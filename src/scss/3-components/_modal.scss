@@ -1,0 +1,64 @@
+.modal {
+
+	&.modal-swal {
+
+		.modal-content {
+			border: none;
+			border-radius: $swal-radius;
+			background-color: $body-bg;
+			color: $swal-text-light;
+			box-shadow: $swal-shadow;
+		}
+
+		.modal-header {
+			border-bottom: none;
+			padding: 1rem 1.25rem;
+			background-color: $swal-header-bg;
+			border-top-left-radius: $swal-radius;
+			border-top-right-radius: $swal-radius;
+		}
+
+		.modal-title {
+			font-weight: 700;
+			color: $white;
+		}
+
+		.modal-body {
+			padding: 1.5rem 1.25rem;
+			font-size: 0.95rem;
+		}
+
+		.modal-footer {
+			border-top: none;
+			padding: 1rem 1.25rem;
+			gap: .5rem;
+		}
+
+		.btn-close {
+			filter: invert(1);
+			opacity: .8;
+
+			&:hover {
+				opacity: 1;
+			}
+		}
+	}
+
+	/* Variante clara tipo print */
+	&.modal-print {
+		.modal-content {
+			background-color: $white;
+			color: $body-color;
+			box-shadow: $box-shadow-lg;
+		}
+
+		.modal-header {
+			background-color: $white;
+			color: $primary;
+		}
+
+		.modal-title {
+			color: $primary;
+		}
+	}
+}

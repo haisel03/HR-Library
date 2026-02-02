@@ -1,0 +1,113 @@
+{{#> layout-main icon="bi bi-kanban" title="Admisiones Pipeline" description="Flujo de proceso para nuevos ingresos"}}
+
+<div class="container-fluid p-0">
+    <div class="row">
+        <!-- Columna: Solicitudes -->
+        <div class="col-12 col-lg-6 col-xl-3">
+            <div class="card bg-light border-0">
+                <div class="card-header bg-transparent">
+                    <h5 class="card-title">Solicitudes <span class="badge bg-secondary ms-1">4</span></h5>
+                </div>
+                <div class="card-body p-2">
+                    <div class="card mb-2 shadow-sm cursor-grab">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-info text-dark">1ro Primaria</span>
+                                <small class="text-muted">Hoy</small>
+                            </div>
+                            <h6 class="fw-bold">Familia Martínez</h6>
+                            <p class="small text-muted mb-2">Solicita información para 2 niños.</p>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <button class="btn btn-outline-primary btn-sm rounded-pill px-3">Contactar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-2 shadow-sm cursor-grab">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-info text-dark">3ro Secundaria</span>
+                                <small class="text-muted">Ayer</small>
+                            </div>
+                            <h6 class="fw-bold">Juan Gabriel Sanchez</h6>
+                            <p class="small text-muted mb-2">Traslado desde otro colegio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna: Entrevista -->
+        <div class="col-12 col-lg-6 col-xl-3">
+            <div class="card bg-light border-0">
+                <div class="card-header bg-transparent">
+                    <h5 class="card-title">Entrevista / Evaluación <span class="badge bg-warning ms-1">2</span></h5>
+                </div>
+                <div class="card-body p-2">
+                    <div class="card mb-2 shadow-sm cursor-grab border-start border-warning border-3">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary">4to Secundaria</span>
+                                <small class="text-muted">Mañana 10:00 AM</small>
+                            </div>
+                            <h6 class="fw-bold">Luis Miguel</h6>
+                            <p class="small text-muted mb-0"><i class="bi bi-calendar-event"></i> Entrevista Psicológica
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card mb-2 shadow-sm cursor-grab border-start border-warning border-3">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-info text-dark">Inicial</span>
+                            </div>
+                            <h6 class="fw-bold">Sofía Méndez</h6>
+                            <p class="small text-muted mb-0"><i class="bi bi-file-earmark-text"></i> Examen de Admisión
+                                pendiente</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna: Admitidos -->
+        <div class="col-12 col-lg-6 col-xl-3">
+            <div class="card bg-light border-0">
+                <div class="card-header bg-transparent">
+                    <h5 class="card-title">Admitidos <span class="badge bg-success ms-1">1</span></h5>
+                </div>
+                <div class="card-body p-2">
+                    <div class="card mb-2 shadow-sm cursor-grab border-start border-success border-3">
+                        <div class="card-body p-3">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span class="badge bg-primary">1ro Secundaria</span>
+                            </div>
+                            <h6 class="fw-bold">Pedro Pascal</h6>
+                            <p class="small text-muted mb-2">Aprobado por dirección. Pendiente pago inscripción.</p>
+                            <div class="d-grid">
+                                <button class="btn btn-success btn-sm">Registar Pago</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna: Matriculados -->
+        <div class="col-12 col-lg-6 col-xl-3">
+            <div class="card bg-light border-0">
+                <div class="card-header bg-transparent">
+                    <h5 class="card-title">Matriculados <span class="badge bg-secondary ms-1">105</span></h5>
+                </div>
+                <div class="card-body p-2">
+                    <div class="text-center p-4 text-muted">
+                        <i class="bi bi-check-circle fs-1"></i>
+                        <p>105 estudiantes completaron el proceso este periodo.</p>
+                        <button class="btn btn-outline-secondary btn-sm">Ver Archivo</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

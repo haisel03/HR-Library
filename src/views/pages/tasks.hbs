@@ -1,0 +1,142 @@
+{{#> layout-main icon="bi bi-layout-three-columns" title="Tablero de Tareas" description="Gestión de tareas con
+arrastrar y soltar (Dragula)"}}
+
+<div class="row mb-4">
+	<div class="col-12 text-end">
+		<button class="btn btn-primary" id="btnNewTask">
+			<i class="bi bi-plus-lg me-1"></i> Nueva Tarea
+		</button>
+	</div>
+</div>
+
+<div class="row kanban-board">
+	<!-- PENDIENTE -->
+	<div class="col-12 col-lg-4 mb-4">
+		<div class="card bg-light shadow-none h-100 border-0">
+			<div
+				class="card-header bg-white border-bottom border-primary border-3 py-3 d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0 fw-bold text-primary">Pendiente</h5>
+				<span class="badge bg-primary rounded-pill badge-count">0</span>
+			</div>
+			<div class="card-body p-2 drag-container" id="tasks-pending" data-status="pending">
+				<!-- Tareas se insertan aquí -->
+			</div>
+		</div>
+	</div>
+
+	<!-- EN PROCESO -->
+	<div class="col-12 col-lg-4 mb-4">
+		<div class="card bg-light shadow-none h-100 border-0">
+			<div
+				class="card-header bg-white border-bottom border-warning border-3 py-3 d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0 fw-bold text-warning">En Proceso</h5>
+				<span class="badge bg-warning rounded-pill badge-count">0</span>
+			</div>
+			<div class="card-body p-2 drag-container" id="tasks-progress" data-status="progress">
+				<!-- Tareas se insertan aquí -->
+			</div>
+		</div>
+	</div>
+
+	<!-- COMPLETADO -->
+	<div class="col-12 col-lg-4 mb-4">
+		<div class="card bg-light shadow-none h-100 border-0">
+			<div
+				class="card-header bg-white border-bottom border-success border-3 py-3 d-flex justify-content-between align-items-center">
+				<h5 class="card-title mb-0 fw-bold text-success">Completado</h5>
+				<span class="badge bg-success rounded-pill badge-count">0</span>
+			</div>
+			<div class="card-body p-2 drag-container" id="tasks-completed" data-status="completed">
+				<!-- Tareas se insertan aquí -->
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal para Nueva Tarea -->
+<div class="modal fade" id="taskModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content border-0 shadow-lg">
+			<div class="modal-header bg-primary text-white py-3">
+				<h5 class="modal-title fw-bold" id="taskModalTitle">Crear Nueva Tarea</h5>
+				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+					aria-label="Close"></button>
+			</div>
+			<div class="modal-body p-4">
+				<form id="taskForm">
+					<div class="mb-3">
+						<label class="form-label fw-semibold">Título de la Tarea</label>
+						<input type="text" class="form-control" id="taskTitle" name="title" required
+							placeholder="¿Qué hay que hacer?">
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label class="form-label fw-semibold">Responsable</label>
+							<input type="text" class="form-control" id="taskResponsible" name="responsible" required
+								placeholder="Usuario">
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label fw-semibold">Prioridad</label>
+							<select class="form-select" id="taskPriority" name="priority">
+								<option value="low">Baja</option>
+								<option value="medium" selected>Media</option>
+								<option value="high">Alta</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 mb-3">
+							<label class="form-label fw-semibold">Inicio</label>
+							<input type="datetime-local" class="form-control" id="taskStart" name="start_date" required>
+						</div>
+						<div class="col-md-6 mb-3">
+							<label class="form-label fw-semibold">Fin</label>
+							<input type="datetime-local" class="form-control" id="taskEnd" name="end_date" required>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label fw-semibold">Descripción</label>
+						<textarea class="form-control" id="taskDescription" name="description" rows="3"
+							placeholder="Detalles de la tarea..."></textarea>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer border-0 p-4 pt-0">
+				<button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="taskForm" class="btn btn-primary px-4">Crear Tarea</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-main}}
+
+<style>
+	.drag-container {
+		min-height: 200px;
+		transition: background-color 0.2s;
+	}
+
+	.drag-container.gu-transit {
+		opacity: 0.5;
+	}
+
+	.task-card {
+		cursor: grab;
+		transition: transform 0.2s, box-shadow 0.2s;
+	}
+
+	.task-card:active {
+		cursor: grabbing;
+	}
+
+	.task-card:hover {
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+	}
+
+	.task-card .form-check-input {
+		cursor: pointer;
+	}
+</style>
+
+<script src="demos/tasks.js"></script>

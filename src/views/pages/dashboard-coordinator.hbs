@@ -1,0 +1,93 @@
+{{#> layout-main icon="bi bi-bar-chart-steps" title="Coordinación Académica" description="Supervisión docente y
+estudiantil"}}
+
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="card h-100">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Rendimiento Académico por Nivel</h5>
+            </div>
+            <div class="card-body">
+                <div class="chart-area" style="height: 300px;">
+                    <!-- Placeholder for ChartJS -->
+                    <canvas id="chartjs-dashboard-bar"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100 border-danger border-2">
+            <div class="card-header bg-danger text-white">
+                <h5 class="card-title mb-0 text-white"><i class="bi bi-exclamation-triangle-fill me-2"></i> Alertas de
+                    Deserción</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <div class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1 fw-bold">Carlos Ruiz</h6>
+                        <span class="badge bg-danger">Crítico</span>
+                    </div>
+                    <p class="mb-1 small">3 materias reprobadas • 5 ausencias seguidas</p>
+                    <a href="#" class="small text-danger">Contactar Tutor</a>
+                </div>
+                <div class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1 fw-bold">Ana María Polo</h6>
+                        <span class="badge bg-warning text-dark">Riesgo</span>
+                    </div>
+                    <p class="mb-1 small">Bajo rendimiento en Matemáticas</p>
+                    <a href="#" class="small text-danger">Agendar Tutoría</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Supervisión Docente - Cumplimiento</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Docente</th>
+                            <th>Materia</th>
+                            <th>Asistencia Tomada</th>
+                            <th>Planificación</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pedro Martínez</td>
+                            <td>Matemáticas</td>
+                            <td><i class="bi bi-check-circle-fill text-success"></i> Hoy</td>
+                            <td><i class="bi bi-check-circle-fill text-success"></i> Entregada</td>
+                            <td><span class="badge bg-success">Cumplido</span></td>
+                        </tr>
+                        <tr>
+                            <td>Laura M.</td>
+                            <td>Lengua Española</td>
+                            <td><i class="bi bi-check-circle-fill text-success"></i> Hoy</td>
+                            <td><i class="bi bi-dash-circle-fill text-warning"></i> Pendiente</td>
+                            <td><span class="badge bg-warning">Parcial</span></td>
+                        </tr>
+                        <tr>
+                            <td>Julio V.</td>
+                            <td>Deportes</td>
+                            <td><i class="bi bi-x-circle-fill text-danger"></i> No registrada hoy</td>
+                            <td><i class="bi bi-check-circle-fill text-success"></i> Entregada</td>
+                            <td><span class="badge bg-warning">Alerta</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

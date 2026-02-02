@@ -1,0 +1,82 @@
+{{#> layout-main icon="bi bi-person-video3" title="Dashboard Docente" description="Bienvenido, Profesor Pedro
+Martínez"}}
+
+<div class="row">
+    <!-- Schedule Today -->
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0 text-white"><i class="bi bi-calendar-day me-2"></i> Mi Agenda Hoy</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <div class="list-group-item border-start border-primary border-4">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">08:00 - 09:30 AM</span>
+                        <span class="badge bg-light text-dark">En curso</span>
+                    </div>
+                    <h6 class="my-1">Matemáticas</h6>
+                    <small class="text-muted">4to Secundaria A • Aula 101</small>
+                    <div class="mt-2">
+                        <a href="teacher-attendance.html" class="btn btn-xs btn-outline-primary py-0">Asistencia</a>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">10:00 - 11:30 AM</span>
+                    </div>
+                    <h6 class="my-1">Física Elemental</h6>
+                    <small class="text-muted">5to Secundaria B • Laboratorio</small>
+                </div>
+                <div class="list-group-item">
+                    <div class="d-flex justify-content-between">
+                        <span class="fw-bold">11:30 - 12:15 PM</span>
+                    </div>
+                    <h6 class="my-1 text-muted">Acompañamiento Pedagógico</h6>
+                    <small class="text-muted">Sala de Profesores</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats & Actions -->
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-muted">Mis Estudiantes</h5>
+                        <h2 class="display-4 fw-bold text-primary mb-3">145</h2>
+                        <button class="btn btn-outline-primary btn-sm">Ver Listas</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <h5 class="card-title text-muted">Calificaciones Pendientes</h5>
+                        <h2 class="display-4 fw-bold text-warning mb-3">2</h2>
+                        <p class="small text-muted">Secciones sin cerrar P1</p>
+                        <a href="teacher-grades.html" class="btn btn-warning text-dark btn-sm">Ir a Calificar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Avisos de Coordinación</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info d-flex align-items-center mb-0">
+                    <i class="bi bi-info-circle-fill me-3 fs-4"></i>
+                    <div>
+                        <strong>Entrega de Planificaciones:</strong> Recordamos que la fecha límite para la entrega de
+                        la planificación mensual es este viernes.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

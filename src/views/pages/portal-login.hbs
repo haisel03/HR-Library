@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+
+<body class="bg-light">
+    <div class="main d-flex justify-content-center align-items-center min-vh-100 w-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="text-center mb-4">
+                        <h1 class="h2 text-primary fw-bold">EduMatrix</h1>
+                        <p class="lead">Portal del Estudiante y Tutor</p>
+                    </div>
+
+                    <div class="card shadow-sm border-0">
+                        <div class="card-body m-3">
+                            <form action="portal-grades.html">
+                                <div class="mb-3">
+                                    <label class="form-label">Código del Estudiante</label>
+                                    <input class="form-control form-control-lg" type="text" name="student_code"
+                                        placeholder="Ej: STU-2023-001" />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">PIN de Acceso</label>
+                                    <input class="form-control form-control-lg" type="password" name="pin"
+                                        placeholder="****" />
+                                </div>
+                                <div class="d-grid gap-2 mt-4">
+                                    <button type="submit" class="btn btn-lg btn-primary">Acceder</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="landing.html">Volver al inicio</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

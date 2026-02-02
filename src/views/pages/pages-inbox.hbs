@@ -1,0 +1,98 @@
+{{#> layout-main icon="bi bi-envelope" title="Bandeja de Entrada" description="Gestión de correos y mensajes."}}
+
+<div class="container-fluid p-0">
+
+    <div class="row">
+        <div class="col-md-4 col-xl-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Carpetas</h5>
+                </div>
+                <div class="list-group list-group-flush" role="tablist">
+                    <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#" role="tab">
+                        <i class="align-middle me-2" data-feather="inbox"></i> Inbox <span
+                            class="badge bg-primary float-end">4</span>
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab">
+                        <i class="align-middle me-2" data-feather="send"></i> Enviados
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab">
+                        <i class="align-middle me-2" data-feather="file-text"></i> Borradores
+                    </a>
+                    <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab">
+                        <i class="align-middle me-2" data-feather="trash"></i> Papelera
+                    </a>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Etiquetas</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <span class="text-warning"><i class="fas fa-circle"></i></span> Trabajo
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-danger"><i class="fas fa-circle"></i></span> Importante
+                    </div>
+                    <div class="mb-2">
+                        <span class="text-primary"><i class="fas fa-circle"></i></span> Social
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8 col-xl-9">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-actions float-end">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" placeholder="Buscar correo...">
+                            <button class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                    <h5 class="card-title mb-0">Inbox</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="email-list">
+                        <div class="p-3 border-bottom hover-bg-light cursor-pointer">
+                            <div class="float-end text-muted text-sm">Now</div>
+                            <div class="form-check d-inline-block me-2">
+                                <input class="form-check-input" type="checkbox" value="">
+                            </div>
+                            <span class="fw-bold">Github</span>
+                            <span class="text-muted ms-2">- [EduMatrix] New pull request merged...</span>
+                        </div>
+                        <div class="p-3 border-bottom hover-bg-light cursor-pointer bg-light">
+                            <div class="float-end text-muted text-sm">12:45 PM</div>
+                            <div class="form-check d-inline-block me-2">
+                                <input class="form-check-input" type="checkbox" value="">
+                            </div>
+                            <span class="fw-bold">Alexander Pierce</span>
+                            <span class="text-muted ms-2">- AdminLTE Design Inspiration...</span>
+                        </div>
+                        <div class="p-3 border-bottom hover-bg-light cursor-pointer">
+                            <div class="float-end text-muted text-sm">Yesterday</div>
+                            <div class="form-check d-inline-block me-2">
+                                <input class="form-check-input" type="checkbox" value="">
+                            </div>
+                            <span class="fw-bold">Support Team</span>
+                            <span class="text-muted ms-2">- Ticket #1234 Resolved...</span>
+                        </div>
+                        <div class="p-3 border-bottom hover-bg-light cursor-pointer">
+                            <div class="float-end text-muted text-sm">2 days ago</div>
+                            <div class="form-check d-inline-block me-2">
+                                <input class="form-check-input" type="checkbox" value="">
+                            </div>
+                            <span class="fw-bold">Marketing</span>
+                            <span class="text-muted ms-2">- Weekly Newsletter: New Features...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{{/layout-main}}

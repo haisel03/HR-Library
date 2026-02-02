@@ -1,0 +1,165 @@
+{{#> layout-main icon="bi bi-calendar" title="Calendario de Eventos" description="Administra tus eventos con la potencia
+de FullCalendar y HR-Library"}}
+
+<div class="row">
+	<!-- Sidebar de Eventos -->
+	<div class="col-md-3">
+		<div class="sticky-top mb-3">
+			<!-- Crear Evento Card -->
+			<div class="card shadow-sm mb-3 card-bt-primary">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">Crear Evento Arrastrable</h6>
+				</div>
+				<div class="card-body">
+					<div class="mb-3">
+						<div class="input-group">
+							<input id="new-event-title" type="text" class="form-control"
+								placeholder="Título del evento">
+							<button id="add-new-event" type="button" class="btn btn-primary">Agregar</button>
+						</div>
+					</div>
+					<div class="btn-group w-100 mb-2" id="color-chooser">
+						<ul class="fc-color-picker list-inline m-0 d-flex justify-content-between">
+							<li class="list-inline-item"><a class="text-primary" href="#"><i
+										class="bi bi-circle-fill"></i></a></li>
+							<li class="list-inline-item"><a class="text-warning" href="#"><i
+										class="bi bi-circle-fill"></i></a></li>
+							<li class="list-inline-item"><a class="text-success" href="#"><i
+										class="bi bi-circle-fill"></i></a></li>
+							<li class="list-inline-item"><a class="text-danger" href="#"><i
+										class="bi bi-circle-fill"></i></a></li>
+							<li class="list-inline-item"><a class="text-info" href="#"><i
+										class="bi bi-circle-fill"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Eventos Arrastrables List -->
+			<div class="card shadow-sm">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-dark">Eventos Disponibles</h6>
+				</div>
+				<div class="card-body">
+					<div id="external-events">
+						<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-primary border-primary mb-2 p-2 rounded cursor-pointer"
+							data-class="bg-primary">Almuerzo</div>
+						<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-warning border-warning mb-2 p-2 rounded cursor-pointer"
+							data-class="bg-warning">Ir a casa</div>
+						<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-success border-success mb-2 p-2 rounded cursor-pointer"
+							data-class="bg-success">Hacer tarea</div>
+						<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-danger border-danger mb-2 p-2 rounded cursor-pointer"
+							data-class="bg-danger">Diseño UI</div>
+						<div class="fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event bg-info border-info mb-2 p-2 rounded cursor-pointer"
+							data-class="bg-info">Reunión Sudo</div>
+						<div class="checkbox mt-3">
+							<label for="drop-remove">
+								<input type="checkbox" id="drop-remove">
+								Eliminar al soltar
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Info Box Humanize -->
+			<div class="card shadow-sm mt-3 border-start border-4 border-info">
+				<div class="card-body p-3">
+					<h6 class="fw-bold text-info mb-2"><i class="bi bi-clock-history me-1"></i>Próximo Evento</h6>
+					<div id="next-event-info" class="d-none">
+						<small class="text-muted d-block mb-1" id="next-event-title"></small>
+						<span class="badge bg-info" id="next-event-time"></span>
+					</div>
+					<div id="no-events-info">
+						<small class="text-muted">No hay eventos próximos.</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Calendario -->
+	<div class="col-md-9">
+		<div class="card shadow-sm border-0">
+			<div class="card-body p-0">
+				<div id="calendar" class="p-3"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal de Evento -->
+<div class="modal fade" id="eventModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content border-0 shadow-lg">
+			<div class="modal-header bg-navy text-white">
+				<h5 class="modal-title fw-bold"><i class="bi bi-calendar-event me-2"></i>Detalle del Evento</h5>
+				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body p-4">
+				<form id="eventForm">
+					<input type="hidden" id="eventId">
+					<div class="mb-3">
+						<label class="form-label fw-bold">Título</label>
+						<input type="text" class="form-control" id="eventTitle" required>
+					</div>
+					<div class="row">
+						<div class="col-6 mb-3">
+							<label class="form-label fw-bold">Inicio</label>
+							<input type="text" class="form-control" id="eventStart" required>
+						</div>
+						<div class="col-6 mb-3">
+							<label class="form-label fw-bold">Fin</label>
+							<input type="text" class="form-control" id="eventEnd">
+						</div>
+					</div>
+					<div class="mb-0">
+						<label class="form-label fw-bold">Color</label>
+						<div class="d-flex gap-2" id="event-color-selection">
+							<input type="color" class="form-control form-control-color" id="eventColor" value="#003876">
+							<span class="small text-muted align-self-center">Color de fondo del evento</span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer border-0 p-4 pt-0">
+				<button type="button" class="btn btn-outline-danger me-auto d-none"
+					id="btn-delete-event">Eliminar</button>
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+				<button type="button" class="btn btn-primary px-4" id="btn-save-event">Guardar Cambios</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-main}}
+
+<style>
+	.cursor-pointer {
+		cursor: pointer;
+	}
+
+	.fc-color-picker a {
+		font-size: 1.2rem;
+		transition: transform 0.2s;
+		display: block;
+	}
+
+	.fc-color-picker a:hover {
+		transform: scale(1.2);
+	}
+
+	#external-events .fc-event {
+		transition: background-color 0.2s, transform 0.2s;
+	}
+
+	#external-events .fc-event:hover {
+		transform: translateX(5px);
+	}
+
+	#calendar .fc-header-toolbar {
+		margin-bottom: 1.5rem;
+	}
+</style>
+
+<script src="demos/events.js"></script>

@@ -1,0 +1,122 @@
+{{#> layout-main icon="bi bi-cash-coin" title="Finanzas Dashboard" description="Estado financiero de la institución"}}
+
+<div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 border-start border-primary border-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Ingresos (Mensual)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-calendar fs-2 text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 border-start border-success border-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Recaudado (Anual)</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-currency-dollar fs-2 text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 border-start border-danger border-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Morosidad</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">15%</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-exclamation-triangle fs-2 text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-0 border-start border-warning border-3 shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Gastos Operativos</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">$18,000</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="bi bi-clipboard-data fs-2 text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Flujo de Caja (Ene - Dic)</h6>
+            </div>
+            <div class="card-body">
+                <div class="chart-area" style="height: 320px;">
+                    <!-- Placeholder for ChartJS -->
+                    <canvas id="chartjs-dashboard-line"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4 mb-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Deudores Recientes</h6>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-0">Familia Santos</h6>
+                        <small class="text-muted">3 meses pendientes</small>
+                    </div>
+                    <span class="badge bg-danger rounded-pill">-$15,000</span>
+                </a>
+                <a href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-0">Jose Díaz</h6>
+                        <small class="text-muted">1 mes pendiente</small>
+                    </div>
+                    <span class="badge bg-warning text-dark rounded-pill">-$5,000</span>
+                </a>
+                <a href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-0">Carla Morrison</h6>
+                        <small class="text-muted">Matrícula parcial</small>
+                    </div>
+                    <span class="badge bg-warning text-dark rounded-pill">-$2,500</span>
+                </a>
+            </div>
+            <div class="card-footer text-center">
+                <a href="finance-payments.html" class="small">Ver gestión de cobros &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

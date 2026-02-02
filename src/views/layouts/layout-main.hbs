@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+
+<body>
+	<div class="wrapper">
+		{{> sidebar}}
+
+		<div class="main">
+			{{> navbar}}
+			<main class="content">
+				<div class="container-fluid p-0">
+					{{> header}}
+
+					{{> @partial-block}}
+
+				</div>
+			</main>
+		</div>
+	</div>
+</body>
+
+</html>

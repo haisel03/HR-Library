@@ -1,0 +1,50 @@
+{{#> layout-auth title="Acceso al Panel" description="Iniciar sesión en el entorno de administración"}}
+
+<div class="card shadow-lg border-0">
+    <div class="card-body p-5">
+        <div class="text-center mb-4">
+            <div class="bg-primary text-white p-3 rounded-circle d-inline-block mb-3">
+                <i class="bi bi-window-stack fs-1"></i>
+            </div>
+            <h3 class="fw-bold">HR-Panel</h3>
+            <p class="text-muted">Gestión Multi-Pestaña</p>
+        </div>
+
+        <form id="panelLoginForm">
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Usuario</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="bi bi-person"></i></span>
+                    <input type="text" class="form-control" placeholder="Nombre de usuario" required value="admin">
+                </div>
+            </div>
+            <div class="mb-4">
+                <label class="form-label fw-semibold">Contraseña</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-white"><i class="bi bi-lock"></i></span>
+                    <input type="password" class="form-control" placeholder="••••••••" required value="123456">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">
+                Entrar al Panel <i class="bi bi-arrow-right ms-2"></i>
+            </button>
+        </form>
+
+        <div class="mt-4 text-center">
+            <a href="login.html" class="small text-decoration-none">Volver al login estándar</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('panelLoginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        HR.msgLoading("Validando credenciales...");
+        setTimeout(() => {
+            window.location.href = "panel.html";
+        }, 1000);
+    });
+</script>
+
+{{/layout-auth}}

@@ -1,0 +1,65 @@
+{{#> layout-main icon="bi bi-table" title="CRUD DataTables" description="Ejemplo de CRUD completo usando HR.api y
+DataTables"}}
+
+<div class="row">
+	<div class="col-12">
+		<div class="card shadow card-bt-primary">
+			<div class="card-header py-3 d-flex justify-content-between align-items-center">
+				<h6 class="m-0 font-weight-bold text-primary">Listado de Usuarios (JSONPlaceholder)</h6>
+				<button class="btn btn-primary btn-sm" id="btnAddUser">
+					<i class="bi bi-person-plus me-1"></i> Nuevo Usuario
+				</button>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover align-middle table-xs" id="usersTable" style="width:100%">
+						<!-- DataTables renderizará el contenido -->
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal Form -->
+<div class="modal fade" id="userModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="userModalTitle">Usuario</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form id="userForm">
+					<input type="hidden" id="userId" name="id">
+					<div class="mb-3">
+						<label class="form-label" for="userName">Nombre completo</label>
+						<input type="text" class="form-control" id="userName" name="name" required placeholder="Ej. Juan Pérez">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="userEmail">Correo electrónico</label>
+						<input type="email" class="form-control" id="userEmail" name="email" required
+							placeholder="ejemplo@correo.com">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="userUsername">Nombre de usuario</label>
+						<input type="text" class="form-control" id="userUsername" name="username" required placeholder="Ej. jperez">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="userPhone">Teléfono</label>
+						<input type="text" class="form-control" id="userPhone" name="phone" required
+							placeholder="Ej. 1-770-736-8031">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" id="btnCancelUser">Cancelar</button>
+				<button type="submit" form="userForm" class="btn btn-primary" id="btnSaveUser">Guardar Cambios</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-main}}
+
+<script src="demos/table.js"></script>

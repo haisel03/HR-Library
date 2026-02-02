@@ -1,0 +1,199 @@
+{{#> layout-main icon="bi bi-check-square" title="Formularios" description="Elementos de formulario, máscaras y
+validaciones."}}
+
+<div class="row">
+	<div class="col-12 col-lg-6">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title mb-0">Inputs Básicos</h5>
+			</div>
+			<div class="card-body">
+				<input type="text" class="form-control mb-3" placeholder="Input Texto Simple">
+				<input type="email" class="form-control mb-3" placeholder="Input Email">
+				<input type="password" class="form-control mb-3" placeholder="Password">
+				<textarea class="form-control mb-3" rows="2" placeholder="Textarea"></textarea>
+				<input type="text" class="form-control mb-3" placeholder="Disabled" disabled>
+				<input type="text" class="form-control mb-3" placeholder="Readonly" readonly>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title mb-0">Selects</h5>
+			</div>
+			<div class="card-body">
+				<h6 class="card-subtitle text-muted mb-2">Nativo</h6>
+				<select class="form-select mb-3">
+					<option selected>Seleccione...</option>
+					<option>Opción 1</option>
+					<option>Opción 2</option>
+					<option>Opción 3</option>
+				</select>
+
+				<h6 class="card-subtitle text-muted mb-2">Select2 (Simple)</h6>
+				<select class="form-select select2 mb-3">
+					<option></option>
+					<option value="AZ">Arizona</option>
+					<option value="CO">Colorado</option>
+					<option value="ID">Idaho</option>
+					<option value="MT">Montana</option>
+					<option value="NE">Nebraska</option>
+					<option value="NM">New Mexico</option>
+					<option value="ND">North Dakota</option>
+					<option value="UT">Utah</option>
+					<option value="WY">Wyoming</option>
+				</select>
+
+				<h6 class="card-subtitle text-muted mb-2">Select2 (Múltiple)</h6>
+				<select class="form-select select2" multiple>
+					<optgroup label="Alaskan/Hawaiian Time Zone">
+						<option value="AK">Alaska</option>
+						<option value="HI">Hawaii</option>
+					</optgroup>
+					<optgroup label="Pacific Time Zone">
+						<option value="CA">California</option>
+						<option value="NV">Nevada</option>
+						<option value="OR">Oregon</option>
+						<option value="WA">Washington</option>
+					</optgroup>
+				</select>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title mb-0">Checks & Radios</h5>
+			</div>
+			<div class="card-body">
+				<div class="mb-3">
+					<label class="form-check">
+						<input class="form-check-input" type="checkbox" value="">
+						<span class="form-check-label">Checkbox por defecto</span>
+					</label>
+					<label class="form-check">
+						<input class="form-check-input" type="checkbox" value="" checked>
+						<span class="form-check-label">Checkbox activado</span>
+					</label>
+					<label class="form-check">
+						<input class="form-check-input" type="checkbox" value="" disabled>
+						<span class="form-check-label">Checkbox deshabilitado</span>
+					</label>
+				</div>
+				<div class="mb-3">
+					<label class="form-check">
+						<input class="form-check-input" type="radio" value="option1" name="radios-example" checked>
+						<span class="form-check-label">Radio opción 1</span>
+					</label>
+					<label class="form-check">
+						<input class="form-check-input" type="radio" value="option2" name="radios-example">
+						<span class="form-check-label">Radio opción 2</span>
+					</label>
+				</div>
+				<div>
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+						<label class="form-check-label" for="flexSwitchCheckDefault">Switch input</label>
+					</div>
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+						<label class="form-check-label" for="flexSwitchCheckChecked">Switch activado</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-12 col-lg-6">
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title mb-0">Grupos de Inputs</h5>
+			</div>
+			<div class="card-body">
+				<div class="input-group mb-3">
+					<span class="input-group-text" id="basic-addon1">@</span>
+					<input type="text" class="form-control" placeholder="Usuario" aria-label="Username"
+						aria-describedby="basic-addon1">
+				</div>
+				<div class="input-group mb-3">
+					<input type="text" class="form-control" placeholder="Destinatario" aria-label="Recipient's username"
+						aria-describedby="basic-addon2">
+					<span class="input-group-text" id="basic-addon2">@ejemplo.com</span>
+				</div>
+				<div class="input-group mb-3">
+					<span class="input-group-text">$</span>
+					<input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+					<span class="input-group-text">.00</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title mb-0">Máscaras (InputMask)</h5>
+				<h6 class="card-subtitle text-muted">Usando <code>data-mask="..."</code></h6>
+			</div>
+			<div class="card-body">
+				<div class="mb-3">
+					<label class="form-label required">Teléfono</label>
+					<input type="text" class="form-control" data-mask="phone" placeholder="999-999-9999">
+				</div>
+				<div class="mb-3">
+					<label class="form-label required">Cédula</label>
+					<input type="text" class="form-control" data-mask="cedula" placeholder="001-0000000-0">
+				</div>
+				<div class="mb-3">
+					<label class="form-label required">RNC</label>
+					<input type="text" class="form-control" data-mask="rnc" placeholder="101010101">
+				</div>
+				<div class="mb-3">
+					<label class="form-label required">Moneda</label>
+					<input type="text" class="form-control" data-mask="money" placeholder="RD$ 0.00">
+				</div>
+				<div class="mb-3">
+					<label class="form-label required">Dirección IP</label>
+					<input type="text" class="form-control" data-mask="ip" placeholder="192.168.1.1">
+				</div>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title mb-0">Validación Institucional (Demo)</h5>
+				<h6 class="card-subtitle text-muted">Prueba usando <code>HR.isValidForm()</code></h6>
+			</div>
+			<div class="card-body">
+				<form id="validation-form" novalidate>
+					<div class="mb-3">
+						<label class="form-label required" for="v-nombre">Nombre Completo</label>
+						<input type="text" class="form-control" id="v-nombre" name="nombre" placeholder="Nombre completo" required>
+					</div>
+					<div class="mb-3">
+						<label class="form-label required" for="v-email">Correo Electrónico</label>
+						<input type="email" class="form-control" id="v-email" name="email" placeholder="ejemplo@correo.com" required
+							data-validation="email">
+					</div>
+					<div class="mb-3">
+						<label class="form-label required" for="v-cedula">Cédula de Identidad</label>
+						<input type="text" class="form-control" id="v-cedula" name="cedula" data-mask="cedula" required>
+						<div class="form-text">Formato oficial dominicano: 000-0000000-0</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label required" for="v-opcion">Departamento</label>
+						<select class="form-select" id="v-opcion" name="opcion" required>
+							<option value="">Seleccione...</option>
+							<option value="1">Tecnología</option>
+							<option value="2">Recursos Humanos</option>
+							<option value="3">Finanzas</option>
+						</select>
+					</div>
+					<div class="d-grid mt-4">
+						<button type="submit" class="btn btn-primary btn-lg" id="btn-validate">Procesar
+							Solicitud</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-main}}

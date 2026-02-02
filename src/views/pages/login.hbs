@@ -1,0 +1,37 @@
+{{#> layout-auth title="Iniciar Sesión" description="Bienvenido de nuevo a HR-Library. Por favor, ingresa tus
+credenciales para continuar."}}
+
+<div class="card">
+	<div class="card-body">
+		<form id="loginForm">
+			<div class="mb-4">
+				<label class="form-label required">Correo Electrónico</label>
+				<input class="form-control" type="email" name="email" placeholder="ejemplo@correo.com" required
+					data-validation="email">
+			</div>
+			<div class="mb-4">
+				<label class="form-label required">Contraseña</label>
+				<input class="form-control" type="password" name="password" placeholder="••••••••" required>
+				<div class="mt-2 text-end">
+					<small><a href="reset-password.html" class="text-white-50">¿Olvidaste tu contraseña?</a></small>
+				</div>
+			</div>
+			<div class="mb-4">
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
+					<label class="form-check-label text-white-50" for="rememberMe">Recordar sesión</label>
+				</div>
+			</div>
+			<div class="d-grid gap-2 mt-4">
+				<button type="submit" class="btn btn-primary btn-lg">Acceder al Portal</button>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div class="text-center mt-4 auth-footer">
+	¿No tienes una cuenta? <a href="#">Solicitar Acceso</a>
+</div>
+
+
+{{/layout-auth}}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+
+<body class="bg-light">
+    <div class="main d-flex flex-column min-vh-100 w-100">
+        <!-- Simple Topbar for Portal -->
+        <nav class="navbar navbar-expand navbar-light navbar-bg border-bottom">
+            <div class="container">
+                <a class="navbar-brand fw-bold" href="#">
+                    <img src="img/icon.png" alt="EduMatrix" height="32" class="d-inline-block align-text-top me-2">
+                    <span class="text-primary">Portal</span> Académico
+                </a>
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                            <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded-circle me-1"
+                                alt="Estudiante" />
+                            <span class="text-dark">Juan Pérez</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a class="dropdown-item" href="portal-login.html">Cerrar Sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <main class="content p-4 flex-grow-1">
+            <div class="container">
+                {{> @partial-block}}
+            </div>
+        </main>
+
+        <footer class="footer py-3 bg-white border-top">
+            <div class="container text-center text-muted"> <small>&copy; 2023 EduMatrix School System</small></div>
+        </footer>
+    </div>
+</body>
+
+</html>

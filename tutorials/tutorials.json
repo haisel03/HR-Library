@@ -1,0 +1,17 @@
+{
+    "introduction": {
+        "title": "Introducción"
+    },
+    "getting-started": {
+        "title": "Primeros Pasos"
+    },
+    "automagic": {
+        "title": "Funciones Automáticas"
+    },
+    "api-conventions": {
+        "title": "Convenciones de la API"
+    },
+    "advanced": {
+        "title": "Funciones Avanzadas"
+    }
+}

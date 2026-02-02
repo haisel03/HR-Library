@@ -1,0 +1,184 @@
+{{#> layout-portal title="UI Kit & Componentes" description="Explora los componentes de la HR Library con el nuevo
+diseño institucional."}}
+
+<div class="row">
+    <div class="col-12">
+        <h2 class="mb-4 text-blue">Dashboard UI Kit</h2>
+    </div>
+</div>
+
+<div class="row">
+    <!-- CARDS & BUTTONS -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Tarjetas y Botones</h5>
+                <span class="badge bg-primary">Institucional</span>
+            </div>
+            <div class="card-body">
+                <p class="text-muted">Las tarjetas ahora tienen bordes definidos y sombras suaves para un aspecto de
+                    dashboard profesional.</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-primary">Primary (DR Blue)</button>
+                    <button class="btn btn-danger">Danger (DR Red)</button>
+                    <button class="btn btn-success">Success</button>
+                    <button class="btn btn-warning">Warning</button>
+                    <button class="btn btn-info">Info</button>
+                </div>
+                <hr>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-outline-primary">Outline Primary</button>
+                    <button class="btn btn-sm btn-primary">Botón Pequeño</button>
+                    <button class="btn btn-lg btn-primary">Botón Grande</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Formularios Dashboard</h5>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label required">Nombre Completo</label>
+                        <input type="text" class="form-control" placeholder="Juan Perez">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Correo Institucional</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" placeholder="juan.perez@republica.do">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Departamento</label>
+                            <select class="form-select">
+                                <option selected>Selecciona...</option>
+                                <option>Tecnología</option>
+                                <option>Recursos Humanos</option>
+                                <option>Finanzas</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Estado</label>
+                            <div class="mt-2">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="active" checked>
+                                    <label class="form-check-label" for="active">Activo</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="status" id="inactive">
+                                    <label class="form-check-label" for="inactive">Inactivo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- TABLES & ALERTS -->
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Tablas de Datos</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>Empleado</th>
+                            <th>Cargo</th>
+                            <th>Estado</th>
+                            <th class="text-end">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Haisel+Ramirez&background=003876&color=fff"
+                                        class="avatar rounded-circle me-2" width="32" height="32">
+                                    Haisel Ramirez
+                                </div>
+                            </td>
+                            <td>Administrador</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td class="text-end">
+                                <button class="btn btn-sm btn-icon btn-outline-primary"><i
+                                        class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-icon btn-outline-danger"><i
+                                        class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Maria+Gomez&background=003876&color=fff"
+                                        class="avatar rounded-circle me-2" width="32" height="32">
+                                    Maria Gomez
+                                </div>
+                            </td>
+                            <td>Contadora</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td class="text-end">
+                                <button class="btn btn-sm btn-icon btn-outline-primary"><i
+                                        class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-icon btn-outline-danger"><i
+                                        class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Jose+Santos&background=003876&color=fff"
+                                        class="avatar rounded-circle me-2" width="32" height="32">
+                                    Jose Santos
+                                </div>
+                            </td>
+                            <td>Soporte TI</td>
+                            <td><span class="badge bg-warning">Pendiente</span></td>
+                            <td class="text-end">
+                                <button class="btn btn-sm btn-icon btn-outline-primary"><i
+                                        class="bi bi-pencil"></i></button>
+                                <button class="btn btn-sm btn-icon btn-outline-danger"><i
+                                        class="bi bi-trash"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Alertas y Feedbacks</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-primary" role="alert">
+                    <i class="bi bi-info-circle me-2"></i> Esta es una alerta principal con el Azul Nacional.
+                </div>
+                <div class="alert alert-success" role="alert">
+                    <i class="bi bi-check-circle me-2"></i> ¡Operación realizada con éxito!
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i> Error al procesar la solicitud.
+                </div>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-primary" onclick="HR.msgSuccess('¡Éxito!', 'Todo ha salido perfecto')">Probar
+                        SweetAlert</button>
+                    <button class="btn btn-info" onclick="HR.toastInfo('Esta es una notificación flotante')">Probar
+                        Toast</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-portal}}

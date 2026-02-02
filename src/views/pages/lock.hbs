@@ -1,0 +1,30 @@
+{{#> layout-auth title="Pantalla de Bloqueo" description="Tu sesión está protegida. Ingresa tu contraseña para
+desbloquear."}}
+
+<div class="card">
+    <div class="card-body text-center">
+        <div class="mb-4">
+            <img src="img/avatar.png" alt="Usuario" class="lock-avatar"
+                onerror="this.src='https://ui-avatars.com/api/?name=Haisel+Ramirez&background=764ba2&color=fff&size=100'">
+            <h4 class="text-white mt-3">Haisel Ramirez</h4>
+            <p class="text-white-50">Administrador de Sistema</p>
+        </div>
+
+        <form id="lockForm">
+            <div class="mb-4">
+                <input class="form-control text-center" type="password" name="password"
+                    placeholder="Ingresa tu contraseña" required>
+            </div>
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Desbloquear</button>
+            </div>
+        </form>
+
+        <div class="mt-4 text-center">
+            <a href="login.html" class="text-white-50">¿No eres Haisel Ramirez? Cerrar sesión</a>
+        </div>
+    </div>
+</div>
+
+
+{{/layout-auth}}

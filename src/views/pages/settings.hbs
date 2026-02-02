@@ -1,0 +1,181 @@
+{{#> layout-main icon="bi bi-gear-wide-connected" title="Configuración de Cuenta" description="Gestión de preferencias,
+seguridad y privacidad institucional."}}
+
+<div class="row">
+	<div class="col-md-3 col-xl-2">
+
+		<div class="card">
+			<div class="card-header">
+				<h5 class="card-title mb-0">Perfil</h5>
+			</div>
+
+			<div class="list-group list-group-flush" role="tablist">
+				<a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#account" role="tab">
+					Cuenta
+				</a>
+				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab">
+					Contraseña
+				</a>
+				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#privacy" role="tab">
+					Privacidad
+				</a>
+				<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab">
+					Notificaciones
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-9 col-xl-10">
+		<div class="tab-content">
+			<div class="tab-pane fade show active" id="account" role="tabpanel">
+
+				<div class="card">
+					<div class="card-header">
+
+						<h5 class="card-title mb-0">Información Pública</h5>
+					</div>
+					<div class="card-body">
+						<form>
+							<div class="row">
+								<div class="col-md-8">
+									<div class="mb-3">
+										<label class="form-label" for="inputUsername">Usuario</label>
+										<input type="text" class="form-control" id="inputUsername" placeholder="Usuario" value="cmason">
+									</div>
+									<div class="mb-3">
+										<label class="form-label" for="inputBio">Biografía</label>
+										<textarea rows="2" class="form-control" id="inputBio" placeholder="Dinos algo sobre ti"></textarea>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="text-center">
+										<img alt="Christina Mason" src="img/avatars/avatar.jpg" class="rounded-circle img-responsive mt-2"
+											width="128" height="128" />
+										<div class="mt-2">
+											<span class="btn btn-primary"><i class="fas fa-upload"></i> Subir</span>
+										</div>
+										<small>Para mejores resultados, usar imagen de al menos 128px por 128px en
+											formato .jpg</small>
+									</div>
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">Guardar cambios</button>
+						</form>
+
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header">
+
+						<h5 class="card-title mb-0">Información Privada</h5>
+					</div>
+					<div class="card-body">
+						<form>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label" for="inputFirstName">Nombre</label>
+										<input type="text" class="form-control" id="inputFirstName" placeholder="Nombre" value="Christina">
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label" for="inputLastName">Apellido</label>
+										<input type="text" class="form-control" id="inputLastName" placeholder="Apellido" value="Mason">
+									</div>
+								</div>
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="inputEmail4">Email</label>
+								<input type="email" class="form-control" id="inputEmail4" placeholder="Email"
+									value="christina.mason@example.com">
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="inputAddress">Dirección</label>
+								<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+							</div>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="mb-3">
+										<label class="form-label" for="inputCity">Ciudad</label>
+										<input type="text" class="form-control" id="inputCity" placeholder="Ciudad">
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="mb-3">
+										<label class="form-label" for="inputState">Estado</label>
+										<select class="form-select" id="inputState">
+											<option selected>Seleccione...</option>
+											<option>...</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="mb-3">
+										<label class="form-label" for="inputZip">Código Postal</label>
+										<input type="text" class="form-control" id="inputZip">
+									</div>
+								</div>
+							</div>
+							<button type="submit" class="btn btn-primary">Guardar cambios</button>
+						</form>
+
+					</div>
+				</div>
+
+			</div>
+			<div class="tab-pane fade" id="password" role="tabpanel">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Contraseña</h5>
+
+						<form>
+							<div class="mb-3">
+								<label class="form-label" for="inputPasswordCurrent">Contraseña actual</label>
+								<input type="password" class="form-control" id="inputPasswordCurrent">
+								<small><a href="#">¿Olvidaste tu contraseña?</a></small>
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="inputPasswordNew">Nueva contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordNew">
+							</div>
+							<div class="mb-3">
+								<label class="form-label" for="inputPasswordNew2">Verificar contraseña</label>
+								<input type="password" class="form-control" id="inputPasswordNew2">
+							</div>
+							<button type="submit" class="btn btn-primary">Guardar cambios</button>
+						</form>
+
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="privacy" role="tabpanel">
+				<div class="card">
+					<div class="card-body">
+						<h5 class="card-title">Privacidad y Seguridad</h5>
+						<p>Configura la visibilidad de tu información y la seguridad de tu cuenta.</p>
+						<form>
+							<div class="form-check form-switch mb-3">
+								<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+								<label class="form-check-label" for="flexSwitchCheckChecked">Hacer mi perfil
+									público</label>
+							</div>
+							<div class="form-check form-switch mb-3">
+								<input class="form-check-input" type="checkbox" id="flexSwitchAuth" checked>
+								<label class="form-check-label" for="flexSwitchAuth">Autenticación de dos
+									factores</label>
+							</div>
+							<button type="submit" class="btn btn-primary">Guardar cambios</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{{/layout-main}}

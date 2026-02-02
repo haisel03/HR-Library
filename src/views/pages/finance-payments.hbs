@@ -1,0 +1,128 @@
+{{#> layout-main icon="bi bi-credit-card" title="Pagos y Cobros" description="Gestión de pagos de estudiantes"}}
+
+<div class="row">
+	<!-- Payment Form -->
+	<div class="col-lg-5 mb-4">
+		<div class="card shadow">
+			<div class="card-header py-3">
+				<h6 class="m-0 font-weight-bold text-primary"><i class="bi bi-plus-circle"></i> Nuevo Pago</h6>
+			</div>
+			<div class="card-body">
+				<form>
+					<div class="mb-3">
+						<label class="form-label">Estudiante / Matrícula</label>
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Buscar estudiante...">
+							<button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+						</div>
+					</div>
+
+					<div class="card bg-light mb-3">
+						<div class="card-body p-2 d-flex align-items-center">
+							<img src="img/avatars/avatar.jpg" class="rounded-circle me-3" width="40" height="40">
+							<div>
+								<h6 class="mb-0 fw-bold">Juan Pérez</h6>
+								<small class="text-danger">Deuda: RD$ 2,500.00</small>
+							</div>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Concepto</label>
+						<select class="form-select">
+							<option selected>Colegiatura Mes Actual</option>
+							<option>Inscripción</option>
+							<option>Materiales</option>
+							<option>Abono a Deuda</option>
+						</select>
+					</div>
+
+					<div class="row mb-3">
+						<div class="col-6">
+							<label class="form-label">Monto</label>
+							<div class="input-group">
+								<span class="input-group-text">RD$</span>
+								<input type="number" class="form-control" value="2500">
+							</div>
+						</div>
+						<div class="col-6">
+							<label class="form-label">Método</label>
+							<select class="form-select">
+								<option>Efectivo</option>
+								<option>Tarjeta</option>
+								<option>Transferencia</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Referencia / Nota</label>
+						<textarea class="form-control" rows="2"></textarea>
+					</div>
+
+					<button type="submit" class="btn btn-success w-100 btn-lg">Procesar Pago</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Payment History -->
+	<div class="col-lg-7">
+		<div class="card shadow">
+			<div class="card-header py-3 d-flex justify-content-between align-items-center">
+				<h6 class="m-0 font-weight-bold text-primary">Historial de Transacciones</h6>
+				<button class="btn btn-sm btn-outline-secondary" onclick='HR.exportPdf("payments-table", {}) '>
+					<i class="bi bi-printer"></i> Reporte Diario
+				</button>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hover align-middle" id="payments-table">
+					<thead>
+						<tr>
+							<th>Recibo #</th>
+							<th>Estudiante</th>
+							<th>Concepto</th>
+							<th>Fecha</th>
+							<th>Monto</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>REC-00234</td>
+							<td>Ana Gómez</td>
+							<td>Colegiatura Oct</td>
+							<td>Hoy 10:30</td>
+							<td class="text-success fw-bold">RD$ 3,000</td>
+							<td class="text-end">
+								<a href="invoice.html" class="btn btn-sm btn-light" title="Imprimir"><i class="bi bi-printer"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>REC-00233</td>
+							<td>Pedro Pascal</td>
+							<td>Inscripción</td>
+							<td>Hoy 09:15</td>
+							<td class="text-success fw-bold">RD$ 5,000</td>
+							<td class="text-end">
+								<a href="invoice.html" class="btn btn-sm btn-light" title="Imprimir"><i class="bi bi-printer"></i></a>
+							</td>
+						</tr>
+						<tr>
+							<td>REC-00232</td>
+							<td>Laura M.</td>
+							<td>Uniforme</td>
+							<td>Ayer</td>
+							<td class="text-success fw-bold">RD$ 1,200</td>
+							<td class="text-end">
+								<a href="invoice.html" class="btn btn-sm btn-light" title="Imprimir"><i class="bi bi-printer"></i></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-main}}

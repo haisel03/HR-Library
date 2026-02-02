@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+
+<body>
+    <div class="wrapper d-flex flex-column min-vh-100 bg-light">
+        <!-- Landing Navbar (No Sidebar) -->
+        {{> navbar-landing}}
+
+        <main class="content flex-grow-1 p-0">
+            {{> @partial-block}}
+        </main>
+
+        <!-- Landing Footer -->
+        {{> footer-landing}}
+    </div>
+</body>
+
+</html>

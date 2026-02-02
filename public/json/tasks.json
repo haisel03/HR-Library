@@ -1,0 +1,156 @@
+[
+    {
+        "id": "t1",
+        "title": "Configurar Servidor",
+        "description": "Instalación de dependencias y despliegue inicial.",
+        "priority": "high",
+        "status": "pending",
+        "responsible": "Haisel Ramirez",
+        "start_date": "2026-02-01T08:00:00",
+        "end_date": "2026-02-05T18:00:00"
+    },
+    {
+        "id": "t2",
+        "title": "Diseño de Base de Datos",
+        "description": "Modelado de tablas para el módulo acadámico.",
+        "priority": "medium",
+        "status": "progress",
+        "responsible": "Juan Pérez",
+        "start_date": "2026-01-30T10:00:00",
+        "end_date": "2026-02-03T12:00:00"
+    },
+    {
+        "id": "t3",
+        "title": "Login Social",
+        "description": "Integrar autenticación con Google y Facebook.",
+        "priority": "low",
+        "status": "completed",
+        "responsible": "Maria Garcia",
+        "start_date": "2026-01-20T09:00:00",
+        "end_date": "2026-01-22T15:00:00",
+        "completed_at": "2026-01-22T14:30:00"
+    },
+    {
+        "id": "t4",
+        "title": "Reporte de Ventas",
+        "description": "Crear exportación a PDF para el cierre diario.",
+        "priority": "high",
+        "status": "pending",
+        "responsible": "Haisel Ramirez",
+        "start_date": "2026-02-02T08:00:00",
+        "end_date": "2026-02-10T18:00:00"
+    },
+    {
+        "id": "t5",
+        "title": "Optimización SEO",
+        "description": "Mejorar las meta-tags y el sitemap.",
+        "priority": "medium",
+        "status": "progress",
+        "responsible": "Carlos Ruiz",
+        "start_date": "2026-02-01T11:00:00",
+        "end_date": "2026-02-04T17:00:00"
+    },
+    {
+        "id": "t6",
+        "title": "Refactor UI Kit",
+        "description": "Actualizar colores a la nueva paleta premium.",
+        "priority": "low",
+        "status": "completed",
+        "responsible": "Ana Lopez",
+        "start_date": "2026-01-25T08:00:00",
+        "end_date": "2026-01-26T18:00:00",
+        "completed_at": "2026-01-26T16:00:00"
+    },
+    {
+        "id": "t7",
+        "title": "Validación de Cédula",
+        "description": "Implementar el algoritmo de checksum dominicano.",
+        "priority": "high",
+        "status": "pending",
+        "responsible": "Juan Pérez",
+        "start_date": "2026-02-01T09:00:00",
+        "end_date": "2026-02-02T13:00:00"
+    },
+    {
+        "id": "t8",
+        "title": "Módulo de Finanzas",
+        "description": "Cálculo automático de mora y recargos.",
+        "priority": "medium",
+        "status": "pending",
+        "responsible": "Maria Garcia",
+        "start_date": "2026-02-03T08:00:00",
+        "end_date": "2026-02-08T18:00:00"
+    },
+    {
+        "id": "t9",
+        "title": "Chat Interno",
+        "description": "Integrar WebSockets para mensajería en vivo.",
+        "priority": "low",
+        "status": "progress",
+        "responsible": "Haisel Ramirez",
+        "start_date": "2026-02-01T15:00:00",
+        "end_date": "2026-02-15T18:00:00"
+    },
+    {
+        "id": "t10",
+        "title": "Seguridad JWT",
+        "description": "Rotación de tokens y manejo de refresh tokens.",
+        "priority": "high",
+        "status": "completed",
+        "responsible": "Carlos Ruiz",
+        "start_date": "2026-01-28T08:00:00",
+        "end_date": "2026-01-29T18:00:00",
+        "completed_at": "2026-01-29T17:45:00"
+    },
+    {
+        "id": "t11",
+        "title": "Portal de Estudiantes",
+        "description": "Dashboard de notas y asistencias.",
+        "priority": "medium",
+        "status": "pending",
+        "responsible": "Ana Lopez",
+        "start_date": "2026-02-05T08:00:00",
+        "end_date": "2026-02-20T18:00:00"
+    },
+    {
+        "id": "t12",
+        "title": "Firma Digital",
+        "description": "Captura de firma en contratos de inscripción.",
+        "priority": "low",
+        "status": "progress",
+        "responsible": "Maria Garcia",
+        "start_date": "2026-02-01T12:00:00",
+        "end_date": "2026-02-05T18:00:00"
+    },
+    {
+        "id": "t13",
+        "title": "Migración de Imágenes",
+        "description": "Mover archivos de Dropbox a AWS S3.",
+        "priority": "high",
+        "status": "pending",
+        "responsible": "Juan Pérez",
+        "start_date": "2026-02-02T10:00:00",
+        "end_date": "2026-02-03T18:00:00"
+    },
+    {
+        "id": "t14",
+        "title": "Notificaciones Push",
+        "description": "Avisos de pago vencido via Firebase.",
+        "priority": "medium",
+        "status": "completed",
+        "responsible": "Haisel Ramirez",
+        "start_date": "2026-01-20T08:00:00",
+        "end_date": "2026-01-21T18:00:00",
+        "completed_at": "2026-01-21T11:00:00"
+    },
+    {
+        "id": "t15",
+        "title": "Backup Semanal",
+        "description": "Scripts de respaldo automatizado de SQL.",
+        "priority": "low",
+        "status": "pending",
+        "responsible": "Carlos Ruiz",
+        "start_date": "2026-02-04T08:00:00",
+        "end_date": "2026-02-04T22:00:00"
+    }
+]

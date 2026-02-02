@@ -1,0 +1,136 @@
+{{#> layout-main icon="bi bi-calendar-check" title="Control de Asistencia" description="Registro diario de asistencia"}}
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form class="row g-3 align-items-end">
+                    <div class="col-md-4">
+                        <label class="form-label">Fecha de Asistencia</label>
+                        <input type="text" class="form-control datetime bg-white" placeholder="Seleccionar fecha" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Grado / Sección</label>
+                        <select class="form-select">
+                            <option selected>4to Secundaria - A</option>
+                            <option>4to Secundaria - B</option>
+                            <option>5to Secundaria - A</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary w-100"><i class="bi bi-people-fill"></i> Cargar
+                            Lista</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Lista de Asistencia - 4to A</h5>
+                <div>
+                    <span class="badge bg-success me-2">30 Presentes</span>
+                    <span class="badge bg-danger">2 Ausentes</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-3">
+                    <button class="btn btn-sm btn-outline-success me-2">Marcar Todos Presentes</button>
+                </div>
+
+                <div class="list-group">
+                    <!-- Estudiante 1 -->
+                    <div class="list-group-item d-flex align-items-center justify-content-between p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="text-muted me-3">#1</span>
+                            <img src="img/avatars/avatar.jpg" class="rounded-circle me-3" width="40" height="40">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Juan Pérez</h6>
+                                <small class="text-muted">Presente</small>
+                            </div>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="status_1" id="p_1" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="p_1">P</label>
+
+                            <input type="radio" class="btn-check" name="status_1" id="t_1" autocomplete="off">
+                            <label class="btn btn-outline-warning" for="t_1">T</label>
+
+                            <input type="radio" class="btn-check" name="status_1" id="a_1" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="a_1">A</label>
+
+                            <input type="radio" class="btn-check" name="status_1" id="e_1" autocomplete="off">
+                            <label class="btn btn-outline-info" for="e_1">E</label>
+                        </div>
+                    </div>
+
+                    <!-- Estudiante 2 -->
+                    <div class="list-group-item d-flex align-items-center justify-content-between p-3 bg-light-danger">
+                        <div class="d-flex align-items-center">
+                            <span class="text-muted me-3">#2</span>
+                            <img src="img/avatars/avatar-2.jpg" class="rounded-circle me-3" width="40" height="40">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Ana Gómez</h6>
+                                <small class="text-danger">Ausente</small>
+                            </div>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="status_2" id="p_2" autocomplete="off">
+                            <label class="btn btn-outline-success" for="p_2">P</label>
+
+                            <input type="radio" class="btn-check" name="status_2" id="t_2" autocomplete="off">
+                            <label class="btn btn-outline-warning" for="t_2">T</label>
+
+                            <input type="radio" class="btn-check" name="status_2" id="a_2" autocomplete="off" checked>
+                            <label class="btn btn-outline-danger" for="a_2">A</label>
+
+                            <input type="radio" class="btn-check" name="status_2" id="e_2" autocomplete="off">
+                            <label class="btn btn-outline-info" for="e_2">E</label>
+                        </div>
+                    </div>
+
+                    <!-- Estudiante 3 -->
+                    <div class="list-group-item d-flex align-items-center justify-content-between p-3">
+                        <div class="d-flex align-items-center">
+                            <span class="text-muted me-3">#3</span>
+                            <img src="img/avatars/avatar-3.jpg" class="rounded-circle me-3" width="40" height="40">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Carlos Ruiz</h6>
+                                <small class="text-muted">Presente</small>
+                            </div>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <input type="radio" class="btn-check" name="status_3" id="p_3" autocomplete="off" checked>
+                            <label class="btn btn-outline-success" for="p_3">P</label>
+
+                            <input type="radio" class="btn-check" name="status_3" id="t_3" autocomplete="off">
+                            <label class="btn btn-outline-warning" for="t_3">T</label>
+
+                            <input type="radio" class="btn-check" name="status_3" id="a_3" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="a_3">A</label>
+
+                            <input type="radio" class="btn-check" name="status_3" id="e_3" autocomplete="off">
+                            <label class="btn btn-outline-info" for="e_3">E</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <div>
+                        <small class="text-muted me-2"><span class="badge bg-success">P</span> Presente</small>
+                        <small class="text-muted me-2"><span class="badge bg-warning">T</span> Tardanza</small>
+                        <small class="text-muted me-2"><span class="badge bg-danger">A</span> Ausencia</small>
+                        <small class="text-muted"><span class="badge bg-info">E</span> Excusa</small>
+                    </div>
+                    <button class="btn btn-primary px-4">Guardar Asistencia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

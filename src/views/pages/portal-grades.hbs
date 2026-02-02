@@ -1,0 +1,123 @@
+{{#> layout-portal}}
+
+<div class="row mb-4">
+    <div class="col-md-8">
+        <h2 class="fw-bold">Hola, Juan</h2>
+        <p class="text-muted">Aquí está tu progreso académico del periodo actual.</p>
+    </div>
+    <div class="col-md-4 text-md-end">
+        <button class="btn btn-outline-primary"><i class="bi bi-download"></i> Descargar Boletín PDF</button>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Perfil Rápido -->
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <img src="img/avatars/avatar.jpg" class="img-fluid rounded-circle mb-3" width="100" alt="Avatar">
+                <h4 class="mb-1">Juan Pérez</h4>
+                <p class="text-muted mb-3">4to de Secundaria - Sección A</p>
+
+                <hr>
+
+                <div class="row text-center mt-4">
+                    <div class="col-4">
+                        <h5 class="fw-bold text-primary">92</h5>
+                        <small class="text-muted">Promedio</small>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="fw-bold text-success">0</h5>
+                        <small class="text-muted">Ausencias</small>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="fw-bold text-warning">2</h5>
+                        <small class="text-muted">Tardanzas</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de Calificaciones -->
+    <div class="col-lg-8 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-header bg-white border-bottom-0">
+                <h5 class="card-title fw-bold">Calificaciones Recientes</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Materia</th>
+                            <th class="text-center">Ago</th>
+                            <th class="text-center">Sep</th>
+                            <th class="text-center">Oct</th>
+                            <th class="text-center">Prom</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold"><i class="bi bi-calculator me-2 text-info"></i> Matemáticas</td>
+                            <td class="text-center">85</td>
+                            <td class="text-center">90</td>
+                            <td class="text-center">92</td>
+                            <td class="text-center fw-bold text-primary">89</td>
+                            <td><span class="badge bg-success rounded-pill">Aprobado</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold"><i class="bi bi-book me-2 text-warning"></i> Lengua Española</td>
+                            <td class="text-center">95</td>
+                            <td class="text-center">94</td>
+                            <td class="text-center">96</td>
+                            <td class="text-center fw-bold text-primary">95</td>
+                            <td><span class="badge bg-success rounded-pill">Aprobado</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold"><i class="bi bi-globe me-2 text-success"></i> Ciencias Sociales</td>
+                            <td class="text-center">88</td>
+                            <td class="text-center">89</td>
+                            <td class="text-center">90</td>
+                            <td class="text-center fw-bold text-primary">89</td>
+                            <td><span class="badge bg-success rounded-pill">Aprobado</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold"><i class="bi bi-flask me-2 text-danger"></i> Ciencias Naturales</td>
+                            <td class="text-center">78</td>
+                            <td class="text-center">80</td>
+                            <td class="text-center">85</td>
+                            <td class="text-center fw-bold text-primary">81</td>
+                            <td><span class="badge bg-success rounded-pill">Aprobado</span></td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold"><i class="bi bi-translate me-2 text-primary"></i> Inglés</td>
+                            <td class="text-center">98</td>
+                            <td class="text-center">99</td>
+                            <td class="text-center">100</td>
+                            <td class="text-center fw-bold text-primary">99</td>
+                            <td><span class="badge bg-success rounded-pill">Excelente</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer bg-white text-end">
+                <a href="#" class="text-decoration-none">Ver historial completo &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="alert alert-info d-flex align-items-center" role="alert">
+            <i class="bi bi-info-circle-fill fs-4 me-3"></i>
+            <div>
+                <strong>Aviso Importante:</strong> La reunión de padres se llevará a cabo el próximo viernes 28 a las
+                4:00 PM en el auditorio principal.
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-portal}}

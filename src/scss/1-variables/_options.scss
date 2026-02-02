@@ -1,0 +1,10 @@
+$min-contrast-ratio: 3 !default;
+$enable-validation-icons: false !default;
+$enable-rfs: false !default;
+$enable-negative-margins: true !default;
+$enable-dark-mode: false !default;
+
+// Contrast overrides
+$yiq-contrasted-threshold: 170 !default;
+$yiq-text-dark: $gray-900 !default;
+$yiq-text-light: $white !default;

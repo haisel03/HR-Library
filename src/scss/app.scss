@@ -1,0 +1,22 @@
+// Variables
+@import "1-variables/app";
+
+// Bootstrap
+@import "1-variables/bootstrap";
+
+
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons.scss";
+
+
+// Theme mixins
+@import "2-mixins/button";
+
+// Theme components
+@import "3-components/index";
+
+// Theme utilities
+@import "4-utilities/cursors";
+
+// Vendors
+@import "5-vendor/vendors";

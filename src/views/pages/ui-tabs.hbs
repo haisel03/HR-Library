@@ -1,0 +1,160 @@
+{{#> layout-main icon="bi bi-folder2-open" title="Pestañas y Paneles" description="Organización institucional de
+contenido mediante pestañas."}}
+
+<div class="container-fluid p-0">
+
+    <div class="row">
+        <!-- Tabs Standard -->
+        <div class="col-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Tabs Estándar</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-tabs mb-3" id="default-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home"
+                                type="button" role="tab" aria-controls="home" aria-selected="true">Inicio</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile"
+                                type="button" role="tab" aria-controls="profile" aria-selected="false">Perfil</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact"
+                                type="button" role="tab" aria-controls="contact" aria-selected="false">Contacto</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="default-tabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <p class="mb-0">Contenido del panel de inicio institucional. Aquí se despliega la
+                                información principal de la sección seleccionada.</p>
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            <p class="mb-0">Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper
+                                congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est eleifend
+                                mi.</p>
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            <p class="mb-0">Proin porttitor, orci nec nonummy molestie, enim est eleifend mi, non
+                                fermentum diam nisl sit amet erat. Duis semper. Duis arcu massa, scelerisque vitae.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Pills -->
+        <div class="col-12 col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Tabs Pills</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-home" type="button" role="tab">Home</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-profile" type="button" role="tab">Profile</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-contact" type="button" role="tab">Contact</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+                                Suspendisse lectus tortor.</p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                            aria-labelledby="pills-profile-tab">
+                            <p class="mb-0">Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper
+                                congue, euismod non, mi.</p>
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                            aria-labelledby="pills-contact-tab">
+                            <p class="mb-0">Proin porttitor, orci nec nonummy molestie, enim est eleifend mi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical Tabs -->
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Tabs Verticales con Iconos</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                    <i class="align-middle me-1" data-feather="home"></i> Home
+                                </a>
+                                <a class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                    href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
+                                    aria-selected="false">
+                                    <i class="align-middle me-1" data-feather="user"></i> Profile
+                                </a>
+                                <a class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill"
+                                    href="#v-pills-messages" role="tab" aria-controls="v-pills-messages"
+                                    aria-selected="false">
+                                    <i class="align-middle me-1" data-feather="message-square"></i> Messages
+                                </a>
+                                <a class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill"
+                                    href="#v-pills-settings" role="tab" aria-controls="v-pills-settings"
+                                    aria-selected="false">
+                                    <i class="align-middle me-1" data-feather="settings"></i> Settings
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                    aria-labelledby="v-pills-home-tab">
+                                    <h4 class="tab-title">Home Tab</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus.
+                                        Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed,
+                                        dolor. Cras elementum ultrices diam. Maecenas ligula massa, varius a, semper
+                                        congue, euismod non, mi. Proin porttitor, orci nec nonummy molestie, enim est
+                                        eleifend mi, non fermentum diam nisl sit amet erat.</p>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                    aria-labelledby="v-pills-profile-tab">
+                                    <h4 class="tab-title">Profile Tab</h4>
+                                    <p>Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper
+                                        suscipit, posuere a, pede. Donec nec justo eget felis facilisis fermentum.
+                                        Aliquam porttitor mauris sit amet orci. Aenean dignissim pellentesque felis.</p>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                                    aria-labelledby="v-pills-messages-tab">
+                                    <h4 class="tab-title">Messages Tab</h4>
+                                    <p>Morbi in sem quis dui placerat ornare. Pellentesque odio nisi, euismod in,
+                                        pharetra a, ultricies in, diam. Sed arcu. Cras consequat.</p>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+                                    aria-labelledby="v-pills-settings-tab">
+                                    <h4 class="tab-title">Settings Tab</h4>
+                                    <p>Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu
+                                        vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis,
+                                        accumsan porttitor, facilisis luctus, metus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

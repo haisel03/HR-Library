@@ -1,0 +1,13 @@
+$transition-base: all .35s ease-in-out !default;
+// Simplebar
+$simplebar-scrollbar-bg: $white !default;
+
+// Hamburger
+$hamburger-width-top: 24px !default;
+$hamburger-width-middle: 24px !default;
+$hamburger-width-bottom: 16px !default;
+
+// Stats
+$stat-bg: lighten($primary, 35%) !default;
+$stat-icon-color: $primary !default;
+$stat-padding: $spacer * 0.75 !default;

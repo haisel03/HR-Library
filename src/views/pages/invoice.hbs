@@ -1,0 +1,118 @@
+{{#> layout-main icon="bi bi-receipt" title="Factura" description="Detalle de facturación"}}
+
+<div class="container-fluid p-0" id="invoice">
+
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body m-sm-3 m-md-5">
+					<div class="mb-4">
+						Hola <strong>Chris Wood</strong>,
+						<br />
+						Esta es la factura por el pago de <strong>$320.00</strong> (USD) que realizaste el 15 de Agosto,
+						2023.
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="text-muted">Pago No.</div>
+							<strong>741037024</strong>
+						</div>
+						<div class="col-md-6 text-md-end">
+							<div class="text-muted">Fecha de pago</div>
+							<strong>Agosto 15, 2023 - 03:45 pm</strong>
+						</div>
+					</div>
+
+					<hr class="my-4" />
+
+					<div class="row mb-4">
+						<div class="col-md-6">
+							<div class="text-muted">Cliente</div>
+							<strong>
+								Chris Wood
+							</strong>
+							<p>
+								4183 Forest Avenue <br>
+								New York City <br>
+								10011 <br>
+								USA <br>
+								<a href="#">
+									chris.wood@gmail.com
+								</a>
+							</p>
+						</div>
+						<div class="col-md-6 text-md-end">
+							<div class="text-muted">Pago Para</div>
+							<strong>
+								EduMatrix LLC
+							</strong>
+							<p>
+								354 Roy Alley <br>
+								Denver <br>
+								80202 <br>
+								USA <br>
+								<a href="#">
+									info@edumatrix.com
+								</a>
+							</p>
+						</div>
+					</div>
+
+					<table class="table table-sm">
+						<thead>
+							<tr>
+								<th>Descripción</th>
+								<th>Cantidad</th>
+								<th class="text-end">Monto</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Licencia Anual EduMatrix Pro</td>
+								<td>1</td>
+								<td class="text-end">$275.00</td>
+							</tr>
+							<tr>
+								<td>Módulo de Contabilidad</td>
+								<td>1</td>
+								<td class="text-end">$45.00</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-end">Subtotal</th>
+								<td class="text-end">$320.00</td>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-end">Impuestos (0%)</th>
+								<td class="text-end">$0.00</td>
+							</tr>
+							<tr>
+								<th colspan="2" class="text-end">Total</th>
+								<td class="text-end">$320.00</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<div class="text-center">
+						<p class="text-sm">
+							<strong>Nota:</strong> Por favor enviar el pago dentro de los 30 días posteriores a la
+							recepción de esta factura.
+						</p>
+
+						<a href="#" class="btn btn-primary no-print"
+							onclick="HR.printEl('#invoice', {noPrintSelector: '.no-print'})">
+							Imprimir esta factura
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-main}}

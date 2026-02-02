@@ -1,0 +1,123 @@
+{{#> layout-main icon="bi bi-calculator" title="Registro de Calificaciones" description="Ingreso de notas por periodo"}}
+
+<div class="row mb-3">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form class="row g-3 align-items-end">
+                    <div class="col-md-3">
+                        <label class="form-label">Periodo Académico</label>
+                        <select class="form-select">
+                            <option selected>2023-2024 / P1</option>
+                            <option>2023-2024 / P2</option>
+                            <option>2023-2024 / P3</option>
+                            <option>2023-2024 / P4</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Grado / Sección</label>
+                        <select class="form-select">
+                            <option selected>4to Secundaria - A</option>
+                            <option>4to Secundaria - B</option>
+                            <option>5to Secundaria - A</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Asignatura</label>
+                        <select class="form-select">
+                            <option selected>Matemáticas</option>
+                            <option>Física</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-primary w-100"><i class="bi bi-search"></i> Cargar
+                            Estudiantes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-actions float-end">
+                    <button class="btn btn-success"><i class="bi bi-save"></i> Guardar Cambios</button>
+                    <button class="btn btn-outline-secondary"><i class="bi bi-printer"></i> Imprimir Planilla</button>
+                </div>
+                <h5 class="card-title mb-0">Listado de Estudiantes</h5>
+                <h6 class="card-subtitle text-muted mt-1">Matemáticas - 4to A (ago-oct)</h6>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px;">#</th>
+                            <th style="width: 250px;">Nombre Apellido</th>
+                            <th class="text-center" style="width: 100px;">Nota 1 (30%)</th>
+                            <th class="text-center" style="width: 100px;">Nota 2 (30%)</th>
+                            <th class="text-center" style="width: 100px;">Nota 3 (40%)</th>
+                            <th class="text-center bg-light fw-bold" style="width: 100px;">Total</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatars/avatar.jpg" class="rounded-circle me-2" width="32"
+                                        height="32">
+                                    <span>Juan Pérez</span>
+                                </div>
+                            </td>
+                            <td><input type="number" class="form-control text-center" value="28" min="0" max="30"></td>
+                            <td><input type="number" class="form-control text-center" value="25" min="0" max="30"></td>
+                            <td><input type="number" class="form-control text-center" value="38" min="0" max="40"></td>
+                            <td class="text-center fw-bold bg-light text-primary">91</td>
+                            <td><input type="text" class="form-control" placeholder="..."></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatars/avatar-2.jpg" class="rounded-circle me-2" width="32"
+                                        height="32">
+                                    <span>Ana Gómez</span>
+                                </div>
+                            </td>
+                            <td><input type="number" class="form-control text-center" value="30" min="0" max="30"></td>
+                            <td><input type="number" class="form-control text-center" value="30" min="0" max="30"></td>
+                            <td><input type="number" class="form-control text-center" value="40" min="0" max="40"></td>
+                            <td class="text-center fw-bold bg-light text-primary">100</td>
+                            <td><input type="text" class="form-control" placeholder="..."></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatars/avatar-3.jpg" class="rounded-circle me-2" width="32"
+                                        height="32">
+                                    <span>Carlos Ruiz</span>
+                                </div>
+                            </td>
+                            <td><input type="number" class="form-control text-center is-invalid" value="15" min="0"
+                                    max="30"></td>
+                            <td><input type="number" class="form-control text-center" value="20" min="0" max="30"></td>
+                            <td><input type="number" class="form-control text-center" value="30" min="0" max="40"></td>
+                            <td class="text-center fw-bold bg-light text-danger">65</td>
+                            <td><input type="text" class="form-control" placeholder="Refuerzo necesario"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-muted">
+                <i class="bi bi-info-circle"></i> Los cambios se guardan automáticamente en borradores cada 5 minutos.
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

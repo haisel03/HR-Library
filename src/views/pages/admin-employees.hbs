@@ -1,0 +1,89 @@
+{{#> layout-main icon="bi bi-briefcase" title="Personal y Profesores" description="Gestión de recursos humanos"}}
+
+<div class="row mb-3">
+    <div class="col-12 text-end">
+        <button class="btn btn-primary"><i class="bi bi-person-plus-fill"></i> Nuevo Empleado</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-hover align-middle" id="employees-table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cargo</th>
+                            <th>Departamento</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatars/avatar-4.jpg" class="rounded-circle me-2" width="36"
+                                        height="36">
+                                    <div>
+                                        <strong>Lic. Rosa Meléndez</strong><br>
+                                        <small class="text-muted">rosa.melendez@edumatrix.com</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Coordinadora Académica</td>
+                            <td>Dirección</td>
+                            <td>12/01/2018</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-light"><i class="bi bi-pencil"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="img/avatars/avatar-3.jpg" class="rounded-circle me-2" width="36"
+                                        height="36">
+                                    <div>
+                                        <strong>Ing. Pedro Martínez</strong><br>
+                                        <small class="text-muted">pedro.m@edumatrix.com</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Profesor Matemáticas</td>
+                            <td>Docencia</td>
+                            <td>05/08/2020</td>
+                            <td><span class="badge bg-success">Activo</span></td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-light"><i class="bi bi-pencil"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle me-2 bg-light d-flex justify-content-center align-items-center"
+                                        style="width:36px; height:36px">JP</div>
+                                    <div>
+                                        <strong>Juan Pablo</strong><br>
+                                        <small class="text-muted">jp@edumatrix.com</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Conserje</td>
+                            <td>Mantenimiento</td>
+                            <td>10/02/2019</td>
+                            <td><span class="badge bg-warning">Vacaciones</span></td>
+                            <td>
+                                <a href="#" class="btn btn-sm btn-light"><i class="bi bi-pencil"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/layout-main}}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> head}}
+
+<body>
+	<div class="wrapper">
+		{{> sidebar}}
+
+		<div class="main overflow-hidden vh-100">
+			<!-- Header / Navbar -->
+			{{> navbar-panel}}
+			<!-- Contenedor de Pestañas (Tabbed Interface) -->
+			<div class="panel-mode-container d-flex flex-column h-100 bg-white">
+				<!-- Barra de Pestañas -->
+				<div class="panel-tabs-bar bg-gray-200 border-bottom d-flex align-items-center p-0">
+
+
+					<div class="flex-grow-1 overflow-hidden">
+						<ul class="nav nav-pills nav-tabs-iframe flex-nowrap mb-0" id="iframe-tabs" role="tablist"
+							style="overflow-x: auto;">
+							<!-- Tabs se insertan aquí vía JS -->
+						</ul>
+					</div>
+					<div class="dropdown border-start">
+						<button class="btn btn-danger text-white dropdown-toggle rounded-0 py-2 border-0" type="button"
+							data-bs-toggle="dropdown">
+							<i class="fas fa-cogs me-1"></i> Opciones
+						</button>
+						<ul class="dropdown-menu shadow border-0">
+							<li>
+								<a class="dropdown-item" href="#" id="btnCloseAll">
+									<i class="bi bi-x-circle me-2"></i>Cerrar Todo
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#" id="btnCloseOthers">
+									<i class="bi bi-dash-circle me-2"></i>Cerrar los Demás
+								</a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#" id="btnIframeRefresh">
+									<i class="bi bi-arrow-clockwise me-2"></i>Actualizar
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Area de Contenido (Iframes) -->
+				<div class="tab-content flex-grow-1 position-relative" id="iframe-contents"
+					style="height: calc(100vh - 100px);">
+					<div
+						class="tab-empty d-flex align-items-center justify-content-center h-100 flex-column text-muted opacity-25">
+						<i class="bi bi-window-plus display-1 mb-3"></i>
+						<h4 class="fw-bold">HR-Panel v1.0</h4>
+						<p>Selecciona una página en el menú lateral para abrir una pestaña.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
