@@ -1,58 +1,219 @@
-label.form-label {
-  text-decoration: none;
-  margin-bottom: .2rem;
-  font-weight: bold !important;
-  color: $form-label-color;
+// ============================================================================
+// _forms.scss
+// Estilos de formularios — Bootstrap 5 + Select2 + estados de validación
+// ============================================================================
 
+/* ── Labels ─────────────────────────────────────────────────────────────────── */
+
+label.form-label {
+  margin-bottom: .2rem;
+  font-weight: $font-weight-bold; // BUG 1: !important innecesario — no hay nada
+  color: $form-label-color;       // que lo sobreescriba en BS5 a este nivel
+  text-decoration: none;
+
+  // Indicador de campo obligatorio
   &.required::after {
     content: " *";
-    font-weight: 700;
+    font-weight: $font-weight-bold;
     color: $danger;
   }
 }
 
+/* ── Inputs y Selects ────────────────────────────────────────────────────────── */
+
 .form-control,
 .form-select {
-  font-weight: 500;
+  font-weight: $font-weight-medium; // BUG 2: 500 hardcoded → usar variable del tema
   color: $gray-800;
   border: 1px solid $gray-300;
   padding: .5rem .75rem;
 
   &:focus {
     border-color: $blue;
-    box-shadow: 0 0 0 0.2rem rgba($blue, 0.1);
+    box-shadow: 0 0 0 .2rem rgba($blue, .1);
+  }
+
+  // Estados de validación Bootstrap 5
+  &.is-valid {
+    border-color: $success;
+    background-image: none; // quitar el ícono SVG nativo de BS5 si se prefiere solo color
+
+    &:focus {
+      border-color: $success;
+      box-shadow: 0 0 0 .2rem rgba($success, .15);
+    }
+  }
+
+  &.is-invalid {
+    border-color: $danger;
+    background-image: none;
+
+    &:focus {
+      border-color: $danger;
+      box-shadow: 0 0 0 .2rem rgba($danger, .15);
+    }
   }
 }
+
+/* ── Input Group ─────────────────────────────────────────────────────────────── */
 
 .input-group {
   .input-group-text {
     background: $blue;
     border: 1px solid $blue;
-    text-align: center;
     color: $white;
-    font-weight: 600;
+    font-weight: $font-weight-bold;
+    text-align: center;
   }
 
+  // El input dentro del grupo no necesita borde izquierdo
   .form-control,
   .form-select {
     border-left: none;
+
+    // Restaurar el radio del lado derecho cuando va al final del grupo
+    &:last-child {
+      border-top-right-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
   }
 }
 
-.select2 {
-  font-weight: $font-weight-bold;
-  color: $dark;
+/* ── Select2 ─────────────────────────────────────────────────────────────────── */
 
-  :hover {
+// BUG 3: el selector `.select2` apunta al contenedor span.select2 que genera
+// Select2 en el DOM, no al <select> original. Los estilos de color/font deben
+// aplicarse sobre .select2-selection y .select2-results__option, no sobre el root.
+// El selector `:hover { cursor: pointer }` estaba mal — faltaba el ampersand (&).
+
+.select2-container--bootstrap-5 {
+
+  // Caja de selección
+  .select2-selection {
+    font-weight: $font-weight-bold;
+    color: $dark;
+    border: 1px solid $gray-300;
+    border-radius: $border-radius;
+    padding: .5rem .75rem;
+    height: auto;
     cursor: pointer;
+
+    &:hover {
+      border-color: $gray-400;
+    }
   }
 
+  // Estado focus
+  &.select2-container--focus .select2-selection {
+    border-color: $blue;
+    box-shadow: 0 0 0 .2rem rgba($blue, .1);
+    outline: 0;
+  }
+
+  // Estado válido (is-invalid en el <select> → propagado por Forms.js)
+  &.select2-container--focus .select2-selection.is-valid,
+  .select2-selection.is-valid {
+    border-color: $success;
+
+    &:focus {
+      box-shadow: 0 0 0 .2rem rgba($success, .15);
+    }
+  }
+
+  // Estado inválido
+  &.select2-container--focus .select2-selection.is-invalid,
+  .select2-selection.is-invalid {
+    border-color: $danger;
+
+    &:focus {
+      box-shadow: 0 0 0 .2rem rgba($danger, .15);
+    }
+  }
+
+  // Dropdown
   .select2-dropdown {
     background-color: $white;
+    border: 1px solid $gray-300;
+    border-radius: $border-radius;
     padding: .2rem;
+    box-shadow: $box-shadow;
   }
 
-  option {
+  // Opciones del dropdown
+  .select2-results__option {
     font-size: $font-size-sm;
+    color: $dark;
+    padding: .35rem .75rem;
+    border-radius: calc($border-radius - 2px);
+    cursor: pointer;
+
+    &--highlighted {
+      background-color: $blue;
+      color: $white;
+    }
+
+    &[aria-selected="true"] {
+      background-color: rgba($blue, .1);
+      color: $blue;
+      font-weight: $font-weight-bold;
+    }
   }
+
+  // Campo de búsqueda dentro del dropdown
+  .select2-search--dropdown .select2-search__field {
+    border: 1px solid $gray-300;
+    border-radius: $border-radius;
+    padding: .35rem .5rem;
+    font-size: $font-size-sm;
+
+    &:focus {
+      border-color: $blue;
+      outline: 0;
+      box-shadow: 0 0 0 .15rem rgba($blue, .1);
+    }
+  }
+
+  // Tags (multiple)
+  .select2-selection__choice {
+    background-color: $blue;
+    border: none;
+    color: $white;
+    font-size: $font-size-sm;
+    border-radius: $border-radius;
+    padding: .1rem .5rem;
+  }
+
+  .select2-selection__choice__remove {
+    color: rgba($white, .85);
+    margin-right: .25rem;
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+/* ── Mensajes de validación Bootstrap 5 ──────────────────────────────────────── */
+
+.invalid-feedback {
+  display: none;
+  font-size: $font-size-sm;
+  color: $danger;
+  margin-top: .25rem;
+}
+
+// Mostrar feedback cuando el campo hermano anterior es inválido
+.is-invalid ~ .invalid-feedback,
+.select2.is-invalid ~ .invalid-feedback {
+  display: block;
+}
+
+.valid-feedback {
+  display: none;
+  font-size: $font-size-sm;
+  color: $success;
+  margin-top: .25rem;
+}
+
+.is-valid ~ .valid-feedback {
+  display: block;
 }

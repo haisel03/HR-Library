@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Table.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Calendar.html">Calendar</a></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-Date.html">Date</a></li><li><a href="module-Dom.html">Dom</a></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-String.html">String</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-init.html#~init">init</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="$HR.html">$HR</a></li><li><a href="Alert.toast.html">toast</a></li><li><a href="module-Alert-Alert.html">Alert</a><ul class='methods'></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#alert">alert</a></li><li><a href="global.html#confirm">confirm</a></li><li><a href="global.html#toast">toast</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Table.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import $ from "jquery";
+import config from "../core/config";
+import Alert from "./Alert";
+
+/**
+ * @module Table
+ * @description Helper avanzado para DataTables con utilidades, acciones, modales y plugins.
+ */
+
+const Table = {
+	_plugins: [],
+
+	/**
+	 * Registra un plugin
+	 */
+	use: (plugin) => {
+		if (typeof plugin === "function") {
+			plugin(Table);
+			Table._plugins.push(plugin);
+		}
+	},
+
+	/**
+	 * Normaliza cualquier input a jQuery
+	 */
+	_tbl: (el) => {
+		if (!el) return $();
+		if (el instanceof $) return el;
+		if (el instanceof HTMLElement) return $(el);
+		return $(el);
+	},
+
+	/**
+	 * Obtiene instancia DataTable si existe
+	 */
+	_dt: (el) => {
+		const $t = Table._tbl(el);
+		return $.fn.DataTable.isDataTable($t) ? $t.DataTable() : null;
+	},
+
+	/**
+	 * Inicializa todas las tablas dentro de un scope
+	 */
+	init: (scope = document) => {
+		$(scope)
+			.find('table[data-target="dt"]')
+			.each((_, el) => Table.initTable(el));
+	},
+
+	/**
+	 * Inicializa una tabla DataTable
+	 */
+	initTable: (el, options = {}) => {
+		const $table = Table._tbl(el);
+		if (!$table.length) return null;
+
+		if ($.fn.DataTable.isDataTable($table)) {
+			return $table.DataTable();
+		}
+
+		return $table.DataTable({
+			language: config.datatables.base.language,
+			...config.datatables.base,
+			drawCallback: function () {
+				if (window.feather) feather.replace();
+			},
+			...options,
+		});
+	},
+
+	/**
+	 * Destruye una DataTable
+	 */
+	destroy: (el) => {
+		const dt = Table._dt(el);
+		if (dt) dt.clear().destroy();
+	},
+
+	/**
+	 * Recarga datos vía AJAX
+	 */
+	reload: (el, resetPaging = false) => {
+		const dt = Table._dt(el);
+		if (dt?.ajax) dt.ajax.reload(null, !resetPaging);
+	},
+
+	/**
+	 * Verifica si una tabla está inicializada
+	 */
+	isInitialized: (el) => $.fn.DataTable.isDataTable(Table._tbl(el)),
+
+	/**
+	 * Crea una columna estándar
+	 */
+	col: (data, title = "", options = {}) => {
+		const {
+			render,
+			icon,
+			iconClass = "",
+			className = "",
+			orderable = true,
+			width,
+			tooltip,
+			autoIcon = true
+		} = options;
+
+		const defaultIcons = {
+			name: "bi bi-person",
+			email: "bi bi-envelope",
+			date: "bi bi-calendar"
+		};
+
+		const finalIcon = icon || (autoIcon ? defaultIcons[data] : null);
+		let finalTitle = title;
+
+		if (finalIcon) {
+			finalTitle = `
+				&lt;span class="dt-title ${iconClass}" ${tooltip ? `title="${tooltip}"` : ""}>
+					&lt;i class="${finalIcon}">&lt;/i>
+					&lt;span>${title}&lt;/span>
+				&lt;/span>
+			`;
+		}
+
+		const column = { data, title: finalTitle, orderable };
+		if (className) column.className = className;
+		if (width) column.width = width;
+		if (typeof render === "function") column.render = render;
+
+		return column;
+	},
+
+	/**
+	 * Columna de selección
+	 */
+	checkbox: () => ({
+		data: null,
+		orderable: false,
+		className: "text-center",
+		width: "30px",
+		render: () => `&lt;input type="checkbox" class="dt-check">`
+	}),
+
+	/**
+	 * Crea columna de acciones
+	 */
+	actions: (options = {}) => {
+		const cfg = Array.isArray(options) ? { actions: options } : options;
+		const {
+			actions = cfg.actionsDefault || ["view", "edit", "delete"],
+			className = "text-center",
+			width = "120px",
+			renderActions,
+			title = "Acciones",
+			icon = "bi bi-gear"
+		} = cfg;
+
+		return Table.col(null, title, {
+			icon,
+			className,
+			width,
+			orderable: false,
+			autoIcon: false,
+			render: (data, type, row) => {
+				if (typeof renderActions === "function") return renderActions(data, type, row);
+
+				const list = typeof actions === "function" ? actions(row) : actions;
+
+				return `
+					&lt;div class="table-actions">
+						${list.map((key) => {
+							const btn = typeof key === "string" ? config.dt_actions[key] : key;
+							if (!btn) return "";
+							return `
+								&lt;a href="#"
+								   data-action="${btn.action}"
+								   class="${btn.class} text-decoration-none fs-4"
+								   title="${btn.title}">
+									&lt;i class="bi ${btn.icon} align-middle">&lt;/i>
+								&lt;/a>
+							`;
+						}).join("")}
+					&lt;/div>
+				`;
+			}
+		});
+	},
+
+	/**
+	 * Obtiene los datos de una fila
+	 */
+	row: (el) => {
+		let $tr = $(el).closest("tr");
+		if ($tr.hasClass("child")) $tr = $tr.prev();
+		const dt = Table._dt($tr.closest("table"));
+		return dt ? dt.row($tr).data() : null;
+	},
+
+	/**
+	 * Maneja eventos de acciones
+	 */
+	onAction: (el, callback) => {
+		const $table = Table._tbl(el);
+		$table.off("click.tableActions")
+			.on("click.tableActions", "[data-action]", async (e) => {
+				e.preventDefault();
+				const btn = e.currentTarget;
+				const action = $(btn).data("action");
+				const row = Table.row(btn);
+				const cfg = config.dt_actions[action];
+
+				if (cfg?.confirm) {
+					const ok = await Alert.confirm(cfg.confirm.title, cfg.confirm.text);
+					if (!ok) return;
+				}
+				callback({ action, row, button: btn });
+			});
+	},
+
+	/**
+	 * Bulk Actions
+	 */
+	getChecked: (el) => {
+		const dt = Table._dt(el);
+		const rows = [];
+		if (!dt) return rows;
+		dt.rows().every(function () {
+			const $node = $(this.node());
+			if ($node.find(".dt-check").prop("checked")) rows.push(this.data());
+		});
+		return rows;
+	},
+
+	/**
+	 * Modales integrados
+	 */
+	modal: {
+		open: (id, data = {}) => {
+			const $modal = $(`#${id}`);
+			Object.entries(data).forEach(([key, value]) => {
+				$modal.find(`[name="${key}"]`).val(value);
+			});
+			$modal.modal("show");
+		},
+		close: (id) => $(`#${id}`).modal("hide"),
+	},
+
+	/**
+	 * Row Management
+	 */
+	addRow: (el, row) => {
+		const dt = Table._dt(el);
+		if (dt) dt.row.add(row).draw(false);
+	},
+	removeRow: (el, trigger) => {
+		const dt = Table._dt(el);
+		const $tr = $(trigger).closest("tr");
+		if (dt) dt.row($tr).remove().draw(false);
+	},
+	updateRow: (el, trigger, data) => {
+		const dt = Table._dt(el);
+		const $tr = $(trigger).closest("tr");
+		if (dt) dt.row($tr).data(data).draw(false);
+	},
+	refresh: (el, data = []) => {
+		const dt = Table._dt(el);
+		if (!dt) return;
+		dt.clear().rows.add(data).draw();
+	},
+
+	/**
+	 * State &amp; UI
+	 */
+	selected: (el) => {
+		const dt = Table._dt(el);
+		return dt ? dt.rows({ selected: true }).data().toArray() : [];
+	},
+	clearSelection: (el) => {
+		const dt = Table._dt(el);
+		if (dt?.rows) dt.rows().deselect();
+	},
+	toggleLoading: (el, state = true) => {
+		Table._tbl(el).closest(".dataTables_wrapper").toggleClass("dt-loading", state);
+	},
+	buttons: (type = "buttons") => config.datatables[type] || [],
+};
+
+export default Table;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Mar 21 2026 08:46:29 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

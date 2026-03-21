@@ -1,1378 +1,308 @@
 /**
- * HR
- * -----------------------------------------------------------
- * Plugin que centraliza todas las funciones útiles del proyecto.
- * API plana y amigable para el desarrollador.
+ * @namespace $HR
+ * @description
+ * Fachada descentralizada del framework HR Library.
+ *
+ * Los helpers se exponen globalmente como $Dom, $Alert, $Table, etc.
+ * $HR queda reservado para inicialización y funciones personalizadas.
  */
 
-import config from "./core/config";
+import config  from "./core/config";
 import spanish from "./core/spanish";
-import dom from "./helpers/dom_helper";
-import icons from "./helpers/icons_helper";
-import sidebar from "./helpers/sidebar_helper";
-import validation from "./helpers/validation_helper";
-import forms from "./helpers/forms_helper";
-import number from "./helpers/number_helper";
-import string from "./helpers/string_helper";
-import api from "./helpers/api_helper";
-import modal from "./helpers/modal_helper";
-import alert from "./helpers/alert_helper";
-import table from "./helpers/table_helper";
-import date from "./helpers/date_helper";
-import storage from "./helpers/storage_helper";
-import charts from "./helpers/charts_helper";
-import editor from "./helpers/editor_helper";
-import signature from "./helpers/signature_helper";
-import exportTbl from "./helpers/exportTbl_helper";
-import calendar from "./helpers/calendar_helper";
-import codes from "./helpers/code_helper";
-import currency from "./helpers/currency_helper";
-import drag from "./helpers/drag_helper";
-import file from "./helpers/file_helper";
-import print from "./helpers/print_helper";
-import select2 from "./helpers/select2_helper";
-import fullscreen from "./helpers/fullscreen_helper";
-import humanize from "./helpers/humanize_helper";
-import iframe from "./helpers/iframe_helper";
-import excel from "./helpers/excel_helper";
-import init from "./core/init";
-
-/**
- * @namespace HR
- */
-const HR = {
-   /** @type {Object} Configuración global del proyecto */
-   config,
-
-   /** @type {Object} Traducciones / idioma */
-   lang: spanish,
-
-   /**
-    * Inicializa todos los componentes automáticos en el scope indicado
-    * @param {HTMLElement|Document|string} [scope=document]
-    */
-   init: (scope) => init(scope),
-
-   /* =====================================================
-      API / HTTP (Axios)
-   ===================================================== */
-
-   /**
-    * Establece el token de autenticación para peticiones API
-    * @param {string|null} token JWT o token de acceso
-    */
-   setToken: (token) => api.setToken(token),
-
-   /**
-    * Obtiene el token de autenticación actual
-    * @returns {string|null}
-    */
-   getToken: () => api.getToken(),
-
-   /**
-    * Habilita o deshabilita alertas automáticas en errores de API
-    * @param {boolean} value
-    */
-   setApiAutoAlerts: (value) => api.setAutoAlerts(value),
-
-   /**
-    * Realiza una petición GET
-    * @param {string} url Endpoint
-    * @param {Object} [params] Parámetros de consulta
-    * @param {Object} [options] Opciones extras de Axios
-    * @returns {Promise<any>}
-    */
-   getApi: (url, params, options) => api.get(url, params, options),
-
-   /**
-    * Realiza una petición POST
-    * @param {string} url Endpoint
-    * @param {Object|FormData} data Cuerpo de la petición
-    * @param {Object} [options] Opciones extras de Axios
-    * @returns {Promise<any>}
-    */
-   postApi: (url, data, options) => api.post(url, data, options),
-
-   /**
-    * Realiza una petición PUT
-    * @param {string} url Endpoint
-    * @param {Object|FormData} data Cuerpo de la petición
-    * @param {Object} [options] Opciones extras de Axios
-    * @returns {Promise<any>}
-    */
-   putApi: (url, data, options) => api.put(url, data, options),
-
-   /**
-    * Realiza una petición PATCH
-    * @param {string} url Endpoint
-    * @param {Object|FormData} data Cuerpo de la petición
-    * @param {Object} [options] Opciones extras de Axios
-    * @returns {Promise<any>}
-    */
-   patchApi: (url, data, options) => api.patch(url, data, options),
-
-   /**
-    * Realiza una petición DELETE
-    * @param {string} url Endpoint
-    * @param {Object} [options] Opciones extras de Axios
-    * @returns {Promise<any>}
-    */
-   deleteApi: (url, options) => api.delete(url, options),
-
-   /**
-    * Acceso directo a la instancia de Axios configurada
-    * @returns {Object} Instancia de Axios
-    */
-   apiRaw: () => api.raw(),
-
-   /* =====================================================
-      MODALES (Bootstrap 5)
-   ===================================================== */
-
-   /**
-    * Abre un modal de Bootstrap 5
-    * @param {string|HTMLElement} target Selector o elemento modal
-    * @param {Object} [data] Datos para pasar al modal (accesibles vía getModalData)
-    */
-   openModal: (target, data) => modal.open(target, data),
-
-   /**
-    * Cierra un modal de Bootstrap 5
-    * @param {string|HTMLElement} target Selector o elemento modal
-    */
-   closeModal: (target) => modal.close(target),
-
-   /**
-    * Alterna la visibilidad de un modal
-    * @param {string|HTMLElement} target Selector o elemento modal
-    */
-   toggleModal: (target) => modal.toggle(target),
-
-   /**
-    * Obtiene los datos pasados a un modal al abrirlo
-    * @param {string|HTMLElement} target Selector o elemento modal
-    * @returns {Object|null}
-    */
-   getModalData: (target) => modal.data(target),
-
-   /* =====================================================
-      ALERTAS Y NOTIFICACIONES
-   ===================================================== */
-   /**
-    * Muestra una alerta success
-    * @param {string} text Mensaje a mostrar
-    */
-   msgSuccess: (text) => alert.alert(text, 's'),
-   /**
-    * Muestra una alerta info
-    * @param {string} text Mensaje a mostrar
-    */
-   msgInfo: (text) => alert.alert(text, 'i'),
-   /**
-    * Muestra una alerta warning
-    * @param {string} text Mensaje a mostrar
-    */
-   msgWarning: (text) => alert.alert(text, 'w'),
-   /**
-    * Muestra una alerta error
-    * @param {string} text Mensaje a mostrar
-    */
-   msgError: (text) => alert.alert(text, 'd'),
-
-   /**
-    * Muestra una alerta modal (SweetAlert, etc.)
-    * @param {string} text Mensaje a mostrar
-    * @param {string} [type='p'] Tipo: p (primary), s (success), i (info), w (warning), d (danger)
-    * @param {Function} [onConfirm] Callback al cerrar/confirmar
-    */
-   alert: (text, type, onConfirm) => alert.alert(text, type, onConfirm),
-
-   /**
-    * Muestra una notificación toast rápida
-    * @param {string} text Mensaje
-    * @param {string} [type='p'] Tipo de alerta
-    */
-   toast: (text, type) => alert.toast(text, type),
-   /**
-    * Muestra una notificación toast success
-    * @param {string} text Mensaje
-    */
-   toastSuccess: (text) => alert.toast(text, 's'),
-   /**
-    * Muestra una notificación toast info
-    * @param {string} text Mensaje
-    */
-   toastInfo: (text) => alert.toast(text, 'i'),
-   /**
-    * Muestra una notificación toast warning
-    * @param {string} text Mensaje
-    */
-   toastWarning: (text) => alert.toast(text, 'w'),
-   /**
-    * Muestra una notificación toast error
-    * @param {string} text Mensaje
-    */
-   toastError: (text) => alert.toast(text, 'd'),
-
-   /**
-    * Muestra un diálogo de confirmación
-    * @param {string} title Título
-    * @param {string} question Pregunta de confirmación
-    * @param {Function} onConfirm Callback si el usuario acepta
-    * @param {string} [type='w'] Tipo de icono (por defecto warning)
-    */
-   msgConfirm: (title, question, onConfirm, type) => alert.confirm(title, question, onConfirm, type),
-
-   /** Muestra la capa de carga global */
-   msgLoading: (close = false) => close ? alert.loadingClose() : alert.loadingOpen(),
-
-   /* =====================================================
-      TABLAS (DataTables)
-   ===================================================== */
-
-   /**
-    * Inicializa una tabla específica con configuración manual
-    * @param {string|HTMLElement|JQuery} target Selector o elemento tabla
-    * @param {Object} [options] Opciones de DataTables
-    * @returns {Object|null} Instancia de DataTable
-    */
-   createTbl: (target, options) => table.initTable(target, options),
-
-   /**
-    * Destruye una instancia de DataTable
-    * @param {string|HTMLElement|JQuery} target
-    */
-   destroyTbl: (target) => table.destroy(target),
-
-   /**
-    * Recarga los datos de una DataTable (útil para AJAX)
-    * @param {string|HTMLElement|JQuery} target
-    * @param {boolean} [resetPaging=false] Si debe volver a la página 1
-    */
-   reloadTbl: (target, resetPaging) => table.reload(target, resetPaging),
-
-   /**
-    * Define una columna para DataTables
-    * @param {string} data Nombre de la propiedad de los datos
-    * @param {string} [title] Título de la columna
-    * @param {Function} [render] Función de renderizado
-    * @returns {Object} Configuración de columna
-    */
-   tblCol: (data, title, render) => table.col(data, title, render),
-
-   /**
-    * Define una columna de acciones para DataTables
-    * @param {Function} render Función de renderizado para las acciones
-    * @returns {Object} Configuración de columna de acciones
-    */
-   tblActionsCol: (render) => table.actions(render),
-
-   /**
-    * Obtiene los botones base para DataTables (copiar, excel, pdf, imprimir)
-    * @param {string} type Tipo de botones ('default', 'export', etc.)
-    * @returns {Array<Object>} Array de configuraciones de botones
-    */
-   tblButtons: (type) => table.buttons(type),
-
-   /**
-    * Obtiene las filas seleccionadas de una tabla (requiere plugin Select)
-    * @param {string|HTMLElement|JQuery} target
-    * @returns {Array} Datos de las filas seleccionadas
-    */
-   getSelectedRows: (target) => table.selected(target),
-
-   /**
-    * Limpia la selección actual de la tabla
-    * @param {string|HTMLElement|JQuery} target
-    */
-   clearTblSelection: (target) => table.clearSelection(target),
-
-   /* =====================================================
-      EXPORTACIÓN
-   ===================================================== */
-
-   /**
-    * Exporta una tabla a Excel (XLSX)
-    * @param {string|HTMLElement|JQuery} target Tabla a exportar
-    * @param {string} [filename='tabla.xlsx'] Nombre del archivo
-    */
-   exportExcel: (target, filename) => exportTbl.excel(target, filename),
-
-   /**
-    * Exporta una tabla a PDF
-    * @param {string|HTMLElement|JQuery} target Tabla a exportar
-    * @param {Object} [options] Título y nombre de archivo
-    */
-   exportPdf: (target, options) => exportTbl.pdf(target, options),
-
-   /**
-    * Exporta una tabla a CSV
-    * @param {string|HTMLElement|JQuery} target Tabla a exportar
-    * @param {string} [filename='tabla.csv']
-    */
-   exportCsv: (target, filename) => exportTbl.csv(target, filename),
-
-   /**
-    * Obtiene los datos de una tabla en formato JSON
-    * @param {string|HTMLElement|JQuery} target
-    * @returns {Array}
-    */
-   exportJson: (target) => exportTbl.json(target),
-
-   /* =====================================================
-      FECHAS Y TIEMPO
-   ===================================================== */
-
-   /**
-    * Retorna un objeto Date con la fecha/hora actual
-    * @returns {Date}
-    */
-   now: () => date.now(),
-
-   /**
-    * Crea un objeto Date seguro a partir de un valor
-    * @param {Date|string|number} value
-    * @returns {Date|null}
-    */
-   createDate: (value) => date.create(value),
-
-   /**
-    * Valida si un valor representa una fecha válida
-    * @param {*} value
-    * @returns {boolean}
-    */
-   isValidDate: (value) => date.isValid(value),
-
-   /**
-    * Formatea una fecha según el locale y tipo
-    * @param {Date|string|number} value
-    * @param {"date"|"datetime"} [type='date']
-    * @param {string} [locale] Locale override
-    * @returns {string} Fecha formateada
-    */
-   formatDate: (value, type, locale) => date.format(value, type, locale),
-
-   /**
-    * Convierte una fecha a string ISO (YYYY-MM-DD)
-    * @param {Date|string|number} value
-    * @returns {string}
-    */
-   toISODate: (value) => date.toISODate(value),
-
-   /**
-    * Convierte una fecha a ISO String completo
-    * @param {Date|string|number} value
-    * @returns {string}
-    */
-   toISOString: (value) => date.toISOString(value),
-
-   /**
-    * Suma o resta días a una fecha
-    * @param {Date|string|number} value
-    * @param {number} days
-    * @returns {Date|null}
-    */
-   addDays: (value, days) => date.addDays(value, days),
-
-   /**
-    * Calcula la diferencia en días entre dos fechas
-    * @param {Date|string|number} start
-    * @param {Date|string|number} end
-    * @returns {number|null}
-    */
-   diffDays: (start, end) => date.diffDays(start, end),
-
-   /**
-    * Obtiene la configuración por defecto para Flatpickr
-    * @param {Object} [options] Opciones adicionales
-    * @returns {Object}
-    */
-   flatpickrConfig: (options) => date.flatpickr(options),
-
-   /**
-    * Obtiene la configuración por defecto para FullCalendar
-    * @param {Object} [options] Opciones adicionales
-    * @returns {Object}
-    */
-   fullCalendarConfig: (options) => date.fullCalendar(options),
-
-   /* =====================================================
-      STORAGE (Local / Session)
-   ===================================================== */
-
-   /**
-    * Guarda un valor en localStorage (con serialización JSON)
-    * @param {string} key
-    * @param {*} value
-    */
-   setLocal: (key, value) => storage.set(key, value),
-
-   /**
-    * Obtiene un valor de localStorage
-    * @param {string} key
-    * @param {*} [defaultValue=null]
-    * @returns {*}
-    */
-   getLocal: (key, defaultValue) => storage.get(key, defaultValue),
-
-   /**
-    * Elimina una clave de localStorage
-    * @param {string} key
-    */
-   removeLocal: (key) => storage.remove(key),
-
-   /** Limpia todo el localStorage */
-   clearLocal: () => storage.clear(),
-
-   /**
-    * Guarda un valor en sessionStorage
-    * @param {string} key
-    * @param {*} value
-    */
-   setSession: (key, value) => storage.setSession(key, value),
-
-   /**
-    * Obtiene un valor de sessionStorage
-    * @param {string} key
-    * @param {*} [defaultValue=null]
-    * @returns {*}
-    */
-   getSession: (key, defaultValue) => storage.getSession(key, defaultValue),
-
-   /**
-    * Elimina una clave de sessionStorage
-    * @param {string} key
-    */
-   removeSession: (key) => storage.removeSession(key),
-
-   /* =====================================================
-      GRÁFICOS (Chart.js)
-   ===================================================== */
-
-   /**
-    * Crea un nuevo gráfico Chart.js
-    * @param {string|HTMLCanvasElement} target Selector o Canvas
-    * @param {Object} options Configuración de Chart.js
-    * @returns {Object|null} Instancia de Chart
-    */
-   createChart: (target, options) => charts.create(target, options),
-
-   /**
-    * Destruye un gráfico existente
-    * @param {string|HTMLCanvasElement} target
-    */
-   destroyChart: (target) => charts.destroy(target),
-
-   /**
-    * Actualiza los datos de un gráfico
-    * @param {string|HTMLCanvasElement} target
-    * @param {Object} data Nuevos datos
-    */
-   updateChartData: (target, data) => charts.updateData(target, data),
-
-   /**
-    * Obtiene la instancia de un gráfico
-    * @param {string|HTMLCanvasElement} target
-    * @returns {Object|null}
-    */
-   getChart: (target) => charts.get(target),
-
-   /* =====================================================
-      EDITOR (Quill)
-   ===================================================== */
-
-   /**
-    * Crea un editor Quill manualmente
-    * @param {string|HTMLElement} target
-    * @param {Object} [options]
-    * @returns {Object|null} Instancia Quill
-    */
-   createEditor: (target, options) => editor.create(target, options),
-
-   /**
-    * Obtiene la instancia de un editor Quill
-    * @param {string|HTMLElement} target
-    * @returns {Object|null}
-    */
-   getEditor: (target) => editor.get(target),
-
-   /**
-    * Obtiene el HTML interno de un editor
-    * @param {string|HTMLElement} target
-    * @returns {string}
-    */
-   getEditorHtml: (target) => editor.getHtml(target),
-
-   /**
-    * Establece el contenido HTML de un editor
-    * @param {string|HTMLElement} target
-    * @param {string} html
-    */
-   setEditorHtml: (target, html) => editor.setHtml(target, html),
-
-   /**
-    * Destruye un editor Quill
-    * @param {string|HTMLElement} target
-    */
-   destroyEditor: (target) => editor.destroy(target),
-
-   /* =====================================================
-      FIRMAS (SignaturePad)
-   ===================================================== */
-
-   /**
-    * Crea un pad de firma manualmente
-    * @param {string|HTMLCanvasElement} target
-    * @param {Object} [options]
-    * @returns {Object|null} Instancia SignaturePad
-    */
-   createSignature: (target, options) => signature.create(target, options),
-
-   /**
-    * Limpia el trazo de un pad de firma
-    * @param {string|HTMLCanvasElement} target
-    */
-   clearSignature: (target) => signature.clear(target),
-
-   /**
-    * Obtiene la firma en formato Base64 (PNG)
-    * @param {string|HTMLCanvasElement} target
-    * @returns {string|null}
-    */
-   getSignatureData: (target) => signature.toDataURL(target),
-
-   /**
-    * Obtiene la instancia de un SignaturePad
-    * @param {string|HTMLCanvasElement} target
-    * @returns {Object|null}
-    */
-   getSignature: (target) => signature.get(target),
-
-   /* =====================================================
-      CALENDARIO (FullCalendar)
-   ===================================================== */
-
-   /**
-    * Inicializa un calendario FullCalendar
-    * @param {string|HTMLElement} target Contenedor
-    * @param {Object} [options] Configuración
-    * @returns {Object|null} Instancia de Calendar
-    */
-   initCalendar: (target, options) => calendar.init(target, options),
-
-   /**
-    * Obtiene la instancia de un calendario
-    * @param {string|HTMLElement} target
-    * @returns {Object|null}
-    */
-   getCalendar: (target) => calendar.get(target),
-
-   /**
-    * Agrega un evento a un calendario
-    * @param {string|HTMLElement} target
-    * @param {Object} event Datos del evento
-    */
-   addCalendarEvent: (target, event) => calendar.addEvent(target, event),
-
-   /**
-    * Elimina todos los eventos de un calendario
-    * @param {string|HTMLElement} target
-    */
-   clearCalendarEvents: (target) => calendar.clearEvents(target),
-
-   /**
-    * Habilita eventos arrastrables externos para un contenedor
-    * @param {string|HTMLElement} container
-    * @param {Object} [options]
-    */
-   calendarDraggable: (container, options) => calendar.draggable(container, options),
-
-   /* =====================================================
-      DOM Y UTILIDADES
-   ===================================================== */
-
-   /**
-    * Normaliza un target en un elemento DOM
-    * @param {string|HTMLElement} target Selector, ID, clase o elemento DOM
-    * @returns {HTMLElement|null} Elemento normalizado
-    */
-   el: (target) => dom.el(target),
-
-   /**
-    * Oculta un elemento DOM
-    * @param {string|HTMLElement} target
-    */
-   hide: (target) => dom.hide(target),
-
-   /**
-    * Muestra un elemento DOM
-    * @param {string|HTMLElement} target
-    */
-   show: (target) => dom.show(target),
-
-   /**
-    * Alterna la visibilidad de un elemento DOM
-    * @param {string|HTMLElement} target
-    */
-   toggle: (target) => dom.toggle(target),
-
-   /**
-    * Verifica si un elemento DOM es visible
-    * @param {string|HTMLElement} target
-    * @returns {boolean}
-    */
-   isVisible: (target) => dom.isVisible(target),
-
-   /**
-    * Verifica si un elemento DOM está oculto
-    * @param {string|HTMLElement} target
-    * @returns {boolean}
-    */
-   isHidden: (target) => dom.isHidden(target),
-
-   /**
-    * Habilita un elemento DOM
-    * @param {string|HTMLElement} target
-    */
-   enable: (target) => dom.enable(target),
-
-   /**
-    * Deshabilita un elemento DOM
-    * @param {string|HTMLElement} target
-    */
-   disable: (target) => dom.disable(target),
-
-   /**
-    * Alterna el estado 'disabled' de un elemento DOM
-    * @param {string|HTMLElement} target
-    */
-   toggleDisabled: (target) => dom.toggleDisabled(target),
-
-   /**
-    * Obtiene o establece el HTML interno de un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} [content] Contenido HTML a establecer
-    * @returns {string|undefined} El HTML si se usa como getter, undefined si se usa como setter
-    */
-   html: (target, content) => dom.html(target, content),
-
-   /**
-    * Obtiene o establece el texto interno de un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} [content] Contenido de texto a establecer
-    * @returns {string|undefined} El texto si se usa como getter, undefined si se usa como setter
-    */
-   text: (target, content) => dom.text(target, content),
-
-   /**
-    * Limpia el contenido HTML de un elemento DOM
-    * @param {string|HTMLElement} target
-    */
-   clear: (target) => dom.clear(target),
-
-   /**
-    * Añade una o varias clases CSS a un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} cls Clases separadas por espacio
-    */
-   addClass: (target, cls) => dom.addClass(target, cls),
-
-   /**
-    * Remueve una o varias clases CSS de un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} cls Clases separadas por espacio
-    */
-   removeClass: (target, cls) => dom.removeClass(target, cls),
-
-   /**
-    * Alterna una o varias clases CSS en un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} cls Clases separadas por espacio
-    */
-   toggleClass: (target, cls) => dom.toggleClass(target, cls),
-
-   /**
-    * Verifica si un elemento DOM tiene una clase CSS específica
-    * @param {string|HTMLElement} target
-    * @param {string} cls Clase a verificar
-    * @returns {boolean}
-    */
-   hasClass: (target, cls) => dom.hasClass(target, cls),
-
-   /**
-    * Obtiene o establece el valor de un elemento de formulario (input, select, textarea)
-    * @param {string|HTMLElement} target
-    * @param {*} [value] Valor a establecer
-    * @returns {*} El valor si se usa como getter, undefined si se usa como setter
-    */
-   val: (target, value) => dom.val(target, value),
-
-   /**
-    * Limpia el valor de un elemento de formulario
-    * @param {string|HTMLElement} target
-    */
-   clearVal: (target) => dom.clearVal(target),
-
-   /**
-    * Obtiene o establece un atributo `data-*` de un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} key Nombre del atributo data (ej. 'id', 'name')
-    * @param {*} [value] Valor a establecer
-    * @returns {*} El valor si se usa como getter, undefined si se usa como setter
-    */
-   data: (target, key, value) => dom.data(target, key, value),
-
-   /**
-    * Asigna un manejador de evento a un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} evt Nombre del evento (ej. 'click', 'change')
-    * @param {Function} cb Función callback a ejecutar
-    */
-   on: (target, evt, cb) => dom.on(target, evt, cb),
-
-   /**
-    * Remueve un manejador de evento de un elemento DOM
-    * @param {string|HTMLElement} target
-    * @param {string} evt Nombre del evento
-    * @param {Function} [cb] Función callback específica a remover. Si no se provee, remueve todos los manejadores para ese evento.
-    */
-   off: (target, evt, cb) => dom.off(target, evt, cb),
-
-   /**
-    * Cambia la visibilidad entre dos elementos DOM, ocultando uno y mostrando el otro
-    * @param {string|HTMLElement} hideTarget Elemento a ocultar
-    * @param {string|HTMLElement} showTarget Elemento a mostrar
-    */
-   changeDiv: (hideTarget, showTarget) => dom.changeDiv(hideTarget, showTarget),
-
-   /* =====================================================
-      NÚMEROS Y STRINGS
-   ===================================================== */
-
-   /**
-    * Formatea un número según el locale y la cantidad de decimales
-    * @param {number|string} n Número a formatear
-    * @param {number} [d=2] Cantidad de decimales
-    * @param {string} [locale="es-DO"] Locale a usar para el formato
-    * @returns {string} Número formateado
-    */
-   numFormat: (n, d, locale) => number.formatNumber(n, d, locale),
-
-   /**
-    * Redondea un número a una cantidad específica de decimales
-    * @param {number} n Número a redondear
-    * @param {number} [d=0] Cantidad de decimales
-    * @returns {number} Número redondeado
-    */
-   numRound: (n, d) => number.round(n, d),
-
-   /**
-    * Convierte un valor a un número de forma segura, retornando un valor por defecto si no es un número válido
-    * @param {*} n Valor a convertir
-    * @param {number} [defaultValue=0] Valor por defecto si la conversión falla
-    * @returns {number}
-    */
-   numToNum: (n, defaultValue) => number.toNumber(n, defaultValue),
-
-   /**
-    * Genera un número entero aleatorio dentro de un rango
-    * @param {number} min Límite inferior (inclusive)
-    * @param {number} max Límite superior (inclusive)
-    * @returns {number} Número entero aleatorio
-    */
-   numRandom: (min, max) => number.randomInt(min, max),
-
-   /**
-    * Capitaliza la primera letra de un string
-    * @param {string} str String a capitalizar
-    * @returns {string} String capitalizado
-    */
-   strCapital: (str) => string.capitalize(str),
-
-   /**
-    * Convierte un string a formato de nombre propio (primera letra de cada palabra en mayúscula)
-    * @param {string} text String a formatear
-    * @returns {string} String en formato de nombre propio
-    */
-   strProperName: (text) => string.properName(text),
-
-   /**
-    * Convierte un string a mayúsculas
-    * @param {string} str String a convertir
-    * @returns {string} String en mayúsculas
-    */
-   strUpper: (str) => string.upper(str),
-
-   /**
-    * Convierte un string a minúsculas
-    * @param {string} str String a convertir
-    * @returns {string} String en minúsculas
-    */
-   strLower: (str) => string.lower(str),
-
-   /* =====================================================
-      FULLSCREEN
-   ===================================================== */
-
-   /**
-    * Alterna el modo pantalla completa
-    * @param {HTMLElement|string} [target] Elemento a poner en pantalla completa
-    */
-   toggleFullscreen: (target) => fullscreen.toggle(target),
-
-   /**
-    * Solicita entrar en modo pantalla completa
-    * @param {HTMLElement|string} [target] Elemento a poner en pantalla completa
-    */
-   requestFullscreen: (target) => fullscreen.request(target),
-
-   /**
-    * Sale del modo pantalla completa
-    */
-   exitFullscreen: () => fullscreen.exit(),
-
-   /**
-    * Extrae solo los números de un string
-    * @param {string} str String de entrada
-    * @returns {string} String con solo números
-    */
-   strOnlyNumbers: (str) => string.onlyNumbers(str),
-
-   /**
-    * Limpia espacios extra en un string (elimina espacios al inicio/final y reduce múltiples espacios a uno solo)
-    * @param {string} str String a limpiar
-    * @returns {string} String limpio
-    */
-   strCleanSpaces: (str) => string.cleanSpaces(str),
-
-   /**
-    * Trunca un string a una longitud máxima, añadiendo un sufijo si es truncado
-    * @param {string} str String a truncar
-    * @param {number} length Longitud máxima
-    * @param {string} [suffix='...'] Sufijo a añadir si se trunca
-    * @returns {string} String truncado
-    */
-   strTruncate: (str, length, suffix) => string.truncate(str, length, suffix),
-
-   /**
-    * Genera un "slug" (URL amigable) a partir de un string
-    * @param {string} str String de entrada
-    * @returns {string} Slug generado
-    */
-   strSlug: (str) => string.slug(str),
-
-   /**
-    * Oculta parte de un string reemplazando caracteres con asteriscos, dejando una parte visible
-    * @param {string} str String a enmascarar
-    * @param {number} [visible=4] Cantidad de caracteres visibles al final
-    * @returns {string} String enmascarado
-    */
-   strMaskText: (str, visible) => string.maskText(str, visible),
-
-   /**
-    * Convierte un valor a booleano de forma segura
-    * @param {*} val Valor a convertir
-    * @returns {boolean}
-    */
-   strToBoolean: (val) => string.toBoolean(val),
-
-   /* =====================================================
-      FORMULARIOS Y VALIDACIÓN
-   ===================================================== */
-
-   /**
-    * Verifica si un valor es nulo o una cadena vacía
-    * @param {*} v Valor a verificar
-    * @returns {boolean}
-    */
-   isNullOrEmpty: (v) => validation.isNullOrEmpty(v),
-
-   /**
-    * Verifica si un valor es nulo, indefinido o una cadena vacía
-    * @param {*} v Valor a verificar
-    * @returns {boolean}
-    */
-   isEmpty: (v) => validation.isEmpty(v),
-
-   /**
-    * Verifica si un email es válido
-    * @param {string} email Email a validar
-    * @param {RegExp} [regex] Expresión regular personalizada
-    * @returns {boolean}
-    */
-   isValidEmail: (email, regex) => validation.isValidEmail(email, regex),
-
-   /**
-    * Verifica si un número de teléfono es válido
-    * @param {string} phone Teléfono a validar
-    * @param {RegExp} [regex] Expresión regular personalizada
-    * @returns {boolean}
-    */
-   isValidPhone: (phone, regex) => validation.isValidPhone(phone, regex),
-
-   /**
-    * Verifica si una cédula dominicana es válida
-    * @param {string} ced Cédula a validar
-    * @returns {boolean}
-    */
-   isValidCedula: (ced) => validation.isValidCedula(ced),
-
-   /**
-    * Valida un formulario completo, mostrando mensajes de error si es necesario
-    * @param {string|HTMLFormElement} form Selector o elemento del formulario
-    * @returns {boolean} True si el formulario es válido, false en caso contrario
-    */
-   isValidForm: (form) => forms.isValidForm(form),
-
-   /**
-    * Limpia todos los campos de un formulario
-    * @param {string|HTMLFormElement} form Selector o elemento del formulario
-    */
-   clearForm: (form) => forms.clearForm(form),
-
-   /**
-    * Serializa un formulario a un objeto JavaScript
-    * @param {string|HTMLFormElement} form Selector o elemento del formulario
-    * @returns {Object} Objeto con los datos del formulario
-    */
-   serializeForm: (form) => forms.serializeForm(form),
-
-   /**
-    * Obtiene el valor sin máscara de un input enmascarado
-    * @param {string|HTMLElement} selector Selector o elemento del input
-    * @returns {string} Valor sin máscara
-    */
-   unmask: (selector) => forms.unmask(selector),
-
-   /**
-    * Verifica si un input enmascarado tiene su máscara completa
-    * @param {string|HTMLElement} selector Selector o elemento del input
-    * @returns {boolean}
-    */
-   isMaskComplete: (selector) => forms.isMaskComplete(selector),
-
-   /* =====================================================
-      ICONOS
-   ===================================================== */
-
-   /**
-    * Establece la librería de iconos por defecto para la función `icon`
-    * @param {'fa'|'bi'|'feather'} lib Nombre de la librería ('fa', 'bi', 'feather')
-    */
-   setDefaultIcon: (lib) => icons.setDefault(lib),
-
-   /**
-    * Genera el HTML para un icono de cualquier librería configurada
-    * @param {string} name Nombre del icono
-    * @param {'fa'|'bi'|'feather'} [lib] Librería a usar (si no se especifica, usa la por defecto)
-    * @param {Object} [options] Opciones adicionales para el icono (ej. tamaño, clases)
-    * @returns {string} HTML del icono
-    */
-   icon: (name, lib, options) => icons.icon(name, lib, options),
-
-   /**
-    * Genera el HTML para un icono de FontAwesome
-    * @param {string} name Nombre del icono FontAwesome (ej. 'fa-solid fa-user')
-    * @param {Object} [options] Opciones adicionales
-    * @returns {string} HTML del icono
-    */
-   fa: (name, options) => icons.fa(name, options),
-
-   /**
-    * Genera el HTML para un icono de Bootstrap Icons
-    * @param {string} name Nombre del icono Bootstrap Icons (ej. 'bi-person')
-    * @param {Object} [options] Opciones adicionales
-    * @returns {string} HTML del icono
-    */
-   bi: (name, options) => icons.bi(name, options),
-
-   /**
-    * Genera el HTML para un icono de Feather Icons
-    * @param {string} name Nombre del icono Feather Icons (ej. 'user')
-    * @param {Object} [options] Opciones adicionales
-    * @returns {string} HTML del icono
-    */
-   feather: (name, options) => icons.feather(name, options),
-
-   /* =====================================================
-      CÓDIGOS (Barcode / QR)
-   ===================================================== */
-
-   /**
-    * Genera un código de barras
-    * @param {HTMLElement|string} el Elemento o selector
-    * @param {string|number} value Valor a codificar
-    * @param {Object} [options] Opciones de JsBarcode
-    * @returns {boolean}
-    */
-   codeBarcode: (el, value, options) => codes.barcode(el, value, options),
-
-   /**
-    * Genera un QR Code en un Canvas
-    * @param {HTMLElement|string} el Elemento o selector
-    * @param {string} text Texto a codificar
-    * @param {Object} [options] Opciones de QRCode
-    * @returns {Promise<boolean>}
-    */
-   codeQrCanvas: (el, text, options) => codes.qrCanvas(el, text, options),
-
-   /**
-    * Genera un QR Code en una imagen
-    * @param {HTMLElement|string} el Elemento o selector
-    * @param {string} text Texto a codificar
-    * @param {Object} [options] Opciones de QRCode
-    * @returns {Promise<boolean>}
-    */
-   codeQrImage: (el, text, options) => codes.qrImage(el, text, options),
-
-   /**
-    * Limpia un código generado
-    * @param {HTMLElement|string} el
-    */
-   codeClear: (el) => codes.clear(el),
-
-   /* =====================================================
-      MONEDAS Y DIVISAS
-   ===================================================== */
-
-   /**
-    * Obtiene el símbolo de una moneda
-    * @param {string} code Código de moneda ('U', 'P', 'E')
-    * @returns {string}
-    */
-   currencySymbol: (code) => currency.getSymbol(code),
-
-   /**
-    * Formatea un valor monetario
-    * @param {number|string} value Valor
-    * @param {string} [code] Código de moneda
-    * @param {number} [decimals] Decimales
-    * @returns {string}
-    */
-   currencyFormat: (value, code, decimals) => currency.format(value, code, decimals),
-
-   /**
-    * Convierte un monto usando una tasa
-    * @param {number|string} value Monto
-    * @param {number} rate Tasa
-    * @param {number} [decimals] Decimales
-    * @returns {number|null}
-    */
-   currencyConvert: (value, rate, decimals) => currency.convert(value, rate, decimals),
-
-   /* =====================================================
-      DRAG & DROP
-   ===================================================== */
-
-   /**
-    * Crea una instancia de Drag & Drop
-    * @param {string} key Identificador
-    * @param {HTMLElement[]} containers Contenedores
-    * @param {Object} [options] Opciones de Dragula
-    */
-   dragCreate: (key, containers, options) => drag.create(key, containers, options),
-
-   /**
-    * Obtiene una instancia de Drag & Drop
-    * @param {string} key
-    * @returns {Object|null}
-    */
-   dragGet: (key) => drag.get(key),
-
-   /**
-    * Destruye una instancia de Drag & Drop
-    * @param {string} key
-    */
-   dragDestroy: (key) => drag.destroy(key),
-
-   /* =====================================================
-      ARCHIVOS (Files)
-   ===================================================== */
-
-   /**
-    * Formatea bytes a tamaño legible
-    * @param {number} bytes
-    * @param {number} [decimals]
-    * @returns {string}
-    */
-   fileFormatSize: (bytes, decimals) => file.formatSize(bytes, decimals),
-
-   /**
-    * Obtiene la extensión de un archivo
-    * @param {File|string} f Archivo o nombre
-    * @returns {string|null}
-    */
-   fileExtension: (f) => file.getExtension(f),
-
-   /**
-    * Valida si el tamaño es permitido
-    * @param {File} f
-    * @param {number} maxSize Tamaño máximo
-    * @returns {boolean}
-    */
-   fileIsValidSize: (f, maxSize) => file.isValidSize(f, maxSize),
-
-   /**
-    * Valida si la extensión es permitida
-    * @param {File} f
-    * @param {string[]} allowed Permitidas
-    * @returns {boolean}
-    */
-   fileIsValidExtension: (f, allowed) => file.isValidExtension(f, allowed),
-
-   /**
-    * Valida si el tipo MIME es permitido
-    * @param {File} f
-    * @param {string[]} mimes Mimes permitidos
-    * @returns {boolean}
-    */
-   fileIsValidMime: (f, mimes) => file.isValidMime(f, mimes),
-
-   /**
-    * Lee un archivo como Base64
-    * @param {File} f
-    * @returns {Promise<string>}
-    */
-   fileReadBase64: (f) => file.readAsBase64(f),
-
-   /**
-    * Lee un archivo como texto
-    * @param {File} f
-    * @returns {Promise<string>}
-    */
-   fileReadText: (f) => file.readAsText(f),
-
-   /**
-    * Dispara la descarga de un texto como archivo
-    * @param {string} content Contenido
-    * @param {string} filename Nombre
-    * @param {string} [type] Tipo MIME
-    */
-   fileDownloadText: (content, filename, type) => file.downloadText(content, filename, type),
-
-   /**
-    * Dispara la descarga de una URL
-    * @param {string} url
-    * @param {string} filename
-    */
-   fileDownloadUrl: (url, filename) => file.downloadUrl(url, filename),
-
-   /* =====================================================
-      IMPRESIÓN (Print)
-   ===================================================== */
-
-   /**
-    * Imprime un elemento o toda la página
-    * @param {string|HTMLElement} [target]
-    * @param {Object} [options]
-    */
-   printEl: (target, options = {}) => print.print(target, options),
-
-   /* =====================================================
-      HUMANIZACIÓN
-   ===================================================== */
-
-   /**
-    * Humaniza una duración en milisegundos
-    * @param {number} ms
-    * @param {Object} [options]
-    * @returns {string}
-    */
-   humanizeDuration: (ms, options) => humanize.duration(ms, options),
-
-   /**
-    * Tiempo faltante hacia una fecha
-    * @param {Date|string|number} target
-    * @returns {string}
-    */
-   humanizeTimeRemaining: (target) => humanize.timeRemaining(target),
-
-   /**
-    * Tiempo transcurrido desde una fecha
-    * @param {Date|string|number} from
-    * @returns {string}
-    */
-   humanizeTimeAgo: (from) => humanize.timeAgo(from),
-
-   /* =====================================================
-      SELECT2
-   ===================================================== */
-
-   /**
-    * Establece el valor de un Select2
-    * @param {string|HTMLElement} el
-    * @param {*} value
-    * @param {boolean} [trigger]
-    */
-   select2Set: (el, value, trigger) => select2.setValue(el, value, trigger),
-
-   /**
-    * Limpia un Select2
-    * @param {string|HTMLElement} el
-    */
-   select2Clear: (el) => select2.clear(el),
-
-   /**
-    * Habilita un Select2
-    * @param {string|HTMLElement} el
-    */
-   select2Enable: (el) => select2.enable(el),
-
-   /**
-    * Deshabilita un Select2
-    * @param {string|HTMLElement} el
-    */
-   select2Disable: (el) => select2.disable(el),
-
-   /**
-    * Recarga un Select2
-    * @param {string|HTMLElement} el
-    */
-   select2Reload: (el) => select2.reload(el),
-
-   /* =====================================================
-      SIDEBAR
-   ===================================================== */
-
-   /**
-    * Alterna el estado del sidebar (colapsado/expandido)
-    */
-   sidebarToggle: () => sidebar.toggle(),
-
-   /**
-    * Colapsa el sidebar
-    */
-   sidebarCollapse: () => sidebar.collapse(),
-
-   /**
-    * Expande el sidebar
-    */
-   sidebarExpand: () => sidebar.expand(),
-
-   /**
-    * Indica si el sidebar está colapsado
-    * @returns {boolean}
-    */
-   sidebarIsCollapsed: () => sidebar.isCollapsed(),
-
-   /**
-    * Recalcula el scroll del sidebar (SimpleBar)
-    */
-   sidebarRefresh: () => sidebar.refresh(),
-
-   /* =====================================================
-      IFRAME MODE (Tabs)
-   ===================================================== */
-
-   /**
-    * Abre una página en una pestaña del iframe mode
-    * @param {string} title
-    * @param {string} url
-    * @param {string} [icon]
-    */
-   iframeOpen: (title, url, icon) => iframe.open(title, url, icon),
-
-   /**
-    * Cierra una pestaña
-    * @param {string} key
-    */
-   iframeClose: (key) => iframe.close(key),
-
-   /**
-    * Pone el iframe activo en pantalla completa
-    */
-   iframeFullscreen: () => iframe.toggleFullscreen(),
-
-   /**
-    * Actualiza el iframe activo
-    */
-   iframeRefresh: () => iframe.refresh(),
-
-   /**
-    * Cierra todas las pestañas excepto la activa
-    */
-   iframeCloseOthers: () => iframe.closeOthers(),
-
-   /**
-    * Cierra todas las pestañas
-    */
-   iframeCloseAll: () => iframe.closeAll(),
-
-   /* =====================================================
-      EXCEL (Import/Export)
-   ===================================================== */
-
-   /**
-    * Exporta datos JSON a un archivo Excel (.xlsx)
-    * @param {Array<Object>} data Array de objetos a exportar
-    * @param {string} [filename='data.xlsx'] Nombre del archivo
-    * @example
-    * const data = [{name: 'Juan', age: 30}, {name: 'María', age: 25}];
-    * HR.excelExport(data, 'usuarios.xlsx');
-    */
-   excelExport: (data, filename) => excel.exportToExcel(data, filename),
-
-   /**
-    * Importa un archivo Excel y lo convierte a JSON
-    * @param {File} file Archivo Excel a importar
-    * @returns {Promise<Array<Object>>} Promesa que resuelve con los datos en formato JSON
-    * @example
-    * const fileInput = document.querySelector('#file-input');
-    * const file = fileInput.files[0];
-    * HR.excelImport(file).then(data => console.log(data));
-    */
-   excelImport: (file) => excel.excelToJson(file),
-
-   /**
-    * Convierte JSON a Excel (alias de excelExport)
-    * @param {Array<Object>} data Array de objetos
-    * @param {string} [filename='data.xlsx'] Nombre del archivo
-    */
-   jsonToExcel: (data, filename) => excel.jsonToExcel(data, filename),
-
-   /**
-    * Convierte Excel a JSON (alias de excelImport)
-    * @param {File} file Archivo Excel
-    * @returns {Promise<Array<Object>>}
-    */
-   excelToJson: (file) => excel.excelToJson(file),
-
-   /**
-    * Convierte datos JSON a un archivo CSV
-    * @param {Array<Object>} data Array de objetos
-    * @param {string} [filename='data.csv'] Nombre del archivo
-    * @example
-    * HR.jsonToCsv([{id: 1, name: 'Test'}], 'datos.csv');
-    */
-   jsonToCsv: (data, filename) => excel.jsonToCsv(data, filename),
-
-   /**
-    * Importa un archivo Excel con múltiples hojas y lo convierte a JSON
-    * @param {File} file Archivo Excel
-    * @returns {Promise<Object>} Objeto donde cada clave es el nombre de una hoja y el valor es un array de datos
-    * @example
-    * HR.excelImportMultiple(file).then(sheets => {
-    *   console.log(sheets.Hoja1); // Datos de la primera hoja
-    *   console.log(sheets.Hoja2); // Datos de la segunda hoja
-    * });
-    */
-   excelImportMultiple: (file) => excel.excelToJsonMultiple(file),
-
-   /**
-    * Exporta múltiples hojas a un archivo Excel
-    * @param {Object} sheets Objeto con nombres de hojas como claves y arrays de datos como valores
-    * @param {string} [filename='data.xlsx'] Nombre del archivo
-    * @example
-    * const sheets = {
-    *   Usuarios: [{name: 'Juan', age: 30}],
-    *   Productos: [{name: 'Laptop', price: 1000}]
-    * };
-    * HR.excelExportMultiple(sheets, 'reporte.xlsx');
-    */
-   excelExportMultiple: (sheets, filename) => excel.jsonToExcelMultiple(sheets, filename),
+import init    from "./core/init";
+
+import Dom          from "./helpers/Dom";
+import Alert        from "./helpers/Alert";
+import Api          from "./helpers/Api";
+import Calendar     from "./helpers/Calendar";
+import Charts       from "./helpers/Charts";
+import Codes        from "./helpers/Codes";
+import Currency     from "./helpers/Currency";
+import DateHelper   from "./helpers/Date";
+import Drag         from "./helpers/Drag";
+import Editor       from "./helpers/Editor";
+import Excel        from "./helpers/Excel";
+import ExportTbl    from "./helpers/ExportTbl";
+import FileHelper   from "./helpers/File";
+import Forms        from "./helpers/Forms";
+import Fullscreen   from "./helpers/Fullscreen";
+import Humanize     from "./helpers/Humanize";
+import Icons        from "./helpers/Icons";
+import Iframe       from "./helpers/Iframe";
+import Modal        from "./helpers/Modal";
+import NumberHelper from "./helpers/Number";
+import Print        from "./helpers/Print";
+import Select2      from "./helpers/Select2";
+import Sidebar      from "./helpers/Sidebar";
+import Signature    from "./helpers/Signature";
+import Storage      from "./helpers/Storage";
+import StringHelper from "./helpers/Strings";
+import Table        from "./helpers/Table";
+import Validation   from "./helpers/Validation";
+
+const $HR = {
+	config,
+	lang: spanish,
+
+	/* ── Init ── */
+	init: (scope) => init(scope),
+
+	/* ── HTTP ── */
+	setToken:        (t)       => Api.setToken(t),
+	getToken:        ()        => Api.getToken(),
+	setApiAlerts:    (v)       => Api.setAutoAlerts(v),
+	getApi:          (u, p, o) => Api.get(u, p, o),
+	postApi:         (u, d, o) => Api.post(u, d, o),
+	putApi:          (u, d, o) => Api.put(u, d, o),
+	patchApi:        (u, d, o) => Api.patch(u, d, o),
+	deleteApi:       (u, o)    => Api.delete(u, o),
+	fetch:	        (u, o)    => Api.fetch(u, o),
+
+	/* ── Modales Bootstrap ── */
+	openModal:       (m, d)    => Modal.open(m, d),
+	closeModal:      (m)       => Modal.close(m),
+	toggleModal:     (m)       => Modal.toggle(m),
+	getModalData:    (m)       => Modal.data(m),
+
+	/* ── Alertas ── */
+	msgSuccess:      (t)       => Alert.success(t),
+	msgInfo:         (t)       => Alert.info(t),
+	msgWarning:      (t)       => Alert.warning(t),
+	msgError:        (t)       => Alert.error(t),
+	alert:           (t, type, cb) => Alert.show(t, type, cb),
+	msgConfirm:      (t, q, cb, type) => Alert.confirm(t, q, cb, type),
+	msgLoading:      (close = false) => close ? Alert.close() : Alert.loading(),
+
+	/* ── Toasts ── */
+	toastSuccess:    (t)       => Alert.toast.success(t),
+	toastInfo:       (t)       => Alert.toast.info(t),
+	toastWarning:    (t)       => Alert.toast.warning(t),
+	toastError:      (t)       => Alert.toast.error(t),
+	toast:           (t, type) => Alert.toast.show(t, type),
+
+	/* ── DataTables ── */
+	createTbl:       (t, o)    => Table.initTable(t, o),
+	destroyTbl:      (t)       => Table.destroy(t),
+	reloadTbl:       (t, r)    => Table.reload(t, r),
+	tblCol:          (d, t, r) => Table.col(d, t, r),
+	tblActionsCol:   (r)       => Table.actions(r),
+	tblButtons:      (t)       => Table.buttons(t),
+	getSelectedRows: (t)       => Table.selected(t),
+	clearTblSelection:(t)      => Table.clearSelection(t),
+	addTblRow:       (t, r)    => Table.addRow(t, r),
+	removeTblRow:    (t, b)    => Table.removeRow(t, b),
+	updateTblRow:    (t, b, d) => Table.updateRow(t, b, d),
+	refreshTbl:      (t, d)    => Table.refresh(t, d),
+
+	/* ── Exportación ── */
+	exportExcel:     (t, f)    => ExportTbl.excel(t, f),
+	exportPdf:       (t, o)    => ExportTbl.pdf(t, o),
+	exportCsv:       (t, f)    => ExportTbl.csv(t, f),
+	exportJson:      (t)       => ExportTbl.json(t),
+
+	/* ── Fechas ── */
+	now:             ()        => DateHelper.now(),
+	createDate:      (v)       => DateHelper.create(v),
+	isValidDate:     (v)       => DateHelper.isValid(v),
+	formatDate:      (v, t, l) => DateHelper.format(v, t, l),
+	toISODate:       (v)       => DateHelper.toISODate(v),
+	toISOString:     (v)       => DateHelper.toISOString(v),
+	addDays:         (v, d)    => DateHelper.addDays(v, d),
+	diffDays:        (s, e)    => DateHelper.diffDays(s, e),
+	flatpickrConfig: (o)       => DateHelper.flatpickr(o),
+	fullCalendarConfig:(o)     => DateHelper.fullCalendar(o),
+
+	/* ── Storage ── */
+	setLocal:        (k, v)    => Storage.set(k, v),
+	getLocal:        (k, d)    => Storage.get(k, d),
+	removeLocal:     (k)       => Storage.remove(k),
+	clearLocal:      ()        => Storage.clear(),
+	setSession:      (k, v)    => Storage.setSession(k, v),
+	getSession:      (k, d)    => Storage.getSession(k, d),
+	removeSession:   (k)       => Storage.removeSession(k),
+
+	/* ── Charts ── */
+	createChart:     (t, o)    => Charts.create(t, o),
+	destroyChart:    (t)       => Charts.destroy(t),
+	updateChartData: (t, d)    => Charts.updateData(t, d),
+	getChart:        (t)       => Charts.get(t),
+
+	/* ── Editor Quill ── */
+	createEditor:    (t, o)    => Editor.create(t, o),
+	getEditor:       (t)       => Editor.get(t),
+	getEditorHtml:   (t)       => Editor.getHtml(t),
+	setEditorHtml:   (t, h)    => Editor.setHtml(t, h),
+	destroyEditor:   (t)       => Editor.destroy(t),
+
+	/* ── Firma digital ── */
+	createSignature: (t, o)    => Signature.create(t, o),
+	clearSignature:  (t)       => Signature.clear(t),
+	getSignatureData:(t)       => Signature.toDataURL(t),
+	getSignature:    (t)       => Signature.get(t),
+
+	/* ── Calendario ── */
+	initCalendar:    (t, o)    => Calendar.init(t, o),
+	getCalendar:     (t)       => Calendar.get(t),
+	addCalendarEvent:(t, e)    => Calendar.addEvent(t, e),
+	clearCalendarEvents:(t)    => Calendar.clearEvents(t),
+	calendarDraggable:(c, o)   => Calendar.draggable(c, o),
+
+	/* ── DOM ── */
+	el:              (t)       => Dom.el(t),
+	show:            (t)       => Dom.show(t),
+	hide:            (t)       => Dom.hide(t),
+	toggle:          (t)       => Dom.toggle(t),
+	isVisible:       (t)       => Dom.isVisible(t),
+	isHidden:        (t)       => Dom.isHidden(t),
+	enable:          (t)       => Dom.enable(t),
+	disable:         (t)       => Dom.disable(t),
+	toggleDisabled:  (t)       => Dom.toggleDisabled(t),
+	html:            (t, v)    => Dom.html(t, v),
+	text:            (t, v)    => Dom.text(t, v),
+	clear:           (t)       => Dom.clear(t),
+	changeDiv:       (t, h)    => Dom.changeDiv(t, h),
+	addClass:        (t, c)    => Dom.addClass(t, c),
+	removeClass:     (t, c)    => Dom.removeClass(t, c),
+	toggleClass:     (t, c)    => Dom.toggleClass(t, c),
+	hasClass:        (t, c)    => Dom.hasClass(t, c),
+	val:             (t, v)    => Dom.val(t, v),
+	clearVal:        (t)       => Dom.clearVal(t),
+	data:            (t, k, v) => Dom.data(t, k, v),
+	on:              (t, e, c) => Dom.on(t, e, c),
+	off:             (t, e, c) => Dom.off(t, e, c),
+
+	/* ── Números & Strings ── */
+	numFormat:       (n, d, l) => NumberHelper.formatNumber(n, d, l),
+	numRound:        (n, d)    => NumberHelper.round(n, d),
+	numToNum:        (n, d)    => NumberHelper.toNumber(n, d),
+	numRandom:       (m, x)    => NumberHelper.randomInt(m, x),
+	strCapital:      (s)       => StringHelper.capitalize(s),
+	strUpper:        (s)       => StringHelper.upper(s),
+	strLower:        (s)       => StringHelper.lower(s),
+	strTrim:         (s)       => StringHelper.trim(s),
+	strCleanSpaces:  (s)       => StringHelper.cleanSpaces(s),
+	strTruncate:     (s, l, f) => StringHelper.truncate(s, l, f),
+	strSlug:         (s)       => StringHelper.slug(s),
+	strNormalize:    (s)       => StringHelper.normalize(s),
+
+	/* ── Fullscreen ── */
+	toggleFullscreen:  (t)     => Fullscreen.toggle(t),
+	requestFullscreen: (t)     => Fullscreen.request(t),
+	exitFullscreen:    ()      => Fullscreen.exit(),
+
+	/* ── Icons ── */
+	setDefaultIcon:  (l)       => Icons.setDefault(l),
+	icon:            (n, l, o) => Icons.iconEl(n, l, o),
+	fa:              (n, o)    => Icons.fa(n, o),
+	bi:              (n, o)    => Icons.bi(n, o),
+	feather:         (n, o)    => Icons.feather(n, o),
+
+	/* ── Códigos ── */
+	codeBarcode:     (e, v, o) => Codes.barcode(e, v, o),
+	codeQrCanvas:    (e, t, o) => Codes.qrCanvas(e, t, o),
+	codeQrImage:     (e, t, o) => Codes.qrImage(e, t, o),
+	codeClear:       (e)       => Codes.clear(e),
+
+	/* ── Monedas ── */
+	currencySymbol:  (c)       => Currency.getSymbol(c),
+	currencyFormat:  (v, c, d) => Currency.format(v, c, d),
+	currencyConvert: (v, r, d) => Currency.convert(v, r, d),
+
+	/* ── Drag ── */
+	dragCreate:      (k, c, o) => Drag.create(k, c, o),
+	dragGet:         (k)       => Drag.get(k),
+	dragDestroy:     (k)       => Drag.destroy(k),
+
+	/* ── Archivos ── */
+	fileFormatSize:        (b, d)    => FileHelper.formatSize(b, d),
+	fileExtension:         (f)       => FileHelper.getExtension(f),
+	fileIsValidSize:       (f, s)    => FileHelper.isValidSize(f, s),
+	fileIsValidExtension:  (f, a)    => FileHelper.isValidExtension(f, a),
+	fileIsValidMime:       (f, m)    => FileHelper.isValidMime(f, m),
+	fileReadBase64:        (f)       => FileHelper.readAsBase64(f),
+	fileReadText:          (f)       => FileHelper.readAsText(f),
+	fileDownloadText:      (c, n, t) => FileHelper.downloadText(c, n, t),
+	fileDownloadUrl:       (u, n)    => FileHelper.downloadUrl(u, n),
+
+	/* ── Impresión ── */
+	printEl:         (t, o)    => Print.print(t, o),
+
+	/* ── Humanización ── */
+	humanizeDuration:       (m, o) => Humanize.duration(m, o),
+	humanizeTimeRemaining:  (t)    => Humanize.timeRemaining(t),
+	humanizeTimeAgo:        (f)    => Humanize.timeAgo(f),
+
+	/* ── Select2 ── */
+	select2Set:      (e, v, t) => Select2.setValue(e, v, t),
+	select2Clear:    (e)       => Select2.clear(e),
+	select2Enable:   (e)       => Select2.enable(e),
+	select2Disable:  (e)       => Select2.disable(e),
+	select2Reload:   (e)       => Select2.reload(e),
+
+	/* ── Sidebar ── */
+	sidebarToggle:      ()     => Sidebar.toggle(),
+	sidebarCollapse:    ()     => Sidebar.collapse(),
+	sidebarExpand:      ()     => Sidebar.expand(),
+	sidebarIsCollapsed: ()     => Sidebar.isCollapsed(),
+	sidebarRefresh:     ()     => Sidebar.refresh(),
+
+	/* ── Iframe / Pestañas ── */
+	iframeOpen:         (t, u, i) => Iframe.open(t, u, i),
+	iframeClose:        (k)       => Iframe.close(k),
+	iframeFullscreen:   ()        => Iframe.toggleFullscreen(),
+	iframeRefresh:      ()        => Iframe.refresh(),
+	iframeCloseOthers:  ()        => Iframe.closeOthers(),
+	iframeCloseAll:     ()        => Iframe.closeAll(),
+
+	/* ── Excel ── */
+	excelExport:         (d, f) => Excel.exportToExcel(d, f),
+	excelImport:         (f)    => Excel.excelToJson(f),
+	jsonToExcel:         (d, f) => Excel.jsonToExcel(d, f),
+	excelToJson:         (f)    => Excel.excelToJson(f),
+	jsonToCsv:           (d, f) => Excel.jsonToCsv(d, f),
+	excelImportMultiple: (f)    => Excel.excelToJsonMultiple(f),
+	excelExportMultiple: (s, f) => Excel.jsonToExcelMultiple(s, f),
+
+	/* ── Validación ── */
+	isValidForm:     (f)       => Forms.isValidForm(f),
+	serializeForm:   (f)       => Forms.serializeForm(f),
+	clearForm:       (f)       => Forms.clearForm(f),
+	isNullOrEmpty:   (v)       => Validation.isNullOrEmpty(v),
+	isEmpty:         (v)       => Validation.isEmpty(v),
+	isValidEmail:    (e)       => Validation.isValidEmail(e),
+	isValidPhone:    (p)       => Validation.isValidPhone(p),
+	isValidCedula:   (c)       => Validation.isValidCedula(c),
 };
 
 // Exposición global
-window.HR = HR;
+window.$Alert      = Alert;
+window.$Api        = Api;
+window.$Calendar   = Calendar;
+window.$Charts     = Charts;
+window.$Codes      = Codes;
+window.$Currency   = Currency;
+window.$Date       = DateHelper;
+window.$Dom        = Dom;
+window.$Drag       = Drag;
+window.$Editor     = Editor;
+window.$Excel      = Excel;
+window.$ExportTbl  = ExportTbl;
+window.$File       = FileHelper;
+window.$Forms      = Forms;
+window.$Fullscreen = Fullscreen;
+window.$Humanize   = Humanize;
+window.$Icons      = Icons;
+window.$Iframe     = Iframe;
+window.$Modal      = Modal;
+window.$Number     = NumberHelper;
+window.$Print      = Print;
+window.$Select2    = Select2;
+window.$Sidebar    = Sidebar;
+window.$Signature  = Signature;
+window.$Storage    = Storage;
+window.$String     = StringHelper;
+window.$Table      = Table;
+window.$Validation = Validation;
+window.$HR         = $HR;
 
-export default HR;
+export default $HR;

@@ -8,26 +8,26 @@ $(async function () {
     let dt = null;
 
     // Iniciar carga
-    HR.msgLoading();
+    $HR.msgLoading();
 
     try {
         // 1. Obtener datos
-        const users = await HR.getApi(API_URL);
+        const users = await $HR.getApi(API_URL);
 
         // 2. Inicializar DataTable con exportaciones
-        dt = HR.createTbl("#reportUsersTable", {
+        dt = $HR.createTbl("#reportUsersTable", {
             data: users,
             // Botones de exportación desde la configuración con iconos
             dom: 'Bfrtip',
-            buttons: HR.tblButtons('icons'),
+            buttons: $HR.tblButtons('icons'),
             columns: [
-                HR.tblCol("id", "#"),
-                HR.tblCol("name", "Nombre Completo"),
-                HR.tblCol("email", "Correo Electrónico"),
-                HR.tblCol("company.name", "Empresa"),
-                HR.tblCol("address.city", "Ciudad"),
-                HR.tblCol("phone", "Teléfono"),
-                HR.tblCol("website", "Sitio Web", (data) => {
+                $HR.tblCol("id", "#"),
+                $HR.tblCol("name", "Nombre Completo"),
+                $HR.tblCol("email", "Correo Electrónico"),
+                $HR.tblCol("company.name", "Empresa"),
+                $HR.tblCol("address.city", "Ciudad"),
+                $HR.tblCol("phone", "Teléfono"),
+                $HR.tblCol("website", "Sitio Web", (data) => {
                     return `<a href="http://${data}" target="_blank" class="text-primary text-decoration-none border-bottom border-primary border-opacity-25">${data}</a>`;
                 }),
             ],
@@ -37,11 +37,11 @@ $(async function () {
         });
 
         // Cerrar carga
-        HR.msgLoading(true);
+        $HR.msgLoading(true);
 
     } catch (error) {
-        HR.msgLoading(true);
-        HR.msgError("Error al generar el reporte de usuarios.");
+        $HR.msgLoading(true);
+        $HR.msgError("Error al generar el reporte de usuarios.");
         console.error(error);
     }
 });

@@ -1,0 +1,22 @@
+// Variables
+@use "1-variables/app";
+
+// Bootstrap
+@use "1-variables/bootstrap";
+
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@use "bootstrap-icons/font/bootstrap-icons" with (
+  $bootstrap-icons-font-dir: "bootstrap-icons/font/fonts"
+);
+
+// Theme mixins
+@use "2-mixins/button";
+
+// Theme components
+@use "3-components/index";
+
+// Theme utilities
+@use "4-utilities/cursors";
+
+// Vendors
+@use "5-vendor/vendors";

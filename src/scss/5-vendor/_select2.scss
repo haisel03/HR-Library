@@ -1,2 +1,11 @@
-@import "select2/dist/css/select2.min.css";
-@import "select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css";
+// ============================================================================
+// 5-vendor/_select2.scss
+//
+// Importa los CSS base de Select2 y el tema Bootstrap 5.
+// Los estilos custom del widget (focus, valid, invalid, dropdown, tags)
+// viven en 3-components/_forms.scss para mantener todo en un solo lugar
+// y poder acceder a las variables del tema ($blue, $danger, $border-radius, etc.)
+// ============================================================================
+
+@use "select2/dist/css/select2.min.css";
+@use "select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css";

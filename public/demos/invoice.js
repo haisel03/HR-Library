@@ -1,6 +1,6 @@
 $(document).on("click", "#printInvoice", function (e) {
 	e.preventDefault();
-	HR.printEl("#invoice", {
+	$Print.print("#invoice", {
 		noPrintSelector: ".no-print",
 	});
 });

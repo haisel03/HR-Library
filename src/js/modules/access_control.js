@@ -1,3 +1,4 @@
+import $ from "jquery";
 import config from "../core/config";
 
 const initAccessControl = () => {

@@ -1,12 +1,9 @@
-import Chart from "chart.js/auto";
-
 document.addEventListener("DOMContentLoaded", function () {
-  console.log(HR);
   // Line Chart
   new Chart(document.getElementById("chartjs-dashboard-line"), {
     type: "line",
     data: {
-      labels: HR.lang.short_months,
+      labels: $HR.lang.short_months,
       datasets: [
         {
           label: "Ventas ($)",
@@ -99,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
   new Chart(document.getElementById("chartjs-dashboard-bar"), {
     type: "bar",
     data: {
-      labels: HR.lang.short_months,
+      labels: $HR.lang.short_months,
       datasets: [
         {
           label: "Este año",
@@ -161,14 +158,12 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Calendar
- /* if (E.datetime) {
-    const date = document.getElementById("datetimepicker-dashboard");
-    if (date) {
-      flatpickr(date, {
-        inline: true,
-        prevArrow: '<span title="Previous month">&laquo;</span>',
-        nextArrow: '<span title="Next month">&raquo;</span>',
-      });
-    }
-  }*/
+  const dateEl = document.getElementById("datetimepicker-dashboard");
+  if (dateEl) {
+    flatpickr(dateEl, $Date.flatpickr({
+      inline: true,
+      prevArrow: '<span title="Mes anterior">&laquo;</span>',
+      nextArrow: '<span title="Mes siguiente">&raquo;</span>',
+    }));
+  }
 });

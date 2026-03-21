@@ -1,0 +1,70 @@
+/* =====================================================
+   IFRAME MODE - Panel Layout Styles
+===================================================== */
+
+// Nav Tabs Iframe Container
+.nav-tabs-iframe {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
+
+	.nav-item {
+		white-space: nowrap;
+	}
+
+	.nav-link {
+		border-radius: 0;
+		border: 0;
+		border-right: 1px solid #dee2e6;
+		padding: 0.6rem 1.2rem;
+		height: 100%;
+		color: #495057;
+		background: #e9ecef;
+		position: relative;
+		font-size: 0.85rem;
+		display: flex;
+		align-items: center;
+
+		&.active {
+			background: #fff;
+			color: var(--bs-primary);
+			font-weight: 600;
+
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				height: 2px;
+				background: var(--bs-primary);
+			}
+		}
+	}
+}
+
+// Tab Close Button
+.tab-close {
+	font-size: 1.1rem;
+	line-height: 1;
+	margin-left: 8px;
+	opacity: 0.5;
+	transition: opacity 0.2s;
+
+	&:hover {
+		opacity: 1;
+		color: var(--bs-danger);
+	}
+}
+
+// Panel Mode Container
+.panel-mode-container {
+	iframe {
+		background: #fff;
+		width: 100%;
+		height: 100%;
+	}
+}

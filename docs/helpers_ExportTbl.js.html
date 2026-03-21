@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/ExportTbl.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Calendar.html">Calendar</a></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-Date.html">Date</a></li><li><a href="module-Dom.html">Dom</a></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-String.html">String</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-init.html#~init">init</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="$HR.html">$HR</a></li><li><a href="Alert.toast.html">toast</a></li><li><a href="module-Alert-Alert.html">Alert</a><ul class='methods'></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#alert">alert</a></li><li><a href="global.html#confirm">confirm</a></li><li><a href="global.html#toast">toast</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/ExportTbl.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import $ from "jquery";
+
+/**
+ * @module ExportTbl
+ * @description Exportaciones de tablas HTML y DataTables.
+ */
+
+const ExportTbl = {
+	/**
+	 * Normaliza a jQuery table
+	 */
+	_table: (el) => {
+		if (!el) return $();
+		if (el instanceof $) return el;
+		if (el instanceof HTMLElement) return $(el);
+		return $(el);
+	},
+
+	/**
+	 * Obtiene instancia DataTable si existe
+	 */
+	_dt: (table) => ($.fn.DataTable.isDataTable(table) ? table.DataTable() : null),
+
+	/**
+	 * Exporta una tabla a Excel (requiere XLSX)
+	 */
+	excel: (el, filename = "tabla.xlsx") => {
+		if (!window.XLSX) {
+			console.error("XLSX no está disponible");
+			return;
+		}
+
+		const $table = ExportTbl._table(el);
+		if (!$table.length) return;
+
+		const dt = ExportTbl._dt($table);
+		let headers = [];
+		let rows = [];
+
+		if (dt) {
+			headers = dt
+				.columns(":visible")
+				.header()
+				.toArray()
+				.map((th) => th.innerText.trim());
+
+			rows = dt.rows({ search: "applied" }).data().toArray();
+		} else {
+			headers = $table
+				.find("thead th")
+				.map((_, th) => th.innerText)
+				.get();
+			rows = $table
+				.find("tbody tr")
+				.map((_, tr) =>
+					$(tr)
+						.find("td")
+						.map((_, td) => td.innerText)
+						.get()
+				)
+				.get();
+		}
+
+		const data = rows.map((row) =>
+			Array.isArray(row) ? row : headers.map((h) => row[h] ?? "")
+		);
+
+		const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+		const wb = XLSX.utils.book_new();
+
+		XLSX.utils.book_append_sheet(wb, ws, "Datos");
+		XLSX.writeFile(wb, filename);
+	},
+
+	/**
+	 * Exporta DataTable a PDF
+	 */
+	pdf: (el, options = {}) => {
+		const $table = ExportTbl._table(el);
+		const dt = ExportTbl._dt($table);
+		if (!dt) return;
+
+		const cfg = {
+			title: null,
+			filename: "tabla.pdf",
+			...options,
+		};
+
+		dt.button().add(0, {
+			extend: "pdfHtml5",
+			title: cfg.title,
+			filename: cfg.filename,
+		});
+
+		dt.button(0).trigger();
+		dt.buttons(0).remove();
+	},
+
+	/**
+	 * Exporta DataTable a CSV
+	 */
+	csv: (el, filename = "tabla.csv") => {
+		const $table = ExportTbl._table(el);
+		const dt = ExportTbl._dt($table);
+		if (!dt) return;
+
+		dt.button().add(0, {
+			extend: "csvHtml5",
+			filename,
+		});
+
+		dt.button(0).trigger();
+		dt.buttons(0).remove();
+	},
+
+	/**
+	 * Retorna los datos visibles como JSON
+	 */
+	json: (el) => {
+		const $table = ExportTbl._table(el);
+		const dt = ExportTbl._dt($table);
+		if (!dt) return [];
+
+		return dt.rows({ search: "applied" }).data().toArray();
+	},
+};
+
+export default ExportTbl;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Mar 21 2026 08:46:29 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

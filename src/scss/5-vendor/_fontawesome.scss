@@ -1,1 +1,4 @@
-@import "@fortawesome/fontawesome-free/css/all.min.css";
+// Font Awesome se carga en src/js/app.js:
+//   import "@fortawesome/fontawesome-free/css/all.min.css";
+// No importar aquí para evitar duplicar el CSS en el bundle.
+@use "@fortawesome/fontawesome-free/css/v4-shims.min.css";

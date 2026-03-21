@@ -1,16 +1,17 @@
+@import "bootstrap/scss/functions";
+
 // Variables
 @import "1-variables/app";
 
 // Bootstrap
 @import "1-variables/bootstrap";
 
-
 $bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
-@import "bootstrap-icons/font/bootstrap-icons.scss";
-
+@import "bootstrap-icons/font/bootstrap-icons";
 
 // Theme mixins
 @import "2-mixins/button";
+@import "2-mixins/table";
 
 // Theme components
 @import "3-components/index";

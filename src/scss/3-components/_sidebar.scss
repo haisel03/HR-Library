@@ -73,15 +73,19 @@ a.sidebar-link {
 
 // Sidebar brand
 .sidebar-brand {
-  font-weight: $sidebar-brand-font-weight;
+  font-weight: $font-weight-bold;
   font-size: $sidebar-brand-font-size;
   padding: $sidebar-brand-padding-y $sidebar-brand-padding-x;
   display: block;
   color: $sidebar-brand-color;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  transition: opacity .15s ease-in-out;
 
   &:hover {
     text-decoration: none;
     color: $sidebar-brand-color;
+    opacity: 0.8;
   }
 
   &:focus {

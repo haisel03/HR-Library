@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Alert.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Calendar.html">Calendar</a></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-Date.html">Date</a></li><li><a href="module-Dom.html">Dom</a></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-String.html">String</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-init.html#~init">init</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="$HR.html">$HR</a></li><li><a href="Alert.toast.html">toast</a></li><li><a href="module-Alert-Alert.html">Alert</a><ul class='methods'></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#alert">alert</a></li><li><a href="global.html#confirm">confirm</a></li><li><a href="global.html#toast">toast</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Alert.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Alert
+ * @description
+ * Sistema de alertas y notificaciones basado exclusivamente en SweetAlert2.
+ *
+ * Expone una API limpia con métodos semánticos:
+ * - Modales: `Alert.success()`, `Alert.error()`, `Alert.warning()`, `Alert.info()`
+ * - Toasts:  `Alert.toast.success()`, `Alert.toast.error()`, etc.
+ * - Utilidad: `Alert.confirm()`, `Alert.loading()`, `Alert.close()`
+ *
+ * Se accede desde HR como `HR.$Alert` o desde los demos directamente
+ * si se importa: `import Alert from "./helpers/Alert"`.
+ *
+ * @example
+ * // Desde un demo externo via HR:
+ * HR.$Alert.success("Guardado correctamente");
+ * HR.$Alert.toast.success("Cambios aplicados");
+ * HR.$Alert.confirm("¿Eliminar?", "Esta acción no se puede deshacer").then(ok => { ... });
+ *
+ * @example
+ * // Acceso directo (import):
+ * import Alert from "./helpers/Alert";
+ * Alert.error("Ocurrió un error inesperado");
+ */
+
+import Swal from "sweetalert2";
+import config from "../core/config";
+
+/* =====================================================
+   INTERNOS
+===================================================== */
+
+/**
+ * Mapeo de tipo semántico → clave de config.alerts
+ * @private
+ * @type {Object.&lt;string, string>}
+ */
+const TYPE_MAP = {
+	success: "s",
+	error:   "d",
+	warning: "w",
+	info:    "i",
+	primary: "p",
+};
+
+/**
+ * Resuelve un tipo semántico ("success") o clave corta ("s") a su clave de config.
+ * @param {string} type
+ * @returns {string}
+ * @private
+ */
+const resolveType = (type) => TYPE_MAP[type] ?? type;
+
+/**
+ * Construye opciones base de SweetAlert2 a partir de un tipo.
+ * @param {string} key  Clave de config.alerts ("s", "d", "w", "i", "p")
+ * @returns {Object}
+ * @private
+ */
+const baseOptions = (key) => ({
+	backdrop:    config.swal.backdrop,
+	background:  config.swal.background,
+	allowOutsideClick: config.swal.clickOutside,
+	allowEscapeKey:    config.swal.escapeKey,
+	customClass: {
+		confirmButton: `btn btn-${config.alerts.colors[key]} px-4`,
+		cancelButton:  `btn btn-outline-secondary px-4`,
+		actions:       "gap-2",
+	},
+	buttonsStyling: false,
+});
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+/**
+ * Muestra un modal de alerta con ícono y título configurados.
+ *
+ * @param {string} text   Mensaje a mostrar
+ * @param {string} [type="info"]  Tipo semántico: "success" | "error" | "warning" | "info" | "primary"
+ *                                o clave corta: "s" | "d" | "w" | "i" | "p"
+ * @param {Function} [cb]  Callback ejecutado si el usuario confirma
+ * @returns {Promise&lt;boolean>}
+ *
+ * @example
+ * Alert.show("Registro guardado", "success");
+ * Alert.show("Falló la operación", "error", () => location.reload());
+ */
+const show = (text, type = "info", cb = null) => {
+	const key = resolveType(type);
+	const { icons, titles, colors } = config.alerts;
+
+	const msg = !text || String(text).trim() === ""
+		? config.messages.default
+		: text;
+
+	return Swal.fire({
+		...baseOptions(key),
+		html: `
+			&lt;div class="d-flex align-items-start gap-3 text-start">
+				&lt;i class="bi ${icons[key]} fs-2 text-${colors[key]} flex-shrink-0 mt-1">&lt;/i>
+				&lt;div>
+					&lt;strong class="d-block mb-1">${titles[key]}&lt;/strong>
+					&lt;span class="text-muted small">${msg}&lt;/span>
+				&lt;/div>
+			&lt;/div>
+		`,
+		confirmButtonText: config.swal.button.confirm,
+	}).then((r) => {
+		if (r.isConfirmed &amp;&amp; typeof cb === "function") cb();
+		return r.isConfirmed;
+	});
+};
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+/**
+ * Namespace de toasts no bloqueantes.
+ * @namespace Alert.toast
+ */
+const toast = {
+	/**
+	 * Muestra un toast genérico.
+	 *
+	 * @param {string} text
+	 * @param {string} [type="info"]
+	 * @returns {Promise}
+	 *
+	 * @example
+	 * Alert.toast.show("Archivo subido", "success");
+	 */
+	show: (text, type = "info") => {
+		const key = resolveType(type);
+		const { icons, colors } = config.alerts;
+
+		return Swal.fire({
+			toast: true,
+			position: config.swal.toast.position,
+			timer: config.swal.toast.timer,
+			timerProgressBar: true,
+			showConfirmButton: false,
+			html: `
+				&lt;div class="d-flex align-items-center gap-2">
+					&lt;i class="bi ${icons[key]} text-${colors[key]}">&lt;/i>
+					&lt;span>${text}&lt;/span>
+				&lt;/div>
+			`,
+			didOpen: (popup) => {
+				popup.addEventListener("mouseenter", Swal.stopTimer);
+				popup.addEventListener("mouseleave", Swal.resumeTimer);
+			},
+		});
+	},
+
+	/**
+	 * Toast de éxito.
+	 * @param {string} text
+	 * @returns {Promise}
+	 * @example Alert.toast.success("Guardado");
+	 */
+	success: (text) => toast.show(text, "success"),
+
+	/**
+	 * Toast de error.
+	 * @param {string} text
+	 * @returns {Promise}
+	 * @example Alert.toast.error("Error al procesar");
+	 */
+	error: (text) => toast.show(text, "error"),
+
+	/**
+	 * Toast de advertencia.
+	 * @param {string} text
+	 * @returns {Promise}
+	 * @example Alert.toast.warning("Campos incompletos");
+	 */
+	warning: (text) => toast.show(text, "warning"),
+
+	/**
+	 * Toast de información.
+	 * @param {string} text
+	 * @returns {Promise}
+	 * @example Alert.toast.info("Recuerda guardar");
+	 */
+	info: (text) => toast.show(text, "info"),
+};
+
+/* =====================================================
+   API PRINCIPAL
+===================================================== */
+
+/**
+ * @namespace Alert
+ */
+const Alert = {
+
+	/* ---- Modales semánticos ---- */
+
+	/**
+	 * Modal de éxito.
+	 * @param {string} text
+	 * @param {Function} [cb]
+	 * @returns {Promise&lt;boolean>}
+	 * @example Alert.success("Registro creado exitosamente");
+	 */
+	success: (text, cb) => show(text, "success", cb),
+
+	/**
+	 * Modal de error / peligro.
+	 * @param {string} text
+	 * @param {Function} [cb]
+	 * @returns {Promise&lt;boolean>}
+	 * @example Alert.error("No se pudo procesar la solicitud");
+	 */
+	error: (text, cb) => show(text, "error", cb),
+
+	/**
+	 * Modal de advertencia.
+	 * @param {string} text
+	 * @param {Function} [cb]
+	 * @returns {Promise&lt;boolean>}
+	 * @example Alert.warning("Revisa los datos antes de continuar");
+	 */
+	warning: (text, cb) => show(text, "warning", cb),
+
+	/**
+	 * Modal de información.
+	 * @param {string} text
+	 * @param {Function} [cb]
+	 * @returns {Promise&lt;boolean>}
+	 * @example Alert.info("Tu sesión expirará en 5 minutos");
+	 */
+	info: (text, cb) => show(text, "info", cb),
+
+	/**
+	 * Modal genérico con tipo explícito (clave corta o semántica).
+	 * @param {string} text
+	 * @param {string} [type="info"]
+	 * @param {Function} [cb]
+	 * @returns {Promise&lt;boolean>}
+	 */
+	show,
+
+	/* ---- Toasts ---- */
+
+	/** @type {Object} Namespace de toasts no bloqueantes */
+	toast,
+
+	/* ---- Confirmación ---- */
+
+	/**
+	 * Muestra un diálogo de confirmación con botones Aceptar / Cancelar.
+	 *
+	 * @param {string} title    Título del diálogo
+	 * @param {string} question Pregunta o descripción
+	 * @param {Function} [cb]  Callback ejecutado si el usuario confirma
+	 * @param {string} [type="warning"]  Tipo del botón de confirmación
+	 * @returns {Promise&lt;boolean>}
+	 *
+	 * @example
+	 * Alert.confirm("¿Eliminar registro?", "Esta acción no se puede deshacer", () => {
+	 *   $HR.deleteApi("/users/1");
+	 * });
+	 *
+	 * @example
+	 * const ok = await Alert.confirm("¿Continuar?", "Se enviará el formulario");
+	 * if (ok) submitForm();
+	 */
+	confirm: (title, question, cb = null, type = "warning") => {
+		const key = resolveType(type);
+
+		return Swal.fire({
+			...baseOptions(key),
+			title,
+			text: question,
+			showCancelButton: true,
+			confirmButtonText: config.swal.button.confirm,
+			cancelButtonText:  config.swal.button.cancel,
+		}).then((r) => {
+			if (r.isConfirmed &amp;&amp; typeof cb === "function") cb();
+			return r.isConfirmed;
+		});
+	},
+
+	/* ---- Loading ---- */
+
+	/**
+	 * Muestra un indicador de carga bloqueante.
+	 *
+	 * @example
+	 * Alert.loading();
+	 * await $HR.postApi("/save", data);
+	 * Alert.close();
+	 */
+	loading: () => {
+		Swal.fire({
+			title:             config.messages.loading.title,
+			html:              `&lt;span class="text-muted small">${config.messages.loading.subtitle}&lt;/span>`,
+			allowOutsideClick: false,
+			allowEscapeKey:    false,
+			showConfirmButton: false,
+			backdrop:          config.swal.backdrop,
+			didOpen:           () => Swal.showLoading(),
+		});
+	},
+
+	/**
+	 * Cierra cualquier alerta o loading activo.
+	 *
+	 * @example
+	 * Alert.close();
+	 */
+	close: () => Swal.close(),
+};
+
+export default Alert;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Mar 21 2026 08:46:29 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

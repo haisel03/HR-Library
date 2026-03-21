@@ -1,0 +1,32 @@
+// ============================================================================
+// 2-mixins/_table-header.scss
+//
+// Mixin para colorear el thead de una tabla.
+// Usa color-contrast() de Bootstrap para garantizar legibilidad automática
+// (blanco o negro según el ratio WCAG del fondo).
+//
+// Las clases .table-h-* se generan en 3-components/_tables.scss
+// usando $theme-colors de 1-variables/_colors.scss.
+// ============================================================================
+
+// @param {Color} $bg      Color de fondo del thead
+// @param {Color} $border  Borde inferior. Por defecto: $bg oscurecido 8%
+//
+// @example
+//   // Clase custom con un color del proyecto:
+//   .table-h-navy { @include table-header($navy); }
+//
+//   // Con borde explícito:
+//   .table-h-brand { @include table-header(#1a4f99, darken(#1a4f99, 12%)); }
+
+@mixin table-header($bg, $border: darken($bg, 8%)) {
+	thead {
+		background-color: $bg;
+
+		th {
+			background-color: $bg;
+			color: color-contrast($bg); // blanco o negro según contraste WCAG
+			border-bottom-color: $border;
+		}
+	}
+}

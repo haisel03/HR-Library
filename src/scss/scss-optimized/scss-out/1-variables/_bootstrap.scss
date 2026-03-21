@@ -1,0 +1,48 @@
+/* ---------- Required ---------- */
+@use "~bootstrap/scss/functions";
+@use "~bootstrap/scss/variables";
+@use "~bootstrap/scss/variables-dark";
+@use "~bootstrap/scss/maps";
+@use "~bootstrap/scss/mixins";
+@use "~bootstrap/scss/utilities";
+
+/* ---------- Base ---------- */
+@use "~bootstrap/scss/root";
+@use "~bootstrap/scss/reboot";
+@use "~bootstrap/scss/type";
+@use "~bootstrap/scss/images";
+@use "~bootstrap/scss/containers";
+@use "~bootstrap/scss/grid";
+
+/* ---------- Components ---------- */
+@use "~bootstrap/scss/tables";
+@use "~bootstrap/scss/forms";
+@use "~bootstrap/scss/buttons";
+@use "~bootstrap/scss/transitions";
+@use "~bootstrap/scss/dropdown";
+@use "~bootstrap/scss/button-group";
+@use "~bootstrap/scss/nav";
+@use "~bootstrap/scss/navbar";
+@use "~bootstrap/scss/card";
+@use "~bootstrap/scss/accordion";
+@use "~bootstrap/scss/breadcrumb";
+@use "~bootstrap/scss/pagination";
+@use "~bootstrap/scss/badge";
+@use "~bootstrap/scss/alert";
+@use "~bootstrap/scss/progress";
+@use "~bootstrap/scss/list-group";
+@use "~bootstrap/scss/close";
+@use "~bootstrap/scss/toasts";
+@use "~bootstrap/scss/modal";
+@use "~bootstrap/scss/tooltip";
+@use "~bootstrap/scss/popover";
+@use "~bootstrap/scss/carousel";
+@use "~bootstrap/scss/spinners";
+@use "~bootstrap/scss/offcanvas";
+@use "~bootstrap/scss/placeholders";
+
+/* ---------- Helpers ---------- */
+@use "~bootstrap/scss/helpers";
+
+/* ---------- Utilities API ---------- */
+@use "~bootstrap/scss/utilities/api";

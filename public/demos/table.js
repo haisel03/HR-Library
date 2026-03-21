@@ -1,141 +1,147 @@
 /**
  * @file table.js
- * @description Demo de CRUD usando HR.api y DataTables.
+ * @description Demo CRUD optimizado usando HR.table helper
  */
 
 $(async function () {
 	const API_URL = "https://jsonplaceholder.typicode.com/users";
 	let dt = null;
-	HR.msgLoading();
 
-	// 1. Inicializar Tabla
+	/* =====================================================
+		 INIT
+	===================================================== */
+
 	const initTable = async () => {
 		try {
-			HR.msgLoading();
-			const users = await HR.getApi(API_URL);
-			HR.msgLoading(true);
-			dt = HR.createTbl("#usersTable", {
+			$HR.msgLoading();
+
+			const users = await $HR.getApi(API_URL);
+
+			$HR.msgLoading(true);
+
+			dt = $Table.initTable("#usersTable", {
 				data: users,
 				columns: [
-					HR.tblCol("id", "#"),
-					HR.tblCol("name", "Nombre"),
-					HR.tblCol("username", "Usuario"),
-					HR.tblCol("email", "Email"),
-					HR.tblCol("phone", "Teléfono"),
-					HR.tblActionsCol((_, __, row) => {
-						return `
-                            <div class="btn-group btn-group-sm">
-                                <button class="btn btn-light btn-edit" data-id="${row.id}" title="Editar">
-                                    <i class="bi bi-pencil text-primary"></i>
-                                </button>
-                                <button class="btn btn-light btn-delete" data-id="${row.id}" title="Eliminar">
-                                    <i class="bi bi-trash text-danger"></i>
-                                </button>
-                            </div>
-                        `;
-					})
+					$Table.col("id", "#"),
+					$Table.col("name", "Nombre"),
+					$Table.col("username", "Usuario"),
+					$Table.col("email", "Email"),
+					$Table.col("phone", "Teléfono"),
+					$Table.actions(["edit", "delete"])
 				]
 			});
+
 		} catch (error) {
-			HR.msgLoading(true);
-			HR.msgError("No se pudieron cargar los datos de la API.");
+			$HR.msgLoading(true);
+			$HR.msgError("No se pudieron cargar los datos de la API.");
 		}
 	};
 
 	await initTable();
 
-	// 2. Evento: Abrir Modal de Creación
-	$("#btnAddUser").on("click", function () {
-		HR.clearForm("#userForm");
-		HR.val("#userId", "");
-		HR.text("#userModalTitle", "Nuevo Usuario");
-		HR.openModal("userModal", {});
-	});
+	/* =====================================================
+		 ACTIONS
+	===================================================== */
 
-	// 3. Evento: Editar
-	$(document).on("click", ".btn-edit", async function () {
-		const id = $(this).data("id");
-		try {
-			HR.msgLoading();
-			const user = await HR.getApi(`${API_URL}/${id}`);
-			HR.msgLoading(true);
+	$Table.onAction("#usersTable", async ({ action, row, button }) => {
 
-			HR.val("#userId", user.id);
-			HR.val("#userName", user.name);
-			HR.val("#userEmail", user.email);
-			HR.val("#userUsername", user.username);
-			HR.val("#userPhone", user.phone);
-
-			HR.text("#userModalTitle", "Editar Usuario");
-			HR.openModal("userModal", {});
-		} catch (error) {
-			HR.msgLoading(true);
-			HR.msgError("No se pudo obtener la información del usuario.");
+		// 🔹 EDITAR
+		if (action === "edit") {
+			$HR.text("#userModalTitle", "Editar Usuario");
+			$Table.modal.open("userModal", row);
 		}
+
+		// 🔹 ELIMINAR
+		if (action === "delete") {
+			try {
+				$HR.msgLoading();
+
+				await $HR.deleteApi(`${API_URL}/${row.id}`);
+
+				$HR.msgLoading(true);
+				$HR.toastSuccess("Usuario eliminado (Simulado)");
+
+				// eliminar fila directamente
+				$Table.removeRow("#usersTable", button);
+
+			} catch (error) {
+				$HR.msgLoading(true);
+				$HR.msgError("No se pudo eliminar el recurso.");
+			}
+		}
+
+		// 🔹 VER (opcional)
+		if (action === "view") {
+			console.log("Ver usuario:", row);
+		}
+
 	});
 
-	// 4. Evento: Guardar (Create/Update)
+	/* =====================================================
+		 CREATE
+	===================================================== */
+
+	$("#btnAddUser").on("click", () => {
+		$HR.clearForm("#userForm");
+		$HR.val("#userId", "");
+		$HR.text("#userModalTitle", "Nuevo Usuario");
+
+		$Table.modal.open("userModal");
+	});
+
+	/* =====================================================
+		 SAVE (CREATE / UPDATE)
+	===================================================== */
+
 	$("#userForm").on("submit", async function (e) {
 		e.preventDefault();
-		const id = HR.val("#userId");
+
+		const id = $HR.val("#userId");
+
 		const data = {
-			name: HR.val("#userName"),
-			email: HR.val("#userEmail"),
-			username: HR.val("#userUsername"),
-			phone: HR.val("#userPhone"),
+			name: $HR.val("#userName"),
+			email: $HR.val("#userEmail"),
+			username: $HR.val("#userUsername"),
+			phone: $HR.val("#userPhone"),
 		};
 
 		try {
-			HR.msgLoading();
-			let response;
-			if (id) {
-				// UPDATE (Simulado por JSONPlaceholder)
-				response = await HR.putApi(`${API_URL}/${id}`, data);
-				HR.msgSuccess(`Usuario "${response.name}" actualizado correctamente (Simulado)`);
-			} else {
-				// CREATE (Simulado por JSONPlaceholder)
-				response = await HR.postApi(API_URL, data);
-				HR.msgSuccess(`Usuario "${response.name}" creado con éxito (Simulado, ID: ${response.id})`);
-			}
-			HR.msgLoading(true);
-			HR.closeModal("userModal");
+			$HR.msgLoading();
 
-			// Nota: JSONPlaceholder no persiste cambios, pero en un app real aquí recargaríamos.
-			// HR.reloadTbl("#usersTable");
+			let response;
+
+			// 🔹 UPDATE
+			if (id) {
+				response = await $HR.putApi(`${API_URL}/${id}`, data);
+
+				$Table.updateRow("#usersTable", `[data-id="${id}"]`, response);
+
+				$HR.msgSuccess(`Usuario "${response.name}" actualizado (Simulado)`);
+
+			} else {
+				// 🔹 CREATE
+				response = await $HR.postApi(API_URL, data);
+
+				$Table.addRow("#usersTable", response);
+
+				$HR.msgSuccess(`Usuario "${response.name}" creado (Simulado)`);
+			}
+
+			$HR.msgLoading(true);
+			$Table.modal.close("userModal");
+
 		} catch (error) {
-			HR.msgLoading(true);
-			HR.msgError("Ocurrió un error al intentar guardar los datos.");
+			$HR.msgLoading(true);
+			$HR.msgError("Ocurrió un error al guardar los datos.");
 		}
 	});
 
-	// 5. Evento: Eliminar
-	$(document).on("click", ".btn-delete", function () {
-		const id = $(this).data("id");
-		const row = $(this).closest("tr");
-		const name = row.find("td:nth-child(2)").text();
+	/* =====================================================
+		 CANCEL
+	===================================================== */
 
-		HR.msgConfirm("¿Estás seguro?", `Vas a eliminar al usuario "${name}". Esta acción no se puede deshacer.`, async () => {
-			try {
-				HR.msgLoading();
-				await HR.deleteApi(`${API_URL}/${id}`);
-				HR.msgLoading(true);
-
-				HR.toastSuccess("Usuario eliminado (Simulado)");
-
-				// Animación local para el demo
-				row.fadeOut(400, () => {
-					// dt.row(row).remove().draw(false); // Si fuera persistente
-				});
-			} catch (error) {
-				HR.msgLoading(true);
-				HR.msgError("No se pudo eliminar el recurso.");
-			}
-		});
-	});
-
-	// 6. Evento: Cancelar
-	$("#btnCancelUser").on("click", function () {
-		HR.clearForm("#userForm");
-		HR.closeModal("userModal");
+	$("#btnCancelUser").on("click", () => {
+		$HR.clearForm("#userForm");
+		$Table.modal.close("userModal");
 	});
 });

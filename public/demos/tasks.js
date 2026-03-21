@@ -11,7 +11,7 @@ $(async function () {
         document.getElementById('tasks-completed')
     ];
 
-    const drake = HR.dragCreate('kanban', containers, {
+    const drake = $Drag.create('kanban', containers, {
         moves: (el, source, handle, sibling) => true,
         accepts: (el, target, source, sibling) => true,
     });
@@ -29,35 +29,35 @@ $(async function () {
         // Actualizar tiempos
         refreshCardTime(el, status);
 
-        HR.toastInfo(`Tarea movida a ${$(target).closest('.card').find('.card-title').text()}`);
+        $Alert.toast.info(`Tarea movida a ${$(target).closest('.card').find('.card-title').text()}`);
     });
 
     // 3. Cargar Tareas desde JSON
-    HR.msgLoading();
+    $HR.msgLoading();
     try {
-        const tasks = await HR.getApi('json/tasks.json');
+        const tasks = await $HR.getApi('json/tasks.json');
         tasks.forEach(t => {
             $(`#tasks-${t.status}`).append(createTaskCard(t));
         });
         updateCounts();
-        HR.msgLoading(true);
+        $HR.msgLoading(true);
     } catch (e) {
-        HR.msgLoading(true);
-        HR.msgError("No se pudieron cargar las tareas.");
+        $HR.msgLoading(true);
+        $HR.msgError("No se pudieron cargar las tareas.");
     }
 
     // 4. Crear Tarea
     $("#btnNewTask").on("click", function () {
-        HR.clearForm("#taskForm");
-        HR.text("#taskModalTitle", "Crear Nueva Tarea");
-        HR.openModal("taskModal");
+        $HR.clearForm("#taskForm");
+        $HR.text("#taskModalTitle", "Crear Nueva Tarea");
+        $HR.openModal("taskModal");
     });
 
     $("#taskForm").on("submit", function (e) {
         e.preventDefault();
 
-        const data = HR.serializeForm("#taskForm");
-        if (!data.title) return HR.msgWarning("Por favor ingresa un título");
+        const data = $HR.serializeForm("#taskForm");
+        if (!data.title) return $HR.msgWarning("Por favor ingresa un título");
 
         const t = {
             id: 'task-' + Date.now(),
@@ -72,8 +72,8 @@ $(async function () {
 
         $("#tasks-pending").append(createTaskCard(t));
 
-        HR.closeModal("taskModal");
-        HR.toastSuccess("Tarea agregada correctamente");
+        $HR.closeModal("taskModal");
+        $Alert.toast.success("Tarea agregada correctamente");
         updateCounts();
     });
 
@@ -90,7 +90,7 @@ $(async function () {
     // 6. Eliminar Tarea
     $(document).on("click", ".btn-delete-task", function () {
         const card = $(this).closest(".task-card");
-        HR.msgConfirm("¿Eliminar tarea?", "¿Estás seguro?", () => {
+        $HR.msgConfirm("¿Eliminar tarea?", "¿Estás seguro?", () => {
             card.fadeOut(300, function () { $(this).remove(); updateCounts(); });
         });
     });
@@ -116,7 +116,7 @@ $(async function () {
                     </div>
                     <h6 class="card-title fw-bold mb-1">${t.title}</h6>
                     <p class="card-text small text-muted mb-2">${t.description || 'Sin descripción'}</p>
-
+ 
                     <div class="d-flex align-items-center mb-3">
                         <div class="avatar-info">
                             <small class="fw-bold d-block text-dark">${t.responsible}</small>
@@ -126,7 +126,7 @@ $(async function () {
 
                     <div class="d-flex justify-content-between align-items-center">
                         ${priorityBadge}
-                        <small class="text-muted" style="font-size: 0.7rem;"><i class="bi bi-calendar-event me-1"></i>${HR.formatDate(t.end_date)}</small>
+                        <small class="text-muted" style="font-size: 0.7rem;"><i class="bi bi-calendar-event me-1"></i>${$HR.formatDate(t.end_date)}</small>
                     </div>
                 </div>
             </div>
@@ -135,10 +135,10 @@ $(async function () {
 
     function getTimeHtml(t) {
         if (t.status === 'completed') {
-            const date = t.completed_at || HR.now();
-            return `<i class="bi bi-check2-all text-success me-1"></i>Finalizado hace ${HR.humanizeTimeAgo(date)}`;
+            const date = t.completed_at || $HR.now();
+            return `<i class="bi bi-check2-all text-success me-1"></i>Finalizado hace ${$HR.humanizeTimeAgo(date)}`;
         } else {
-            return `<i class="bi bi-hourglass-split text-warning me-1"></i>Faltan ${HR.humanizeTimeRemaining(t.end_date)}`;
+            return `<i class="bi bi-hourglass-split text-warning me-1"></i>Faltan ${$HR.humanizeTimeRemaining(t.end_date)}`;
         }
     }
 
@@ -147,7 +147,7 @@ $(async function () {
         const t = {
             status: status,
             end_date: card.data('end'),
-            completed_at: status === 'completed' ? HR.now() : null
+            completed_at: status === 'completed' ? $HR.now() : null
         };
         card.find('.time-info').html(getTimeHtml(t));
     }

@@ -1,7 +1,8 @@
-//plugins
 @import "flatpickr";
 @import "simplebar";
 @import "jsvectormap";
 @import "sweetalert2";
 @import "select2";
-//@import "datatablets";
+// Font Awesome se importa en src/js/app.js — no duplicar aquí
+// DataTables CSS se importa en src/js/modules/datatables.js por chunk
+// @use "datatablets";

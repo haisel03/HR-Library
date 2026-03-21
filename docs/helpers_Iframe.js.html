@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Iframe.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Calendar.html">Calendar</a></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-Date.html">Date</a></li><li><a href="module-Dom.html">Dom</a></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-String.html">String</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-init.html#~init">init</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="$HR.html">$HR</a></li><li><a href="Alert.toast.html">toast</a></li><li><a href="module-Alert-Alert.html">Alert</a><ul class='methods'></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#alert">alert</a></li><li><a href="global.html#confirm">confirm</a></li><li><a href="global.html#toast">toast</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Iframe.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import $ from "jquery";
+
+/**
+ * @module Iframe
+ * @description Gestión de pestañas con iframes.
+ */
+
+const tabsContainer = "#iframe-tabs";
+const contentsContainer = "#iframe-contents";
+const instances = new Map(); // url -> { tabId, iframeId }
+
+const Iframe = {
+	/**
+	 * Abre una página en una nueva pestaña (o enfoca la existente)
+	 */
+	open: (title, url, icon = "bi bi-file-earmark") => {
+		const key = url.split("/").pop().split("?")[0];
+
+		if (instances.has(key)) {
+			Iframe.focus(key);
+			return;
+		}
+
+		const id = "iframe-" + Date.now();
+		const tabId = "tab-" + id;
+		const iframeId = "frame-" + id;
+
+		const tabHtml = `
+			&lt;li class="nav-item" role="presentation" id="li-${key}">
+				&lt;button class="nav-link d-flex align-items-center active" id="${tabId}" data-bs-toggle="pill"
+						data-bs-target="#panel-${key}" type="button" role="tab" aria-selected="true">
+					&lt;i class="${icon} me-2">&lt;/i>
+					&lt;span class="tab-title">${title}&lt;/span>
+					&lt;i class="bi bi-x ms-2 tab-close" data-key="${key}">&lt;/i>
+				&lt;/button>
+			&lt;/li>
+		`;
+
+		$(tabsContainer + " .nav-link").removeClass("active");
+		$(contentsContainer + " .tab-pane").removeClass("show active");
+		$(tabsContainer).append(tabHtml);
+
+		const finalUrl = url.includes("?") ? `${url}&amp;iframe=1` : `${url}?iframe=1`;
+
+		const contentHtml = `
+			&lt;div class="tab-pane fade show active h-100" id="panel-${key}" role="tabpanel">
+				&lt;iframe src="${finalUrl}" id="${iframeId}" class="w-100 h-100 border-0" allowfullscreen>&lt;/iframe>
+			&lt;/div>
+		`;
+		$(contentsContainer).append(contentHtml);
+
+		instances.set(key, { tabId, iframeId });
+
+		$(`#li-${key} .tab-close`).on("click", function (e) {
+			e.stopPropagation();
+			Iframe.close(key);
+		});
+	},
+
+	focus: (key) => {
+		const inst = instances.get(key);
+		if (inst) {
+			$(`#${inst.tabId}`).tab("show");
+		}
+	},
+
+	close: (key) => {
+		const inst = instances.get(key);
+		if (!inst) return;
+
+		const nextTab = $(`#li-${key}`).prev().find(".nav-link");
+		const prevTab = $(`#li-${key}`).next().find(".nav-link");
+
+		$(`#li-${key}`).remove();
+		$(`#panel-${key}`).remove();
+		instances.delete(key);
+
+		if (nextTab.length) nextTab.tab("show");
+		else if (prevTab.length) prevTab.tab("show");
+	},
+
+	toggleFullscreen: () => {
+		const activePane = $(contentsContainer + " .tab-pane.active iframe")[0];
+		if (activePane) {
+			if (activePane.requestFullscreen) activePane.requestFullscreen();
+			else if (activePane.webkitRequestFullscreen) activePane.webkitRequestFullscreen();
+			else if (activePane.msRequestFullscreen) activePane.msRequestFullscreen();
+		}
+	},
+
+	refresh: () => {
+		const activeIframe = $(contentsContainer + " .tab-pane.active iframe")[0];
+		if (activeIframe) {
+			activeIframe.src = activeIframe.src;
+		}
+	},
+
+	closeOthers: () => {
+		const activeLi = $("#iframe-tabs .nav-link.active").closest("li");
+		const activeKey = activeLi.attr("id")?.replace("li-", "");
+
+		if (instances.size &lt;= 1) return;
+
+		$("#iframe-tabs li").each(function () {
+			const key = $(this).attr("id")?.replace("li-", "");
+			if (key &amp;&amp; key !== activeKey) {
+				Iframe.close(key);
+			}
+		});
+	},
+
+	closeAll: () => {
+		instances.clear();
+		$(tabsContainer).empty();
+		$(contentsContainer).empty().append(`
+            &lt;div class="tab-empty d-flex align-items-center justify-content-center h-100 flex-column text-muted opacity-25">
+                &lt;i class="bi bi-window-plus display-1 mb-3">&lt;/i>
+                &lt;h4 class="fw-bold">HR-Panel v1.0&lt;/h4>
+                &lt;p>Selecciona una página en el menú lateral para abrir una pestaña.&lt;/p>
+            &lt;/div>
+        `);
+	},
+};
+
+export default Iframe;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat Mar 21 2026 08:46:29 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

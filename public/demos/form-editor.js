@@ -5,8 +5,8 @@
 
 $(async function () {
     // 1. Inicializar Componentes vía HR
-    const editor = HR.createEditor('#full-editor');
-    const signature = HR.createSignature('#signature-pad');
+    const editor = $Editor.create('#full-editor');
+    const signature = $Signature.create('#signature-pad');
 
     // 2. Setup Select2
     $('.select2').each(function () {
@@ -18,7 +18,7 @@ $(async function () {
     });
 
     // 3. Setup Flatpickr
-    $('.datetimepicker').flatpickr(HR.flatpickrConfig({
+    $('.datetimepicker').flatpickr($Date.flatpickr({
         enableTime: true,
         altInput: true,
         altFormat: "F j, Y - H:i",
@@ -31,7 +31,7 @@ $(async function () {
 
     // 5. Manejo de Firma
     $('#clear-signature').on('click', function () {
-        HR.clearSignature('#signature-pad');
+        $Signature.clear('#signature-pad');
         $('#signature-input').val('');
         updateDebugger();
     });
@@ -40,43 +40,43 @@ $(async function () {
     $('#richForm').on('submit', function (e) {
         e.preventDefault();
 
-        if (!HR.isValidForm(this)) {
-            HR.msgWarning("Por favor completa los campos requeridos.");
+        if (!$HR.isValidForm(this)) {
+            $HR.msgWarning("Por favor completa los campos requeridos.");
             return;
         }
 
         // Obtener datos
-        const data = HR.serializeForm(this);
-        data.description = HR.getEditorHtml('#full-editor');
-        data.signature = HR.getSignatureData('#signature-pad');
+        const data = $HR.serializeForm(this);
+        data.description = $Editor.getHtml('#full-editor');
+        data.signature = $Signature.getSignatureData('#signature-pad');
 
         if (!data.signature) {
-            HR.msgWarning("La firma es obligatoria para este registro.");
+            $HR.msgWarning("La firma es obligatoria para este registro.");
             return;
         }
 
-        HR.msgLoading("Procesando registro...");
+        $HR.msgLoading("Procesando registro...");
 
         setTimeout(() => {
-            HR.msgLoading(true);
-            HR.msgSuccess("¡Formulario procesado con éxito!", "Los datos han sido validados y serializados correctamente.");
+            $HR.msgLoading(true);
+            $HR.msgSuccess("¡Formulario procesado con éxito!", "Los datos han sido validados y serializados correctamente.");
             console.log("Form Data:", data);
 
             // Resetear después de éxito (opcional)
-            // HR.clearForm('#richForm');
-            // HR.clearSignature('#signature-pad');
-            // HR.setEditorHtml('#full-editor', '');
+            // $HR.clearForm('#richForm');
+            // $Signature.clear('#signature-pad');
+            // $Editor.setHtml('#full-editor', '');
         }, 1500);
     });
 
     $('#btnReset').on('click', function () {
-        HR.msgConfirm("¿Reiniciar formulario?", "Se perderán todos los cambios ingresados.", () => {
-            HR.clearForm('#richForm');
-            HR.clearSignature('#signature-pad');
-            HR.setEditorHtml('#full-editor', '<p>Escribe aquí los detalles del registro...</p>');
+        $HR.msgConfirm("¿Reiniciar formulario?", "Se perderán todos los cambios ingresados.", () => {
+            $HR.clearForm('#richForm');
+            $Signature.clear('#signature-pad');
+            $Editor.setHtml('#full-editor', '<p>Escribe aquí los detalles del registro...</p>');
             $('.select2').val(null).trigger('change');
             updateDebugger();
-            HR.toastInfo("Formulario reiniciado");
+            $Alert.toast.info("Formulario reiniciado");
         });
     });
 
@@ -84,9 +84,9 @@ $(async function () {
     $('input, select, textarea').on('input change', updateDebugger);
 
     function updateDebugger() {
-        const data = HR.serializeForm('#richForm');
+        const data = $HR.serializeForm('#richForm');
         // Limpiar base64 de la firma para el visualizador si es muy largo
-        const sig = HR.getSignatureData('#signature-pad');
+        const sig = $Signature.getSignatureData('#signature-pad');
         if (sig) data.signature = "[Base64 Signature Data]";
 
         $('#form-debugger').text(JSON.stringify(data, null, 4));

@@ -16,35 +16,35 @@ $(function () {
         const title = $(this).find('span').text() || $(this).text();
         const icon = $(this).find('i').attr('class') || 'bi bi-file-earmark';
 
-        HR.iframeOpen(title, href, icon);
+        $Iframe.open(title, href, icon);
         $('.tab-empty').addClass('d-none');
     });
 
     // 2. Botones de Control
     $('#btnIframeFullscreen').on('click', function () {
-        HR.iframeFullscreen();
+        $Iframe.toggleFullscreen();
     });
 
     $('#btnIframeRefresh').on('click', function () {
-        HR.iframeRefresh();
+        $Iframe.refresh();
     });
 
     $('#btnCloseOthers').on('click', function (e) {
         e.preventDefault();
-        HR.msgConfirm("¿Cerrar las demás pestañas?", "Se cerrarán todas las pestañas excepto la actual.", () => {
-            HR.iframeCloseOthers();
-            HR.toastInfo("Pestañas cerradas");
+        $HR.msgConfirm("¿Cerrar las demás pestañas?", "Se cerrarán todas las pestañas excepto la actual.", () => {
+            $Iframe.closeOthers();
+            $Alert.toast.info("Pestañas cerradas");
         });
     });
 
     $('#btnCloseAll').on('click', function (e) {
         e.preventDefault();
-        HR.msgConfirm("¿Cerrar todas las pestañas?", "Se cerrarán todas las ventanas abiertas.", () => {
-            HR.iframeCloseAll();
-            HR.toastInfo("Todas las pestañas cerradas");
+        $HR.msgConfirm("¿Cerrar todas las pestañas?", "Se cerrarán todas las ventanas abiertas.", () => {
+            $Iframe.closeAll();
+            $Alert.toast.info("Todas las pestañas cerradas");
         });
     });
 
     // Cargar inicio opcional
-    // HR.iframeOpen('Dashboard', 'dashboard.html', 'bi bi-speedometer2');
+    // $Iframe.open('Dashboard', 'dashboard.html', 'bi bi-speedometer2');
 });

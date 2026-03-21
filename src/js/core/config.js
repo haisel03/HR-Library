@@ -505,7 +505,108 @@ const config = {
 		collapseClass: "collapsed",
 	},
 
-
+	dt_actions: {
+		view: {
+			icon: "bi-eye",
+			class: "text-primary",
+			title: "Ver",
+			action: "view"
+		},
+		edit: {
+			icon: "bi-pen",
+			class: "text-primary",
+			title: "Editar",
+			action: "edit"
+		},
+		delete: {
+			action: "delete",
+			icon: "bi-trash",
+			class: "text-danger",
+			title: "Eliminar",
+			confirm: {
+				title: "¿Estás seguro?",
+				text: "Esta acción no se puede deshacer"
+			}
+		},
+		print: {
+			icon: "bi-printer",
+			class: "text-secondary",
+			title: "Imprimir",
+			action: "print"
+		},
+		duplicate: {
+			icon: "bi-files",
+			class: "text-info",
+			title: "Duplicar",
+			action: "duplicate"
+		},
+		download: {
+			icon: "bi-download",
+			class: "text-success",
+			title: "Descargar",
+			action: "download"
+		},
+		share: {
+			icon: "bi-share",
+			class: "text-primary",
+			title: "Compartir",
+			action: "share"
+		},
+		activate: {
+			icon: "bi-check-circle",
+			class: "text-success",
+			title: "Activar",
+			action: "activate"
+		},
+		deactivate: {
+			icon: "bi-slash-circle",
+			class: "text-warning",
+			title: "Desactivar",
+			action: "deactivate"
+		},
+		open: {
+			icon: "bi-box-arrow-up-right",
+			class: "text-primary",
+			title: "Abrir",
+			action: "open"
+		},
+		history: {
+			icon: "bi-clock",
+			class: "text-muted",
+			title: "Historial",
+			action: "history"
+		},
+		permissions: {
+			icon: "bi-lock",
+			class: "text-secondary",
+			title: "Permisos",
+			action: "permissions"
+		},
+		settings: {
+			icon: "bi-gear",
+			class: "text-dark",
+			title: "Configuración",
+			action: "settings"
+		},
+		invoice: {
+			icon: "bi-file-earmark-text",
+			class: "text-primary",
+			title: "Factura",
+			action: "invoice"
+		},
+		payment: {
+			icon: "bi-credit-card",
+			class: "text-success",
+			title: "Registrar pago",
+			action: "payment"
+		},
+		export: {
+			icon: "bi-upload",
+			class: "text-info",
+			title: "Exportar",
+			action: "export"
+		}
+	}
 };
 
 export default config;

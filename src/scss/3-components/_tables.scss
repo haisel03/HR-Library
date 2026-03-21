@@ -1,3 +1,9 @@
+// ============================================================================
+// 3-components/_tables.scss
+// ============================================================================
+
+/* ── Base ────────────────────────────────────────────────────────────────────── */
+
 .table {
 	width: 100%;
 	margin-bottom: 0;
@@ -9,7 +15,7 @@
 			text-transform: uppercase;
 			font-size: 0.75rem;
 			letter-spacing: 0.5px;
-			font-weight: 700;
+			font-weight: $font-weight-bold;
 			color: $gray-600;
 			border-bottom: 2px solid $gray-200;
 		}
@@ -22,13 +28,14 @@
 	th {
 		border-color: $gray-200;
 	}
+
+	>tbody>tr>td {
+		vertical-align: middle;
+	}
 }
 
-.table>tbody>tr>td {
-	vertical-align: middle;
-}
+/* ── Variante compacta ───────────────────────────────────────────────────────── */
 
-// Compact table variant
 .table-xs {
 	font-size: $font-size-sm;
 
@@ -38,23 +45,20 @@
 		vertical-align: middle;
 	}
 
-	thead {
-		tr {
+	thead tr {
+		background-color: $primary;
+		color: $white;
+
+		th {
 			background-color: $primary;
 			color: $white;
-
-			th {
-				background-color: $primary;
-				color: $white;
-				padding-top: 0.25rem;
-				padding-bottom: 0.25rem;
-				font-weight: $font-weight-bold;
-				border-bottom: 1px solid $table-border-color;
-				text-transform: uppercase;
-				letter-spacing: 0.5px;
-			}
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+			font-weight: $font-weight-bold;
+			border-bottom: 1px solid $table-border-color;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
 		}
-
 	}
 
 	tbody td {
@@ -69,5 +73,42 @@
 	&.table-hover tbody tr:hover {
 		background-color: rgba($primary, 0.05);
 		cursor: pointer;
+	}
+}
+
+/* ── Clases .table-h-* ───────────────────────────────────────────────────────── */
+// Genera una clase por cada color de $theme-colors (_colors.scss):
+// colores custom, semánticos (primary, success, danger...) y redes sociales.
+//
+// Uso:
+//   <table class="table table-h-success">   → thead verde,    texto blanco
+//   <table class="table table-h-warning">   → thead amarillo, texto oscuro
+//   <table class="table table-h-navy">      → thead azul DR,  texto blanco
+//   <table class="table table-h-facebook">  → thead azul FB,  texto blanco
+//
+// Para un color que no esté en el mapa, usa el mixin directamente:
+//   .table-h-custom { @include table-header(#2c7a3a); }
+
+@each $name, $color in $theme-colors {
+	.table-h-#{$name} {
+		@include table-header($color);
+	}
+}
+
+// Escala de grises
+// Uso: <table class="table table-h-gray-700">
+
+@each $shade, $color in ("100": $gray-100,
+	"200": $gray-200,
+	"300": $gray-300,
+	"400": $gray-400,
+	"500": $gray-500,
+	"600": $gray-600,
+	"700": $gray-700,
+	"800": $gray-800,
+	"900": $gray-900,
+) {
+	.table-h-gray-#{$shade} {
+		@include table-header($color);
 	}
 }

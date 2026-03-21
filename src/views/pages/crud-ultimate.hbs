@@ -1,0 +1,176 @@
+{{#> layout-main icon="bi bi-star-fill" title="Ultimate CRUD" description="Demostración de alto nivel integrando casi
+todos los helpers del framework"}}
+
+<div class="row mb-4">
+	<div class="col-12">
+		<div class="card shadow-sm border-0 bg-primary text-white">
+			<div class="card-body d-flex align-items-center justify-content-between p-4">
+				<div>
+					<h3 class="fw-bold mb-1 text-white">Gestión Maestra de Empleados</h3>
+					<p class="opacity-75 mb-0 text-white">Demostración técnica de 21+ helpers trabajando en conjunto.</p>
+				</div>
+				<div class="d-none d-md-block">
+					<button class="btn btn-light btn-lg" id="btnFullscreen">
+						<i class="bi bi-arrows-fullscreen me-2"></i>Pantalla Completa
+					</button>
+					<button class="btn btn-outline-light btn-lg ms-2" id="btnAddEmployee">
+						<i class="bi bi-plus-circle me-2"></i>Registrar Nuevo
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-12">
+		<div class="card shadow-sm border-0">
+			<div class="card-header bg-white py-3">
+				<div class="row align-items-center">
+					<div class="col">
+						<h3 class="card-title">Listado de Personal Académico</h3>
+					</div>
+					<div class="col-auto" id="tableActionButtons">
+						<!-- Botones de exportación inyectados por el helper -->
+					</div>
+				</div>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover table-sm table-h-primary align-middle w-100" id="employeeTable">
+						<!-- DataTables render -->
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- MODAL MAESTRO -->
+<div class="modal fade" id="employeeModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+	<div class="modal-dialog modal-xl modal-dialog-scrollable">
+		<div class="modal-content border-0 shadow-lg">
+			<div class="modal-header bg-light border-0 py-3">
+				<h5 class="modal-title fw-bold" id="employeeModalTitle">Ficha de Empleado</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body p-4">
+				<form id="employeeForm">
+					<input type="hidden" id="empId" name="id">
+
+					<div class="row g-4">
+						<!-- Sección 1: Datos Básicos -->
+						<div class="col-md-8">
+							<div class="card border-0 bg-light-subtle p-3 h-100">
+								<h6 class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2">Información Personal</h6>
+								<div class="row g-3">
+									<div class="col-md-6">
+										<label class="form-label required" for="empName">Nombre Completo</label>
+										<input type="text" class="form-control" id="empName" name="name" required
+											placeholder="Ej. Haisel Ramirez">
+									</div>
+									<div class="col-md-6">
+										<label class="form-label required" for="empEmail">Correo Corporativo</label>
+										<input type="email" class="form-control email" id="empEmail" name="email" required
+											placeholder="h.ramirez@empresa.com">
+									</div>
+									<div class="col-md-6">
+										<label class="form-label required" for="empPhone">Teléfono / WhatsApp</label>
+										<input type="text" class="form-control phone" id="empPhone" name="phone" required
+											data-mask="(000) 000-0000" data-mask-config="(999) 999-9999">
+									</div>
+									<div class="col-md-6">
+										<label class="form-label required" for="empRole">Departamento / Rol</label>
+										<select class="form-select select2" id="empRole" name="role" required>
+											<option value="">Seleccione...</option>
+											<option value="IT">Tecnología de la Información</option>
+											<option value="HR">Recursos Humanos</option>
+											<option value="ACAD">Académico</option>
+											<option value="FIN">Finanzas</option>
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Sección 2: Foto / Avatar -->
+						<div class="col-md-4">
+							<div class="card border-0 bg-light-subtle p-3 h-100 text-center">
+								<h6 class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2 text-start">Fotografía</h6>
+								<div class="mb-3">
+									<img src="img/avatars/avatar.jpg" id="avatarPreview" class="rounded-circle shadow-sm border p-1"
+										style="width: 120px; height: 120px; object-fit: cover;">
+								</div>
+								<div class="mb-2">
+									<label class="btn btn-outline-primary btn-sm">
+										Subir Foto <input type="file" id="empAvatar" name="avatar" hidden accept="image/*">
+									</label>
+								</div>
+								<small class="text-muted d-block" id="avatarMeta">Máx: 2MB (.jpg, .png)</small>
+							</div>
+						</div>
+
+						<!-- Sección 3: Datos Financieros y Fechas -->
+						<div class="col-md-6">
+							<div class="card border-0 bg-light-subtle p-3 h-100">
+								<h6 class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2">Contrato y Salario</h6>
+								<div class="row g-3">
+									<div class="col-md-6">
+										<label class="form-label required" for="empJoinDate">Fecha de Ingreso</label>
+										<div class="input-group">
+											<span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+											<input type="text" class="form-control" id="empJoinDate" name="join_date" required>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<label class="form-label required" for="empSalary">Salario Mensual</label>
+										<div class="input-group">
+											<span class="input-group-text">$</span>
+											<input type="number" class="form-control" id="empSalary" name="salary" required step="0.01">
+										</div>
+										<small class="text-primary fw-bold" id="salaryFormatted"></small>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Sección 4: Firma Digital -->
+						<div class="col-md-6">
+							<div class="card border-0 bg-light-subtle p-3 h-100">
+								<h6
+									class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2 d-flex justify-content-between">
+									Firma de Aceptación
+									<button type="button" class="btn btn-link btn-sm p-0 text-decoration-none"
+										id="btnClearSignature">Limpiar</button>
+								</h6>
+								<div class="signature-wrapper border rounded bg-white">
+									<canvas id="empSignature" style="width: 100%; height: 150px; cursor: crosshair;"></canvas>
+								</div>
+							</div>
+						</div>
+
+						<!-- Sección 5: Notas (Editor WYSIWYG) -->
+						<div class="col-12">
+							<div class="card border-0 bg-light-subtle p-3">
+								<h6 class="fw-bold text-uppercase small text-muted mb-3 border-bottom pb-2">Notas Adicionales / Perfil
+								</h6>
+								<div id="empNotes" style="height: 150px;" class="bg-white rounded"></div>
+								<textarea name="notes" id="empNotesHidden" hidden></textarea>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer bg-light border-0 py-3">
+				<button type="button" class="btn btn-secondary px-4" id="btnCancelEmployee">Descartar</button>
+				<button type="button" class="btn btn-info px-4" id="btnSaveDraft">Guardar Borrador</button>
+				<button type="submit" form="employeeForm" class="btn btn-primary px-5 fw-bold" id="btnSaveEmployee">Guardar y
+					Finalizar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-main}}
+
+<script src="demos/crud-ultimate.js"></script>

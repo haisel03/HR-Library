@@ -4,11 +4,11 @@
  */
 
 $(async function () {
-	const calendarEl = HR.el('calendar');
+	const calendarEl = $Dom.el('calendar');
 	if (!calendarEl) return;
 
 	// 1. Inicializar Draggable
-	HR.calendarDraggable('external-events', {
+	$Calendar.draggable('external-events', {
 		itemSelector: '.fc-event',
 		eventData: function (eventEl) {
 			return {
@@ -20,7 +20,7 @@ $(async function () {
 	});
 
 	// 2. Inicializar Calendario
-	const calendar = HR.initCalendar('calendar', {
+	const calendar = $Calendar.init('calendar', {
 		themeSystem: 'bootstrap5',
 		headerToolbar: {
 			left: 'prev,next today',
@@ -40,7 +40,7 @@ $(async function () {
 			if ($('#drop-remove').is(':checked')) {
 				info.draggedEl.parentNode.removeChild(info.draggedEl);
 			}
-			HR.toastSuccess(`Evento "${info.draggedEl.innerText}" agregado al calendario`);
+			$Alert.toast.success(`Evento "${info.draggedEl.innerText}" agregado al calendario`);
 			calculateNextEvent();
 		},
 		select: function (info) {
@@ -54,40 +54,40 @@ $(async function () {
 	});
 
 	// 3. Setup Flatpickr
-	const startPicker = flatpickr("#eventStart", HR.flatpickrConfig({ enableTime: true }));
-	const endPicker = flatpickr("#eventEnd", HR.flatpickrConfig({ enableTime: true }));
+	const startPicker = flatpickr("#eventStart", $Date.flatpickr({ enableTime: true }));
+	const endPicker = flatpickr("#eventEnd", $Date.flatpickr({ enableTime: true }));
 
 	// 4. Lógica del Modal
 	function openEventModal(event = null, info = null) {
-		HR.clearForm('#eventForm');
+		$HR.clearForm('#eventForm');
 		$('#btn-delete-event').addClass('d-none');
 
 		if (event) {
-			HR.val('#eventId', event.id);
-			HR.val('#eventTitle', event.title);
+			$HR.val('#eventId', event.id);
+			$HR.val('#eventTitle', event.title);
 			startPicker.setDate(event.start);
 			endPicker.setDate(event.end);
-			HR.val('#eventColor', event.backgroundColor);
+			$HR.val('#eventColor', event.backgroundColor);
 			$('#btn-delete-event').removeClass('d-none');
 		} else if (info) {
 			startPicker.setDate(info.start);
 			endPicker.setDate(info.end);
 		}
 
-		HR.openModal('eventModal');
+		$HR.openModal('eventModal');
 	}
 
 	$('#btn-save-event').on('click', function () {
-		const id = HR.val('#eventId');
+		const id = $HR.val('#eventId');
 		const eventData = {
-			title: HR.val('#eventTitle'),
-			start: HR.val('#eventStart'),
-			end: HR.val('#eventEnd'),
-			backgroundColor: HR.val('#eventColor'),
-			borderColor: HR.val('#eventColor')
+			title: $HR.val('#eventTitle'),
+			start: $HR.val('#eventStart'),
+			end: $HR.val('#eventEnd'),
+			backgroundColor: $HR.val('#eventColor'),
+			borderColor: $HR.val('#eventColor')
 		};
 
-		if (!eventData.title) return HR.msgWarning("El título es obligatorio");
+		if (!eventData.title) return $HR.msgWarning("El título es obligatorio");
 
 		if (id) {
 			const existing = calendar.getEventById(id);
@@ -102,17 +102,17 @@ $(async function () {
 			calendar.addEvent({ ...eventData, id: String(Date.now()) });
 		}
 
-		HR.closeModal('eventModal');
-		HR.toastSuccess(id ? "Evento actualizado" : "Evento creado");
+		$HR.closeModal('eventModal');
+		$Alert.toast.success(id ? "Evento actualizado" : "Evento creado");
 		calculateNextEvent();
 	});
 
 	$('#btn-delete-event').on('click', function () {
-		const id = HR.val('#eventId');
-		HR.msgConfirm("¿Eliminar evento?", "Esta acción no se puede deshacer.", () => {
+		const id = $HR.val('#eventId');
+		$HR.msgConfirm("¿Eliminar evento?", "Esta acción no se puede deshacer.", () => {
 			calendar.getEventById(id)?.remove();
-			HR.closeModal('eventModal');
-			HR.toastInfo("Evento eliminado");
+			$HR.closeModal('eventModal');
+			$Alert.toast.info("Evento eliminado");
 			calculateNextEvent();
 		});
 	});
@@ -147,8 +147,8 @@ $(async function () {
 			if (events.length > 0) {
 				$('#no-events-info').addClass('d-none');
 				$('#next-event-info').removeClass('d-none');
-				HR.text('#next-event-title', events[0].title);
-				HR.text('#next-event-time', HR.humanizeTimeRemaining(events[0].start));
+				$HR.text('#next-event-title', events[0].title);
+				$HR.text('#next-event-time', $HR.humanizeTimeRemaining(events[0].start));
 			} else {
 				$('#no-events-info').removeClass('d-none');
 				$('#next-event-info').addClass('d-none');

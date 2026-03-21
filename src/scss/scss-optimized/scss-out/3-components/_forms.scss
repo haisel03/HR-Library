@@ -1,0 +1,58 @@
+label.form-label {
+  text-decoration: none;
+  margin-bottom: .2rem;
+  font-weight: bold !important;
+  color: $form-label-color;
+
+  &.required::after {
+    content: " *";
+    font-weight: 700;
+    color: $danger;
+  }
+}
+
+.form-control,
+.form-select {
+  font-weight: 500;
+  color: $gray-800;
+  border: 1px solid $gray-300;
+  padding: .5rem .75rem;
+
+  &:focus {
+    border-color: $blue;
+    box-shadow: 0 0 0 0.2rem rgba($blue, 0.1);
+  }
+}
+
+.input-group {
+  .input-group-text {
+    background: $blue;
+    border: 1px solid $blue;
+    text-align: center;
+    color: $white;
+    font-weight: 600;
+  }
+
+  .form-control,
+  .form-select {
+    border-left: none;
+  }
+}
+
+.select2 {
+  font-weight: $font-weight-bold;
+  color: $dark;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  .select2-dropdown {
+    background-color: $white;
+    padding: .2rem;
+  }
+
+  option {
+    font-size: $font-size-sm;
+  }
+}

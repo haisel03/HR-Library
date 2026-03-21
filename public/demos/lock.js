@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     $('#lockForm').on('submit', function (e) {
         e.preventDefault();
 
-        if (HR.isValidForm(this)) {
-            HR.msgLoading();
+        if ($HR.isValidForm(this)) {
+            $HR.msgLoading();
             setTimeout(() => {
-                HR.msgLoading(true);
-                HR.toastSuccess('Sesión recuperada');
+                $HR.msgLoading(true);
+                $Alert.toast.success('Sesión recuperada');
                 // window.location.href = 'index.html';
             }, 1000);
         }
