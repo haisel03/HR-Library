@@ -19,6 +19,12 @@ const instance = axios.create({
 	},
 });
 
+// Laravel CSRF Protection
+const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+if (csrfToken) {
+	instance.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
+}
+
 let authToken = null;
 let autoAlerts = true;
 
