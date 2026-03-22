@@ -19,7 +19,7 @@ const Codes = {
 		const format = options.format || cfg.defaultFormat;
 
 		if (!cfg.supportedFormats.includes(format)) {
-			console.warn(`Barcode format no soportado: ${format}`);
+			// Formato no soportado — retornar false es suficiente señal para el caller
 			return false;
 		}
 
@@ -48,7 +48,7 @@ const Codes = {
 			});
 			return true;
 		} catch (err) {
-			console.error("Error generando QR canvas:", err);
+			// Error silenciado — caller debe manejar el false de retorno
 			return false;
 		}
 	},
@@ -70,7 +70,7 @@ const Codes = {
 			element.src = dataUrl;
 			return true;
 		} catch (err) {
-			console.error("Error generando QR image:", err);
+			// Error silenciado — caller debe manejar el false de retorno
 			return false;
 		}
 	},

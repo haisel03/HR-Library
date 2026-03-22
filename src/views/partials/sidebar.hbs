@@ -1,24 +1,41 @@
 <nav id="sidebar" class="sidebar js-sidebar">
-	<div class="sidebar-content js-simplebar">
-		<a class="sidebar-brand text-decoration-none" href="index.html">
-			<span class="align-middle">HR Library</span>
+	<div class="sidebar-content js-simplebar" data-simplebar-auto-hide="false">
+
+		{{!-- ── Brand ─────────────────────────────────────────────────────────── --}}
+		<a class="sidebar-brand" href="index.html">
+			{{!-- Logo expandido (visible cuando el sidebar está abierto) --}}
+			<img src="img/logos/logo-sidebar.svg"
+				 alt="HR Library"
+				 class="sidebar-brand-full"
+				 width="160"
+				 height="44">
+			{{!-- Ícono solo (visible cuando el sidebar está colapsado) --}}
+			<img src="img/logos/logo-sidebar-collapsed.svg"
+				 alt="HR"
+				 class="sidebar-brand-icon"
+				 width="36"
+				 height="36">
 		</a>
 
+		{{!-- ── Nav ───────────────────────────────────────────────────────────── --}}
 		<ul class="sidebar-nav">
-			<!-- DASHBOARDS -->
-			<li class="sidebar-header">
-				Dashboards
-			</li>
+
+			{{!-- DASHBOARDS --}}
+			<li class="sidebar-header">Dashboards</li>
+
 			<li class="sidebar-item">
-				<a data-bs-target="#dashboards" class="sidebar-link collapsed" data-bs-toggle="collapse" aria-expanded="false">
-					<i class="align-middle bi bi-speedometer2"></i>
-					<span class="align-middle">Paneles</span>
+				<a class="sidebar-link collapsed"
+				   data-bs-target="#dashboards"
+				   data-bs-toggle="collapse"
+				   aria-expanded="false"
+				   aria-controls="dashboards">
+					<i class="bi bi-speedometer2"></i>
+					<span>Paneles</span>
 					<i class="bi bi-chevron-right icon-right"></i>
 				</a>
 				<ul id="dashboards" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
 					<li class="sidebar-item"><a class="sidebar-link" href="dashboard.html">Principal</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="dashboard-coordinator.html">Coordinador</a>
-					</li>
+					<li class="sidebar-item"><a class="sidebar-link" href="dashboard-coordinator.html">Coordinador</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="dashboard-secretary.html">Secretaria</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="dashboard-sudo.html">Administrador</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="dashboard-teacher.html">Docente</a></li>
@@ -26,14 +43,17 @@
 				</ul>
 			</li>
 
-			<!-- ACADÉMICO -->
-			<li class="sidebar-header">
-				Gestión Académica
-			</li>
+			{{!-- GESTIÓN ACADÉMICA --}}
+			<li class="sidebar-header">Gestión Académica</li>
+
 			<li class="sidebar-item">
-				<a data-bs-target="#academic" class="sidebar-link collapsed" data-bs-toggle="collapse" aria-expanded="false">
-					<i class="align-middle bi bi-journal-check"></i>
-					<span class="align-middle">Academia</span>
+				<a class="sidebar-link collapsed"
+				   data-bs-target="#academic"
+				   data-bs-toggle="collapse"
+				   aria-expanded="false"
+				   aria-controls="academic">
+					<i class="bi bi-journal-check"></i>
+					<span>Academia</span>
 					<i class="bi bi-chevron-right icon-right"></i>
 				</a>
 				<ul id="academic" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -44,14 +64,17 @@
 				</ul>
 			</li>
 
-			<!-- ADMINISTRACIÓN -->
-			<li class="sidebar-header">
-				Administración
-			</li>
+			{{!-- ADMINISTRACIÓN --}}
+			<li class="sidebar-header">Administración</li>
+
 			<li class="sidebar-item">
-				<a data-bs-target="#admin" class="sidebar-link collapsed" data-bs-toggle="collapse" aria-expanded="false">
-					<i class="align-middle bi bi-briefcase"></i>
-					<span class="align-middle">Gestión</span>
+				<a class="sidebar-link collapsed"
+				   data-bs-target="#admin"
+				   data-bs-toggle="collapse"
+				   aria-expanded="false"
+				   aria-controls="admin">
+					<i class="bi bi-briefcase"></i>
+					<span>Gestión</span>
 					<i class="bi bi-chevron-right icon-right"></i>
 				</a>
 				<ul id="admin" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -62,14 +85,17 @@
 				</ul>
 			</li>
 
-			<!-- FINANZAS -->
-			<li class="sidebar-header">
-				Finanzas
-			</li>
+			{{!-- FINANZAS --}}
+			<li class="sidebar-header">Finanzas</li>
+
 			<li class="sidebar-item">
-				<a data-bs-target="#finance" class="sidebar-link collapsed" data-bs-toggle="collapse" aria-expanded="false">
-					<i class="align-middle bi bi-credit-card"></i>
-					<span class="align-middle">Contabilidad</span>
+				<a class="sidebar-link collapsed"
+				   data-bs-target="#finance"
+				   data-bs-toggle="collapse"
+				   aria-expanded="false"
+				   aria-controls="finance">
+					<i class="bi bi-credit-card"></i>
+					<span>Contabilidad</span>
 					<i class="bi bi-chevron-right icon-right"></i>
 				</a>
 				<ul id="finance" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -80,70 +106,100 @@
 				</ul>
 			</li>
 
-			<!-- PORTAL -->
-			<li class="sidebar-header">
-				Portal del Usuario
-			</li>
-			<li class="sidebar-item"><a class="sidebar-link" href="portal-grades.html"><i
-						class="align-middle bi bi-mortarboard"></i> Calificaciones</a></li>
-			<li class="sidebar-item"><a class="sidebar-link" href="portal-login.html"><i
-						class="align-middle bi bi-box-arrow-in-right"></i> Login Portal</a></li>
+			{{!-- PORTAL --}}
+			<li class="sidebar-header">Portal del Usuario</li>
 
-			<!-- EXTRAS -->
-			<li class="sidebar-header">
-				Extras & Herramientas
-			</li>
-			<li class="sidebar-item"><a class="sidebar-link" href="events.html"><i
-						class="align-middle bi bi-calendar-event"></i> Calendario</a></li>
-			<li class="sidebar-item"><a class="sidebar-link" href="tasks.html"><i
-						class="align-middle bi bi-layout-three-columns"></i> Tablero de Tareas</a></li>
-			<li class="sidebar-item"><a class="sidebar-link" href="pages-projects.html"><i
-						class="align-middle bi bi-kanban"></i> Proyectos</a></li>
-			<li class="sidebar-item"><a class="sidebar-link" href="pages-inbox.html"><i
-						class="align-middle bi bi-envelope"></i> Bandeja</a></li>
-			<li class="sidebar-item"><a class="sidebar-link" href="pages-gallery.html"><i
-						class="align-middle bi bi-images"></i> Galería</a></li>
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="panel-login.html">
-					<i class="align-middle bi bi-window-stack"></i> <span class="align-middle">Panel de Control
-						(Tabs)</span>
-					<span class="badge bg-danger ms-1" style="font-size: 0.6rem;">NEW</span>
+				<a class="sidebar-link" href="portal-grades.html">
+					<i class="bi bi-mortarboard"></i>
+					<span>Calificaciones</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="portal-login.html">
+					<i class="bi bi-box-arrow-in-right"></i>
+					<span>Login Portal</span>
 				</a>
 			</li>
 
-			<!-- COMPONENTES -->
-			<li class="sidebar-header">
-				Componentes UI
+			{{!-- EXTRAS & HERRAMIENTAS --}}
+			<li class="sidebar-header">Extras &amp; Herramientas</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="events.html">
+					<i class="bi bi-calendar-event"></i>
+					<span>Calendario</span>
+				</a>
 			</li>
 			<li class="sidebar-item">
-				<a data-bs-target="#ui" class="sidebar-link collapsed" data-bs-toggle="collapse" aria-expanded="false">
-					<i class="align-middle bi bi-palette"></i>
-					<span class="align-middle">UI Kit</span>
+				<a class="sidebar-link" href="tasks.html">
+					<i class="bi bi-layout-three-columns"></i>
+					<span>Tablero de Tareas</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="pages-projects.html">
+					<i class="bi bi-kanban"></i>
+					<span>Proyectos</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="pages-inbox.html">
+					<i class="bi bi-envelope"></i>
+					<span>Bandeja</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="pages-gallery.html">
+					<i class="bi bi-images"></i>
+					<span>Galería</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="panel-login.html">
+					<i class="bi bi-window-stack"></i>
+					<span>Panel de Control</span>
+					<span class="sidebar-badge badge bg-danger">NEW</span>
+				</a>
+			</li>
+
+			{{!-- COMPONENTES UI --}}
+			<li class="sidebar-header">Componentes UI</li>
+
+			<li class="sidebar-item">
+				<a class="sidebar-link collapsed"
+				   data-bs-target="#ui"
+				   data-bs-toggle="collapse"
+				   aria-expanded="false"
+				   aria-controls="ui">
+					<i class="bi bi-palette"></i>
+					<span>UI Kit</span>
 					<i class="bi bi-chevron-right icon-right"></i>
 				</a>
 				<ul id="ui" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
 					<li class="sidebar-item"><a class="sidebar-link" href="ui-kit.html">General Kit</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="table.html">DataTables CRUD</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="crud-ultimate.html">CRUD Ultimate</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="report-users.html">Reporte de Usuarios</a>
-					</li>
-					<li class="sidebar-item"><a class="sidebar-link" href="ui-tabs.html">Tabs & Navs</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="report-users.html">Reporte de Usuarios</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="ui-tabs.html">Tabs &amp; Navs</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="ui-infobox.html">InfoBoxes</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="forms.html">Formularios</a></li>
-					<li class="sidebar-item"><a class="sidebar-link" href="form-editor.html">Editor de Formularios</a>
-					</li>
+					<li class="sidebar-item"><a class="sidebar-link" href="form-editor.html">Editor de Formularios</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="datatable-api.html">Tablas API</a></li>
 				</ul>
 			</li>
 
-			<!-- SEGURIDAD -->
-			<li class="sidebar-header">
-				Seguridad
-			</li>
+			{{!-- SEGURIDAD --}}
+			<li class="sidebar-header">Seguridad</li>
+
 			<li class="sidebar-item">
-				<a data-bs-target="#auth" class="sidebar-link collapsed" data-bs-toggle="collapse" aria-expanded="false">
-					<i class="align-middle bi bi-shield-lock"></i>
-					<span class="align-middle">Autenticación</span>
+				<a class="sidebar-link collapsed"
+				   data-bs-target="#auth"
+				   data-bs-toggle="collapse"
+				   aria-expanded="false"
+				   aria-controls="auth">
+					<i class="bi bi-shield-lock"></i>
+					<span>Autenticación</span>
 					<i class="bi bi-chevron-right icon-right"></i>
 				</a>
 				<ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -155,10 +211,25 @@
 			</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link" href="landing.html" target="_blank">
-					<i class="align-middle bi bi-display"></i> <span class="align-middle">Landing Page</span>
+				<a class="sidebar-link" href="landing.html" target="_blank" rel="noopener">
+					<i class="bi bi-display"></i>
+					<span>Landing Page</span>
+					<i class="bi bi-box-arrow-up-right ms-auto opacity-50" style="font-size:.7rem;margin-right:0;"></i>
 				</a>
 			</li>
+
 		</ul>
+
+		{{!-- ── CTA / Footer del sidebar ─────────────────────────────────────── --}}
+		<div class="sidebar-cta">
+			<div class="sidebar-cta-content">
+				<p class="sidebar-cta-title">HR Library</p>
+				<p class="sidebar-cta-text">v2.0 — Documentación y componentes</p>
+				<a href="ui-kit.html" class="btn btn-sm btn-outline-light w-100 mt-2">
+					<i class="bi bi-book me-1"></i> Ver Docs
+				</a>
+			</div>
+		</div>
+
 	</div>
 </nav>

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 148 34" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="1" width="32" height="32" rx="8" fill="#003876"/>
+  <text x="16" y="18" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="13" font-weight="900" fill="white" letter-spacing="-0.3">HR</text>
+  <text x="40" y="18" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="16" font-weight="700" fill="#003876" letter-spacing="-0.4">HR</text>
+  <text x="57" y="18" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="16" font-weight="300" fill="#2B2F36">Library</text>
+</svg>

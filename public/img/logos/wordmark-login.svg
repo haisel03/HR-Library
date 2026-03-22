@@ -1,0 +1,24 @@
+<svg width="320" height="100" viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ícono -->
+  <rect x="0" y="10" width="80" height="80" rx="20" fill="#003876"/>
+  <rect x="10" y="20" width="60" height="60" rx="14" fill="white" fill-opacity="0.06"/>
+  <path d="M18 60 H30 V44 H38" stroke="rgba(255,255,255,0.20)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M42 60 H54 V44" stroke="rgba(255,255,255,0.14)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="18" cy="60" r="2.5" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="38" cy="44" r="2.5" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="54" cy="44" r="2.5" fill="rgba(255,255,255,0.28)"/>
+  <text x="40" y="56" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="28" font-weight="900"
+        fill="white" letter-spacing="-1">HR</text>
+  <!-- Nombre -->
+  <text x="96" y="44" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="36" font-weight="700"
+        fill="#003876" letter-spacing="-1">HR</text>
+  <text x="130" y="44" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="36" font-weight="300"
+        fill="#2B2F36">Library</text>
+  <!-- Tagline -->
+  <text x="96" y="72" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="12" font-weight="400"
+        fill="#708090" letter-spacing="2.5">FRONTEND FRAMEWORK</text>
+</svg>

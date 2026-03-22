@@ -37,6 +37,13 @@
   font-weight: $font-weight-normal;
 }
 
+@each $name, $color in $theme-colors {
+	.card-bt-#{$name} {
+		@include card-bt($color);
+	}
+}
+
+
 
 
 .card-img,
@@ -48,6 +55,8 @@
     height: 100%;
   }
 }
+
+
 
 .card>.table>tbody {
 

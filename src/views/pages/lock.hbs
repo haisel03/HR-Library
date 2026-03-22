@@ -1,30 +1,50 @@
-{{#> layout-auth title="Pantalla de Bloqueo" description="Tu sesión está protegida. Ingresa tu contraseña para
-desbloquear."}}
+{{#> layout-auth
+title="Pantalla de Bloqueo"
+description="Tu sesión está protegida. Ingresa tu contraseña para continuar."}}
 
 <div class="card">
-    <div class="card-body text-center">
-        <div class="mb-4">
-            <img src="img/avatar.png" alt="Usuario" class="lock-avatar"
-                onerror="this.src='https://ui-avatars.com/api/?name=Haisel+Ramirez&background=764ba2&color=fff&size=100'">
-            <h4 class="text-white mt-3">Haisel Ramirez</h4>
-            <p class="text-white-50">Administrador de Sistema</p>
-        </div>
+	<div class="card-body text-center">
 
-        <form id="lockForm">
-            <div class="mb-4">
-                <input class="form-control text-center" type="password" name="password"
-                    placeholder="Ingresa tu contraseña" required>
-            </div>
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary btn-lg">Desbloquear</button>
-            </div>
-        </form>
+		<div class="mb-4">
+			<img src="img/avatars/avatar.png" alt="Usuario" class="lock-avatar"
+				onerror="this.src='https://ui-avatars.com/api/?name=Haisel+Ramirez&background=4e73df&color=fff&size=100'">
 
-        <div class="mt-4 text-center">
-            <a href="login.html" class="text-white-50">¿No eres Haisel Ramirez? Cerrar sesión</a>
-        </div>
-    </div>
+			<h5 class="mt-3 fw-bold">Haisel Ramirez</h5>
+			<p class="text-muted small mb-0">Administrador de Sistema</p>
+		</div>
+
+		<form id="lockForm">
+
+			<div class="form-floating mb-3 password-wrapper">
+				<input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+				<label for="password">
+					<i class="bi bi-lock me-1"></i> Contraseña
+				</label>
+
+				<i class="bi bi-eye toggle-password" id="togglePassword"></i>
+			</div>
+
+			<div class="d-grid">
+				<button type="submit" class="btn btn-primary btn-lg">
+					<i class="bi bi-unlock me-2"></i>
+					Desbloquear
+				</button>
+			</div>
+
+		</form>
+
+		<div class="mt-4">
+			<a href="login.html" class="text-muted small">
+				¿No eres Haisel Ramirez? Cerrar sesión
+			</a>
+		</div>
+
+	</div>
 </div>
 
-
 {{/layout-auth}}
+
+
+{{#*inline "js"}}
+<script src="js/demos/login.js"></script>
+{{/inline}}

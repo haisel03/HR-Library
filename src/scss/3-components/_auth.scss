@@ -1,117 +1,202 @@
 .auth-body {
-    background: url('~assets/img/auth-bg.png') no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Inter', sans-serif;
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Inter', sans-serif;
+	overflow: hidden;
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(135deg, rgba(0, 56, 118, 0.7) 0%, rgba(0, 0, 0, 0.4) 100%);
-        z-index: 1;
-    }
+	// 🔥 GRADIENT ANIMADO PREMIUM
+	background: linear-gradient(270deg, #4e73df, #224abe, #1cc88a);
+	background-size: 600% 600%;
+	animation: gradientMove 12s ease infinite;
 
-    .container {
-        position: relative;
-        z-index: 2;
-    }
+	// 🔥 OVERLAY LIGHT EFFECT
+	&::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(circle at top left, rgba(255, 255, 255, 0.15), transparent 40%),
+			radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.25), transparent 50%);
+		z-index: 1;
+	}
 
-    .card {
-        background: #fff;
-        border: none;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        border-radius: 12px;
-        overflow: hidden;
+	.container {
+		position: relative;
+		z-index: 2;
+	}
 
-        .card-body {
-            padding: 3rem;
-        }
+	// 🔥 CARD PREMIUM GLASS
+	.card {
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(12px);
+		border-radius: 18px;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
+		overflow: hidden;
+		transition: all 0.3s ease;
 
-        .card-title {
-            color: $blue;
-            font-weight: 800;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-    }
+		&:hover {
+			transform: translateY(-4px) scale(1.01);
+			box-shadow: 0 35px 90px rgba(0, 0, 0, 0.4);
+		}
 
-    .form-label {
-        color: $gray-700;
-        font-weight: 600;
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        margin-bottom: 0.5rem;
-    }
+		.card-body {
+			padding: 3rem 2.5rem;
+		}
 
-    .form-control {
-        background: $gray-100;
-        border: 2px solid $gray-200;
-        color: $gray-900;
-        border-radius: 8px;
-        padding: 0.8rem 1rem;
-        font-weight: 500;
-        transition: all 0.2s;
+		.card-title {
+			color: $blue;
+			font-weight: 800;
+			text-align: center;
+			margin-bottom: 2rem;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+	}
 
-        &:focus {
-            background: #fff;
-            border-color: $primary;
-            box-shadow: 0 0 0 4px rgba($primary, 0.1);
-        }
+	.form-floating {
+		position: relative;
 
-        &::placeholder {
-            color: $gray-400;
-        }
-    }
+		>.form-control {
+			background: $gray-100;
+			border: 2px solid $gray-300;
+			border-radius: 10px;
+			padding: 1rem;
+			height: calc(3.5rem + 2px);
+			font-weight: 500;
+			transition: all 0.25s ease;
 
-    .btn-primary {
-        background: $blue;
-        border: none;
-        border-radius: 8px;
-        padding: 0.9rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        transition: all 0.3s;
+			&:focus {
+				background: #fff;
+				border-color: $primary;
+				box-shadow: 0 0 0 4px rgba($primary, 0.1);
+			}
 
-        &:hover {
-            background: darken($blue, 10%);
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba($blue, 0.3);
-        }
-    }
+			&::placeholder {
+				color: $gray-600;
+			}
+		}
 
-    .auth-footer {
-        color: #fff;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+		>label {
+			color: $primary;
+			font-weight: 600;
+			padding-left: 1rem;
+			transition: all 0.2s ease;
+		}
+	}
 
-        a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
+	// 🔥 PASSWORD ICON
+	.password-wrapper {
+		position: relative;
 
-            &:hover {
-                border-bottom-color: #fff;
-            }
-        }
-    }
+		.toggle-password {
+			position: absolute;
+			top: 50%;
+			right: 15px;
+			transform: translateY(-50%);
+			cursor: pointer;
+			color: $gray-600;
+			font-size: 1.2rem;
+			transition: all 0.2s;
+
+			&:hover {
+				color: $primary;
+				transform: translateY(-50%) scale(1.1);
+			}
+		}
+	}
+
+	.form-check {
+		.form-check-input {
+			cursor: pointer;
+		}
+
+		.form-check-label {
+			font-weight: 500;
+			color: $dark;
+		}
+	}
+
+	.btn-primary {
+		background: linear-gradient(135deg, $blue, lighten($blue, 10%));
+		border: none;
+		border-radius: 10px;
+		padding: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 1px;
+		transition: all 0.3s ease;
+
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 10px 25px rgba($blue, 0.4);
+		}
+
+		&:active {
+			transform: scale(0.98);
+		}
+	}
+
+	// 🔥 FOOTER
+	.auth-footer {
+		text-align: center;
+		margin-top: 1.5rem;
+		font-size: 0.9rem;
+		color: #fff;
+
+		a {
+			color: #fff;
+			font-weight: 700;
+			text-decoration: none;
+			position: relative;
+
+			&::after {
+				content: '';
+				position: absolute;
+				width: 0%;
+				height: 2px;
+				bottom: -2px;
+				left: 0;
+				background: #fff;
+				transition: width 0.3s;
+			}
+
+			&:hover::after {
+				width: 100%;
+			}
+		}
+	}
 }
 
+// 🔥 AVATAR
 .lock-avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    border: 4px solid #fff;
-    margin: 0 auto 1.5rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    object-fit: cover;
+	width: 110px;
+	height: 110px;
+	border-radius: 50%;
+	border: 4px solid #fff;
+	margin: 0 auto 1.5rem;
+	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+	object-fit: cover;
+	transition: transform 0.3s ease;
+
+	&:hover {
+		transform: scale(1.05);
+	}
+}
+
+// 🔥 ANIMACIÓN GRADIENTE
+@keyframes gradientMove {
+	0% {
+		background-position: 0% 50%;
+	}
+
+	50% {
+		background-position: 100% 50%;
+	}
+
+	100% {
+		background-position: 0% 50%;
+	}
 }

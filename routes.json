@@ -1,0 +1,22 @@
+{
+  "/api/*": "/$1",
+
+  "/api/dashboard/stats":    "/dashboard/1",
+  "/api/dashboard/events":   "/events",
+  "/api/dashboard/tasks":    "/tasks",
+
+  "/api/auth/login":         "/usuarios",
+
+  "/api/academico/cursos":       "/cursos",
+  "/api/academico/estudiantes":  "/estudiantes",
+  "/api/academico/calificaciones": "/calificaciones",
+  "/api/academico/asistencia":   "/asistencia",
+
+  "/api/admin/empleados":    "/empleados",
+  "/api/admin/escuelas":     "/escuelas",
+  "/api/admin/clientes":     "/clientes",
+
+  "/api/finanzas/facturas":  "/facturas",
+  "/api/finanzas/pagos":     "/pagos",
+  "/api/finanzas/gastos":    "/gastos"
+}

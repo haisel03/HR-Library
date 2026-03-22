@@ -1,37 +1,63 @@
-{{#> layout-auth title="Iniciar Sesión" description="Bienvenido de nuevo a HR-Library. Por favor, ingresa tus
-credenciales para continuar."}}
+{{#> layout-auth
+title="Iniciar Sesión"
+description="Bienvenido de nuevo a HR-Library. Ingresa tus credenciales para continuar."}}
 
 <div class="card">
 	<div class="card-body">
+
 		<form id="loginForm">
-			<div class="mb-4">
-				<label class="form-label required">Correo Electrónico</label>
-				<input class="form-control" type="email" name="email" placeholder="ejemplo@correo.com" required
-					data-validation="email">
+
+			<!-- EMAIL -->
+			<div class="form-floating mb-4">
+				<input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com" required>
+				<label for="email">
+					<i class="bi bi-envelope me-1"></i> Correo Electrónico
+				</label>
 			</div>
-			<div class="mb-4">
-				<label class="form-label required">Contraseña</label>
-				<input class="form-control" type="password" name="password" placeholder="••••••••" required>
-				<div class="mt-2 text-end">
-					<small><a href="reset-password.html" class="text-white-50">¿Olvidaste tu contraseña?</a></small>
-				</div>
+
+			<!-- PASSWORD -->
+			<div class="form-floating mb-3 password-wrapper">
+				<input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" required>
+				<label for="password">
+					<i class="bi bi-lock me-1"></i> Contraseña
+				</label>
+
+				<i class="bi bi-eye toggle-password" id="togglePassword"></i>
 			</div>
-			<div class="mb-4">
-				<div class="form-check form-switch">
-					<input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
-					<label class="form-check-label text-white-50" for="rememberMe">Recordar sesión</label>
-				</div>
+
+			<div class="text-end mb-3">
+				<a href="reset-password.html" class="text-muted small">
+					¿Olvidaste tu contraseña?
+				</a>
 			</div>
-			<div class="d-grid gap-2 mt-4">
-				<button type="submit" class="btn btn-primary btn-lg">Acceder al Portal</button>
+
+			<!-- REMEMBER -->
+			<div class="form-check form-switch mb-4">
+				<input class="form-check-input" type="checkbox" id="rememberMe" name="remember">
+				<label class="form-check-label" for="rememberMe">
+					Recordar sesión
+				</label>
 			</div>
+
+			<!-- BUTTON -->
+			<div class="d-grid">
+				<button type="submit" class="btn btn-primary btn-lg">
+					<i class="bi bi-box-arrow-in-right me-2"></i>
+					Acceder al Portal
+				</button>
+			</div>
+
 		</form>
+
 	</div>
 </div>
 
 <div class="text-center mt-4 auth-footer">
-	¿No tienes una cuenta? <a href="#">Solicitar Acceso</a>
+	¿No tienes una cuenta? <a href="#">Solicitar acceso</a>
 </div>
 
-
 {{/layout-auth}}
+
+{{#*inline "js"}}
+<script src="js/demos/login.js"></script>
+{{/inline}}

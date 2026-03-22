@@ -14,6 +14,78 @@ import es from "./spanish.js";
  */
 
 const config = {
+
+	/* =====================================================
+		 ASSETS — rutas de recursos estáticos
+	===================================================== */
+
+	/**
+	 * Configuración de rutas de assets del proyecto.
+	 * Consumida por el helper Asset.js
+	 */
+	assets: {
+		/**
+		 * Ruta base de la carpeta de imágenes (relativa al HTML generado).
+		 * No incluir slash al final.
+		 * @type {string}
+		 */
+		basePath: "img",
+
+		/**
+		 * Logos del proyecto — generados en svg-out/ / logo-out/
+		 */
+		logos: {
+			/** Subcarpeta dentro de basePath */
+			path: "/logos",
+
+			/** Mapa de variantes → nombre de archivo */
+			variants: {
+				default: "logo-horizontal.svg",   // fallback universal
+				horizontal: "logo-horizontal.svg",   // navbar sobre fondo blanco
+				compact: "logo-compact.svg",      // breadcrumb / navbar pequeña
+				sidebar: "logo-sidebar.svg",      // sidebar expandido (texto blanco)
+				"sidebar-collapsed": "logo-sidebar-collapsed.svg", // sidebar colapsado (solo ícono)
+				login: "logo-login.svg",        // pantalla login fondo blanco
+				"login-dark": "logo-login-dark.svg",   // pantalla login fondo oscuro/azul
+				symbol: "logo-symbol.svg",       // ícono 80px azul (páginas internas)
+				"symbol-dark": "logo-symbol-dark.svg",  // ícono 80px charcoal
+				"symbol-on-dark": "logo-symbol-on-dark.svg", // ícono transparente sobre sidebar
+			}
+		},
+
+		/**
+		 * Avatares de usuarios
+		 */
+		avatars: {
+			path: "/avatars",
+			default: "avatar.jpg",
+		},
+
+		/**
+		 * Fotos de empleados
+		 */
+		employees: {
+			path: "/employees",
+			default: "default.png",
+		},
+
+		/**
+		 * Imágenes de fondo
+		 */
+		backgrounds: {
+			path: "/bg",
+		},
+
+		/**
+		 * Placeholders para imágenes faltantes o rotas
+		 */
+		placeholders: {
+			user: "user.png",
+			image: "image.png",
+			logo: "logo.png",
+		},
+	},
+
 	/* =====================================================
 		 MONEDAS
 	===================================================== */
@@ -501,7 +573,7 @@ const config = {
 	sidebar: {
 		sidebarSelector: "#sidebar",
 		toggleSelector: "[data-toggle='sidebar']",
-		simplebarSelector: "#sidebar-scroll",
+		simplebarSelector: ".js-simplebar",
 		collapseClass: "collapsed",
 	},
 
@@ -606,7 +678,42 @@ const config = {
 			title: "Exportar",
 			action: "export"
 		}
-	}
-};
+	},
+	 flatpickr: {
+    base: {
+      locale: "es",
+      allowInput: true,
+    },
+    types: {
+      date: {
+        dateFormat: "Y-m-d",
+      },
+      datetime: {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+      },
+      time: {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+      },
+      range: {
+        mode: "range",
+      },
+    },
+		modifiers: {
+      min: {
+        minDate: "today",
+      },
+      max: {
+        maxDate: "today",
+      },
+    },
+  }
+}
+
+
+
+
 
 export default config;

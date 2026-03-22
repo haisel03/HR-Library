@@ -1,0 +1,11 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+  <rect width="80" height="80" rx="20" fill="#2B2F36"/>
+  <path d="M24 45 V38 H40 V35" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M40 35 H56 V45" stroke="rgba(255,255,255,0.12)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="24" cy="48" r="3.5" fill="rgba(255,255,255,0.40)"/>
+  <circle cx="40" cy="32" r="3.5" fill="rgba(255,255,255,0.40)"/>
+  <circle cx="56" cy="48" r="3.5" fill="rgba(255,255,255,0.25)"/>
+  <text x="40" y="46" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="26" font-weight="900"
+        fill="white" letter-spacing="-1">HR</text>
+</svg>
