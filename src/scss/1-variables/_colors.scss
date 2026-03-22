@@ -163,6 +163,7 @@ $theme-colors: map.merge($theme-colors, $social-colors
 
 // Body
 $body-bg: #f8f9fa !default;
+$main-bg: $gray-400 !default;
 $body-color: $gray-800 !default;
 $body-bg-dark: #0b0e14 !default;
 $body-color-dark: $gray-100 !default;

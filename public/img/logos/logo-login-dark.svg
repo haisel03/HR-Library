@@ -1,0 +1,17 @@
+<svg viewBox="0 0 240 112" xmlns="http://www.w3.org/2000/svg">
+  <rect x="86" y="4" width="68" height="68" rx="17" fill="white" fill-opacity="0.12"/>
+  <circle cx="104" cy="56" r="2.8" fill="white" fill-opacity="0.5"/>
+  <circle cx="120" cy="40" r="2.8" fill="white" fill-opacity="0.5"/>
+  <circle cx="136" cy="56" r="2.8" fill="white" fill-opacity="0.3"/>
+  <path d="M104 53 V46 H120 V43" stroke="white" stroke-opacity="0.28" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M120 43 H136 V53" stroke="white" stroke-opacity="0.18" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="120" y="40" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="26" font-weight="900" fill="white" letter-spacing="-0.8">HR</text>
+  <text x="120" y="87" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="28" font-weight="700" fill="white" letter-spacing="-1">HR<tspan font-weight="300" fill="rgba(255,255,255,0.80)"> Library</tspan></text>
+  <text x="120" y="105" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="10" font-weight="400" fill="rgba(255,255,255,0.45)" letter-spacing="2.5">FRONTEND FRAMEWORK</text>
+</svg>

@@ -11,7 +11,7 @@ import str from "./Strings";
  */
 
 const instance = axios.create({
-	baseURL: config.api?.baseUrl ?? "",
+	baseURL: config.api?.baseURL ?? "",
 	timeout: config.api?.timeout ?? 15000,
 	headers: {
 		"X-Requested-With": "XMLHttpRequest",
@@ -124,8 +124,7 @@ const Api = {
 			}
 			return await response.json();
 		} catch (error) {
-			console.error("[Api.fetch] Error:", error);
-			return error;
+			throw error;
 		}
 	},
 
@@ -137,8 +136,14 @@ const Api = {
 		sl.innerHTML = '<option value="">Seleccione...</option>';
 		try {
 			const response = await Api.fetch(url, params);
-			const data = response?.data || response; // Handle both {data:[]} and []
-
+			const data = response?.data || response;
+			if (data.length === 0) {
+				sl.innerHTML = '<option value="">No hay datos</option>';
+				return;
+			}
+			if (data.length > 15) {
+				sl.classList.add("select2");
+			}
 			if (Array.isArray(data)) {
 				data.forEach(v => {
 					const option = document.createElement("option");
@@ -148,7 +153,7 @@ const Api = {
 				});
 			}
 		} catch (error) {
-			console.error("[Api.getSelect] Error:", error);
+			sl.innerHTML = '<option value="">Error al cargar datos</option>';
 		}
 	},
 };

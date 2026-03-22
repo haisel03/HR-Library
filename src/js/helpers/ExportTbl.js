@@ -1,4 +1,5 @@
 import $ from "jquery";
+import Alert from "./Alert";
 
 /**
  * @module ExportTbl
@@ -26,7 +27,7 @@ const ExportTbl = {
 	 */
 	excel: (el, filename = "tabla.xlsx") => {
 		if (!window.XLSX) {
-			console.error("XLSX no está disponible");
+			Alert.error("XLSX no está disponible — asegúrate de importar el módulo xlsx");
 			return;
 		}
 

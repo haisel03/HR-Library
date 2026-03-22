@@ -66,11 +66,11 @@ const Fullscreen = {
 				const icon = btn.querySelector("i");
 				if (icon) {
 					if (isFS) {
-						icon.classList.remove("fa-expand");
-						icon.classList.add("fa-compress");
+						icon.classList.remove("bi-fullscreen");
+						icon.classList.add("bi-fullscreen-exit");
 					} else {
-						icon.classList.remove("fa-compress");
-						icon.classList.add("fa-expand");
+						icon.classList.remove("bi-fullscreen-exit");
+						icon.classList.add("bi-fullscreen");
 					}
 				}
 			});

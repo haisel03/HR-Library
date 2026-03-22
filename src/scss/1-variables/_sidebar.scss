@@ -1,45 +1,77 @@
-$sidebar-width: 260px !default;
-$sidebar-transition: margin-left .35s ease-in-out,
-	left .35s ease-in-out,
-	margin-right .35s ease-in-out,
-	right .35s ease-in-out !default;
+// ============================================================================
+// 1-variables/_sidebar.scss
+// ============================================================================
 
-// Sidebar brand
-$sidebar-brand-padding-y: 1.15rem !default;
-$sidebar-brand-padding-x: 1.5rem !default;
-$sidebar-brand-font-weight: $font-weight-bold !default;
-$sidebar-brand-font-size: 1.15rem !default;
-$sidebar-brand-color: $gray-100 !default;
+$sidebar-width:            260px !default;
+$sidebar-collapsed-width:  68px  !default;
 
-// Sidebar header
-$sidebar-header-padding: 1.5rem 1.5rem 0.375rem !default;
-$sidebar-header-font-size: $font-size-sm !default;
-$sidebar-header-color: $gray-400 !default;
+$sidebar-transition:
+  margin-left  .3s ease-in-out,
+  left         .3s ease-in-out,
+  margin-right .3s ease-in-out,
+  right        .3s ease-in-out,
+  width        .3s ease-in-out !default;
 
-// Sidebar link
-$sidebar-link-padding: .625rem 1.625rem !default;
-$sidebar-link-font-weight: 400 !default;
-$sidebar-link-bg: $sidebar-bg !default;
-$sidebar-link-color: rgba($gray-200, 0.5) !default;
-$sidebar-link-border-left-color: transparent !default;
+// ── Brand ──────────────────────────────────────────────────────────────────
+$sidebar-brand-padding-y:    1rem   !default;
+$sidebar-brand-padding-x:    1.25rem !default;
+$sidebar-brand-font-weight:  $font-weight-bold !default;
+$sidebar-brand-font-size:    1.1rem !default;
+$sidebar-brand-color:        $gray-100 !default;
+$sidebar-brand-border-color: rgba($white, .06) !default;
 
-$sidebar-link-hover-font-weight: $font-weight-normal !default;
-$sidebar-link-hover-bg: $sidebar-bg !default;
-$sidebar-link-hover-color: $white !default;
+// ── Header ─────────────────────────────────────────────────────────────────
+$sidebar-header-padding:     1.25rem 1.5rem .3rem !default;
+$sidebar-header-font-size:   .7rem  !default;
+$sidebar-header-font-weight: 600    !default;
+$sidebar-header-color:       rgba($white, .3) !default;
+$sidebar-header-letter-spacing: .08em !default;
+
+// ── Link default ───────────────────────────────────────────────────────────
+$sidebar-link-padding:            .6rem 1.5rem !default;
+$sidebar-link-font-size:          .875rem !default;
+$sidebar-link-font-weight:        400 !default;
+$sidebar-link-color:              rgba($white, .55) !default;
+$sidebar-link-bg:                 transparent !default;
+$sidebar-link-border-left-width:  3px !default;
+$sidebar-link-border-left-color:  transparent !default;
+$sidebar-link-border-radius:      0 !default;
+$sidebar-link-gap:                .65rem !default;      // espacio ícono - texto
+
+// ── Link hover ─────────────────────────────────────────────────────────────
+$sidebar-link-hover-color:            $white !default;
+$sidebar-link-hover-bg:              rgba($white, .04) !default;
 $sidebar-link-hover-border-left-color: $red !default;
+$sidebar-link-icon-hover-color:       $white !default;
 
-$sidebar-link-active-font-weight: $font-weight-normal !default;
-$sidebar-link-active-bg: #{linear-gradient(90deg, rgba($primary,0.1) 0%, rgba($primary,0.0875) 50%, rgba($black, 0) 100%)} !default;
-$sidebar-link-active-color: $white !default;
+// ── Link active ────────────────────────────────────────────────────────────
+$sidebar-link-active-color:            $white !default;
+$sidebar-link-active-bg:              linear-gradient(
+  90deg,
+  rgba($primary, .15) 0%,
+  rgba($primary, .06) 60%,
+  rgba($primary, 0)   100%
+) !default;
 $sidebar-link-active-border-left-color: $red !default;
+$sidebar-link-icon-color:              rgba($white, .55) !default;
+$sidebar-link-icon-active-color:       $white !default;
 
-// Sidebar link icon
-$sidebar-link-icon-color: rgba($white, 0.6) !default;
-$sidebar-link-icon-hover-color: $white !default;
-$sidebar-link-icon-active-color: $white !default;
+// ── Dropdown child links ────────────────────────────────────────────────────
+$sidebar-dropdown-padding-left:  2.75rem !default;   // sangría bajo el ícono padre
+$sidebar-dropdown-link-color:    rgba($white, .45) !default;
+$sidebar-dropdown-link-hover-color: $white !default;
+$sidebar-dropdown-link-active-color: $white !default;
+$sidebar-dropdown-link-font-size:   .8125rem !default;
 
-// Sidebar bottom
-$sidebar-cta-color: $aqua !default;
-$sidebar-cta-padding: $spacer*1.5 !default;
-$sidebar-cta-margin: $spacer*1.75 !default;
-$sidebar-cta-border-radius: $border-radius-lg !default;
+// ── Badge ───────────────────────────────────────────────────────────────────
+$sidebar-badge-font-size: .6rem !default;
+
+// ── CTA block ───────────────────────────────────────────────────────────────
+$sidebar-cta-padding:        1.25rem !default;
+$sidebar-cta-margin:         1rem 1rem 1.25rem !default;
+$sidebar-cta-border-radius:  $border-radius-lg !default;
+$sidebar-cta-color:          rgba($white, .85) !default;
+$sidebar-cta-title-size:     .8125rem !default;
+$sidebar-cta-text-size:      .75rem !default;
+
+ 

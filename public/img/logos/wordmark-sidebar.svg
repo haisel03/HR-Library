@@ -1,0 +1,22 @@
+<svg width="200" height="48" viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ícono pequeño -->
+  <rect x="0" y="4" width="40" height="40" rx="10" fill="white" fill-opacity="0.15"/>
+  <path d="M8 30 H14 V20 H19" stroke="rgba(255,255,255,0.30)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M21 30 H27 V20" stroke="rgba(255,255,255,0.20)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="8" cy="30" r="1.8" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="19" cy="20" r="1.8" fill="rgba(255,255,255,0.55)"/>
+  <text x="20" y="27" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="15" font-weight="900"
+        fill="white" letter-spacing="-0.3">HR</text>
+  <!-- Texto -->
+  <text x="50" y="21" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="19" font-weight="700"
+        fill="white" letter-spacing="-0.5">HR</text>
+  <text x="70" y="21" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="19" font-weight="300"
+        fill="rgba(255,255,255,0.85)">Library</text>
+  <!-- Versión -->
+  <text x="50" y="36" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="10" font-weight="400"
+        fill="rgba(255,255,255,0.45)" letter-spacing="2">FRAMEWORK</text>
+</svg>

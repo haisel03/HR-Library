@@ -1,0 +1,6 @@
+<svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <rect x="4" y="4" width="40" height="40" rx="10" fill="white" fill-opacity="0.15"/>
+  <text x="24" y="27" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, sans-serif" font-size="16" font-weight="900"
+        fill="white" letter-spacing="-0.3">HR</text>
+</svg>

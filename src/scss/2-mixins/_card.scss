@@ -1,0 +1,4 @@
+@mixin card-bt($color, $border: darken($color, 8%)) {
+	border: none;
+	border-top: 3px solid $color;
+}

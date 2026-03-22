@@ -44,11 +44,17 @@ const Excel = {
 	/**
 	 * Convierte JSON a CSV
 	 */
+	/**
+	 * Convierte datos JSON a CSV y descarga el archivo.
+	 * @param {Object[]} data
+	 * @param {string} [filename="data.csv"]
+	 */
 	jsonToCsv: (data, filename = "data.csv") => {
 		const worksheet = XLSX.utils.json_to_sheet(data);
-		const workbook = XLSX.utils.book_new();
+		const workbook  = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-		XLSX.writeFile(workbook, { bookType: "csv", bookSST: false, type: "string" });
+		// BUG corregido: el segundo arg debe ser el filename (string), no un objeto de opciones
+		XLSX.writeFile(workbook, filename, { bookType: "csv" });
 	},
 
 	/**

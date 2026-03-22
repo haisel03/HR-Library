@@ -16,7 +16,6 @@ const initAccessControl = () => {
             elements.forEach(el => {
                 el.style.display = 'none';
             });
-            console.log(`[EduMatrix] Módulo desactivado: ${moduleName}`);
         }
     });
 };

@@ -1,6 +1,8 @@
 import Inputmask from "inputmask";
 import Validation from "./Validation";
+import flatpickr from "flatpickr";
 import Dom from "./Dom";
+import config from "../core/config";
 
 /**
  * @module Forms
@@ -10,7 +12,7 @@ import Dom from "./Dom";
  */
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   UTILIDADES INTERNAS
+	 UTILIDADES INTERNAS
 ───────────────────────────────────────────────────────────────────────────── */
 
 /**
@@ -67,8 +69,8 @@ const _setValid = (input) => {
 		next?.nextElementSibling?.classList.contains("invalid-feedback")
 			? next.nextElementSibling
 			: input.nextElementSibling?.classList.contains("invalid-feedback")
-			? input.nextElementSibling
-			: null;
+				? input.nextElementSibling
+				: null;
 	feedback?.remove();
 };
 
@@ -84,7 +86,7 @@ const _isSelectEmpty = (select) => {
 };
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   HELPER PRINCIPAL
+	 HELPER PRINCIPAL
 ───────────────────────────────────────────────────────────────────────────── */
 
 const Forms = {
@@ -124,6 +126,13 @@ const Forms = {
 		root.querySelectorAll("[data-mask]").forEach((el) => {
 			const mask = el.dataset.maskConfig ?? null;
 			if (mask && !el.inputmask) Inputmask(mask).mask(el);
+		});
+		root.querySelectorAll(".toggle-password").forEach((el) => {
+			const targetId = el.dataset.target || "#password";
+			const toggleId = el.dataset.toggle || el;
+			el.addEventListener("click", () => {
+				Forms.togglePassword(targetId, toggleId);
+			});
 		});
 	},
 
@@ -320,6 +329,33 @@ const Forms = {
 	 */
 	isMaskComplete: (selector) =>
 		document.querySelector(selector)?.inputmask?.isComplete() ?? false,
+
+	/**
+	 * Alterna la visibilidad de un campo password.
+	 * Acepta selectores, ids o elementos directamente.
+	 * Actualiza el ícono del botón toggle usando clases Bootstrap Icons.
+	 *
+	 * @param {string|HTMLElement} [passwordEl="#password"]    El input type=password
+	 * @param {string|HTMLElement} [toggleEl="#togglePassword"] El botón/ícono toggle
+	 *
+	 * @example
+	 * // Auto: busca #password y #togglePassword
+	 * $Forms.togglePassword();
+	 *
+	 * @example
+	 * // Custom: pasa los selectores
+	 * $Forms.togglePassword("#myPasswordInput", "#myToggleBtn");
+	 */
+	togglePassword: (passwordEl = "#password", toggleEl = "#togglePassword") => {
+		const input = Dom.el(passwordEl);
+		const btn = Dom.el(toggleEl);
+		if (!input || !btn) return;
+
+		const isHidden = input.type === "password";
+		input.type = isHidden ? "text" : "password";
+		btn.classList.toggle("bi-eye", !isHidden);
+		btn.classList.toggle("bi-eye-slash", isHidden);
+	}
 };
 
 export default Forms;

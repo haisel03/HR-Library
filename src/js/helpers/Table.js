@@ -1,6 +1,7 @@
 import $ from "jquery";
 import config from "../core/config";
 import Alert from "./Alert";
+import Icons from "./Icons";
 
 /**
  * @module Table
@@ -62,7 +63,7 @@ const Table = {
 			language: config.datatables.base.language,
 			...config.datatables.base,
 			drawCallback: function () {
-				if (window.feather) feather.replace();
+				Icons.init();
 			},
 			...options,
 		});

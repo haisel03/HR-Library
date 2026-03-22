@@ -1,7 +1,7 @@
-import config from "../core/config";
+import $Config from "../core/config";
 
 /**
- * @module Date
+ * @module DateHelper
  * @description Helper de fechas como capa de normalización.
  */
 
@@ -30,7 +30,7 @@ const DateHelper = {
 	/**
 	 * Formatea una fecha usando Intl.DateTimeFormat
 	 */
-	format: (value, type = "date", locale = config.formats.locale) => {
+	format: (value, type = "date", locale = $Config.formats.locale) => {
 		const d = DateHelper.create(value);
 		if (!d) return "";
 
@@ -100,6 +100,43 @@ const DateHelper = {
 		nowIndicator: true,
 		...overrides,
 	}),
+	 buildConfig(el) {
+  const { base = {}, types = {}, modifiers = {} } = $Config.flatpickr || {};
+
+  let cfg = { ...base };
+
+  // Tipos
+  Object.keys(types).forEach((key) => {
+    if (el.classList.contains(key)) {
+      cfg = { ...cfg, ...types[key] };
+    }
+  });
+
+  // Modificadores
+  Object.keys(modifiers).forEach((key) => {
+    if (el.classList.contains(key)) {
+      cfg = { ...cfg, ...modifiers[key] };
+    }
+  });
+
+  if (el.dataset.minDate) cfg.minDate = el.dataset.minDate;
+  if (el.dataset.maxDate) cfg.maxDate = el.dataset.maxDate;
+  if (el.dataset.dateFormat) cfg.dateFormat = el.dataset.dateFormat;
+  if (el.dataset.enableTime) cfg.enableTime = el.dataset.enableTime === "true";
+  return cfg;
+},
+
+	init(scope = document) {
+		// Inicializa flatpickr en todos los inputs con data-flatpickr
+    const root = scope instanceof HTMLElement ? scope : document;
+    root.querySelectorAll("input").forEach((el) => {
+      if (el._flatpickr) return;
+      const config = this.buildConfig(el);
+      if (Object.keys(config).length > 1) {
+        flatpickr(el, config);
+      }
+    });
+  },
 };
 
 export default DateHelper;

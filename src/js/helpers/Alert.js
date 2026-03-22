@@ -197,6 +197,8 @@ const toast = {
  */
 const Alert = {
 
+	alert: (text, type = "info", cb = null) => show(text, type, cb),
+
 	/* ---- Modales semánticos ---- */
 
 	/**

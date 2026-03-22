@@ -1,0 +1,24 @@
+<svg viewBox="0 0 240 112" xmlns="http://www.w3.org/2000/svg">
+  <!-- Ícono 68x68 centrado → x=(240-68)/2=86 -->
+  <rect x="86" y="4" width="68" height="68" rx="17" fill="#003876"/>
+  <rect x="96" y="14" width="48" height="48" rx="11" fill="white" fill-opacity="0.06"/>
+  <!-- Nodos -->
+  <circle cx="104" cy="56" r="2.8" fill="white" fill-opacity="0.45"/>
+  <circle cx="120" cy="40" r="2.8" fill="white" fill-opacity="0.45"/>
+  <circle cx="136" cy="56" r="2.8" fill="white" fill-opacity="0.28"/>
+  <!-- Circuito -->
+  <path d="M104 53 V46 H120 V43" stroke="white" stroke-opacity="0.22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M120 43 H136 V53" stroke="white" stroke-opacity="0.14" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- HR centrado en ícono: x=86+68/2=120 -->
+  <text x="120" y="40" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="26" font-weight="900" fill="white" letter-spacing="-0.8">HR</text>
+  <!-- Nombre centrado x=120, y=86 -->
+  <text x="120" y="87" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="28" font-weight="700" fill="#003876" letter-spacing="-1">HR<tspan font-weight="300" fill="#2B2F36"> Library</tspan></text>
+  <!-- Tagline -->
+  <text x="120" y="105" text-anchor="middle" dominant-baseline="middle"
+        font-family="Roboto, 'Helvetica Neue', sans-serif"
+        font-size="10" font-weight="400" fill="#708090" letter-spacing="2.5">FRONTEND FRAMEWORK</text>
+</svg>

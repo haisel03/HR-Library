@@ -9,7 +9,10 @@
     "prepublishOnly": "cross-env NODE_ENV=production webpack --progress --config webpack/webpack.prod.js",
     "docs": "jsdoc -c jsdoc.json",
     "lint": "eslint src/js --ext .js",
-    "lint:fix": "eslint src/js --ext .js --fix"
+    "lint:fix": "eslint src/js --ext .js --fix",
+		"api":       "json-server --watch db.json --port 3001 --routes routes.json --middlewares middleware.js",
+    "api:delay": "json-server --watch db.json --port 3001 --routes routes.json --middlewares middleware.js --delay 500",
+    "api:reset": "node reset.js"
   },
   "browserslist": [
     ">= 0.5%",
@@ -60,6 +63,7 @@
     "handlebars-loader": "^1.7.3",
     "html-webpack-plugin": "^5.6.3",
     "jsdoc": "^4.0.4",
+    "json-server": "^0.17.4",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss-loader": "^8.1.1",
     "postcss-preset-env": "^10.1.3",
