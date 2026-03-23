@@ -134,7 +134,7 @@ const FileHelper = {
    * @param {number}   [options.maxSize]
    * @param {string[]} [options.extensions]
    * @param {string[]} [options.mimes]
-   * @returns {{ valid: boolean, error?: string }}
+   * @returns {{ valid: boolean, error: string|null|undefined }}
    */
   validateFile(file, { maxSize, extensions, mimes } = {}) {
     if (!(file instanceof File))                          return { valid: false, error: "Archivo inválido." };
