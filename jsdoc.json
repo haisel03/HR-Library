@@ -1,54 +1,68 @@
 {
-  "source": {
-    "include": [
-      "src/js/HR.js",
-      "src/js/core",
-      "src/js/helpers"
-    ],
-    "includePattern": ".+\\.js$",
-    "excludePattern": "(node_modules|demos)"
-  },
-  "opts": {
-    "destination": "./docs",
-    "recurse": true,
-    "template": "./node_modules/docdash"
-  },
-  "plugins": [
-    "plugins/markdown"
-  ],
-  "templates": {
-    "cleverLinks": true,
-    "monospaceLinks": true,
-    "default": {
-      "outputSourceFiles": true
-    }
-  },
-  "docdash": {
-    "static": false,
-    "sort": true,
-    "sectionOrder": [
-      "Modules",
-      "Namespaces",
-      "Classes",
-      "Externals",
-      "Events",
-      "Interfaces",
-      "Mixins",
-      "Tutorials",
-      "Global"
-    ],
-    "search": true,
-    "collapse": true,
-    "typedefs": true,
-    "removeQuotes": "none",
-    "scripts": [],
-    "menu": {
-      "HR Library": {
-        "href": "https://github.com/haisel03/HR-Library",
-        "target": "_blank",
-        "class": "menu-item",
-        "id": "menu-repo"
-      }
-    }
-  }
+	"source": {
+		"include": [
+			"src/js"
+		],
+		"includePattern": ".+\\.js$",
+		"exclude": [
+			"node_modules",
+			"docs",
+			"demos",
+			"dist",
+			"build"
+		]
+	},
+	"opts": {
+		"destination": "./docs",
+		"recurse": true,
+		"readme": "./README.md",
+		"template": "./node_modules/docdash",
+		"encoding": "utf8"
+	},
+	"plugins": [
+		"plugins/markdown"
+	],
+	"templates": {
+		"cleverLinks": true,
+		"monospaceLinks": true,
+		"default": {
+			"outputSourceFiles": false,
+			"includeDate": false
+		}
+	},
+	"docdash": {
+		"static": false,
+		"sort": true,
+		"search": true,
+		"collapse": true,
+		"typedefs": true,
+		"removeQuotes": "none",
+		"sectionOrder": [
+			"Namespaces",
+			"Classes",
+			"Modules",
+			"Interfaces",
+			"Mixins",
+			"Events",
+			"Externals",
+			"Global"
+		],
+		"menu": {
+			"GitHub": {
+				"href": "https://github.com/haisel03/HR-Library",
+				"target": "_blank"
+			},
+			"NPM (future)": {
+				"href": "#",
+				"target": "_blank"
+			}
+		}
+	},
+	"tags": {
+		"allowUnknownTags": [
+			"category",
+			"group",
+			"internal"
+		]
+	}
 }
