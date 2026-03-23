@@ -1,137 +1,244 @@
+// ============================================================================
+// 3-components/_navbar.scss
+// Fusión: HR Library (estructura nav) + CoffeeSchools (topbar, search, profile)
+// ============================================================================
+
+/* ── Navbar principal ────────────────────────────────────────────────────── */
+
 .navbar {
+  background:    $navbar-bg;
   border-bottom: $navbar-border-bottom;
-  box-shadow: $navbar-box-shadow;
+  box-shadow:    $navbar-box-shadow;
+  padding:       $navbar-padding-y $navbar-padding-x;
 
-  @include media-breakpoint-down(md) {
-    width: 100vw;
-  }
+  @include media-breakpoint-down(md) { width: 100vw; }
 }
 
-.navbar .avatar {
-  margin-top: -15px;
-  margin-bottom: -15px;
-}
-
-.navbar-nav {
-  direction: ltr;
-}
-
-.navbar-align {
-  margin-left: auto;
-}
-
-.navbar-bg {
-  background: $navbar-bg;
-}
+.navbar .avatar { margin-top: -15px; margin-bottom: -15px; }
+.navbar-nav     { direction: ltr; }
+.navbar-align   { margin-left: auto; }
+.navbar-bg      { background: $navbar-bg; }
 
 .navbar-brand {
   font-weight: $navbar-brand-font-weight;
-  font-size: $navbar-brand-font-size;
-  padding: $navbar-brand-padding-y $navbar-brand-padding-x;
-  color: $navbar-brand-color;
-  display: block;
+  font-size:   $navbar-brand-font-size;
+  padding:     $navbar-brand-padding-y $navbar-brand-padding-x;
+  color:       $navbar-brand-color;
+  display:     block;
 
-  svg,
-  .feather {
-    color: $navbar-brand-icon-color;
-    height: 24px;
-    width: 24px;
-    margin-left: -0.15rem;
-    margin-right: 0.375rem;
-    margin-top: -0.375rem;
+  svg, .feather {
+    color:        $navbar-brand-icon-color;
+    height:       24px;
+    width:        24px;
+    margin-left:  -.15rem;
+    margin-right: .375rem;
+    margin-top:   -.375rem;
   }
 }
 
+/* ── Nav icons ───────────────────────────────────────────────────────────── */
+
 .nav-icon,
 .nav-flag {
-  padding: .1rem .8rem;
-  display: block;
-  font-size: 1.5rem;
-  color: $gray-600;
-  transition: $transition-appearance-fast;
+  padding:     .1rem .8rem;
+  display:     block;
+  font-size:   1.5rem;
+  color:       $gray-600;
+  transition:  $transition-appearance-fast;
   line-height: 1.4;
 
-  &:after {
-    display: none !important;
-  }
+  &:after { display: none !important; }
+  &:hover, &.active { color: $primary; }
 
-  &:hover,
-  &.active {
-    color: $primary;
-  }
-
-  svg,
-  .feather {
-    width: 20px;
-    height: 20px;
-  }
+  svg, .feather { width: 20px; height: 20px; }
 }
 
 .nav-item {
   .indicator {
-    background: $primary;
-    box-shadow: $box-shadow;
+    background:    $primary;
+    box-shadow:    $box-shadow;
     border-radius: 50%;
-    display: block;
-    height: 18px;
-    width: 18px;
-    padding: 1px;
-    position: absolute;
-    top: 0;
-    right: -8px;
-    text-align: center;
-    transition: top .1s ease-out;
-    font-size: 0.675rem;
-    color: $white;
+    display:       block;
+    height:        18px;
+    width:         18px;
+    padding:       1px;
+    position:      absolute;
+    top:           0;
+    right:         -8px;
+    text-align:    center;
+    transition:    top .1s ease-out;
+    font-size:     .675rem;
+    color:         $white;
   }
-
-  &:hover .indicator {
-    top: -4px;
-  }
-
-  a:focus {
-    outline: 0;
-  }
-}
-
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-  .navbar .avatar {
-    max-height: 47px;
-  }
-}
-
-@include media-breakpoint-down(sm) {
-  .navbar {
-    padding: 0.75rem;
-  }
-
-  .nav-icon {
-    padding: .1rem .75rem;
-  }
-
-  .dropdown,
-  .dropleft,
-  .dropright,
-  .dropup {
-    position: inherit;
-  }
-
-  .navbar-expand .navbar-nav .dropdown-menu-lg {
-    min-width: 100%;
-  }
-
-  .nav-item .nav-link:after {
-    display: none;
-  }
+  &:hover .indicator { top: -4px; }
+  a:focus { outline: 0; }
 }
 
 .nav-flag img {
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  object-fit: cover;
+  width:         20px;
+  height:        20px;
+  object-fit:    cover;
 }
 
-.navbar input {
-  direction: ltr;
+/* ── Topbar buttons / toggle ─────────────────────────────────────────────── */
+
+.topbar-toggle,
+.topbar-btn {
+  background:  none;
+  border:      none;
+  width:       38px;
+  height:      38px;
+  border-radius: $border-radius-sm;
+  display:     flex;
+  align-items: center;
+  justify-content: center;
+  color:       $secondary;
+  font-size:   1.15rem;
+  position:    relative;
+  transition:  background .15s, color .15s;
+  flex-shrink: 0;
+  &:hover { background: rgba($primary, .08); color: $dark; }
+}
+
+.topbar-btn__badge {
+  position:      absolute;
+  top:           5px;
+  right:         5px;
+  background:    $danger;
+  color:         $white;
+  font-size:     .58rem;
+  font-weight:   700;
+  line-height:   1;
+  width:         15px;
+  height:        15px;
+  border-radius: 50%;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  border:        2px solid $navbar-bg;
+}
+
+/* ── Topbar search ───────────────────────────────────────────────────────── */
+
+.topbar-search {
+  display:      flex;
+  align-items:  center;
+  gap:          .5rem;
+  background:   $navbar-input-bg;
+  border:       1px solid rgba($primary, .15);
+  border-radius: $border-radius;
+  padding:      .38rem .85rem;
+  color:        $secondary;
+  transition:   border-color .15s, box-shadow .15s;
+
+  &:focus-within {
+    border-color: $primary;
+    box-shadow:   0 0 0 3px rgba($primary, .1);
+  }
+
+  i { font-size: .9rem; }
+
+  input {
+    background:  none;
+    border:      none;
+    outline:     none;
+    font-size:   .85rem;
+    color:       $dark;
+    width:       185px;
+    &::placeholder { color: rgba($secondary, .45); }
+  }
+}
+
+/* ── Topbar profile ──────────────────────────────────────────────────────── */
+
+.topbar-profile {
+  background:  none;
+  border:      none;
+  display:     flex;
+  align-items: center;
+  gap:         .5rem;
+  padding:     .25rem .6rem;
+  border-radius: $border-radius-sm;
+  color:       $dark;
+  font-size:   .875rem;
+  font-weight: 700;
+  transition:  background .15s;
+  cursor:      pointer;
+  &:hover { background: rgba($primary, .08); }
+
+  .profile-avatar {
+    width:         33px;
+    height:        33px;
+    border-radius: 50%;
+    background:    rgba($primary, .12);
+    border:        2px solid rgba($primary, .3);
+    color:         $secondary;
+    font-size:     .7rem;
+    font-weight:   700;
+    display:       flex;
+    align-items:   center;
+    justify-content: center;
+  }
+}
+
+/* ── Notifications dropdown ──────────────────────────────────────────────── */
+
+.notification-dropdown { width: 330px; border: 1px solid $card-border-color !important; }
+
+.dropdown-header {
+  display:       flex;
+  align-items:   center;
+  justify-content: space-between;
+  padding:       .9rem 1.1rem;
+  border-bottom: 1px solid $card-border-color;
+  font-size:     .9rem;
+  font-weight:   700;
+  color:         $dark;
+}
+
+.notification-list { max-height: 320px; overflow-y: auto; }
+
+.notification-item {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           .75rem;
+  padding:       .8rem 1.1rem;
+  text-decoration: none;
+  color:         inherit;
+  border-bottom: 1px solid rgba($card-border-color, .4);
+  transition:    background .15s;
+  &:hover       { background: rgba($primary, .04); }
+  &:last-child  { border-bottom: none; }
+}
+
+.notification-icon {
+  width:         38px;
+  height:        38px;
+  border-radius: $border-radius-sm;
+  flex-shrink:   0;
+  display:       flex;
+  align-items:   center;
+  justify-content: center;
+  font-size:     1rem;
+}
+
+.notification-body p { font-size: .84rem; color: $body-color; margin: 0; }
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+
+@include media-breakpoint-down(sm) {
+  .navbar { padding: .75rem; }
+  .nav-icon { padding: .1rem .75rem; }
+
+  .dropdown, .dropleft, .dropright, .dropup { position: inherit; }
+
+  .navbar-expand .navbar-nav .dropdown-menu-lg { min-width: 100%; }
+  .nav-item .nav-link:after { display: none; }
+}
+
+.navbar input { direction: ltr; }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .navbar .avatar { max-height: 47px; }
 }

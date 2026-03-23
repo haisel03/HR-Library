@@ -7,7 +7,7 @@
 .simplebar-content {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100%;
   padding-bottom: 0 !important;
 }
 
@@ -15,5 +15,5 @@
   position: sticky;
   top: 0;
   left: 0;
-  width: $sidebar-width;
+  width: 100%;
 }

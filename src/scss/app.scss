@@ -1,24 +1,50 @@
+// ============================================================================
+// app.scss — HR Library v3 · Entry point
+//
+// TEMA ACTIVO: Café Claro (por defecto)
+// Para cambiar al tema oscuro, usar app-cafe-oscuro.scss como entry point,
+// o reemplazar el @import de tema abajo.
+//
+// ORDEN OBLIGATORIO:
+//   1. Bootstrap functions (sin variables aún)
+//   2. Tema (sobreescribe las variables !default)
+//   3. Variables HR (las que el tema no sobreescribió quedan con su default)
+//   4. Bootstrap completo
+//   5. Mixins
+//   6. Componentes
+//   7. Utilidades
+//   8. Vendors
+// ============================================================================
+
+// ── 1. Bootstrap functions (necesarias para lighten(), darken(), etc.) ────────
 @import "bootstrap/scss/functions";
 
-// Variables
+// ── 2. Tema activo ────────────────────────────────────────────────────────────
+//    Descomenta UNO de los dos:
+@import "6-themes/cafe-claro";
+// @import "6-themes/cafe-oscuro";
+
+// ── 3. Variables HR ───────────────────────────────────────────────────────────
 @import "1-variables/app";
 
-// Bootstrap
+// ── 4. Bootstrap completo ─────────────────────────────────────────────────────
 @import "1-variables/bootstrap";
 
 $bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
 @import "bootstrap-icons/font/bootstrap-icons";
 
-// Theme mixins
+// ── 5. Mixins ─────────────────────────────────────────────────────────────────
 @import "2-mixins/button";
 @import "2-mixins/table";
 @import "2-mixins/card";
 
-// Theme components
+// ── 6. Componentes ────────────────────────────────────────────────────────────
 @import "3-components/index";
 
-// Theme utilities
+// ── 7. Utilidades ─────────────────────────────────────────────────────────────
 @import "4-utilities/cursors";
+@import "4-utilities/dark-mode";
+@import "4-utilities/sweetalert";
 
-// Vendors
+// ── 8. Vendors ────────────────────────────────────────────────────────────────
 @import "5-vendor/vendors";

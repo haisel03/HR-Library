@@ -1,30 +1,35 @@
+/**
+ * @file login.js
+ * CAMBIOS v3:
+ * - $HR.isValidForm      → $Forms.isValidForm
+ * - $HR.msgLoading()     → $Alert.loading()
+ * - $HR.msgLoading(true) → $Alert.loading(false)
+ * - $HR.msgSuccess       → $Alert.success
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
-	// Interacción con HR
-	$('#loginForm').on('submit', function (e) {
+	$("#loginForm").on("submit", function (e) {
 		e.preventDefault();
 
-		if ($HR.isValidForm(this)) {
-			$HR.msgLoading();
-			// Simulación de login
+		if ($Forms.isValidForm(this)) {
+			$Alert.loading();
 			setTimeout(() => {
-				$HR.msgLoading(true);
-				$HR.msgSuccess('¡Bienvenido de nuevo!');
+				$Alert.loading(false);
+				$Alert.success("¡Bienvenido de nuevo!");
 				// window.location.href = 'index.html';
 			}, 1500);
 		}
 	});
 
-	$('#lockForm').on('submit', function (e) {
+	$("#lockForm").on("submit", function (e) {
 		e.preventDefault();
-		if ($HR.isValidForm(this)) {
-			$HR.msgLoading();
-			// Simulación de login
+		if ($Forms.isValidForm(this)) {
+			$Alert.loading();
 			setTimeout(() => {
-				$HR.msgLoading(true);
-				$HR.msgSuccess('¡Bienvenido de nuevo!');
-				window.location.href = 'index.html';
+				$Alert.loading(false);
+				$Alert.success("¡Bienvenido de nuevo!");
+				window.location.href = "index.html";
 			}, 1500);
 		}
 	});
-
 });

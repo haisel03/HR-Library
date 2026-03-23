@@ -1,34 +1,18 @@
 <nav id="sidebar" class="sidebar js-sidebar">
-	<div class="sidebar-content js-simplebar" data-simplebar-auto-hide="false">
+	<div class="sidebar-content js-simplebar" data-simplebar-auto-hide="true">
 
-		{{!-- ── Brand ─────────────────────────────────────────────────────────── --}}
 		<a class="sidebar-brand" href="index.html">
-			{{!-- Logo expandido (visible cuando el sidebar está abierto) --}}
-			<img src="img/logos/logo-sidebar.svg"
-				 alt="HR Library"
-				 class="sidebar-brand-full"
-				 width="160"
-				 height="44">
-			{{!-- Ícono solo (visible cuando el sidebar está colapsado) --}}
-			<img src="img/logos/logo-sidebar-collapsed.svg"
-				 alt="HR"
-				 class="sidebar-brand-icon"
-				 width="36"
-				 height="36">
+			<img src="img/logos/logo-sidebar.svg" alt="HR Library" class="sidebar-brand-full" width="160" height="44">
+			<img src="img/logos/logo-sidebar-collapsed.svg" alt="HR" class="sidebar-brand-icon" width="36" height="36">
 		</a>
-
-		{{!-- ── Nav ───────────────────────────────────────────────────────────── --}}
 		<ul class="sidebar-nav">
 
 			{{!-- DASHBOARDS --}}
 			<li class="sidebar-header">Dashboards</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link collapsed"
-				   data-bs-target="#dashboards"
-				   data-bs-toggle="collapse"
-				   aria-expanded="false"
-				   aria-controls="dashboards">
+				<a class="sidebar-link collapsed" data-bs-target="#dashboards" data-bs-toggle="collapse" aria-expanded="false"
+					aria-controls="dashboards">
 					<i class="bi bi-speedometer2"></i>
 					<span>Paneles</span>
 					<i class="bi bi-chevron-right icon-right"></i>
@@ -47,11 +31,8 @@
 			<li class="sidebar-header">Gestión Académica</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link collapsed"
-				   data-bs-target="#academic"
-				   data-bs-toggle="collapse"
-				   aria-expanded="false"
-				   aria-controls="academic">
+				<a class="sidebar-link collapsed" data-bs-target="#academic" data-bs-toggle="collapse" aria-expanded="false"
+					aria-controls="academic">
 					<i class="bi bi-journal-check"></i>
 					<span>Academia</span>
 					<i class="bi bi-chevron-right icon-right"></i>
@@ -68,11 +49,8 @@
 			<li class="sidebar-header">Administración</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link collapsed"
-				   data-bs-target="#admin"
-				   data-bs-toggle="collapse"
-				   aria-expanded="false"
-				   aria-controls="admin">
+				<a class="sidebar-link collapsed" data-bs-target="#admin" data-bs-toggle="collapse" aria-expanded="false"
+					aria-controls="admin">
 					<i class="bi bi-briefcase"></i>
 					<span>Gestión</span>
 					<i class="bi bi-chevron-right icon-right"></i>
@@ -89,11 +67,8 @@
 			<li class="sidebar-header">Finanzas</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link collapsed"
-				   data-bs-target="#finance"
-				   data-bs-toggle="collapse"
-				   aria-expanded="false"
-				   aria-controls="finance">
+				<a class="sidebar-link collapsed" data-bs-target="#finance" data-bs-toggle="collapse" aria-expanded="false"
+					aria-controls="finance">
 					<i class="bi bi-credit-card"></i>
 					<span>Contabilidad</span>
 					<i class="bi bi-chevron-right icon-right"></i>
@@ -104,22 +79,6 @@
 					<li class="sidebar-item"><a class="sidebar-link" href="invoice.html">Facturas</a></li>
 					<li class="sidebar-item"><a class="sidebar-link" href="pricing.html">Planes</a></li>
 				</ul>
-			</li>
-
-			{{!-- PORTAL --}}
-			<li class="sidebar-header">Portal del Usuario</li>
-
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="portal-grades.html">
-					<i class="bi bi-mortarboard"></i>
-					<span>Calificaciones</span>
-				</a>
-			</li>
-			<li class="sidebar-item">
-				<a class="sidebar-link" href="portal-login.html">
-					<i class="bi bi-box-arrow-in-right"></i>
-					<span>Login Portal</span>
-				</a>
 			</li>
 
 			{{!-- EXTRAS & HERRAMIENTAS --}}
@@ -167,11 +126,8 @@
 			<li class="sidebar-header">Componentes UI</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link collapsed"
-				   data-bs-target="#ui"
-				   data-bs-toggle="collapse"
-				   aria-expanded="false"
-				   aria-controls="ui">
+				<a class="sidebar-link collapsed" data-bs-target="#ui" data-bs-toggle="collapse" aria-expanded="false"
+					aria-controls="ui">
 					<i class="bi bi-palette"></i>
 					<span>UI Kit</span>
 					<i class="bi bi-chevron-right icon-right"></i>
@@ -193,11 +149,8 @@
 			<li class="sidebar-header">Seguridad</li>
 
 			<li class="sidebar-item">
-				<a class="sidebar-link collapsed"
-				   data-bs-target="#auth"
-				   data-bs-toggle="collapse"
-				   aria-expanded="false"
-				   aria-controls="auth">
+				<a class="sidebar-link collapsed" data-bs-target="#auth" data-bs-toggle="collapse" aria-expanded="false"
+					aria-controls="auth">
 					<i class="bi bi-shield-lock"></i>
 					<span>Autenticación</span>
 					<i class="bi bi-chevron-right icon-right"></i>
@@ -219,17 +172,5 @@
 			</li>
 
 		</ul>
-
-		{{!-- ── CTA / Footer del sidebar ─────────────────────────────────────── --}}
-		<div class="sidebar-cta">
-			<div class="sidebar-cta-content">
-				<p class="sidebar-cta-title">HR Library</p>
-				<p class="sidebar-cta-text">v2.0 — Documentación y componentes</p>
-				<a href="ui-kit.html" class="btn btn-sm btn-outline-light w-100 mt-2">
-					<i class="bi bi-book me-1"></i> Ver Docs
-				</a>
-			</div>
-		</div>
-
 	</div>
 </nav>

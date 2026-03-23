@@ -1,5 +1,5 @@
 import feather from "feather-icons";
-import config from "../core/config";
+import config from "../core/config.js";
 
 /**
  * @module Icons

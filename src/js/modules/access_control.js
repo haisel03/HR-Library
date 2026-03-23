@@ -1,5 +1,5 @@
 import $ from "jquery";
-import config from "../core/config";
+import config from "../core/config.js";
 
 const initAccessControl = () => {
     const modules = config.modules;

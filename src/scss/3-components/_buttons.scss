@@ -1,8 +1,21 @@
-.btn .feather {
-  width: 14px;
-  height: 14px;
+// ============================================================================
+// 3-components/_buttons.scss
+// Fusión: HR Library (mixin loop) + CoffeeSchools (transiciones, sombras)
+// ============================================================================
+
+.btn {
+  font-weight:     $btn-font-weight;
+  border-radius:   $btn-border-radius;
+  letter-spacing:  .02em;
+  transition:      all .18s cubic-bezier(.4, 0, .2, 1);
+
+  .feather {
+    width:  14px;
+    height: 14px;
+  }
 }
 
+// Botones de todos los colores del tema
 @each $color, $value in $theme-colors {
   .btn-#{$color} {
     @include button-color($white);
@@ -10,6 +23,7 @@
   }
 }
 
+// Redes sociales
 @each $color, $value in $social-colors {
   .btn-#{$color} {
     @include button-variant($value, $value);
@@ -18,8 +32,21 @@
   }
 }
 
+// Light y white con texto oscuro
 .btn-light,
 .btn-white {
   @include button-color($gray-800);
   @include button-color-hover($gray-800);
 }
+
+// Elevación en hover para botones primarios
+.btn-primary {
+  box-shadow: 0 2px 8px rgba($primary, .3);
+  &:hover {
+    box-shadow: 0 4px 14px rgba($primary, .4);
+    transform:  translateY(-1px);
+  }
+  &:active { transform: translateY(0); }
+}
+
+.btn-sm { font-size: .8rem; }

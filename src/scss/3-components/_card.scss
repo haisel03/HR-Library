@@ -1,72 +1,115 @@
-.card {
-  margin-bottom: $grid-gutter-width;
-  box-shadow: $card-shadow;
-  border-radius: $card-border-radius;
-  border: 1px solid $card-border-color;
-  transition: all .3s ease;
+// ============================================================================
+// 3-components/_card.scss
+// Fusión: HR Library (base, variantes BT) + CoffeeSchools (hover, accent, header)
+// ============================================================================
 
-  &:hover {
-    box-shadow: 0 8px 24px rgba($black, 0.08);
-    transform: translateY(-2px);
-  }
+.card {
+	margin-bottom: $grid-gutter-width;
+	background: $card-bg;
+	border: $card-border-width solid $card-border-color;
+	border-radius: $card-border-radius;
+	box-shadow: $card-shadow;
+	overflow: hidden;
+	transition: box-shadow .2s, transform .2s;
+	position: relative;
+
+	// Línea superior decorativa (aparece en hover)
+	&::before {
+		content: '';
+		display: block;
+		height: 3px;
+		background: linear-gradient(90deg, $primary, $secondary, $primary);
+		opacity: 0;
+		transition: opacity .2s;
+	}
+
+	&:hover {
+		box-shadow: 0 8px 24px rgba($dark, .08);
+		transform: translateY(-2px);
+
+		&::before {
+			opacity: 1;
+		}
+	}
 }
 
 .card-header {
-  border-bottom: 1px solid $card-border-color;
-  background-color: transparent;
-  padding: $card-cap-padding-y $card-cap-padding-x;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	border-bottom: 1px solid $card-border-color;
+	background-color: rgba($primary, .03);
+	padding: $card-cap-padding-y $card-cap-padding-x;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 1rem;
 }
 
 .card-footer {
-  padding-top: $card-cap-padding-y;
-  padding-bottom: $card-cap-padding-y;
-  padding-left: $card-cap-padding-x;
-  padding-right: $card-cap-padding-x;
+	background-color: rgba($primary, .02);
+	border-top: 1px solid $card-border-color;
+	padding-top: $card-cap-padding-y;
+	padding-bottom: $card-cap-padding-y;
+	padding-left: $card-cap-padding-x;
+	padding-right: $card-cap-padding-x;
 }
 
 .card-title {
-  font-size: $card-title-font-size;
-  font-weight: $card-title-font-weight;
-  color: $card-title-color;
+	font-size: $card-title-font-size;
+	font-weight: $card-title-font-weight;
+	color: $card-title-color;
+	margin: 0;
+	font-family: $ff-condensed;
+
+	i {
+		font-size: 1.5rem;
+		color: $dark;
+		margin-right: .5rem;
+	}
 }
 
 .card-subtitle {
-  font-weight: $font-weight-normal;
+	font-weight: $font-weight-normal;
 }
 
+// Variante card destacada
+.card--accent {
+	border-color: rgba($primary, .4);
+
+	&::before {
+		opacity: 1;
+	}
+}
+
+// Card header actions helper
+.card-header-actions {
+	display: flex;
+	align-items: center;
+	gap: .5rem;
+}
+
+// Variantes BT (border-top coloreado)
 @each $name, $color in $theme-colors {
 	.card-bt-#{$name} {
 		@include card-bt($color);
 	}
 }
 
-
-
-
+// Imágenes
 .card-img,
 .card-img-top,
 .card-img-bottom {
-  @include img-fluid;
-
-  @media all and (-ms-high-contrast:none) {
-    height: 100%;
-  }
+	@include img-fluid;
 }
-
-
 
 .card>.table>tbody {
 
-  tr:last-child td:first-child,
-  tr:last-child th:first-child {
-    border-bottom-left-radius: $card-border-radius;
-  }
+	tr:last-child td:first-child,
+	tr:last-child th:first-child {
+		border-bottom-left-radius: $card-border-radius;
+	}
 
-  tr:last-child td:last-child,
-  tr:last-child th:last-child {
-    border-bottom-right-radius: $card-border-radius;
-  }
+	tr:last-child td:last-child,
+	tr:last-child th:last-child {
+		border-bottom-right-radius: $card-border-radius;
+	}
 }

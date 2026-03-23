@@ -1,0 +1,103 @@
+// ============================================================================
+// 3-components/_stat-card.scss
+//
+// Stat cards de CoffeeSchools integradas en HR Library.
+// Complementan al componente .stat (círculo) ya existente.
+// ============================================================================
+
+// ── Stat card (versión tarjeta completa) ─────────────────────────────────────
+
+.stat-card {
+  background:    $card-bg;
+  border:        1px solid $card-border-color;
+  border-radius: $card-border-radius;
+  padding:       1.35rem;
+  display:       flex;
+  align-items:   center;
+  gap:           1.1rem;
+  box-shadow:    $card-shadow;
+  transition:    transform .2s, box-shadow .2s;
+  position:      relative;
+  overflow:      hidden;
+
+  // Ornamento decorativo esquina
+  &::after {
+    content:       '';
+    position:      absolute;
+    right:         -12px;
+    bottom:        -12px;
+    width:         70px;
+    height:        70px;
+    border-radius: 50%;
+    background:    rgba($primary, .06);
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform:  translateY(-3px);
+    box-shadow: 0 8px 24px rgba($dark, .09);
+  }
+
+  &__icon {
+    width:         54px;
+    height:        54px;
+    border-radius: $border-radius-lg;
+    flex-shrink:   0;
+    display:       flex;
+    align-items:   center;
+    justify-content: center;
+    font-size:     1.5rem;
+    border:        1px solid rgba($primary, .15);
+  }
+
+  &__label {
+    display:        block;
+    font-size:      .75rem;
+    color:          $secondary;
+    font-weight:    700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom:  .15rem;
+  }
+
+  &__value {
+    display:     block;
+    font-size:   1.7rem;
+    font-weight: 700;
+    color:       $dark;
+    line-height: 1.1;
+  }
+
+  &__change {
+    font-size:   .78rem;
+    display:     block;
+    margin-top:  .2rem;
+    font-weight: 700;
+  }
+
+  // Variantes de color
+  &--primary .stat-card__icon { background: rgba($primary,  .1); color: $primary;  }
+  &--success .stat-card__icon { background: rgba($success,  .1); color: $success;  }
+  &--warning .stat-card__icon { background: rgba($warning,  .1); color: $warning;  }
+  &--danger  .stat-card__icon { background: rgba($danger,   .1); color: $danger;   }
+  &--info    .stat-card__icon { background: rgba($info,     .1); color: $info;     }
+}
+
+// ── Stat simple (círculo — versión original HR) ───────────────────────────────
+
+.stat {
+  background:    $stat-bg;
+  border-radius: 50%;
+  width:         40px;
+  height:        40px;
+  align-items:   center;
+  justify-content: center;
+  display:       flex;
+
+  svg {
+    width:        18px;
+    height:       18px;
+    color:        $stat-icon-color !important;
+    stroke-width: 1.5;
+  }
+}

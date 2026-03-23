@@ -1,88 +1,81 @@
 /**
  * @file crud-ultimate.js
  * @description Demo avanzada que integra casi todos los helpers del framework.
+ *
+ * CAMBIOS v3:
+ * - Table.col(data, title, options)  — render va en options.render, NO como 3er arg directo
+ * - $Currency.format(val, "P")       — código "P"/"U"/"E", NO "DOP"
+ * - $Table.exportButtons([...])      — reemplaza $Table.buttons("icons") que no existe
+ * - flatpickr("#el", $Date.flatpickr(...)) — $Date.flatpickr() devuelve opciones, no inicializa
+ * - $Signature.toDataURL("#el")      — era signaturePad.isEmpty() (instancia directa)
+ * - $Forms.serialize / $Forms.clear  — reemplaza serializeForm / clearForm (aliases existen)
+ * - $Modal.open("#id") / $Modal.close("#id") — con # selector
+ * - $Alert.confirmDelete(cb)         — en lugar de $Alert.confirm manual para delete
  */
 
 $(async function () {
-	/* =====================================================
-		 CONFIG & ESTADO
-	===================================================== */
-	const API_MOCK = "https://jsonplaceholder.typicode.com/users"; // Usamos users como base mock
+	const API_MOCK = "https://jsonplaceholder.typicode.com/users";
 	let dt = null;
-	let signaturePad = null;
-	let quillEditor = null;
 	let currentDraft = null;
 
-	/* =====================================================
-		 INICIALIZACIÓN DE COMPONENTES
-	===================================================== */
+	/* ── INIT ── */
 
 	const initPage = async () => {
 		try {
-			// 1. Mostrar Loading Global via $Alert
 			$Alert.loading();
 
-			// 2. Cargar Datos via $Api
 			const data = await $Api.get(API_MOCK);
 
-			// 3. Inicializar Tabla via $Table
-			dt = $Table.initTable("#employeeTable", {
-				data: data,
+			// col(data, title, { render }) — render dentro de options
+			const $tbl = $Dom.el("#employeeTable");
+			dt = $Table.initTable($tbl, {
+				ordering: false,
+				language: $HR.lang.datatables,
+				data,
 				columns: [
 					$Table.col("id", "#"),
-					$Table.col("name", "Empleado", (v, r) => {
-						return `
-                            <div class="d-flex align-items-center">
-                                ${$Icons.bi("person-circle", { class: "fs-4 text-primary me-2" }).outerHTML}
-                                <div>
-                                    <div class="fw-bold">${v}</div>
-                                    <div class="small text-muted">${r.email}</div>
-                                </div>
-                            </div>
-                        `;
+					$Table.col("name", "Empleado", {
+						render: (v, type, r) => `
+							<div class="d-flex align-items-center">
+								${$Icons.bi("person-circle", { class: "fs-4 text-primary me-2" }).outerHTML}
+								<div>
+									<div class="fw-bold">${v}</div>
+									<div class="small text-muted">${r.email}</div>
+								</div>
+							</div>`,
 					}),
-					$Table.col("company.name", "Depto", (v) => {
-						return `<span class="badge bg-light text-dark border">${v || "General"}</span>`;
+					$Table.col("company.name", "Depto", {
+						render: (v) => `<span class="badge bg-light text-dark border">${v || "General"}</span>`,
 					}),
-					$Table.col("phone", "Contacto"),
-					$Table.col("website", "Salario (Sim)", (v) => {
-						// Usar $Currency y $Number
-						const val = (v.length || 1) * 1000;
-						return $Currency.format(val, "DOP");
+					$Table.col("phone", "Contacto", {
+						icon: "bi bi-telephone-fill",
+						classIcon: "text-white",
 					}),
-					$Table.actions(["edit", "delete"]),
+					$Table.col("website", "Salario (Sim)", {
+						render: (v) => $Currency.format((v?.length || 1) * 1000, "P"),
+					}),
+					$Table.actions(["view", "edit", "delete", "print"]),
 				],
-				buttons: $Table.buttons("icons"),
+				// exportButtons() — buttons("icons") no existe en la librería
+				buttons: $Table.exportButtons(["excel", "pdf", "print"]),
 			});
 
-			// 4. Inicializar Select2 via $Select2
 			$Select2.init(document, { placeholder: "Seleccionar Rol..." });
 
-			// 5. Inicializar Fechas via $Date
-			const joinDate = $Date.flatpickr("#empJoinDate", {
-				defaultDate: "today",
-				altInput: true,
-			});
+			// $Date.flatpickr() devuelve opciones — se pasan al llamado nativo de flatpickr
+			flatpickr("#empJoinDate", $Date.flatpickr({ type: "date", defaultDate: "today", altInput: true }));
 
-			// 6. Inicializar Editor via $Editor
-			quillEditor = $Editor.create("#empNotes", {
-				placeholder: "Ingrese notas sobre el desempeño...",
-			});
+			$Editor.create("#empNotes", { placeholder: "Ingrese notas sobre el desempeño..." });
+			$Signature.create("#empSignature");
 
-			// 7. Inicializar Firma via $Signature
-			signaturePad = $Signature.create("#empSignature");
-
-			// 8. Pantalla Completa via $Fullscreen
 			$Dom.on("#btnFullscreen", "click", () => $Fullscreen.toggle());
 
-			// 9. Verificar Drafts en LocalStorage via $Storage
 			const draft = $Storage.get("employee_draft");
 			if (draft) {
 				$Alert.toast.info("Tienes un borrador guardado");
 				currentDraft = draft;
 			}
 
-			// Cerrar Loading
 			$Alert.close();
 		} catch (error) {
 			$Alert.close();
@@ -92,55 +85,47 @@ $(async function () {
 
 	await initPage();
 
-	/* =====================================================
-		 ACCIONES DE TABLA
-	===================================================== */
+	/* ── ACCIONES TABLA ── */
 
 	$Table.onAction("#employeeTable", async ({ action, row, button }) => {
 		if (action === "edit") {
 			resetForm();
 			$Dom.text("#employeeModalTitle", `Editar Registro: ${row.name}`);
-
-			// Mapear datos a Form
-			$Dom.val("#empId", row.id);
-			$Dom.val("#empName", row.name);
+			$Dom.val("#empId",    row.id);
+			$Dom.val("#empName",  row.name);
 			$Dom.val("#empEmail", row.email);
 			$Dom.val("#empPhone", row.phone);
-
-			// Simulamos datos extras
 			$Select2.setValue("#empRole", "IT");
 			$Dom.val("#empSalary", (row.username?.length || 5) * 5000);
 			updateSalaryPreview();
-
-			$Modal.open("employeeModal");
+			$Modal.open("#employeeModal");
 		}
 
+		// "delete" ya tiene confirmación automática via config.dt_actions.delete.confirm
+		// Si se quiere lógica post-confirmación adicional, usar onAction con acción distinta
 		if (action === "delete") {
-			$Alert.confirm("¿Eliminar registro?", `¿Estás seguro de eliminar a ${row.name}?`, async () => {
-				$Alert.loading();
+			$Alert.loading();
+			try {
 				await $Api.delete(`${API_MOCK}/${row.id}`);
 				$Table.removeRow("#employeeTable", button);
-				$Alert.close();
 				$Alert.toast.success("Eliminado correctamente");
-			});
+			} catch {
+				$Alert.error("No se pudo eliminar.");
+			} finally {
+				$Alert.close();
+			}
 		}
 	});
 
-	/* =====================================================
-		 ACCIONES DE FORMULARIO
-	===================================================== */
+	/* ── FORMULARIO ── */
 
 	$Dom.on("#btnAddEmployee", "click", () => {
 		resetForm();
 		$Dom.text("#employeeModalTitle", "Registrar Nuevo Empleado");
-
 		if (currentDraft) {
-			$Alert.confirm("Borrador encontrado", "¿Deseas cargar los datos guardados?", () => {
-				fillFromData(currentDraft);
-			});
+			$Alert.confirm("Borrador encontrado", "¿Deseas cargar los datos guardados?", () => fillFromData(currentDraft));
 		}
-
-		$Modal.open("employeeModal");
+		$Modal.open("#employeeModal");
 	});
 
 	$Dom.on("#empSalary", "input", updateSalaryPreview);
@@ -148,26 +133,21 @@ $(async function () {
 	$Dom.on("#employeeForm", "submit", async function (e) {
 		e.preventDefault();
 
-		// 1. Validar via HR.$Forms
 		if (!$Forms.isValidForm(this)) {
 			return $Alert.toast.error("Por favor completa los campos requeridos");
 		}
 
-		// 2. Capturar Firma
-		if (signaturePad.isEmpty()) {
-			return $Alert.warning("Se requiere la firma del empleado");
-		}
+		// $Signature.toDataURL — la instancia se accede así, no signaturePad.isEmpty()
+		const sigData = $Signature.toDataURL("#empSignature");
+		if (!sigData) return $Alert.warning("Se requiere la firma del empleado");
 
-		// 3. Capturar Editor HTML
 		const notes = $Editor.getHtml("#empNotes");
 		$Dom.val("#empNotesHidden", notes);
 
-		// 4. Serializar
-		const data = $Forms.serializeForm(this);
+		const data = $Forms.serialize(this);
 
 		try {
 			$Alert.loading();
-
 			const isEdit = !!data.id;
 			let result;
 
@@ -180,39 +160,30 @@ $(async function () {
 			}
 
 			$Alert.close();
-			$Modal.close("employeeModal");
+			$Modal.close("#employeeModal");
 			$Alert.success(`Empleado ${isEdit ? "actualizado" : "registrado"} con éxito`);
-
-			// Limpiar borrador
 			$Storage.remove("employee_draft");
 			currentDraft = null;
-		} catch (error) {
+		} catch {
 			$Alert.close();
 			$Alert.error("Error al procesar el servidor.");
 		}
 	});
 
 	$Dom.on("#btnSaveDraft", "click", () => {
-		const data = $Forms.serializeForm("#employeeForm");
+		const data = $Forms.serialize("#employeeForm");
 		$Storage.set("employee_draft", data);
 		$Alert.toast.success("Borrador guardado localmente");
 		currentDraft = data;
 	});
 
-	$Dom.on("#btnCancelEmployee", "click", () => {
-		$Modal.close("employeeModal");
-	});
+	$Dom.on("#btnCancelEmployee", "click", () => $Modal.close("#employeeModal"));
+	$Dom.on("#btnClearSignature",  "click", () => $Signature.clear("#empSignature"));
 
-	$Dom.on("#btnClearSignature", "click", () => {
-		$Signature.clear("#empSignature");
-	});
-
-	/* =====================================================
-		 UTILERIA LOCAL
-	===================================================== */
+	/* ── HELPERS LOCALES ── */
 
 	function resetForm() {
-		$Forms.clearForm("#employeeForm");
+		$Forms.clear("#employeeForm");
 		$Signature.clear("#empSignature");
 		$Editor.setHtml("#empNotes", "");
 		$Dom.val("#empSalary", "");
@@ -221,7 +192,7 @@ $(async function () {
 	}
 
 	function fillFromData(data) {
-		$Dom.val("#empName", data.name);
+		$Dom.val("#empName",  data.name);
 		$Dom.val("#empEmail", data.email);
 		$Dom.val("#empPhone", data.phone);
 		$Select2.setValue("#empRole", data.role);
@@ -231,32 +202,23 @@ $(async function () {
 
 	function updateSalaryPreview() {
 		const raw = $Dom.val("#empSalary");
-		if (raw) {
-			const formatted = $Currency.format(raw, "DOP");
-			$Dom.text("#salaryFormatted", `Equivale a: ${formatted}`);
-		} else {
-			$Dom.text("#salaryFormatted", "");
-		}
+		$Dom.text("#salaryFormatted", raw ? `Equivale a: ${$Currency.format(raw, "P")}` : "");
 	}
 
-	// Simulación de validación de archivo via HR.$File
+	// Validación de avatar via $File
 	$Dom.on("#empAvatar", "change", function (e) {
 		const file = e.target.files[0];
 		if (!file) return;
 
 		if (!$File.isValidSize(file, 2 * 1024 * 1024)) {
 			$Alert.error("El archivo supera los 2MB");
-			this.value = "";
-			return;
+			return (this.value = "");
 		}
-
 		if (!$File.isValidExtension(file, ["jpg", "jpeg", "png"])) {
 			$Alert.error("Solo se permiten imágenes (JPG, PNG)");
-			this.value = "";
-			return;
+			return (this.value = "");
 		}
 
-		// Leer y mostrar preview
 		$File.readAsBase64(file).then((base64) => {
 			$Dom.el("#avatarPreview").src = base64;
 			$Alert.toast.success("Foto cargada correctamente");

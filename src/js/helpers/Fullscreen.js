@@ -1,85 +1,101 @@
-import Dom from "./Dom";
-
 /**
  * @module Fullscreen
- * @description Helper para manejar el modo de pantalla completa.
+ * @description
+ * Helper para manejo de pantalla completa en HR Library.
+ * Soporta API nativa con fallbacks webkit/ms.
+ * Auto-binding por `data-widget="fullscreen"` con sincronización de iconos.
+ *
+ * @example
+ * Fullscreen.request();           // página completa
+ * Fullscreen.toggle("#miPanel");  // alternar en elemento
+ * Fullscreen.isActive();          // true | false
+ * Fullscreen.onChange((activo) => console.log(activo ? "Entró" : "Salió"));
+ *
+ * @version 3.0.0
  */
 
-const Fullscreen = {
-	/**
-	 * Solicita entrar en modo pantalla completa
-	 */
-	request: (target = document.documentElement) => {
-		const element = Dom.el(target);
-		if (!element) return;
+import Dom from "./Dom.js";
 
-		if (element.requestFullscreen) {
-			element.requestFullscreen();
-		} else if (element.webkitRequestFullscreen) {
-			element.webkitRequestFullscreen();
-		} else if (element.msRequestFullscreen) {
-			element.msRequestFullscreen();
-		}
-	},
+/* ── Helpers privados de API nativa ── */
 
-	/**
-	 * Sale del modo pantalla completa
-	 */
-	exit: () => {
-		if (document.exitFullscreen) {
-			document.exitFullscreen();
-		} else if (document.webkitExitFullscreen) {
-			document.webkitExitFullscreen();
-		} else if (document.msExitFullscreen) {
-			document.msExitFullscreen();
-		}
-	},
+const _requestFS = (el) =>
+  el.requestFullscreen?.() ?? el.webkitRequestFullscreen?.() ?? el.msRequestFullscreen?.();
 
-	/**
-	 * Alterna el modo pantalla completa
-	 */
-	toggle: (target = document.documentElement) => {
-		if (!document.fullscreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-			Fullscreen.request(target);
-		} else {
-			Fullscreen.exit();
-		}
-	},
+const _exitFS = () =>
+  document.exitFullscreen?.() ?? document.webkitExitFullscreen?.() ?? document.msExitFullscreen?.();
 
-	/**
-	 * Inicializa el binding automático
-	 */
-	init: () => {
-		Dom.on(document, "click", (e) => {
-			const btn = e.target.closest('[data-widget="fullscreen"]');
-			if (btn) {
-				e.preventDefault();
-				Fullscreen.toggle();
-			}
-		});
+const _activeEl = () =>
+  document.fullscreenElement ?? document.webkitFullscreenElement ?? document.msFullscreenElement ?? null;
 
-		const updateIcons = () => {
-			const isFS = !!(document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement);
-			const buttons = document.querySelectorAll('[data-widget="fullscreen"]');
-
-			buttons.forEach((btn) => {
-				const icon = btn.querySelector("i");
-				if (icon) {
-					if (isFS) {
-						icon.classList.remove("bi-fullscreen");
-						icon.classList.add("bi-fullscreen-exit");
-					} else {
-						icon.classList.remove("bi-fullscreen-exit");
-						icon.classList.add("bi-fullscreen");
-					}
-				}
-			});
-		};
-
-		Dom.on(document, "fullscreenchange", updateIcons);
-		Dom.on(document, "webkitfullscreenchange", updateIcons);
-		Dom.on(document, "msfullscreenchange", updateIcons);
-	},
+/** Sincroniza iconos en botones [data-widget="fullscreen"]. @private */
+const _syncIcons = () => {
+  const isFS = _activeEl() !== null;
+  Dom.qa('[data-widget="fullscreen"]').forEach((btn) => {
+    const icon = btn.querySelector("i");
+    if (!icon) return;
+    icon.classList.toggle("bi-fullscreen",      !isFS);
+    icon.classList.toggle("bi-fullscreen-exit",  isFS);
+  });
 };
 
-export default Fullscreen;
+const Fullscreen = {
+
+  /**
+   * Solicita pantalla completa en un elemento.
+   * @param {string|HTMLElement} [target=document.documentElement]
+   */
+  request(target = document.documentElement) {
+    const el = Dom.el(target) ?? document.documentElement;
+    _requestFS(el);
+  },
+
+  /** Sale del modo pantalla completa. */
+  exit() {
+    if (this.isActive()) _exitFS();
+  },
+
+  /**
+   * Alterna pantalla completa.
+   * @param {string|HTMLElement} [target=document.documentElement]
+   */
+  toggle(target = document.documentElement) {
+    this.isActive() ? this.exit() : this.request(target);
+  },
+
+  /** @returns {boolean} Si hay un elemento en pantalla completa. */
+  isActive: () => _activeEl() !== null,
+
+  /** @returns {Element|null} Elemento actualmente en pantalla completa. */
+  getActive: () => _activeEl(),
+
+  /**
+   * Registra callback al cambiar estado de pantalla completa.
+   * @param {Function} callback  `(isActive: boolean) => void`
+   */
+  onChange(callback) {
+    if (typeof callback !== "function") return;
+    const handler = () => callback(this.isActive());
+    Dom.on(document, "fullscreenchange",       handler);
+    Dom.on(document, "webkitfullscreenchange", handler);
+    Dom.on(document, "msfullscreenchange",     handler);
+  },
+
+  /**
+   * Inicializa binding automático para `[data-widget="fullscreen"]`
+   * y sincronización de iconos.
+   */
+  init() {
+    Dom.on(document, "click", (e) => {
+      const btn = e.target.closest('[data-widget="fullscreen"]');
+      if (!btn) return;
+      e.preventDefault();
+      this.toggle();
+    });
+
+    Dom.on(document, "fullscreenchange",       _syncIcons);
+    Dom.on(document, "webkitfullscreenchange", _syncIcons);
+    Dom.on(document, "msfullscreenchange",     _syncIcons);
+  },
+};
+
+export default Object.freeze(Fullscreen);

@@ -1,11 +1,15 @@
 // ============================================================================
 // Fonts
 // ============================================================================
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@100..700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@100..700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&family=Ubuntu+Sans:ital,wght@0,100..800;1,100..800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 
 $font-family-sans-serif: "Ubuntu", "Helvetica Neue", Arial, -apple-system,
 	BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", sans-serif,
 	"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+
+$ff-condensed: "Roboto Condensed", sans-serif !default;
+$ff-mono: "M PLUS Code Latin", monospace !default;
+$ff-mono-light: "M PLUS Code Latin Light", monospace !default;
 
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
@@ -14,4 +18,5 @@ $font-weight-bold: 600 !default;
 $font-size-base: .875rem !default;
 $font-size-lg: .925rem !default;
 $font-size-sm: .75rem !default;
-$small-font-size: 80% !default;
+$font-size-xs: .625rem !default;
+$small-font-size: 75% !default;

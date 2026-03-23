@@ -1,0 +1,40 @@
+// ============================================================================
+// app-cafe-claro.scss — HR Library v3 · Tema "Café Claro"
+//
+// Entry point dedicado al tema Café Claro (Latte / Profesional).
+// Sidebar azul institucional, acentos dorados, fondo blanco/gris.
+//
+// Este archivo es idéntico a app.scss en su comportamiento por defecto.
+// Útil cuando se tienen los dos bundles activos y se cambia via JS:
+//   document.getElementById('theme-link').href = 'app-cafe-claro.css';
+// ============================================================================
+
+@import "bootstrap/scss/functions";
+
+// Tema claro
+@import "6-themes/cafe-claro";
+
+// Variables HR
+@import "1-variables/app";
+
+// Bootstrap
+@import "1-variables/bootstrap";
+
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+// Mixins
+@import "2-mixins/button";
+@import "2-mixins/table";
+@import "2-mixins/card";
+
+// Componentes
+@import "3-components/index";
+
+// Utilidades
+@import "4-utilities/cursors";
+@import "4-utilities/dark-mode";
+@import "4-utilities/sweetalert";
+
+// Vendors
+@import "5-vendor/vendors";

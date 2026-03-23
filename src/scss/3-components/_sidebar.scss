@@ -1,300 +1,597 @@
-
 // ============================================================================
 // 3-components/_sidebar.scss
+// Fusión: HR Library (estructura, SimpleBar, variables) + CoffeeSchools
+// (brand detallado, nav-badge, divider, submenu, overlay móvil)
 // ============================================================================
 
-/* ── Contenedor principal ───────────────────────────────────────────────── */
+/* ── Contenedor principal ────────────────────────────────────────────────── */
 
 .sidebar {
-  min-width: $sidebar-width;
-  max-width: $sidebar-width;
-  background: $sidebar-bg;
-  transition: $sidebar-transition;
-  direction: ltr;
-  z-index: 1030;
+	min-width: $sidebar-width;
+	max-width: $sidebar-width;
+	background: $sidebar-bg;
+	transition: $sidebar-transition;
+	direction: ltr;
+	z-index: 1030;
+	position: sticky;
+	top: 0;
 
-  // Colapsado en desktop
-  &.collapsed {
-    min-width: $sidebar-collapsed-width;
-    max-width: $sidebar-collapsed-width;
+	// Textura sutil (visible en tema café oscuro)
+	background-image: linear-gradient(180deg,
+			rgba($primary, .04) 0%,
+			transparent 40%,
+			rgba(#000, .12) 100%);
 
-    // Ocultar textos y elementos innecesarios
-    .sidebar-brand-full     { display: none; }
-    .sidebar-brand-icon     { display: block; }
-    .sidebar-header         { opacity: 0; pointer-events: none; }
-    .sidebar-link span,
-    .sidebar-link .icon-right,
-    .sidebar-badge,
-    .sidebar-cta            { display: none; }
-    .sidebar-link           { justify-content: center; padding: .65rem 0; }
-    .sidebar-link i         { margin: 0; }
-    .sidebar-dropdown       { display: none !important; }
-  }
+	// Línea lateral decorativa
+	&::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		width: 3px;
+		background: linear-gradient(180deg, transparent, $primary 30%, $secondary 70%, transparent);
+		opacity: .4;
+		pointer-events: none;
+	}
 
-  // Comportamiento mobile: colapsado por defecto
-  @media (max-width: #{map-get($grid-breakpoints, 'lg') - .02px}) {
-    margin-left: -$sidebar-width;
+	// Colapsado en desktop — flyout submenús al hacer hover
+	&.collapsed {
+		min-width: $sidebar-collapsed-width;
+		max-width: $sidebar-collapsed-width;
+		overflow: visible; // permitir flyouts fuera del sidebar
 
-    &.collapsed {
-      margin-left: 0;
-      min-width: $sidebar-width;
-      max-width: $sidebar-width;
+		.sidebar-brand-full {
+			display: none;
+		}
 
-      // Restaurar visibilidad en mobile
-      .sidebar-brand-full     { display: block; }
-      .sidebar-brand-icon     { display: none; }
-      .sidebar-header         { opacity: 1; pointer-events: auto; }
-      .sidebar-link span,
-      .sidebar-link .icon-right,
-      .sidebar-badge,
-      .sidebar-cta            { display: flex; }
-      .sidebar-link           { justify-content: flex-start; padding: $sidebar-link-padding; }
-      .sidebar-link i         { margin-right: $sidebar-link-gap; }
-      .sidebar-dropdown       { display: block !important; }
-    }
-  }
+		.sidebar-brand-icon {
+			display: block;
+		}
+
+		.sidebar-header {
+			opacity: 0;
+			height: 0;
+			padding: 0;
+			margin: 0;
+			pointer-events: none;
+			overflow: hidden;
+		}
+
+		.sidebar-link span,
+		.sidebar-link .icon-right,
+		.sidebar-badge,
+		.sidebar-cta {
+			display: none;
+		}
+
+		.sidebar-link {
+			justify-content: center;
+			padding: .65rem 0;
+		}
+
+		.sidebar-link i {
+			margin: 0;
+		}
+
+		// Submenús como flyout popup al hacer hover
+		.sidebar-nav>.sidebar-item {
+			position: relative;
+
+			// Flyout para items CON submenú
+			>.sidebar-dropdown {
+				display: none !important;
+			}
+
+			&:hover>.sidebar-dropdown {
+				display: block !important;
+				position: absolute;
+				left: 100%;
+				top: 0;
+				min-width: 200px;
+				background: darken($sidebar-bg, 3%);
+				border-radius: 0 $border-radius-lg $border-radius-lg 0;
+				box-shadow: 4px 4px 16px rgba(#000, .3);
+				padding: .5rem 0;
+				z-index: 1050;
+
+				.sidebar-link,
+				a.sidebar-link {
+					padding: .45rem 1rem .45rem 1.25rem;
+					white-space: nowrap;
+
+					&::before {
+						display: none;
+					}
+
+					// quitar bullet en flyout
+				}
+			}
+
+			// Tooltip con nombre para items SIN submenú
+			&:not(:has(.sidebar-dropdown))>.sidebar-link {
+				&:hover::after {
+					content: attr(data-bs-original-title);
+				}
+			}
+		}
+	}
+
+	// Mobile: colapsado por defecto
+	@media (max-width: #{map-get($grid-breakpoints, 'lg') - .02px}) {
+		margin-left: -$sidebar-width;
+
+		&.collapsed {
+			margin-left: 0;
+			min-width: $sidebar-width;
+			max-width: $sidebar-width;
+
+			.sidebar-brand-full {
+				display: block;
+			}
+
+			.sidebar-brand-icon {
+				display: none;
+			}
+
+			.sidebar-header {
+				opacity: 1;
+				height: auto;
+				padding: $sidebar-header-padding;
+				margin: 0;
+				pointer-events: auto;
+				overflow: visible;
+			}
+
+			.sidebar-link span,
+			.sidebar-link .icon-right,
+			.sidebar-badge,
+			.sidebar-cta {
+				display: flex;
+			}
+
+			.sidebar-link {
+				justify-content: flex-start;
+				padding: $sidebar-link-padding;
+			}
+
+			.sidebar-link i {
+				margin-right: $sidebar-link-gap;
+			}
+
+			.sidebar-dropdown {
+				display: block !important;
+			}
+		}
+	}
 }
 
-/* ── Scroll con SimpleBar ───────────────────────────────────────────────── */
+/* ── Scroll con SimpleBar ────────────────────────────────────────────────── */
 
 .sidebar-content {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  background: $sidebar-bg;
-  transition: $sidebar-transition;
-  overflow: hidden;           // SimpleBar gestiona el scroll
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	background: $sidebar-bg;
+	transition: $sidebar-transition;
+	overflow: hidden; // SimpleBar maneja el scroll interno
+	width: 100%; // heredar ancho del .sidebar padre
 }
 
-/* ── Brand ──────────────────────────────────────────────────────────────── */
+// Cuando el sidebar está colapsado, permitir que los flyouts se desborden
+.sidebar.collapsed .sidebar-content {
+	overflow: visible;
+}
+
+// SimpleBar wrappers también deben permitir overflow en modo colapsado
+.sidebar.collapsed {
+
+	.simplebar-wrapper,
+	.simplebar-mask,
+	.simplebar-offset,
+	.simplebar-content-wrapper,
+	.simplebar-content {
+		overflow: visible !important;
+	}
+}
+
+/* ── Brand ───────────────────────────────────────────────────────────────── */
 
 .sidebar-brand {
-  display: flex;
-  align-items: center;
-  padding: $sidebar-brand-padding-y $sidebar-brand-padding-x;
-  text-decoration: none;
-  border-bottom: 1px solid $sidebar-brand-border-color;
-  min-height: 64px;           // altura fija para que el contenido no salte al colapsar
-  transition: padding .3s ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: $sidebar-brand-padding-y $sidebar-brand-padding-x;
+	text-decoration: none;
+	border-bottom: 1px solid $sidebar-brand-border-color;
+	min-height: 64px;
+	transition: padding .3s ease-in-out;
+	flex-shrink: 0;
 
-  &:hover,
-  &:focus {
-    text-decoration: none;
-    opacity: .85;
-    outline: 0;
-  }
+	&:hover,
+	&:focus {
+		text-decoration: none;
+		opacity: .85;
+		outline: 0;
+	}
 
-  // Logo completo (texto + símbolo)
-  .sidebar-brand-full {
-    display: block;
-    max-height: 38px;
-    width: auto;
-  }
+	.brand-link {
+		display: flex;
+		align-items: center;
+		gap: .8rem;
+		text-decoration: none;
+		color: $sidebar-brand-color;
+	}
 
-  // Solo ícono (sidebar colapsado)
-  .sidebar-brand-icon {
-    display: none;
-    width: 36px;
-    height: 36px;
-  }
+	.brand-icon {
+		width: 36px;
+		height: 36px;
+		background: rgba($primary, .18);
+		border: 1px solid rgba($primary, .3);
+		border-radius: .6rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: $primary;
+		font-size: 1.05rem;
+		flex-shrink: 0;
+	}
+
+	.sidebar-brand-full {
+		display: block;
+		max-height: 38px;
+		width: auto;
+	}
+
+	.sidebar-brand-icon {
+		display: none;
+		width: 36px;
+		height: 36px;
+	}
+
+	.sidebar-toggle {
+		background: none;
+		border: none;
+		color: $sidebar-link-color;
+		font-size: 1.05rem;
+		padding: .3rem;
+		border-radius: .35rem;
+		cursor: pointer;
+		transition: color .15s;
+
+		&:hover {
+			color: $sidebar-brand-color;
+		}
+	}
 }
 
-/* ── Nav lista ──────────────────────────────────────────────────────────── */
+/* ── User info ───────────────────────────────────────────────────────────── */
+
+.sidebar-user {
+	display: flex;
+	align-items: center;
+	gap: .8rem;
+	padding: .9rem $sidebar-brand-padding-x;
+	border-bottom: 1px solid $sidebar-brand-border-color;
+	background: rgba(#000, .15);
+	flex-shrink: 0;
+
+	.user-avatar {
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		border: 2px solid rgba($primary, .4);
+		background: rgba($primary, .15);
+		color: $primary;
+		font-size: .72rem;
+		font-weight: 700;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	.user-name {
+		display: block;
+		color: $sidebar-brand-color;
+		font-size: .85rem;
+		font-weight: 700;
+		line-height: 1.2;
+	}
+
+	.user-role {
+		display: block;
+		color: $sidebar-link-color;
+		font-size: .73rem;
+		letter-spacing: .04em;
+	}
+}
+
+/* ── Nav lista ───────────────────────────────────────────────────────────── */
 
 .sidebar-nav {
-  padding: .5rem 0;
-  margin-bottom: 0;
-  list-style: none;
-  flex-grow: 1;
+	padding: .5rem 0;
+	margin-bottom: 0;
+	list-style: none;
+	flex-grow: 1;
 }
 
-/* ── Header de sección ──────────────────────────────────────────────────── */
+// En modo colapsado, la lista de íconos puede hacer scroll vertical
+.sidebar.collapsed .sidebar-nav {
+	overflow-y: auto;
+	overflow-x: visible;
+	flex: 1 1 0;
+	min-height: 0;
+
+	// Scrollbar delgado para el listado de íconos
+	&::-webkit-scrollbar {
+		width: 3px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background: rgba($primary, .25);
+		border-radius: 2px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	scrollbar-width: thin;
+}
+
+/* ── Header de sección ───────────────────────────────────────────────────── */
 
 .sidebar-header {
-  padding: $sidebar-header-padding;
-  font-size: $sidebar-header-font-size;
-  font-weight: $sidebar-header-font-weight;
-  color: $sidebar-header-color;
-  text-transform: uppercase;
-  letter-spacing: $sidebar-header-letter-spacing;
-  transition: opacity .2s ease-in-out;
-  white-space: nowrap;
-  overflow: hidden;
+	padding: $sidebar-header-padding;
+	font-size: $sidebar-header-font-size;
+	font-weight: $sidebar-header-font-weight;
+	color: $sidebar-header-color;
+	text-transform: uppercase;
+	letter-spacing: $sidebar-header-letter-spacing;
+	transition: opacity .2s ease-in-out;
+	white-space: nowrap;
+	overflow: hidden;
+	user-select: none;
 }
 
-/* ── Links ──────────────────────────────────────────────────────────────── */
+/* ── Links ───────────────────────────────────────────────────────────────── */
 
 .sidebar-link,
 a.sidebar-link {
-  display: flex;
-  align-items: center;
-  gap: $sidebar-link-gap;
-  padding: $sidebar-link-padding;
-  font-size: $sidebar-link-font-size;
-  font-weight: $sidebar-link-font-weight;
-  color: $sidebar-link-color;
-  background: $sidebar-link-bg;
-  text-decoration: none;
-  cursor: pointer;
-  position: relative;
-  border-left: $sidebar-link-border-left-width solid $sidebar-link-border-left-color;
-  transition:
-    color .15s ease-in-out,
-    background .15s ease-in-out,
-    border-left-color .15s ease-in-out;
-  white-space: nowrap;
-  overflow: hidden;
+	display: flex;
+	align-items: center;
+	gap: $sidebar-link-gap;
+	padding: $sidebar-link-padding;
+	font-size: $sidebar-link-font-size;
+	font-weight: $sidebar-link-font-weight;
+	color: $sidebar-link-color;
+	background: $sidebar-link-bg;
+	text-decoration: none;
+	cursor: pointer;
+	position: relative;
+	border-left: $sidebar-link-border-left-width solid $sidebar-link-border-left-color;
+	transition:
+		color .15s ease-in-out,
+		background .15s ease-in-out,
+		border-left-color .15s ease-in-out,
+		padding-left .15s;
+	white-space: nowrap;
+	overflow: hidden;
 
-  // Ícono
-  i, svg {
-    flex-shrink: 0;
-    font-size: 1rem;
-    color: $sidebar-link-icon-color;
-    transition: color .15s ease-in-out;
-    margin: 0;                // el gap del flex reemplaza el margin
-  }
+	i,
+	svg {
+		flex-shrink: 0;
+		font-size: 1rem;
+		color: $sidebar-link-icon-color;
+		opacity: .75;
+		transition: color .15s ease-in-out, opacity .15s;
+		margin: 0;
+	}
 
-  // Texto: crece para empujar el chevron a la derecha
-  span:first-of-type {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+	span:first-of-type {
+		flex: 1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 
-  // Chevron collapse
-  .icon-right {
-    flex-shrink: 0;
-    font-size: .7rem;
-    opacity: .5;
-    transition: transform .2s ease-in-out, opacity .15s;
-    margin-left: auto;
-    margin-right: 0 !important;
-  }
+	.icon-right {
+		flex-shrink: 0;
+		font-size: .68rem;
+		opacity: .5;
+		transition: transform .2s ease-in-out, opacity .15s;
+		margin-left: auto;
+	}
 
-  &[aria-expanded="true"] .icon-right {
-    transform: rotate(90deg);
-    opacity: 1;
-  }
+	&[aria-expanded="true"] .icon-right {
+		transform: rotate(180deg);
+		opacity: 1;
+	}
 
-  &:focus { outline: 0; }
+	&:focus {
+		outline: 0;
+	}
 
-  &:hover {
-    color: $sidebar-link-hover-color;
-    background: $sidebar-link-hover-bg;
-    border-left-color: $sidebar-link-hover-border-left-color;
+	&:hover {
+		color: $sidebar-link-hover-color;
+		background: $sidebar-link-hover-bg;
+		border-left-color: $sidebar-link-hover-border-left-color;
+		padding-left: calc(#{nth($sidebar-link-padding, 2)} + .2rem);
 
-    i, svg { color: $sidebar-link-icon-hover-color; }
-    .icon-right { opacity: 1; }
-  }
+		i,
+		svg {
+			color: $sidebar-link-icon-hover-color;
+			opacity: 1;
+		}
+
+		.icon-right {
+			opacity: 1;
+		}
+	}
 }
 
 // Link activo
-.sidebar-item.active > .sidebar-link,
+.sidebar-item.active>.sidebar-link,
 .sidebar-item.active .sidebar-link:hover {
-  color: $sidebar-link-active-color;
-  background: $sidebar-link-active-bg;
-  border-left-color: $sidebar-link-active-border-left-color;
+	color: $sidebar-link-active-color;
+	background: $sidebar-link-active-bg;
+	border-left-color: $sidebar-link-active-border-left-color;
+	font-weight: 700;
 
-  i, svg { color: $sidebar-link-icon-active-color; }
+	i,
+	svg {
+		color: $sidebar-link-icon-active-color;
+		opacity: 1;
+	}
 }
 
-/* ── Dropdown (hijos) ───────────────────────────────────────────────────── */
+/* ── Dropdown hijos ──────────────────────────────────────────────────────── */
 
 .sidebar-dropdown {
-  .sidebar-link,
-  a.sidebar-link {
-    padding-left: $sidebar-dropdown-padding-left;
-    font-size: $sidebar-dropdown-link-font-size;
-    color: $sidebar-dropdown-link-color;
-    border-left-color: transparent;
 
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-      opacity: .5;
-      transition: opacity .15s, transform .15s;
-    }
+	.sidebar-link,
+	a.sidebar-link {
+		padding-left: $sidebar-dropdown-padding-left;
+		font-size: $sidebar-dropdown-link-font-size;
+		color: $sidebar-dropdown-link-color;
+		border-left-color: transparent;
 
-    &:hover {
-      color: $sidebar-dropdown-link-hover-color;
-      background: $sidebar-link-hover-bg;
-      border-left-color: $sidebar-link-hover-border-left-color;
-      &::before { opacity: 1; transform: scale(1.4); }
-    }
-  }
+		&::before {
+			content: '';
+			display: inline-block;
+			width: 4px;
+			height: 4px;
+			border-radius: 50%;
+			background: currentColor;
+			flex-shrink: 0;
+			opacity: .5;
+			transition: opacity .15s, transform .15s;
+		}
 
-  .sidebar-item.active > .sidebar-link {
-    color: $sidebar-dropdown-link-active-color;
-    background: $sidebar-link-active-bg;
-    border-left-color: $sidebar-link-active-border-left-color;
-    &::before { opacity: 1; transform: scale(1.4); }
-  }
+		&:hover {
+			color: $sidebar-dropdown-link-hover-color;
+			background: $sidebar-link-hover-bg;
+			border-left-color: $sidebar-link-hover-border-left-color;
+
+			&::before {
+				opacity: 1;
+				transform: scale(1.4);
+			}
+		}
+	}
+
+	.sidebar-item.active>.sidebar-link {
+		color: $sidebar-dropdown-link-active-color;
+		background: $sidebar-link-active-bg;
+		border-left-color: $sidebar-link-active-border-left-color;
+
+		&::before {
+			opacity: 1;
+			transform: scale(1.4);
+		}
+	}
 }
 
-/* ── Badge ──────────────────────────────────────────────────────────────── */
+/* ── Badge ───────────────────────────────────────────────────────────────── */
 
 .sidebar-badge {
-  font-size: $sidebar-badge-font-size;
-  padding: .15em .45em;
-  margin-left: auto;
-  flex-shrink: 0;
+	font-size: $sidebar-badge-font-size;
+	padding: .15em .5rem;
+	margin-left: auto;
+	flex-shrink: 0;
+	background: rgba($primary, .18);
+	color: $primary;
+	border: 1px solid rgba($primary, .25);
+	border-radius: 20px;
 }
 
-// Badge en posición absoluta (compatibilidad legacy)
 .sidebar-badge-abs {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
+	position: absolute;
+	right: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1;
 }
 
-/* ── CTA / Footer ───────────────────────────────────────────────────────── */
+/* ── Divisor decorativo ──────────────────────────────────────────────────── */
+
+.sidebar-divider {
+	height: 1px;
+	background: linear-gradient(90deg, transparent, rgba($primary, .2), transparent);
+	margin: .5rem $sidebar-brand-padding-x;
+}
+
+/* ── CTA / Footer ────────────────────────────────────────────────────────── */
 
 .sidebar-cta {
-  flex-shrink: 0;
-  padding: 0;
+	flex-shrink: 0;
+	padding: 0;
 }
 
 .sidebar-cta-content {
-  margin: $sidebar-cta-margin;
-  padding: $sidebar-cta-padding;
-  border-radius: $sidebar-cta-border-radius;
-  background: $sidebar-cta-bg;
-  color: $sidebar-cta-color;
+	margin: $sidebar-cta-margin;
+	padding: $sidebar-cta-padding;
+	border-radius: $sidebar-cta-border-radius;
+	background: $sidebar-cta-bg;
+	color: $sidebar-cta-color;
 }
 
 .sidebar-cta-title {
-  font-size: $sidebar-cta-title-size;
-  font-weight: 700;
-  color: $white;
-  margin-bottom: .2rem;
+	font-size: $sidebar-cta-title-size;
+	font-weight: 700;
+	color: $sidebar-brand-color;
+	margin-bottom: .2rem;
 }
 
 .sidebar-cta-text {
-  font-size: $sidebar-cta-text-size;
-  color: rgba($white, .55);
-  margin-bottom: 0;
+	font-size: $sidebar-cta-text-size;
+	color: rgba($sidebar-brand-color, .55);
+	margin-bottom: 0;
 }
 
-/* ── Toggle button (hamburger en navbar) ────────────────────────────────── */
+/* ── Toggle hamburger ────────────────────────────────────────────────────── */
 
 .sidebar-toggle {
-  cursor: pointer;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: $border-radius;
-  flex-shrink: 0;
+	cursor: pointer;
+	width: 28px;
+	height: 28px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: $border-radius;
+	flex-shrink: 0;
 
-  &:hover {
-    background: rgba($black, .08);
-  }
+	&:hover {
+		background: rgba(#000, .08);
+	}
+}
+
+/* ── Overlay móvil ───────────────────────────────────────────────────────── */
+
+.sidebar-overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba($dark, .65);
+	z-index: 1029;
+	backdrop-filter: blur(3px);
+
+	&.active {
+		display: block;
+	}
+}
+
+/* ── SimpleBar personalizado ─────────────────────────────────────────────── */
+
+.sidebar::-webkit-scrollbar {
+	width: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+	background: rgba($primary, .25);
+	border-radius: 2px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+	background: transparent;
 }

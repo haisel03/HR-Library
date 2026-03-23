@@ -1,202 +1,143 @@
+// ============================================================================
+// 3-components/_auth.scss
+// De HR Library — pantalla de login/registro con gradiente animado.
+// Ajustado para usar variables de tema ($primary, $blue, $dark, etc.)
+// ============================================================================
+
 .auth-body {
-	position: relative;
-	min-height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-family: 'Inter', sans-serif;
-	overflow: hidden;
+  position:        relative;
+  min-height:      100vh;
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  overflow:        hidden;
 
-	// 🔥 GRADIENT ANIMADO PREMIUM
-	background: linear-gradient(270deg, #4e73df, #224abe, #1cc88a);
-	background-size: 600% 600%;
-	animation: gradientMove 12s ease infinite;
+  // Gradiente animado usa los colores del tema activo
+  background:      linear-gradient(270deg, $primary, darken($primary, 15%), $success);
+  background-size: 600% 600%;
+  animation:       gradientMove 12s ease infinite;
 
-	// 🔥 OVERLAY LIGHT EFFECT
-	&::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background:
-			radial-gradient(circle at top left, rgba(255, 255, 255, 0.15), transparent 40%),
-			radial-gradient(circle at bottom right, rgba(0, 0, 0, 0.25), transparent 50%);
-		z-index: 1;
-	}
+  &::before {
+    content:    '';
+    position:   absolute;
+    inset:      0;
+    background:
+      radial-gradient(circle at top left,  rgba($white, .15), transparent 40%),
+      radial-gradient(circle at bottom right, rgba($dark, .25), transparent 50%);
+    z-index:    1;
+  }
 
-	.container {
-		position: relative;
-		z-index: 2;
-	}
+  .container { position: relative; z-index: 2; }
 
-	// 🔥 CARD PREMIUM GLASS
-	.card {
-		background: rgba(255, 255, 255, 0.92);
-		backdrop-filter: blur(12px);
-		border-radius: 18px;
-		border: 1px solid rgba(255, 255, 255, 0.2);
-		box-shadow: 0 25px 70px rgba(0, 0, 0, 0.35);
-		overflow: hidden;
-		transition: all 0.3s ease;
+  // Card glassmorphism
+  .card {
+    background:     rgba($white, .92);
+    backdrop-filter: blur(12px);
+    border-radius:  18px;
+    border:         1px solid rgba($white, .2);
+    box-shadow:     0 25px 70px rgba($dark, .35);
+    overflow:       hidden;
+    transition:     all .3s ease;
 
-		&:hover {
-			transform: translateY(-4px) scale(1.01);
-			box-shadow: 0 35px 90px rgba(0, 0, 0, 0.4);
-		}
+    &:hover {
+      transform:  translateY(-4px) scale(1.01);
+      box-shadow: 0 35px 90px rgba($dark, .4);
+    }
 
-		.card-body {
-			padding: 3rem 2.5rem;
-		}
+    .card-body { padding: 3rem 2.5rem; }
 
-		.card-title {
-			color: $blue;
-			font-weight: 800;
-			text-align: center;
-			margin-bottom: 2rem;
-			letter-spacing: 1px;
-			text-transform: uppercase;
-		}
-	}
+    .card-title {
+      color:          $primary;
+      font-weight:    800;
+      text-align:     center;
+      margin-bottom:  2rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+  }
 
-	.form-floating {
-		position: relative;
+  // Floating inputs
+  .form-floating > .form-control {
+    background:    $gray-100;
+    border:        2px solid $gray-300;
+    border-radius: 10px;
+    height:        calc(3.5rem + 2px);
+    font-weight:   500;
+    transition:    all .25s ease;
 
-		>.form-control {
-			background: $gray-100;
-			border: 2px solid $gray-300;
-			border-radius: 10px;
-			padding: 1rem;
-			height: calc(3.5rem + 2px);
-			font-weight: 500;
-			transition: all 0.25s ease;
+    &:focus {
+      background:   $white;
+      border-color: $primary;
+      box-shadow:   0 0 0 4px rgba($primary, .1);
+    }
+  }
 
-			&:focus {
-				background: #fff;
-				border-color: $primary;
-				box-shadow: 0 0 0 4px rgba($primary, 0.1);
-			}
+  .form-floating > label { color: $primary; font-weight: 600; padding-left: 1rem; }
 
-			&::placeholder {
-				color: $gray-600;
-			}
-		}
+  // Toggle password
+  .password-wrapper {
+    position: relative;
 
-		>label {
-			color: $primary;
-			font-weight: 600;
-			padding-left: 1rem;
-			transition: all 0.2s ease;
-		}
-	}
+    .toggle-password {
+      position:  absolute;
+      top:       50%;
+      right:     15px;
+      transform: translateY(-50%);
+      cursor:    pointer;
+      color:     $gray-600;
+      font-size: 1.2rem;
+      transition: all .2s;
+      &:hover { color: $primary; transform: translateY(-50%) scale(1.1); }
+    }
+  }
 
-	// 🔥 PASSWORD ICON
-	.password-wrapper {
-		position: relative;
+  // Botón submit
+  .btn-primary {
+    background:    linear-gradient(135deg, $primary, lighten($primary, 10%));
+    border:        none;
+    border-radius: 10px;
+    padding:       .9rem;
+    font-weight:   700;
+    letter-spacing: 1px;
+    transition:    all .3s ease;
+    &:hover  { transform: translateY(-2px); box-shadow: 0 10px 25px rgba($primary, .4); }
+    &:active { transform: scale(.98); }
+  }
 
-		.toggle-password {
-			position: absolute;
-			top: 50%;
-			right: 15px;
-			transform: translateY(-50%);
-			cursor: pointer;
-			color: $gray-600;
-			font-size: 1.2rem;
-			transition: all 0.2s;
+  // Footer
+  .auth-footer {
+    text-align:  center;
+    margin-top:  1.5rem;
+    font-size:   .9rem;
+    color:       $white;
 
-			&:hover {
-				color: $primary;
-				transform: translateY(-50%) scale(1.1);
-			}
-		}
-	}
-
-	.form-check {
-		.form-check-input {
-			cursor: pointer;
-		}
-
-		.form-check-label {
-			font-weight: 500;
-			color: $dark;
-		}
-	}
-
-	.btn-primary {
-		background: linear-gradient(135deg, $blue, lighten($blue, 10%));
-		border: none;
-		border-radius: 10px;
-		padding: 0.9rem;
-		font-weight: 700;
-		letter-spacing: 1px;
-		transition: all 0.3s ease;
-
-		&:hover {
-			transform: translateY(-2px);
-			box-shadow: 0 10px 25px rgba($blue, 0.4);
-		}
-
-		&:active {
-			transform: scale(0.98);
-		}
-	}
-
-	// 🔥 FOOTER
-	.auth-footer {
-		text-align: center;
-		margin-top: 1.5rem;
-		font-size: 0.9rem;
-		color: #fff;
-
-		a {
-			color: #fff;
-			font-weight: 700;
-			text-decoration: none;
-			position: relative;
-
-			&::after {
-				content: '';
-				position: absolute;
-				width: 0%;
-				height: 2px;
-				bottom: -2px;
-				left: 0;
-				background: #fff;
-				transition: width 0.3s;
-			}
-
-			&:hover::after {
-				width: 100%;
-			}
-		}
-	}
+    a {
+      color:           $white;
+      font-weight:     700;
+      text-decoration: none;
+      position:        relative;
+      &::after { content: ''; position: absolute; width: 0%; height: 2px; bottom: -2px; left: 0; background: $white; transition: width .3s; }
+      &:hover::after { width: 100%; }
+    }
+  }
 }
 
-// 🔥 AVATAR
+// Avatar de lock screen
 .lock-avatar {
-	width: 110px;
-	height: 110px;
-	border-radius: 50%;
-	border: 4px solid #fff;
-	margin: 0 auto 1.5rem;
-	box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-	object-fit: cover;
-	transition: transform 0.3s ease;
-
-	&:hover {
-		transform: scale(1.05);
-	}
+  width:         110px;
+  height:        110px;
+  border-radius: 50%;
+  border:        4px solid $white;
+  margin:        0 auto 1.5rem;
+  box-shadow:    0 10px 30px rgba($dark, .2);
+  object-fit:    cover;
+  transition:    transform .3s ease;
+  &:hover { transform: scale(1.05); }
 }
 
-// 🔥 ANIMACIÓN GRADIENTE
+// Animación gradiente
 @keyframes gradientMove {
-	0% {
-		background-position: 0% 50%;
-	}
-
-	50% {
-		background-position: 100% 50%;
-	}
-
-	100% {
-		background-position: 0% 50%;
-	}
+  0%   { background-position: 0%   50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0%   50%; }
 }

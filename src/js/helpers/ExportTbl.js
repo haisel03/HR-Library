@@ -1,5 +1,5 @@
 import $ from "jquery";
-import Alert from "./Alert";
+import Alert from "./Alert.js";
 
 /**
  * @module ExportTbl

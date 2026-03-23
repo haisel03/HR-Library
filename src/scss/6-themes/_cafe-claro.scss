@@ -1,0 +1,189 @@
+// ============================================================================
+// 6-themes/_cafe-claro.scss
+//
+// Tema "Café Claro" — paleta profesional clara inspirada en latte y crema.
+// Versión diurna: fondos blancos, acentos cálidos, sidebar azul institucional
+// de HR Library mezclado con los acentos dorados de CoffeeSchools.
+//
+// Paleta:
+//   Azul DR   #003876 · Rojo DR  #CE1126 · Dorado  #C9A227
+//   Crema     #FFFAF4 · Arena    #E6D8C3 · Miel    #C68642
+// ============================================================================
+
+// ── Semánticos Bootstrap ──────────────────────────────────────────────────────
+$primary:   #003876 !default;   // Azul institucional DR
+$secondary: #6c757d !default;
+$success:   #198754 !default;
+$info:      #5B8FA8 !default;
+$warning:   #C9A227 !default;   // Dorado cálido
+$danger:    #CE1126 !default;   // Rojo DR
+$dark:      #2B2F36 !default;
+$light:     #f5f7fb !default;
+
+// ── Tipografía ────────────────────────────────────────────────────────────────
+$font-family-sans-serif: 'Ubuntu', 'Helvetica Neue', Arial, system-ui, sans-serif;
+$headings-font-family:   'Ubuntu', 'Roboto', sans-serif;
+$font-size-base:         0.875rem;
+$line-height-base:       1.5;
+$headings-font-weight:   700;
+$headings-color:         #2B2F36;
+
+// ── Radios y bordes ───────────────────────────────────────────────────────────
+$border-radius:    0.35rem;
+$border-radius-sm: 0.2rem;
+$border-radius-lg: 0.5rem;
+$border-radius-xl: 0.75rem;
+$border-color:     #dee2e6;
+
+// ── Cards ─────────────────────────────────────────────────────────────────────
+$card-border-color:      #e9ecef;
+$card-border-radius:     $border-radius-lg;
+$card-cap-bg:            #fff;
+$card-cap-padding-y:     1rem;
+$card-cap-padding-x:     1.25rem;
+$card-bg:                #fff;
+$card-border-width:      0;
+$card-shadow:            0 4px 12px rgba(#2B2F36, .04);
+$card-title-color:       $primary;
+$card-title-font-size:   .925rem;
+$card-title-font-weight: 700;
+
+// ── Inputs ────────────────────────────────────────────────────────────────────
+$input-border-color:       #ced4da;
+$input-focus-border-color: $primary;
+$input-focus-box-shadow:   0 0 0 .2rem rgba($primary, .1);
+$input-bg:                 #fff;
+$input-color:              #495057;
+$input-disabled-bg:        #e9ecef;
+$form-label-color:         #495057;
+
+// ── Botones ───────────────────────────────────────────────────────────────────
+$btn-border-radius: $border-radius;
+$btn-padding-x:     .85rem;
+$btn-font-weight:   600;
+
+// ── Tablas ────────────────────────────────────────────────────────────────────
+$table-border-color:   #e9ecef;
+$table-hover-bg:       rgba($primary, .04);
+$table-striped-bg:     #f8f9fa;
+$table-cell-padding-y: .75rem;
+$table-cell-padding-x: .75rem;
+
+// ── Sidebar ───────────────────────────────────────────────────────────────────
+$sidebar-width:           260px;
+$sidebar-collapsed-width: 68px;
+$sidebar-bg:              #002144;   // Azul marino DR oscurecido
+$sidebar-cta-bg:          lighten(#002144, 5%);
+
+$sidebar-brand-color:        #f8f9fa;
+$sidebar-brand-border-color: rgba(#fff, .06);
+$sidebar-brand-font-weight:  700;
+$sidebar-brand-font-size:    1.1rem;
+$sidebar-brand-padding-y:    1rem;
+$sidebar-brand-padding-x:    1.25rem;
+
+$sidebar-header-color:          rgba(#fff, .3);
+$sidebar-header-font-size:      .7rem;
+$sidebar-header-font-weight:    600;
+$sidebar-header-letter-spacing: .08em;
+$sidebar-header-padding:        1.25rem 1.5rem .3rem;
+
+$sidebar-link-color:              rgba(#fff, .55);
+$sidebar-link-bg:                 transparent;
+$sidebar-link-font-size:          .875rem;
+$sidebar-link-font-weight:        400;
+$sidebar-link-padding:            .6rem 1.5rem;
+$sidebar-link-gap:                .65rem;
+$sidebar-link-border-left-width:  3px;
+$sidebar-link-border-left-color:  transparent;
+$sidebar-link-border-radius:      0;
+
+$sidebar-link-hover-color:             #fff;
+$sidebar-link-hover-bg:               rgba(#fff, .04);
+$sidebar-link-hover-border-left-color: $danger;
+$sidebar-link-icon-hover-color:        #fff;
+
+$sidebar-link-active-color:             #fff;
+$sidebar-link-active-bg:               linear-gradient(90deg, rgba($primary, .15) 0%, rgba($primary, .06) 60%, rgba($primary, 0) 100%);
+$sidebar-link-active-border-left-color: $danger;
+$sidebar-link-icon-color:              rgba(#fff, .55);
+$sidebar-link-icon-active-color:       #fff;
+
+$sidebar-dropdown-padding-left:    2.75rem;
+$sidebar-dropdown-link-color:      rgba(#fff, .45);
+$sidebar-dropdown-link-hover-color: #fff;
+$sidebar-dropdown-link-active-color: #fff;
+$sidebar-dropdown-link-font-size:  .8125rem;
+$sidebar-badge-font-size:          .6rem;
+$sidebar-cta-padding:              1.25rem;
+$sidebar-cta-margin:               1rem 1rem 1.25rem;
+$sidebar-cta-border-radius:        $border-radius-lg;
+$sidebar-cta-color:                rgba(#fff, .85);
+$sidebar-cta-title-size:           .8125rem;
+$sidebar-cta-text-size:            .75rem;
+
+$sidebar-transition:
+  margin-left  .3s ease-in-out,
+  left         .3s ease-in-out,
+  width        .3s ease-in-out;
+
+// ── Navbar ────────────────────────────────────────────────────────────────────
+$navbar-bg:                 #fff;
+$navbar-box-shadow:         0 0 2rem 0 rgba(#2B2F36, .1);
+$navbar-border-bottom:      0;
+$navbar-padding-y:          .875rem;
+$navbar-padding-x:          1.375rem;
+$navbar-brand-color:        #f8f9fa;
+$navbar-brand-font-size:    1.15rem;
+$navbar-brand-font-weight:  400;
+$navbar-brand-padding-y:    .875rem;
+$navbar-brand-padding-x:    0;
+$navbar-brand-icon-color:   $primary;
+$navbar-input-bg:           #f8f9fa;
+$navbar-nav-link-padding-x: .5rem;
+
+// ── Colores de cuerpo y contenido ─────────────────────────────────────────────
+$body-bg:         #f5f7fb;
+$body-color:      #495057;
+$body-bg-dark:    #0b0e14;
+$body-color-dark: #f8f9fa;
+$main-bg:         #ced4da;
+$content-bg:      #f5f7fb;
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+$content-padding-desktop: 1.5rem;
+$content-padding-mobile:  1rem;
+$topbar-height:           60px;
+
+// ── Shadows ───────────────────────────────────────────────────────────────────
+$box-shadow-sm: 0 0.05rem 0.2rem rgba(#2B2F36, .05);
+$box-shadow:    0 0.1rem  0.2rem rgba(#2B2F36, .05);
+$box-shadow-lg: 0 0.2rem  0.2rem rgba(#2B2F36, .05);
+
+// ── SweetAlert2 ───────────────────────────────────────────────────────────────
+$swal-radius:    1rem;
+$swal-shadow:    0 25px 50px rgba(0, 0, 0, 0.5);
+$swal-bg:        #fff;
+$swal-bg-dark:   #0f172a;
+$swal-text-main: #e5e7eb;
+$swal-text-light:#e5e7eb;
+$swal-text-muted:#94a3b8;
+$swal-header-bg: $primary;
+
+// ── Otros componentes ─────────────────────────────────────────────────────────
+$footer-bg:                  #fff;
+$dropdown-bg:                #fff;
+$modal-content-border-width: 0;
+$modal-header-border-width:  1px;
+$modal-footer-border-width:  1px;
+$simplebar-scrollbar-bg:     #fff;
+$stat-bg:                    lighten($primary, 55%);
+$stat-icon-color:            $primary;
+
+// ── Opciones Bootstrap ────────────────────────────────────────────────────────
+$enable-negative-margins: true;
+$enable-shadows:          false;
+$enable-dark-mode:        false;
+$enable-rfs:              false;
+$enable-validation-icons: false;
+$min-contrast-ratio:      3;

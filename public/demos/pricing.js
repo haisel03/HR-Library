@@ -1,17 +1,24 @@
+/**
+ * @file pricing.js
+ * CAMBIOS v3:
+ * - $HR.msgLoading()     → $Alert.loading()
+ * - $HR.msgLoading(true) → $Alert.loading(false)
+ * - $HR.msgSuccess(t, m) → $Alert.success(texto) — un solo argumento
+ * - $HR.msgInfo(t, m)    → $Alert.info(texto)
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
-    // Selección de plan
-    $('.btn-select-plan').on('click', function () {
-        const plan = $(this).closest('.card-body').find('h5').text();
-        $HR.msgLoading();
+	$(".btn-select-plan").on("click", function () {
+		const plan = $(this).closest(".card-body").find("h5").text();
+		$Alert.loading();
 
-        setTimeout(() => {
-            $HR.msgLoading(true);
-            $HR.msgSuccess('Suscripción Actualizada', `Has seleccionado el plan ${plan}. Estamos preparando tu entorno institucional.`);
-        }, 1200);
-    });
+		setTimeout(() => {
+			$Alert.loading(false);
+			$Alert.success(`Has seleccionado el plan ${plan}. Estamos preparando tu entorno institucional.`);
+		}, 1200);
+	});
 
-    // Contactar ventas
-    $('#btn-ventas').on('click', function () {
-        $HR.msgInfo('Soporte Institucional', 'Un ejecutivo de ventas se pondrá en contacto contigo en breve para personalizar tu plan Enterprise.');
-    });
+	$("#btn-ventas").on("click", function () {
+		$Alert.info("Un ejecutivo de ventas se pondrá en contacto contigo en breve para personalizar tu plan Enterprise.");
+	});
 });

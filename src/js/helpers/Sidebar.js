@@ -1,5 +1,5 @@
 import SimpleBar from "simplebar";
-import Config from "../core/config";
+import Config from "../core/config.js";
 
 /**
  * @module Sidebar

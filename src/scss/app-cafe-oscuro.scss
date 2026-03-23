@@ -1,0 +1,39 @@
+// ============================================================================
+// app-cafe-oscuro.scss — HR Library v3 · Tema "Café Oscuro"
+//
+// Entry point dedicado al tema Café Oscuro (Expresso / Chocolate Amargo).
+// Sidebar oscuro, acentos dorados, fondo crema.
+//
+// Webpack / Vite: apuntar a este archivo como entry para generar
+//   app-cafe-oscuro.css
+// ============================================================================
+
+@import "bootstrap/scss/functions";
+
+// Tema oscuro
+@import "6-themes/cafe-oscuro";
+
+// Variables HR
+@import "1-variables/app";
+
+// Bootstrap
+@import "1-variables/bootstrap";
+
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+// Mixins
+@import "2-mixins/button";
+@import "2-mixins/table";
+@import "2-mixins/card";
+
+// Componentes
+@import "3-components/index";
+
+// Utilidades
+@import "4-utilities/cursors";
+@import "4-utilities/dark-mode";
+@import "4-utilities/sweetalert";
+
+// Vendors
+@import "5-vendor/vendors";

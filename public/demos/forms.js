@@ -1,15 +1,23 @@
+/**
+ * @file forms.js
+ * CAMBIOS v3:
+ * - $HR.isValidForm  → $Forms.isValidForm
+ * - $HR.msgLoading() → $Alert.loading()
+ * - $HR.msgLoading(true) → $Alert.loading(false)  (true=abrir, false=cerrar)
+ * - $HR.msgSuccess   → $Alert.success (un solo string)
+ */
+
 document.addEventListener("DOMContentLoaded", function () {
-    $('#validation-form').on('submit', function (e) {
-        e.preventDefault();
+	$("#validation-form").on("submit", function (e) {
+		e.preventDefault();
 
-        if ($HR.isValidForm(this)) {
-            $HR.msgLoading();
+		if ($Forms.isValidForm(this)) {
+			$Alert.loading();
 
-            // Simulación de procesamiento asíncrono
-            setTimeout(() => {
-                $HR.msgLoading(true); // Ocultar loading
-                $HR.msgSuccess('¡Éxito!', 'La solicitud ha sido procesada de manera institucional correctamente.');
-            }, 1500);
-        }
-    });
+			setTimeout(() => {
+				$Alert.loading(false);
+				$Alert.success("La solicitud ha sido procesada correctamente.");
+			}, 1500);
+		}
+	});
 });

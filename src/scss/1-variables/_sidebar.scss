@@ -10,7 +10,8 @@ $sidebar-transition:
   left         .3s ease-in-out,
   margin-right .3s ease-in-out,
   right        .3s ease-in-out,
-  width        .3s ease-in-out !default;
+  min-width    .3s ease-in-out,
+  max-width    .3s ease-in-out !default;
 
 // ── Brand ──────────────────────────────────────────────────────────────────
 $sidebar-brand-padding-y:    1rem   !default;

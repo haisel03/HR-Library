@@ -7,7 +7,7 @@ import {
 	CategoryScale, LinearScale, LogarithmicScale, TimeScale,
 	Filler, Legend, Title, Tooltip,
 } from "chart.js";
-import config from "../core/config";
+import config from "../core/config.js";
 
 /**
  * @module Charts

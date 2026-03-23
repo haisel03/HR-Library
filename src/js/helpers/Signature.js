@@ -1,5 +1,5 @@
 import SignaturePad from "signature_pad";
-import config from "../core/config";
+import config from "../core/config.js";
 
 /**
  * @module Signature

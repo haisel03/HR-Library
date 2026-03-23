@@ -1,70 +1,73 @@
-// ============================
-// Styles
-// ============================
-import "../scss/app.scss";
+/**
+ * @file app.js
+ * @description Entry point de HR Library.
+ * Importa todos los módulos de terceros en orden correcto,
+ * inicializa $HR y expone globalmente.
+ *
+ * @version 3.0.0
+ */
 
-// ============================
-// Bootstrap y jQuery
-// ============================
-import "./modules/jquery";
-import "./modules/bootstrap";
+// ── Estilos ──────────────────────────────────────────
+import "../scss/app.scss"; // Manejar via Vite/webpack
 
-// ============================
-// Modulos y librerias
-// ============================
-import "./modules/swal";
-import "./modules/select2";
-import "./modules/inputmask";
-import "./modules/flatpickr";     // CORREGIDO: faltaba en el import original
-import "./modules/datatables";
-import "./modules/fullcalendar";
-import "./modules/xlsx";
-import "./modules/humanizer";
-import "./modules/codes";
-import "./modules/feather";
-import "./modules/axios";
-import "./modules/dayjs";
-import "./modules/quill";
-import "./modules/signature_pad";
-import "./modules/dragula";
-import "./modules/validation";
-import "./modules/simplebar";
-import "./modules/notyf";
-import "./modules/toastify";
+// ── Base ─────────────────────────────────────────────
+import "./modules/jquery.js";        // 1. jQuery primero (base de Select2, DataTables)
+import "./modules/axios.js";         // 2. Axios con interceptores
+import "./modules/bootstrap.js";     // 3. Bootstrap componentes
 
-// ============================
-// Modulos de la plantilla
-// ============================
-import "./modules/sidebar";
-import "./modules/theme";
+// ── Notificaciones ────────────────────────────────────
+import "./modules/swal.js";          // 4. SweetAlert2
+import "./modules/notyf.js";         // 5. Notyf (alternativa toast)
+import "./modules/toastify.js";      // 6. Toastify (alternativa toast)
 
-// ============================
-// Modulos de graficos
-// ============================
-import "./modules/chartjs";
-import "./modules/vector-maps";
+// ── Formularios ───────────────────────────────────────
+import "./modules/select2.js";       // 7. Select2 (requiere jQuery)
+import "./modules/inputmask.js";     // 8. Inputmask con aliases RD
+import "./modules/flatpickr.js";     // 9. Flatpickr con locale ES
+import "./modules/validation.js";    // 10. Validación nativa
 
-// ============================
-// Iconos
-// ============================
-// Bootstrap Icons: viene del SCSS (app.scss → bootstrap-icons)
-// Font Awesome: se mantiene aquí como CSS (no duplicar en _fontawesome.scss)
-import "@fortawesome/fontawesome-free/css/all.min.css";
+// ── Tablas ────────────────────────────────────────────
+import "./modules/datatables.js";    // 11. DataTables con plugins
 
-// ============================
-// Control de acceso (inicializado despues de jQuery)
-// ============================
-import "./modules/access_control";
+// ── Gráficos ──────────────────────────────────────────
+import "./modules/chartjs.js";       // 12. Chart.js
+import "./modules/vector-maps.js";   // 13. Mapas vectoriales
 
-// ============================
-// HR PLUGIN
-// ============================
-import $HR from "./HR";
-window.$HR = $HR;
+// ── Calendarios ───────────────────────────────────────
+import "./modules/fullcalendar.js";  // 14. FullCalendar con plugins
+import "./modules/dayjs.js";         // 15. Day.js para fechas
 
-// ============================
-// Inicializador
-// ============================
+// ── Editores ──────────────────────────────────────────
+import "./modules/quill.js";         // 16. Quill WYSIWYG
+import "./modules/signature_pad.js"; // 17. Firma digital
+
+// ── Archivos / Exportación ────────────────────────────
+import "./modules/xlsx.js";          // 18. SheetJS Excel
+
+// ── Códigos ───────────────────────────────────────────
+import "./modules/codes.js";         // 19. JsBarcode + QRCode
+
+// ── Utilidades ───────────────────────────────────────
+import "./modules/dragula.js";       // 20. Dragula drag & drop
+import "./modules/simplebar.js";     // 21. SimpleBar scroll personalizado
+import "./modules/humanizer.js";     // 22. Humanize duration
+import "./modules/feather.js";       // 23. Feather Icons
+
+// ── UI / Template ─────────────────────────────────────
+import "./modules/theme.js";         // 25. Tema / dark mode
+import "./modules/access_control.js";// 26. Control de acceso
+
+// ── Iconos ────────────────────────────────────────────
+// Bootstrap Icons: via SCSS
+// Font Awesome: importar si se usa FA
+// import "@fortawesome/fontawesome-free/css/all.min.css";
+
+// ── HR Library ────────────────────────────────────────
+import $HR from "./HR.js";
+
+// ── Inicialización ────────────────────────────────────
 $(function () {
-	$HR.init();
+  $HR.init();
 });
+
+export default $HR;
