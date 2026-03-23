@@ -1,0 +1,6 @@
+D:\Proyectos\HR-Library\hr-dotnet\obj\Debug\net8.0\HRHelpers.csproj.AssemblyReference.cache
+D:\Proyectos\HR-Library\hr-dotnet\obj\Debug\net8.0\HRHelpers.GeneratedMSBuildEditorConfig.editorconfig
+D:\Proyectos\HR-Library\hr-dotnet\obj\Debug\net8.0\HRHelpers.AssemblyInfoInputs.cache
+D:\Proyectos\HR-Library\hr-dotnet\obj\Debug\net8.0\HRHelpers.AssemblyInfo.cs
+D:\Proyectos\HR-Library\hr-dotnet\obj\Debug\net8.0\HRHelpers.csproj.CoreCompileInputs.cache
+D:\Proyectos\HR-Library\hr-dotnet\obj\Debug\net8.0\HRHelpers.sourcelink.json

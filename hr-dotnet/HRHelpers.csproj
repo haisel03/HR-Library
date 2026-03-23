@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>HRHelpers</AssemblyName>
+    <RootNamespace>HRHelpers</RootNamespace>
+    <PackageId>HRHelpers</PackageId>
+    <Authors>HR Library Team</Authors>
+    <Description>C# port de HR-Library JS helpers para .NET (ASP.NET Core/MVC/Blazor)</Description>
+    <PackageTags>helpers;validation;format;api;aspnetcore</PackageTags>
+    <RepositoryUrl>https://github.com/tu-repo/HR-Library</RepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
+
