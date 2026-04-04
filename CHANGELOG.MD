@@ -2,6 +2,10 @@
 
 Todos los cambios notables en este proyecto serán documentados en este archivo.
 
+## Cambio de Webpack a Vite
+
+    - Se ha cambiado el empaquetador wewpack para Vite para darle mejor rendimiento
+
 ## [Unreleased]
 
 ### Cambios (BlackboxAI)

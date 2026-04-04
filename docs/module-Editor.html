@@ -129,14 +129,7 @@ con V2 (usa config.editor para las opciones base).</p></li></ul></dd>
 
     <h5 class="h5-examples">Example</h5>
     
-    <pre class="prettyprint"><code>// Auto-init: &lt;div data-editor="quill">&lt;/div>
-Editor.init();
-
-// Manual
-Editor.create("#descripcion");
-Editor.setHtml("#descripcion", "&lt;p>Hola&lt;/p>");
-const html = Editor.getHtml("#descripcion");
-Editor.onChange("#descripcion", (html) => console.log(html));</code></pre>
+    <pre class="prettyprint"><code>// Auto-init: &lt;div data-editor="quill">&lt;/div>Editor.init();// ManualEditor.create("#descripcion");Editor.setHtml("#descripcion", "&lt;p>Hola&lt;/p>");const html = Editor.getHtml("#descripcion");Editor.onChange("#descripcion", (html) => console.log(html));</code></pre>
 
 
 

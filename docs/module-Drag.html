@@ -125,12 +125,7 @@ Gestiona instancias con clave, callbacks de eventos y cleanup.</p></li></ul></dd
 
     <h5 class="h5-examples">Example</h5>
     
-    <pre class="prettyprint"><code>Drag.create("kanban", [col1, col2, col3]);
-Drag.onDrop("kanban", (el, target, source) => {
-  Api.patch(`/tareas/${el.dataset.id}`, { columna: target.id });
-});
-Drag.addContainer("kanban", document.getElementById("archivados"));
-Drag.destroy("kanban");</code></pre>
+    <pre class="prettyprint"><code>Drag.create("kanban", [col1, col2, col3]);Drag.onDrop("kanban", (el, target, source) => {  Api.patch(`/tareas/${el.dataset.id}`, { columna: target.id });});Drag.addContainer("kanban", document.getElementById("archivados"));Drag.destroy("kanban");</code></pre>
 
 
 

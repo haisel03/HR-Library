@@ -129,22 +129,7 @@ exportButtons, search) con la gestión de filas y el onAction integrado de V2
 
     <h5 class="h5-examples">Example</h5>
     
-    <pre class="prettyprint"><code>Table.initTable("#tblUsuarios", {
-  serverSide: true,
-  ajax:       config.apiUrl("/usuarios"),
-  columns: [
-    Table.index(),
-    Table.col("nombre", "Nombre", { icon: "bi bi-person", truncate: 30 }),
-    Table.money("monto",  "Monto"),
-    Table.date("creado",  "Fecha"),
-    Table.status("activo"),
-    Table.actions(["view","edit","delete"]),
-  ],
-});
-
-Table.onAction("#tblUsuarios", ({ action, row }) => {
-  if (action === "edit") Modal.open("#mdlEditar", row);
-});</code></pre>
+    <pre class="prettyprint"><code>Table.initTable("#tblUsuarios", {  serverSide: true,  ajax:       config.apiUrl("/usuarios"),  columns: [    Table.index(),    Table.col("nombre", "Nombre", { icon: "bi bi-person", truncate: 30 }),    Table.money("monto",  "Monto"),    Table.date("creado",  "Fecha"),    Table.status("activo"),    Table.actions(["view","edit","delete"]),  ],});Table.onAction("#tblUsuarios", ({ action, row }) => {  if (action === "edit") Modal.open("#mdlEditar", row);});</code></pre>
 
 
 

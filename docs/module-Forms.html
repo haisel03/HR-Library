@@ -127,10 +127,7 @@ funcionalidades avanzadas de V1: submit a API, watch, dirty, fill, submitConfirm
 
     <h5 class="h5-examples">Example</h5>
     
-    <pre class="prettyprint"><code>const data = Forms.serialize("#formUsuario");
-Forms.fill("#formUsuario", usuario);
-await Forms.submit("#formUsuario", "/usuarios", { method: "post", onSuccess: () => Table.reload("#tbl") });
-Forms.watch("#formUsuario", (campo, datos) => console.log(campo.name, datos));</code></pre>
+    <pre class="prettyprint"><code>const data = Forms.serialize("#formUsuario");Forms.fill("#formUsuario", usuario);await Forms.submit("#formUsuario", "/usuarios", { method: "post", onSuccess: () => Table.reload("#tbl") });Forms.watch("#formUsuario", (campo, datos) => console.log(campo.name, datos));</code></pre>
 
 
 

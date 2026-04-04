@@ -10,179 +10,181 @@
 // ============================================================================
 
 // ── Semánticos Bootstrap ──────────────────────────────────────────────────────
-$primary:   #C68642 !default;
-$secondary: #6B3A2A !default;
-$success:   #4A7C59 !default;
-$info:      #4A7A8A !default;
-$warning:   #A0522D !default;
-$danger:    #8B3A3A !default;
-$dark:      #1A0E0A !default;
-$light:     #F5ECD7 !default;
+$primary: #c68642 !default;
+$secondary: #6b3a2a !default;
+$success: #4a7c59 !default;
+$info: #4a7a8a !default;
+$warning: #a0522d !default;
+$danger: #8b3a3a !default;
+$dark: #1a0e0a !default;
+$light: #f5ecd7 !default;
 
 // ── Tipografía ────────────────────────────────────────────────────────────────
-$font-family-sans-serif: 'Roboto', 'Ubuntu', system-ui, sans-serif;
-$headings-font-family:   'Ubuntu', 'Roboto', serif;
-$font-size-base:         0.9rem;
-$line-height-base:       1.65;
-$headings-font-weight:   700;
-$headings-color:         #1A0E0A;
+$font-family-sans-serif: "Roboto", "Ubuntu", system-ui, sans-serif;
+$headings-font-family: "Ubuntu", "Roboto", serif;
+$font-size-base: 0.9rem;
+$line-height-base: 1.65;
+$headings-font-weight: 700;
+$headings-color: #1a0e0a;
 
 // ── Radios y bordes ───────────────────────────────────────────────────────────
-$border-radius:    0.5rem;
+$border-radius: 0.5rem;
 $border-radius-sm: 0.35rem;
 $border-radius-lg: 0.8rem;
 $border-radius-xl: 1.1rem;
-$border-color:     #D4B896;
+$border-color: #d4b896;
 
 // ── Cards ─────────────────────────────────────────────────────────────────────
-$card-border-color:   #D4B896;
-$card-border-radius:  $border-radius-lg;
-$card-cap-bg:         #FFFAF4;
-$card-cap-padding-y:  1rem;
-$card-cap-padding-x:  1.35rem;
-$card-bg:             #FFFAF4;
-$card-border-width:   1px;
-$card-shadow:         0 2px 8px rgba(#1A0E0A, .05), 0 1px 2px rgba(#1A0E0A, .04);
-$card-title-color:    #1A0E0A;
+$card-border-color: #d4b896;
+$card-border-radius: $border-radius-lg;
+$card-cap-bg: #fffaf4;
+$card-cap-padding-y: 1rem;
+$card-cap-padding-x: 1.35rem;
+$card-bg: #fffaf4;
+$card-border-width: 1px;
+$card-shadow:
+	0 2px 8px rgba(#1a0e0a, 0.05),
+	0 1px 2px rgba(#1a0e0a, 0.04);
+$card-title-color: #1a0e0a;
 $card-title-font-size: 1rem;
 $card-title-font-weight: 700;
 
 // ── Inputs ────────────────────────────────────────────────────────────────────
-$input-border-color:       #C4A882;
-$input-focus-border-color: #C68642;
-$input-focus-box-shadow:   0 0 0 .22rem rgba(#C68642, .18);
-$input-bg:                 #FFFAF4;
-$input-color:              #1A0E0A;
-$input-disabled-bg:        rgba(#C68642, .06);
-$form-label-color:         #2C1810;
+$input-border-color: #c4a882;
+$input-focus-border-color: #c68642;
+$input-focus-box-shadow: 0 0 0 0.22rem rgba(#c68642, 0.18);
+$input-bg: #fffaf4;
+$input-color: #1a0e0a;
+$input-disabled-bg: rgba(#c68642, 0.06);
+$form-label-color: #2c1810;
 
 // ── Botones ───────────────────────────────────────────────────────────────────
 $btn-border-radius: $border-radius;
-$btn-padding-x:     1.1rem;
-$btn-font-weight:   600;
+$btn-padding-x: 1.1rem;
+$btn-font-weight: 600;
 
 // ── Tablas ────────────────────────────────────────────────────────────────────
-$table-border-color: #DFC9AD;
-$table-hover-bg:     rgba(#C68642, .06);
-$table-striped-bg:   rgba(#C68642, .03);
-$table-cell-padding-y: .75rem;
-$table-cell-padding-x: .75rem;
+$table-border-color: #dfc9ad;
+$table-hover-bg: rgba(#c68642, 0.06);
+$table-striped-bg: rgba(#c68642, 0.03);
+$table-cell-padding-y: 0.75rem;
+$table-cell-padding-x: 0.75rem;
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
-$sidebar-width:           270px;
+$sidebar-width: 270px;
 $sidebar-collapsed-width: 68px;
-$sidebar-bg:              #1A0E0A;
-$sidebar-cta-bg:          #120A06;
+$sidebar-bg: #1a0e0a;
+$sidebar-cta-bg: #120a06;
 
-$sidebar-brand-color:        #F5ECD7;
-$sidebar-brand-border-color: rgba(#C68642, .1);
-$sidebar-brand-font-weight:  700;
-$sidebar-brand-font-size:    1.05rem;
-$sidebar-brand-padding-y:    0;
-$sidebar-brand-padding-x:    1.35rem;
+$sidebar-brand-color: #f5ecd7;
+$sidebar-brand-border-color: rgba(#c68642, 0.1);
+$sidebar-brand-font-weight: 700;
+$sidebar-brand-font-size: 1.05rem;
+$sidebar-brand-padding-y: 0;
+$sidebar-brand-padding-x: 1.35rem;
 
-$sidebar-header-color:          rgba(#C68642, .45);
-$sidebar-header-font-size:      .62rem;
-$sidebar-header-font-weight:    700;
-$sidebar-header-letter-spacing: .12em;
-$sidebar-header-padding:        1.1rem 1.35rem .3rem;
+$sidebar-header-color: rgba(#c68642, 0.45);
+$sidebar-header-font-size: 0.62rem;
+$sidebar-header-font-weight: 700;
+$sidebar-header-letter-spacing: 0.12em;
+$sidebar-header-padding: 1.1rem 1.35rem 0.3rem;
 
-$sidebar-link-color:              #C4A882;
-$sidebar-link-bg:                 transparent;
-$sidebar-link-font-size:          .875rem;
-$sidebar-link-font-weight:        400;
-$sidebar-link-padding:            .6rem 1.35rem;
-$sidebar-link-gap:                .7rem;
-$sidebar-link-border-left-width:  3px;
-$sidebar-link-border-left-color:  transparent;
-$sidebar-link-border-radius:      0;
+$sidebar-link-color: #c4a882;
+$sidebar-link-bg: transparent;
+$sidebar-link-font-size: 0.875rem;
+$sidebar-link-font-weight: 400;
+$sidebar-link-padding: 0.6rem 1.35rem;
+$sidebar-link-gap: 0.7rem;
+$sidebar-link-border-left-width: 3px;
+$sidebar-link-border-left-color: transparent;
+$sidebar-link-border-radius: 0;
 
-$sidebar-link-hover-color:             #F5ECD7;
-$sidebar-link-hover-bg:               rgba(#C68642, .07);
-$sidebar-link-hover-border-left-color: #C68642;
-$sidebar-link-icon-hover-color:        #F5ECD7;
+$sidebar-link-hover-color: #f5ecd7;
+$sidebar-link-hover-bg: rgba(#c68642, 0.07);
+$sidebar-link-hover-border-left-color: #c68642;
+$sidebar-link-icon-hover-color: #f5ecd7;
 
-$sidebar-link-active-color:             #E8C9A0;
-$sidebar-link-active-bg:               rgba(#C68642, .16);
-$sidebar-link-active-border-left-color: #C68642;
-$sidebar-link-icon-color:              rgba(#C4A882, .75);
-$sidebar-link-icon-active-color:       #C68642;
+$sidebar-link-active-color: #e8c9a0;
+$sidebar-link-active-bg: rgba(#c68642, 0.16);
+$sidebar-link-active-border-left-color: #c68642;
+$sidebar-link-icon-color: rgba(#c4a882, 0.75);
+$sidebar-link-icon-active-color: #c68642;
 
-$sidebar-dropdown-padding-left:    2.1rem;
-$sidebar-dropdown-link-color:      rgba(#C4A882, .75);
-$sidebar-dropdown-link-hover-color: #F5ECD7;
-$sidebar-dropdown-link-active-color: #C68642;
-$sidebar-dropdown-link-font-size:  .82rem;
-$sidebar-badge-font-size:          .63rem;
-$sidebar-cta-padding:              1.25rem;
-$sidebar-cta-margin:               1rem 1rem 1.25rem;
-$sidebar-cta-border-radius:        $border-radius-lg;
-$sidebar-cta-color:                rgba(#F5ECD7, .85);
-$sidebar-cta-title-size:           .8125rem;
-$sidebar-cta-text-size:            .75rem;
+$sidebar-dropdown-padding-left: 2.1rem;
+$sidebar-dropdown-link-color: rgba(#c4a882, 0.75);
+$sidebar-dropdown-link-hover-color: #f5ecd7;
+$sidebar-dropdown-link-active-color: #c68642;
+$sidebar-dropdown-link-font-size: 0.82rem;
+$sidebar-badge-font-size: 0.63rem;
+$sidebar-cta-padding: 1.25rem;
+$sidebar-cta-margin: 1rem 1rem 1.25rem;
+$sidebar-cta-border-radius: $border-radius-lg;
+$sidebar-cta-color: rgba(#f5ecd7, 0.85);
+$sidebar-cta-title-size: 0.8125rem;
+$sidebar-cta-text-size: 0.75rem;
 
 $sidebar-transition:
-  margin-left  .3s ease-in-out,
-  left         .3s ease-in-out,
-  width        .3s ease-in-out;
+	margin-left 0.3s ease-in-out,
+	left 0.3s ease-in-out,
+	width 0.3s ease-in-out;
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
-$navbar-bg:                 #FFFAF4;
-$navbar-box-shadow:         0 2px 12px rgba(#1A0E0A, .06);
-$navbar-border-bottom:      2px solid rgba(#C68642, .25);
-$navbar-padding-y:          0;
-$navbar-padding-x:          1.75rem;
-$navbar-brand-color:        #1A0E0A;
-$navbar-brand-font-size:    1.05rem;
-$navbar-brand-font-weight:  700;
-$navbar-brand-padding-y:    0;
-$navbar-brand-padding-x:    0;
-$navbar-brand-icon-color:   #C68642;
-$navbar-input-bg:           rgba(#C68642, .08);
-$navbar-nav-link-padding-x: .5rem;
+$navbar-bg: #fffaf4;
+$navbar-box-shadow: 0 2px 12px rgba(#1a0e0a, 0.06);
+$navbar-border-bottom: 2px solid rgba(#c68642, 0.25);
+$navbar-padding-y: 0;
+$navbar-padding-x: 1.75rem;
+$navbar-brand-color: #1a0e0a;
+$navbar-brand-font-size: 1.05rem;
+$navbar-brand-font-weight: 700;
+$navbar-brand-padding-y: 0;
+$navbar-brand-padding-x: 0;
+$navbar-brand-icon-color: #c68642;
+$navbar-input-bg: rgba(#c68642, 0.08);
+$navbar-nav-link-padding-x: 0.5rem;
 
 // ── Colores de cuerpo y contenido ─────────────────────────────────────────────
-$body-bg:         #F5ECD7;
-$body-color:      #2C1810;
-$body-bg-dark:    #0F0704;
-$body-color-dark: #C4A882;
-$main-bg:         #F0E4CC;
-$content-bg:      #F5ECD7;
+$body-bg: #f5ecd7;
+$body-color: #2c1810;
+$body-bg-dark: #0f0704;
+$body-color-dark: #c4a882;
+$main-bg: #f0e4cc;
+$content-bg: #f5ecd7;
 
 // ── Layout ────────────────────────────────────────────────────────────────────
 $content-padding-desktop: 1.75rem;
-$content-padding-mobile:  1rem;
-$topbar-height:           62px;
+$content-padding-mobile: 1rem;
+$topbar-height: 62px;
 
 // ── Shadows ───────────────────────────────────────────────────────────────────
-$box-shadow-sm: 0 0.05rem 0.2rem rgba(#1A0E0A, .06);
-$box-shadow:    0 0.1rem  0.2rem rgba(#1A0E0A, .08);
-$box-shadow-lg: 0 0.2rem  0.4rem rgba(#1A0E0A, .1);
+$box-shadow-sm: 0 0.05rem 0.2rem rgba(#1a0e0a, 0.06);
+$box-shadow: 0 0.1rem 0.2rem rgba(#1a0e0a, 0.08);
+$box-shadow-lg: 0 0.2rem 0.4rem rgba(#1a0e0a, 0.1);
 
 // ── SweetAlert2 ───────────────────────────────────────────────────────────────
-$swal-radius:    1rem;
-$swal-shadow:    0 16px 48px rgba(#1A0E0A, .16);
-$swal-bg:        #FFFAF4;
-$swal-bg-dark:   #1C0F09;
-$swal-text-main: #2C1810;
-$swal-text-light:#E8C9A0;
-$swal-text-muted:#A0522D;
+$swal-radius: 1rem;
+$swal-shadow: 0 16px 48px rgba(#1a0e0a, 0.16);
+$swal-bg: #fffaf4;
+$swal-bg-dark: #1c0f09;
+$swal-text-main: #2c1810;
+$swal-text-light: #e8c9a0;
+$swal-text-muted: #a0522d;
 $swal-header-bg: $primary;
 
 // ── Otros componentes ─────────────────────────────────────────────────────────
-$footer-bg:                  rgba(#FFFAF4, .9);
-$dropdown-bg:                #FFFAF4;
+$footer-bg: rgba(#fffaf4, 0.9);
+$dropdown-bg: #fffaf4;
 $modal-content-border-width: 0;
-$modal-header-border-width:  1px;
-$modal-footer-border-width:  1px;
-$simplebar-scrollbar-bg:     rgba(#C68642, .4);
-$stat-bg:                    rgba(#C68642, .12);
-$stat-icon-color:            #C68642;
+$modal-header-border-width: 1px;
+$modal-footer-border-width: 1px;
+$simplebar-scrollbar-bg: rgba(#c68642, 0.4);
+$stat-bg: rgba(#c68642, 0.12);
+$stat-icon-color: #c68642;
 
 // ── Opciones Bootstrap ────────────────────────────────────────────────────────
 $enable-negative-margins: true;
-$enable-shadows:          false;
-$enable-dark-mode:        false;
-$enable-rfs:              false;
-$enable-validation-icons: false;
-$min-contrast-ratio:      3;
+$enable-shadows: true;
+$enable-dark-mode: true;
+$enable-rfs: false;
+$enable-validation-icons: true;
+$min-contrast-ratio: 3;

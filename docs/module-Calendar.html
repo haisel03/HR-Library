@@ -127,13 +127,7 @@ Usa locale español y la configuración de $Date.fullCalendar() como base.</p></
 
     <h5 class="h5-examples">Example</h5>
     
-    <pre class="prettyprint"><code>const cal = Calendar.init("#divCal", {
-  events: "/api/eventos",
-  onEventClick: (info) => Modal.open("#mdlEvento"),
-});
-Calendar.addEvent("#divCal", { title: "Reunión", start: "2026-04-01" });
-Calendar.goTo("#divCal", "2026-06-01");
-Calendar.setView("#divCal", "timeGridWeek");</code></pre>
+    <pre class="prettyprint"><code>const cal = Calendar.init("#divCal", {  events: "/api/eventos",  onEventClick: (info) => Modal.open("#mdlEvento"),});Calendar.addEvent("#divCal", { title: "Reunión", start: "2026-04-01" });Calendar.goTo("#divCal", "2026-06-01");Calendar.setView("#divCal", "timeGridWeek");</code></pre>
 
 
 
