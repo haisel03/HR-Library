@@ -7,6 +7,9 @@
 /dist
 /_builder
 
+# HTML generado desde .hbs (equivalente a salida intermedia de HtmlWebpackPlugin)
+/src/pages
+
 # misc
 .DS_Store
 .vscode/

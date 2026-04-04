@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Libreria para mis proyectos con JavaScript, CSS, HTML, con Bootstrap y un sin número de funciones para la web",
   "scripts": {
-    "build": "npm run docs && cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js --progress",
+    "build": "npm run docs && node scripts/generate-pages.js && vite build && node scripts/postbuild.js",
+    "dev": "node scripts/generate-pages.js && vite",
+    "preview": "vite preview",
+    "build:webpack": "npm run docs && cross-env NODE_ENV=production webpack --config webpack/webpack.prod.js --progress",
     "watch": "webpack --config webpack/webpack.dev.js --watch --progress",
-    "start": "webpack serve --config webpack/webpack.dev.js --progress",
-    "prepublishOnly": "cross-env NODE_ENV=production webpack --progress --config webpack/webpack.prod.js",
+    "start": "node scripts/generate-pages.js && vite",
+    "start:webpack": "webpack serve --config webpack/webpack.dev.js --progress",
+    "prepublishOnly": "npm run build",
     "docs": "jsdoc -c jsdoc.json",
     "lint": "eslint src/js --ext .js",
     "lint:fix": "eslint src/js --ext .js --fix",
@@ -75,7 +79,8 @@
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.0",
-    "webpack-merge": "^5.10.0"
+    "webpack-merge": "^5.10.0",
+    "vite": "^5.4.21"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^7.2.0",
