@@ -16,7 +16,7 @@
  */
 
 import humanizeDuration from "humanize-duration";
-import DateHelper from "./Date.js";
+import DateHelper from "./utils/Date.js";
 
 /** Opciones base para humanize-duration. @private */
 const _DEFAULTS = Object.freeze({

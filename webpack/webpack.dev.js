@@ -1,25 +1,28 @@
-const { merge }  = require("webpack-merge");
-const webpack    = require("webpack");
-const common     = require("./webpack.common");
+const { merge } = require("webpack-merge");
+const webpack   = require("webpack");
+const common    = require("./webpack.common");
 
 module.exports = merge(common, {
   mode:    "development",
-  devtool: "eval-cheap-module-source-map",  // más rápido que inline-source-map,
-                                             // igual de legible en dev
+  devtool: "eval-cheap-module-source-map",
+
+  // ── Salida en dev: sin hash → evita acumular archivos en HMR ────────────────
+  output: {
+    filename:      "js/[name].js",
+    chunkFilename: "js/[name].chunk.js",
+  },
 
   // ── Dev Server ───────────────────────────────────────────────────────────────
   devServer: {
     static: {
       directory: common.output.path,
     },
-    port:               9000,
-    compress:           true,
-    historyApiFallback: true,
-    open: { app: { name: "firefox" } },
+    port:     9000,
+    compress: true,
+    // Usa el navegador predeterminado del sistema en vez de hardcodear Firefox
+    open:     true,
 
-    // Evita que cada guardado recargue toda la página;
-    // solo recarga si HMR no puede aplicar el cambio
-    hot:    true,
+    hot:        true,
     liveReload: false,
 
     client: {
@@ -27,11 +30,9 @@ module.exports = merge(common, {
         errors:   true,
         warnings: false,
       },
-      // Muestra progreso de compilación en el navegador
       progress: true,
     },
 
-    // Cabeceras útiles para desarrollo local
     headers: {
       "Access-Control-Allow-Origin": "*",
     },
@@ -39,16 +40,16 @@ module.exports = merge(common, {
 
   // ── Optimización en dev ──────────────────────────────────────────────────────
   optimization: {
-    // En dev no minificamos; solo necesitamos que los módulos
-    // tengan IDs estables para que HMR funcione bien
-    minimize:      false,
-    moduleIds:     "named",
-    runtimeChunk: "single",
+    minimize:  false,
+    moduleIds: "named",
+    // runtimeChunk heredado de common → HMR funciona correctamente
   },
+
+  // ── Performance: silenciar en dev, solo importa en prod ─────────────────────
+  performance: { hints: false },
 
   // ── Plugins exclusivos de dev ────────────────────────────────────────────────
   plugins: [
-    // Muestra nombres de módulos en el overlay de errores
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("development"),
     }),
@@ -60,7 +61,7 @@ module.exports = merge(common, {
       {
         test: /\.(css|scss|sass)$/i,
         use: [
-          "style-loader",       // inyecta estilos en el DOM → HMR de CSS sin reload
+          "style-loader",
           {
             loader:  "css-loader",
             options: { sourceMap: true, importLoaders: 2 },

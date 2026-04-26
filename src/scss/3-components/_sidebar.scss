@@ -89,7 +89,7 @@
 				left: 100%;
 				top: 0;
 				min-width: 200px;
-				background: darken($sidebar-bg, 3%);
+    background: darken($sidebar-bg, 3%);
 				border-radius: 0 $border-radius-lg $border-radius-lg 0;
 				box-shadow: 4px 4px 16px rgba(#000, .3);
 				padding: .5rem 0;
@@ -118,7 +118,7 @@
 	}
 
 	// Mobile: colapsado por defecto
-	@media (max-width: #{map-get($grid-breakpoints, 'lg') - .02px}) {
+@media (max-width: #{map-get($grid-breakpoints, 'lg') - .02px}) {
 		margin-left: -$sidebar-width;
 
 		&.collapsed {

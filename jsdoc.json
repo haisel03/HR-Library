@@ -10,12 +10,13 @@
 			"build",
 			"src/js/new",
 			"src/js/old",
-			"public/demos",
+			"static/demos",
 			"webpack",
 			"src/js/core/access_control.js",
 			"src/js/core/axios.js",
 			"src/js/core/bootstrap.js",
-			"src/js/core/chartjs.js"
+			"src/js/core/chartjs.js",
+			"scripts"
 		]
 	},
 	"opts": {

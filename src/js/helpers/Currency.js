@@ -15,7 +15,7 @@
  */
 
 import config       from "../core/config.js";
-import NumberHelper from "./Number.js";
+import NumberHelper from "./utils/Number.js";
 
 const Currency = {
 

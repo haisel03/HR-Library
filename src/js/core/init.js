@@ -35,29 +35,25 @@
  */
 
 import config     from "./config.js";
-import Dom        from "../helpers/Dom.js";
-import Alert      from "../helpers/Alert.js";
-import Storage    from "../helpers/Storage.js";
-import Api        from "../helpers/Api.js";
-import Event      from "../helpers/Event.js";
-import Validation from "../helpers/Validation.js";
-import Forms      from "../helpers/Forms.js";
-import Select2    from "../helpers/Select2.js";
-import Table      from "../helpers/Table.js";
-import Modal      from "../helpers/Modal.js";
-import Sidebar    from "../helpers/Sidebar.js";
-import Iframe     from "../helpers/Iframe.js";
+
+import * as Data from "../helpers/data/index.js";
+import Excel from "../helpers/data/Excel.js";
+import Asset from "../helpers/Asset.js";
+import Codes from "../helpers/Codes.js";
+import Editor from "../helpers/Editor.js";
+import Event from "../helpers/Event.js";
 import Fullscreen from "../helpers/Fullscreen.js";
-import Editor     from "../helpers/Editor.js";
-import Signature  from "../helpers/Signature.js";
-import DateHelper from "../helpers/Date.js";
-import Charts     from "../helpers/Charts.js";
-import Codes      from "../helpers/Codes.js";
-import Humanize   from "../helpers/Humanize.js";
-import Icons      from "../helpers/Icons.js";
-import Print      from "../helpers/Print.js";
-import Excel      from "../helpers/Excel.js";
-import Calendar   from "../helpers/Calendar.js";
+import Humanize from "../helpers/Humanize.js";
+import Icons from "../helpers/Icons.js";
+import Iframe from "../helpers/Iframe.js";
+import Print from "../helpers/Print.js";
+import Select2 from "../helpers/Select2.js";
+import Sidebar from "../helpers/Sidebar.js";
+import Signature from "../helpers/Signature.js";
+import Calendar from "../helpers/ui/Calendar.js";
+import * as UI from "../helpers/ui/index.js";
+import * as Utils from "../helpers/utils/index.js";
+
 
 /* ── Registro de helpers ── */
 

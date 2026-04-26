@@ -1,265 +1,382 @@
 /**
  * @module config
  * @description
- * Configuración global de HR Library v3.0.
+ * Configuración global de HR Library v3.2.
  * Combina la estructura robusta de CS v1 (Config.js) con la riqueza
  * de opciones de HR v2 (config.js). Consumida por todos los helpers.
  *
  * @author HR Library
- * @version 3.0.0
+ * @version 3.2.0
  */
 
-import spanish from "./spanish.js";
+import Lang from "./lang.js";
 
 const config = {
+	/* ── Aplicación ── */
+	app: {
+		name: "HR Library",
+		version: "3.2.0",
+		locale: "es-DO",
+		timezone: "America/Santo_Domingo",
+		dateFormat: "d/m/Y",
+		timeFormat: "H:i",
+		currency: "DOP",
+		environment: "development", // "development" | "production"
+	},
 
-  /* ── Aplicación ── */
-  app: {
-    name:        "HR Library",
-    version:     "3.0.0",
-    locale:      "es-DO",
-    timezone:    "America/Santo_Domingo",
-    dateFormat:  "d/m/Y",
-    timeFormat:  "H:i",
-    currency:    "DOP",
-    environment: "production", // "development" | "production"
-  },
+	/** Helper de idioma activo */
+	lang: Lang,
 
-  /** Helper de idioma activo */
-  lang: spanish,
+	/** ASP.NET Core integration */
+	aspnet: {
+		enabled: true,
+		problemDetails: true,  // Parse RFC 7807 ProblemDetails
+		modelStateErrors: true, // Convert ModelState to array
+		retryCount: 2,
+		antiForgery: false,    // Disabled per user
+	},
 
-  /* ── API / Rutas ── */
-  paths: {
-    base:   "/",
-    api:    "/api/v1",
-    assets: "/assets",
-  },
+	/** API Config - Enhanced for ASP.NET Core */
+		api: {
+			baseURL: '/api', // ASP.NET Core example
+			timeout: 15000,
+			retryCount: 2,
+			retryDelay: 1000,
+		version: 'v1',
+		headers: {
+			'Content-Type': 'application/json',
+			'X-Requested-With': 'XMLHttpRequest'
+		}
+	},
 
-  api: {
-    baseURL: "/api/v1",
-    timeout: 15_000,
-    retries: 0,
-  },
+	/** Globals exposure */
+	globals: {
+		enabled: true // window.$HR, $Alert etc.
+	},
 
-  /* ── Assets (rutas de recursos estáticos) ── */
-  assets: {
-    basePath: "img",
-    logos: {
-      path: "/logos",
-      variants: {
-        default:             "logo-horizontal.svg",
-        horizontal:          "logo-horizontal.svg",
-        compact:             "logo-compact.svg",
-        sidebar:             "logo-sidebar.svg",
-        "sidebar-collapsed": "logo-sidebar-collapsed.svg",
-        login:               "logo-login.svg",
-        "login-dark":        "logo-login-dark.svg",
-        symbol:              "logo-symbol.svg",
-        "symbol-dark":       "logo-symbol-dark.svg",
-        "symbol-on-dark":    "logo-symbol-on-dark.svg",
-      }
-    },
-    avatars:      { path: "/avatars",      default: "avatar.jpg"  },
-    employees:    { path: "/employees",    default: "default.png" },
-    backgrounds:  { path: "/bg" },
-    placeholders: { path: "/placeholders" },
-  },
+	/* ── Assets (rutas de recursos estáticos) ── */
+	assets: {
+		basePath: "img",
+		logos: {
+			path: "/logos",
+			variants: {
+				default: "logo-horizontal.svg",
+				horizontal: "logo-horizontal.svg",
+				compact: "logo-compact.svg",
+				sidebar: "logo-sidebar.svg",
+				"sidebar-collapsed": "logo-sidebar-collapsed.svg",
+				login: "logo-login.svg",
+				"login-dark": "logo-login-dark.svg",
+				symbol: "logo-symbol.svg",
+				"symbol-dark": "logo-symbol-dark.svg",
+				"symbol-on-dark": "logo-symbol-on-dark.svg",
+			},
+		},
+		avatars: { path: "/avatars", default: "avatar.jpg" },
+		employees: { path: "/employees", default: "default.png" },
+		backgrounds: { path: "/bg" },
+		placeholders: { path: "/placeholders" },
+	},
 
-  /* ── Monedas ── */
-  monedas: {
-    P: "RD$",   // Peso dominicano
-    U: "USD$",  // Dólar estadounidense
-    E: "EUR€",  // Euro
-  },
+	/* ── Monedas ── */
+	monedas: {
+		P: "RD$", // Peso dominicano
+		U: "USD$", // Dólar estadounidense
+		E: "EUR€", // Euro
+	},
 
-  /* ── Formatos ── */
-  formats: {
-    locale:   "es-DO",
-    date:     "DD/MM/YYYY",
-    datetime: "DD/MM/YYYY HH:mm",
-    time:     "HH:mm",
-  },
+	/* ── Formatos ── */
+	formats: {
+		locale: "es-DO",
+		date: "DD/MM/YYYY",
+		datetime: "DD/MM/YYYY HH:mm",
+		time: "HH:mm",
+	},
 
-  /* ── Paginación ── */
-  pagination: {
-    pageLength: 10,
-    lengthMenu: [10, 25, 50, 100],
-  },
+	/* ── Paginación ── */
+	pagination: {
+		pageLength: 10,
+		lengthMenu: [10, 25, 50, 100],
+	},
 
-  /* ── Storage ── */
-  storage: {
-    namespace: "HR",        // prefijo para namespacing en localStorage (V1 approach)
-    tokenKey:  "auth_token",
-  },
+	/* ── Storage ── */
+	storage: {
+		namespace: "HR", // prefijo para namespacing en localStorage (V1 approach)
+		tokenKey: "auth_token",
+	},
 
-  /* ── Validaciones (regex configurables) ── */
-  validation: {
-    emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
-    phoneRegex: /^[\d()\s\-+]{7,20}$/,
-    urlRegex:   /^https?:\/\/.+/,
-  },
+	/* ── Validaciones (regex configurables) ── */
+	validation: {
+		emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+		phoneRegex: /^[\d()\s\-+]{7,20}$/,
+		urlRegex: /^https?:\/\/.+/,
+	},
 
-  /* ── Alertas (SweetAlert2) ── */
-  alerts: {
-    colors: { s: "success", d: "danger",  w: "warning", i: "info", p: "primary" },
-    icons: {
-      s: "bi-check-circle-fill",
-      d: "bi-x-circle-fill",
-      w: "bi-exclamation-triangle-fill",
-      i: "bi-info-circle-fill",
-      p: "bi-bell-fill",
-    },
-    titles: { s: "Éxito", d: "Error", w: "Advertencia", i: "Información", p: "Aviso" },
-  },
+	/* ── Alertas (SweetAlert2) ── */
+	alerts: {
+		colors: {
+			s: "success",
+			d: "danger",
+			w: "warning",
+			i: "info",
+			p: "primary",
+		},
+		icons: {
+			s: "bi-check-circle-fill",
+			d: "bi-x-circle-fill",
+			w: "bi-exclamation-triangle-fill",
+			i: "bi-info-circle-fill",
+			p: "bi-bell-fill",
+		},
+		titles: {
+			s: "Éxito",
+			d: "Error",
+			w: "Advertencia",
+			i: "Información",
+			p: "Aviso",
+		},
+	},
 
-  swal: {
-    backdrop:     true,
-    background:   "#fff",
-    clickOutside: true,
-    escapeKey:    true,
-    button: { confirm: "Aceptar", cancel: "Cancelar", deny: "No aceptar" },
-    toast:  { position: "top-end", timer: 3500 },
-  },
+	swal: {
+		backdrop: true,
+		background: "#fff",
+		clickOutside: true,
+		escapeKey: true,
+		button: { confirm: "Aceptar", cancel: "Cancelar", deny: "No aceptar" },
+		toast: { position: "top-end", timer: 3500 },
+	},
 
-  /* ── Mensajes del sistema ── */
-  messages: {
-    default: "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
-    success: "Operación realizada con éxito.",
-    error:   "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
-    warning: "Advertencia: revise los datos ingresados.",
-    info:    "Información.",
-    saved:   "Registro guardado exitosamente.",
-    updated: "Registro actualizado exitosamente.",
-    deleted: "Registro eliminado exitosamente.",
-    noData:  "No hay datos disponibles.",
-    loading: { title: "Procesando...", subtitle: "Por favor, espere." },
-  },
+	/* ── Mensajes del sistema ── */
+	messages: {
+		default: "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
+		success: "Operación realizada con éxito.",
+		error: "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
+		warning: "Advertencia: revise los datos ingresados.",
+		info: "Información.",
+		saved: "Registro guardado exitosamente.",
+		updated: "Registro actualizado exitosamente.",
+		deleted: "Registro eliminado exitosamente.",
+		noData: "No hay datos disponibles.",
+		loading: { title: "Procesando...", subtitle: "Por favor, espere." },
+	},
 
-  /* ── DataTables ── */
-  datatables: {
-    base: {
-      language:   spanish.datatables,
-      pageLength: 10,
-      lengthMenu: [10, 25, 50, 100],
-      responsive: true,
-      autoWidth:  false,
-      processing: true,
-      serverSide: false,
-      dom: '<"row align-items-center mb-2"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
-           '<"row"<"col-sm-12"tr>>' +
-           '<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-    },
-    domButtons:
-      '<"row align-items-center mb-2"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"B><"col-sm-12 col-md-4"f>>' +
-      '<"row"<"col-sm-12"tr>>' +
-      '<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-  },
+	/* ── DataTables ── */
+	datatables: {
+		base: {
+			language: {}, // TODO: spanish.datatables
+			pageLength: 10,
+			lengthMenu: [10, 25, 50, 100],
+			responsive: true,
+			autoWidth: false,
+			processing: true,
+			serverSide: false,
+			dom:
+				'<"row align-items-center mb-2"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+				'<"row"<"col-sm-12"tr>>' +
+				'<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+		},
+		domButtons:
+			'<"row align-items-center mb-2"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"B><"col-sm-12 col-md-4"f>>' +
+			'<"row"<"col-sm-12"tr>>' +
+			'<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+	},
 
-  /* ── Acciones de DataTable ── */
-  dt_actions: {
-    view:        { icon: "bi-eye",                class: "text-primary",   title: "Ver",           action: "view"        },
-    edit:        { icon: "bi-pencil-square",      class: "text-warning",   title: "Editar",        action: "edit"        },
-    delete:      { icon: "bi-trash3",             class: "text-danger",    title: "Eliminar",      action: "delete",
-                   confirm: { title: "¿Eliminar registro?", text: "Esta acción no se puede deshacer." } },
-    print:       { icon: "bi-printer",            class: "text-secondary", title: "Imprimir",      action: "print"       },
-    duplicate:   { icon: "bi-files",              class: "text-info",      title: "Duplicar",      action: "duplicate"   },
-    download:    { icon: "bi-download",           class: "text-success",   title: "Descargar",     action: "download"    },
-    share:       { icon: "bi-share",              class: "text-primary",   title: "Compartir",     action: "share"       },
-    activate:    { icon: "bi-check-circle",       class: "text-success",   title: "Activar",       action: "activate"    },
-    deactivate:  { icon: "bi-slash-circle",       class: "text-warning",   title: "Desactivar",    action: "deactivate"  },
-    open:        { icon: "bi-box-arrow-up-right", class: "text-primary",   title: "Abrir",         action: "open"        },
-    history:     { icon: "bi-clock",              class: "text-muted",     title: "Historial",     action: "history"     },
-    permissions: { icon: "bi-lock",               class: "text-secondary", title: "Permisos",      action: "permissions" },
-    settings:    { icon: "bi-gear",               class: "text-dark",      title: "Configuración", action: "settings"    },
-    invoice:     { icon: "bi-file-earmark-text",  class: "text-primary",   title: "Factura",       action: "invoice"     },
-    payment:     { icon: "bi-credit-card",        class: "text-success",   title: "Registrar pago",action: "payment"     },
-    export:      { icon: "bi-upload",             class: "text-info",      title: "Exportar",      action: "export"      },
-  },
+	/* ── Acciones de DataTable ── */
+	dt_actions: {
+		view: {
+			icon: "bi-eye",
+			class: "text-primary",
+			title: "Ver",
+			action: "view",
+		},
+		edit: {
+			icon: "bi-pencil-square",
+			class: "text-warning",
+			title: "Editar",
+			action: "edit",
+		},
+		delete: {
+			icon: "bi-trash3",
+			class: "text-danger",
+			title: "Eliminar",
+			action: "delete",
+			confirm: {
+				title: "¿Eliminar registro?",
+				text: "Esta acción no se puede deshacer.",
+			},
+		},
+		print: {
+			icon: "bi-printer",
+			class: "text-secondary",
+			title: "Imprimir",
+			action: "print",
+		},
+		duplicate: {
+			icon: "bi-files",
+			class: "text-info",
+			title: "Duplicar",
+			action: "duplicate",
+		},
+		download: {
+			icon: "bi-download",
+			class: "text-success",
+			title: "Descargar",
+			action: "download",
+		},
+		share: {
+			icon: "bi-share",
+			class: "text-primary",
+			title: "Compartir",
+			action: "share",
+		},
+		activate: {
+			icon: "bi-check-circle",
+			class: "text-success",
+			title: "Activar",
+			action: "activate",
+		},
+		deactivate: {
+			icon: "bi-slash-circle",
+			class: "text-warning",
+			title: "Desactivar",
+			action: "deactivate",
+		},
+		open: {
+			icon: "bi-box-arrow-up-right",
+			class: "text-primary",
+			title: "Abrir",
+			action: "open",
+		},
+		history: {
+			icon: "bi-clock",
+			class: "text-muted",
+			title: "Historial",
+			action: "history",
+		},
+		permissions: {
+			icon: "bi-lock",
+			class: "text-secondary",
+			title: "Permisos",
+			action: "permissions",
+		},
+		settings: {
+			icon: "bi-gear",
+			class: "text-dark",
+			title: "Configuración",
+			action: "settings",
+		},
+		invoice: {
+			icon: "bi-file-earmark-text",
+			class: "text-primary",
+			title: "Factura",
+			action: "invoice",
+		},
+		payment: {
+			icon: "bi-credit-card",
+			class: "text-success",
+			title: "Registrar pago",
+			action: "payment",
+		},
+		export: {
+			icon: "bi-upload",
+			class: "text-info",
+			title: "Exportar",
+			action: "export",
+		},
+	},
 
-  /* ── Flatpickr ── */
-  flatpickr: {
-    base: { locale: "es", allowInput: true },
-    types: {
-      date:     { dateFormat: "Y-m-d" },
-      datetime: { enableTime: true, dateFormat: "Y-m-d H:i" },
-      time:     { enableTime: true, noCalendar: true, dateFormat: "H:i" },
-      range:    { mode: "range" },
-    },
-    modifiers: { min: { minDate: "today" }, max: { maxDate: "today" } },
-  },
+	/* ── Flatpickr ── */
+	flatpickr: {
+		base: { locale: "es", allowInput: true },
+		types: {
+			date: { dateFormat: "Y-m-d" },
+			datetime: { enableTime: true, dateFormat: "Y-m-d H:i" },
+			time: { enableTime: true, noCalendar: true, dateFormat: "H:i" },
+			range: { mode: "range" },
+		},
+		modifiers: { min: { minDate: "today" }, max: { maxDate: "today" } },
+	},
 
-  /* ── Charts (Chart.js) ── */
-  charts: {
-    base: {
-      responsive:          true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend:  { position: "top", labels: { font: { size: 13 } } },
-        tooltip: { enabled: true },
-      },
-    },
-  },
+	/* ── Charts (Chart.js) ── */
+	charts: {
+		base: {
+			responsive: true,
+			maintainAspectRatio: false,
+			plugins: {
+				legend: { position: "top", labels: { font: { size: 13 } } },
+				tooltip: { enabled: true },
+			},
+		},
+	},
 
-  /* ── Editor (Quill) ── */
-  editor: {
-    theme: "snow",
-    base: {
-      placeholder: "Escribe aquí...",
-      modules: {
-        toolbar: [
-          [{ header: [1, 2, 3, false] }],
-          ["bold", "italic", "underline", "strike"],
-          [{ list: "ordered" }, { list: "bullet" }],
-          [{ align: [] }],
-          ["link", "image"],
-          ["clean"],
-        ],
-      },
-    },
-  },
+	/* ── Editor (Quill) ── */
+	editor: {
+		theme: "snow",
+		base: {
+			placeholder: "Escribe aquí...",
+			modules: {
+				toolbar: [
+					[{ header: [1, 2, 3, false] }],
+					["bold", "italic", "underline", "strike"],
+					[{ list: "ordered" }, { list: "bullet" }],
+					[{ align: [] }],
+					["link", "image"],
+					["clean"],
+				],
+			},
+		},
+	},
 
-  /* ── Firma Digital ── */
-  signature: {
-    base: { penColor: "#3a7fe7", backgroundColor: "rgba(255,255,255,0)" },
-  },
+	/* ── Firma Digital ── */
+	signature: {
+		base: { penColor: "#3a7fe7", backgroundColor: "rgba(255,255,255,0)" },
+	},
 
-  /* ── Iconos ── */
-  icons: { fa: "fa", bi: "bi", feather: "feather", default: "bi" },
+	/* ── Iconos ── */
+	icons: { fa: "fa", bi: "bi", feather: "feather", default: "bi" },
 
-  /* ── Sidebar ── */
-  sidebar: {
-    sidebarSelector: "#sidebar",
-    toggleSelector:  '[data-widget="sidebar-toggle"], [data-toggle="sidebar"]',
-    scrollSelector:  ".js-simplebar",
-    collapseClass:   "collapsed",
-  },
+	/* ── Sidebar ── */
+	sidebar: {
+		sidebarSelector: "#sidebar",
+		toggleSelector: '[data-widget="sidebar-toggle"], [data-toggle="sidebar"]',
+		scrollSelector: ".js-simplebar",
+		collapseClass: "collapsed",
+	},
 
-  /* ── IframeTab ── */
-  iframeTab: {
-    tabsContainer:     "#iframe-tabs",
-    contentsContainer: "#iframe-contents",
-    emptyIcon:    "bi-window-plus",
-    emptyTitle:   "HR Library",
-    emptyMessage: "Selecciona una página en el menú para abrir una pestaña.",
-  },
+	/* ── IframeTab ── */
+	iframeTab: {
+		tabsContainer: "#iframe-tabs",
+		contentsContainer: "#iframe-contents",
+		emptyIcon: "bi-window-plus",
+		emptyTitle: "HR Library",
+		emptyMessage: "Selecciona una página en el menú para abrir una pestaña.",
+	},
 
-  /* ── Utilidades ── */
+	/* ── Utilidades ── */
 
-  /** @returns {boolean} Indica si el entorno es desarrollo */
-  isDev() { return this.app.environment === "development"; },
+	/** @returns {boolean} Indica si el entorno es desarrollo */
+	isDev() {
+		return this.app.environment === "development";
+	},
 
-  /** @param {string} endpoint @returns {string} URL completa del endpoint */
-  apiUrl(endpoint) { return `${this.paths.api}${endpoint}`; },
+	/** @param {string} endpoint @returns {string} URL completa del endpoint */
+	apiUrl(endpoint) {
+		return `/api${endpoint}`;
+	},
 
-  /** @param {string} code @returns {string} Símbolo de la moneda */
-  moneda(code) { return this.monedas[code] ?? ""; },
+	/** @param {string} code @returns {string} Símbolo de la moneda */
+	moneda(code) {
+		return this.monedas[code] ?? "";
+	},
 
-  /** Inicializa Config. Invocado por init.js */
-  init() {
-    if (this.isDev()) {
-      console.info(`[Config] ${this.app.name} v${this.app.version} — entorno: ${this.app.environment}`);
-    }
-  },
+	/** Inicializa Config. Invocado por init.js */
+	init() {
+		if (this.isDev()) {
+			console.info(
+				`[Config] ${this.app.name} v${this.app.version} — entorno: ${this.app.environment}`,
+			);
+		}
+	},
 };
 
 Object.freeze(config);

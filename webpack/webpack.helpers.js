@@ -1,8 +1,8 @@
-const paths           = require("./paths");
-const path            = require("path");
-const fs              = require("fs");
+const paths             = require("./paths");
+const path              = require("path");
+const fs                = require("fs");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Handlebars      = require("handlebars");
+const Handlebars        = require("handlebars");
 
 /* ─────────────────────────────────────────────────────────────────────────────
    UTILIDAD INTERNA: registra todos los .hbs de un directorio como partials
@@ -35,8 +35,8 @@ module.exports = {
       fs.readdirSync(paths.demos)
         .filter((file) => file.endsWith(".js"))
         .forEach((file) => {
-          const name     = path.parse(file).name;
-          entries[name]  = path.resolve(paths.demos, file);
+          const name    = path.parse(file).name;
+          entries[name] = path.resolve(paths.demos, file);
         });
     }
 
@@ -47,7 +47,7 @@ module.exports = {
      buildHtmlPlugins()
      Genera un HtmlWebpackPlugin por cada .hbs en src/views/pages/.
      Si existe un demo JS con el mismo nombre que la página, lo incluye
-     como chunk adicional (ej: index.hbs → chunks: ["vendors", "app", "index"]).
+     como chunk adicional (ej: index.hbs → chunks: ["runtime", "vendors", "app", "index"]).
   ─────────────────────────────────────────────────────────────────────────── */
   buildHtmlPlugins() {
     if (!fs.existsSync(paths.pages)) {
@@ -58,22 +58,21 @@ module.exports = {
       .readdirSync(paths.pages)
       .filter((file) => file.endsWith(".hbs"))
       .map((file) => {
-        const name    = path.parse(file).name;
-        const demoJs  = path.resolve(paths.demos, `${name}.js`);
+        const name   = path.parse(file).name;
+        const demoJs = path.resolve(paths.demos, `${name}.js`);
 
-        // "vendors" siempre primero si splitChunks lo genera;
-        // luego el entry principal y, si existe, el demo específico de la página
-        const chunks  = ["vendors", "app"];
+        // "runtime" primero (chunk de webpack runtime), luego vendors, app y demo
+        const chunks = ["runtime", "vendors", "app"];
         if (fs.existsSync(demoJs)) chunks.push(name);
 
         return new HtmlWebpackPlugin({
           filename:      `${name}.html`,
           template:      path.resolve(paths.pages, file),
           inject:        "body",
-          scriptLoading: "blocking",
+          // "defer" es más moderno y no bloquea el parser HTML
+          scriptLoading: "defer",
           minify:        false,
           chunks,
-          // Orden estricto: vendors → app → demo (si existe)
           chunksSortMode: "manual",
         });
       });

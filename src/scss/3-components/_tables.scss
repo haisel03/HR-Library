@@ -128,9 +128,9 @@
 
     &.current {
       background:   $primary !important;
-      border-color: darken($primary, 8%) !important;
+border-color: darken($primary, 8%) !important;
       color:        $white !important;
-      &:hover { background: darken($primary, 8%) !important; color: $white !important; }
+  &:hover { background: darken($primary, 8%) !important; color: $white !important; }
     }
 
     &.disabled { color: rgba($secondary, .35) !important; }

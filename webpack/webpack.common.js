@@ -5,7 +5,6 @@ const TerserPlugin = require("terser-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { existsSync } = require("fs");
 const { resolve } = require("path");
 
 // Registrar partials Handlebars antes de procesar templates
@@ -13,16 +12,16 @@ helpers.registerHandlebarsPartials();
 
 // ─── Assets estáticos a copiar ────────────────────────────────────────────────
 const copyPatterns = [
-	{ from: paths.img, to: "img", noErrorOnMissing: true },
+	{ from: paths.img,   to: "img",   noErrorOnMissing: true },
 	{ from: paths.fonts, to: "fonts", noErrorOnMissing: true },
 	{
 		from: "node_modules/bootstrap-icons/font/fonts",
-		to: "fonts",
+		to:   "fonts",
 		noErrorOnMissing: true,
 	},
 	{
 		from: resolve(paths.root, "docs"),
-		to: "docs",
+		to:   "docs",
 		noErrorOnMissing: true,
 	},
 ];
@@ -36,9 +35,11 @@ module.exports = {
 	// ── Salida ──────────────────────────────────────────────────────────────────
 	output: {
 		path: paths.dist,
-		filename: "js/[name].min.js",
+		// [contenthash] invalida el cache del browser SOLO cuando cambia el contenido
+		// → usuarios siempre reciben la versión más reciente sin romper el cache innecesariamente
+		filename:   "js/[name].[contenthash:8].min.js",
 		publicPath: "/",
-		clean: true,            // reemplaza CleanWebpackPlugin (nativo desde webpack 5)
+		clean: true,
 	},
 
 	// ── Cache persistente ────────────────────────────────────────────────────────
@@ -56,19 +57,18 @@ module.exports = {
 		},
 	},
 
-	// ── Performance ─────────────────────────────────────────────────────────────
-	performance: { hints: false },
-
 	// ── Optimización ────────────────────────────────────────────────────────────
 	optimization: {
-		minimize: true,
 		minimizer: [
 			new TerserPlugin({
-				parallel: true,       // usa todos los cores disponibles
+				parallel: true,
 				extractComments: false,
 				terserOptions: {
 					format: { comments: false },
-					compress: { drop_console: false },
+					compress: {
+						drop_console: true,    // elimina console.* en producción
+						drop_debugger: true,   // elimina debugger statements
+					},
 				},
 			}),
 			new CssMinimizerPlugin({
@@ -76,15 +76,19 @@ module.exports = {
 			}),
 		],
 
+		// El runtime (mapa de chunks) en su propio archivo
+		// → el hash de vendors NO cambia cuando solo editas app.js
+		runtimeChunk: "single",
+
 		// Extrae vendor (node_modules) en un chunk compartido entre páginas
 		// Evita duplicar Bootstrap, jQuery, etc. en cada bundle de página
 		splitChunks: {
 			chunks: "all",
 			cacheGroups: {
 				vendors: {
-					test: /[\\/]node_modules[\\/]/,
-					name: "vendors",
-					chunks: "all",
+					test:     /[\\/]node_modules[\\/]/,
+					name:     "vendors",
+					chunks:   "all",
 					priority: 10,
 				},
 			},
@@ -99,15 +103,11 @@ module.exports = {
 		// Copia img/, fonts/, docs/ tal cual al dist/
 		new CopyWebpackPlugin({ patterns: copyPatterns }),
 
-		// Extrae CSS en archivos separados (solo prod lo usa, pero se declara aquí
-		// porque HtmlWebpackPlugin necesita conocer el plugin en common)
+		// Extrae CSS en archivos separados con hash para cache busting
 		new MiniCssExtractPlugin({
-			filename: "css/[name].min.css",
-			chunkFilename: "css/[name].min.css",
+			filename:      "css/[name].[contenthash:8].min.css",
+			chunkFilename: "css/[name].[contenthash:8].min.css",
 		}),
-
-		// ELIMINADO: CleanWebpackPlugin  → output.clean: true lo reemplaza
-		// ELIMINADO: HotModuleReplacementPlugin → solo va en dev (ver webpack.dev.js)
 	],
 
 	// ── Loaders ─────────────────────────────────────────────────────────────────
@@ -115,7 +115,7 @@ module.exports = {
 		rules: [
 			// JavaScript / JSX
 			{
-				test: /\.(js|jsx)$/,
+				test:    /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: {
 					loader: "babel-loader",
@@ -123,19 +123,18 @@ module.exports = {
 						cacheDirectory: true,
 						presets: [
 							["@babel/preset-env", {
-								targets: "> 0.25%, not dead",
+								targets:     "> 0.25%, not dead",
 								useBuiltIns: "usage",
-								corejs: 3,
+								corejs:      3,
 							}],
 						],
-						// sin plugins: [] — preset-env ya incluye dynamic import
 					},
 				},
 			},
 
 			// Handlebars
 			{
-				test: /\.(hbs|handlebars)$/,
+				test:   /\.(hbs|handlebars)$/,
 				loader: "handlebars-loader",
 				options: {
 					partialDirs: [paths.partials, paths.layouts],
@@ -160,11 +159,13 @@ module.exports = {
 
 	// ── Resolución de módulos ────────────────────────────────────────────────────
 	resolve: {
-		modules: [paths.src, "node_modules"],
+		modules:    [paths.src, "node_modules"],
 		extensions: [".js", ".jsx", ".hbs"],
 		alias: {
-			"@": paths.src,
-			assets: paths.public,
+			"@":     paths.src,
+			assets:  paths.public,
 		},
+		// No seguir symlinks → resolución más rápida (útil con monorepos y npm link)
+		symlinks: false,
 	},
 };

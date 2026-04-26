@@ -16,7 +16,7 @@
  * Print.html("<h1>Reporte</h1><p>Contenido...</p>");
  */
 
-import Dom from "./Dom.js";
+import Dom from "./utils/Dom.js";
 
 // ─────────────────────────────────────────────
 // Función privada de impresión por iframe

@@ -10,7 +10,7 @@
     "docs": "jsdoc -c jsdoc.json",
     "lint": "eslint src/js --ext .js",
     "lint:fix": "eslint src/js --ext .js --fix",
-		"api":       "json-server --watch db.json --port 3001 --routes routes.json --middlewares middleware.js",
+    "api": "json-server --watch db.json --port 3001 --routes routes.json --middlewares middleware.js",
     "api:delay": "json-server --watch db.json --port 3001 --routes routes.json --middlewares middleware.js --delay 500",
     "api:reset": "node reset.js"
   },
@@ -90,6 +90,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.7",
+    "choices.js": "^11.2.1",
     "core-js": "^3.40.0",
     "datatables.net": "^2.2.2",
     "datatables.net-bs5": "^2.2.2",

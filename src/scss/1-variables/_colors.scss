@@ -1,4 +1,3 @@
-@use "sass:map";
 // Theme colors - Soft professional palette (A–Z)
 $aqua: #00FFFF !default;
 $beige: #F5F5DC !default;
@@ -158,7 +157,7 @@ $social-colors: (
   "vimeo": #1AB7EA,
   "youtube": #FF0000) !default;
 
-$theme-colors: map.merge($theme-colors, $social-colors
+$theme-colors: map-merge($theme-colors, $social-colors
 );
 
 // Body

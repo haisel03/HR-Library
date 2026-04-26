@@ -14,7 +14,7 @@
  * @version 3.0.0
  */
 
-import Dom from "./Dom.js";
+import Dom from "./utils/Dom.js";
 
 /* ── Helpers privados de API nativa ── */
 
