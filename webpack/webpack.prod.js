@@ -1,18 +1,22 @@
-const { merge }          = require("webpack-merge");
+const { merge }           = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const webpack            = require("webpack");
-const common             = require("./webpack.common");
-const paths              = require("./paths");
+const webpack             = require("webpack");
+const common              = require("./webpack.common");
+const paths               = require("./paths");
 
 module.exports = merge(common, {
   mode:    "production",
-  devtool: false,          // sin sourcemaps en prod (velocidad + seguridad)
+  // hidden-source-map: genera el mapa pero NO lo enlaza en el JS
+  // → stack traces legibles en tu servidor de errores (Sentry, etc.)
+  //   sin exponer el código fuente al usuario final
+  // Usa false si prefieres sin sourcemaps en absoluto.
+  devtool: "hidden-source-map",
 
   // ── Salida ───────────────────────────────────────────────────────────────────
+  // publicPath vacío → rutas relativas: el HTML funciona en cualquier host/carpeta
   output: {
     path:       paths.dist,
-    filename:   "js/[name].min.js",
-    publicPath: "",        // rutas relativas para que el HTML funcione en cualquier host
+    publicPath: "",
   },
 
   // ── Plugins exclusivos de prod ────────────────────────────────────────────────
@@ -20,14 +24,9 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("production"),
     }),
-
-    // NOTA: MiniCssExtractPlugin ya está declarado en common.js para que
-    // HtmlWebpackPlugin lo conozca. Aquí solo reemplazamos el loader
-    // (style-loader → MiniCssExtractPlugin.loader) via las rules de abajo.
-    // No instanciamos el plugin de nuevo para evitar duplicados.
   ],
 
-  // ── CSS en prod: extrae a archivos .css separados ────────────────────────────
+  // ── CSS en prod: extrae a archivos .css separados con hash ──────────────────
   module: {
     rules: [
       {
@@ -35,13 +34,19 @@ module.exports = merge(common, {
         use: [
           {
             loader:  MiniCssExtractPlugin.loader,
-            options: { publicPath: "../" },   // corrige rutas relativas de fuentes/img en CSS
+            // Corrige rutas relativas de fuentes/img dentro del CSS
+            options: { publicPath: "../" },
           },
           "css-loader",
           "postcss-loader",
           {
             loader:  "sass-loader",
-            options: { sassOptions: { quietDeps: true } },
+            options: {
+              sassOptions: {
+                quietDeps: true,
+                silenceDeprecations: ["import", "global-builtin", "color-functions"],
+              },
+            },
           },
         ],
       },
@@ -50,8 +55,11 @@ module.exports = merge(common, {
 
   // ── Performance ──────────────────────────────────────────────────────────────
   performance: {
-    hints:                "warning",   // avisa si un asset supera el límite (no bloquea)
-    maxEntrypointSize:    512_000,
-    maxAssetSize:         512_000,
+    hints:             "warning",
+    // Este proyecto distribuye demos y librerías UI pesadas; mantenemos hints
+    // solo para JS/CSS generados y con umbrales acordes al tamaño real del bundle.
+    assetFilter:       (assetFilename) => /\.(js|css)$/i.test(assetFilename),
+    maxEntrypointSize: 6_000_000,
+    maxAssetSize:      1_000_000,
   },
 });

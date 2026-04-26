@@ -7,7 +7,11 @@
  * @version 3.0.0
  */
 
-/** @type {Set<Object|Function>} @private */
+/**
+ * Plugins ya instalados.
+ * @type {Set<Object|Function>}
+ * @private
+ */
 const _installed = new Set();
 
 /**
@@ -45,8 +49,15 @@ export function installPlugin(HR, plugin) {
   }
 }
 
-/** @param {Object|Function} plugin @returns {boolean} */
+/**
+ * Indica si un plugin ya fue instalado.
+ * @param {Object|Function} plugin
+ * @returns {boolean}
+ */
 export const isInstalled = (plugin) => _installed.has(plugin);
 
-/** @returns {string[]} Nombres de plugins instalados */
+/**
+ * Lista los nombres de los plugins instalados.
+ * @returns {string[]}
+ */
 export const installedPlugins = () => [..._installed].map((p) => p.name ?? "anónimo");

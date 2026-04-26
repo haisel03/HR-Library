@@ -11,6 +11,13 @@ Todos los cambios notables en este proyecto serán documentados en este archivo.
 - jsdoc.json exclude legacy/core/vendor para docs clean (solo warnings menores).
 - Docs generados ./docs/ sin errores.
 
+### Corregido
+
+- Build JS corregido al actualizar `Choices.js` para usar imports compatibles con Webpack 5 y la nueva ubicación de `Dom`.
+- ESLint actualizado para soportar sintaxis moderna del proyecto (`ecmaVersion: 2021`, `browser`, `es2021`).
+- Warnings de JSDoc corregidos en `plugin-system.js` y `Table.js`.
+- Warnings ruidosos de Sass y performance afinados en `webpack.prod.js`, manteniendo visibles solo los avisos de bundle realmente relevantes.
+
 ## [1.0.0] - 2026-02-01
 
 ### Añadido
