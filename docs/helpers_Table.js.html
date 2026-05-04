@@ -1,4 +1,53 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Table.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Table.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @module Table
  * @description
  * Helper para DataTables en HR Library.
@@ -53,14 +102,14 @@ const _dt = (el) => {
 /** @private */
 const _title = (title, icon, iconClass = "text-muted") =>
 	icon
-		? `<span class="me-1"><i class="${icon} ${iconClass}"></i></span>${title}`
+		? `&lt;span class="me-1">&lt;i class="${icon} ${iconClass}">&lt;/i>&lt;/span>${title}`
 		: title;
 
 /** @private */
 // Escapa caracteres para atributos HTML
 const _escAttr = (str) =>
-	String(str).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")
-		.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	String(str).replace(/&amp;/g, "&amp;amp;").replace(/"/g, "&amp;quot;").replace(/'/g, "&amp;#39;")
+		.replace(/&lt;/g, "&amp;lt;").replace(/>/g, "&amp;gt;");
 
 /* ── Table ── */
 
@@ -102,7 +151,7 @@ const Table = {
 		if (!$table.length) { console.warn("[Table] Elemento no encontrado:", el); return null; }
 		if ($.fn.DataTable?.isDataTable($table)) return $table.DataTable();
 
-		const hasButtons = Array.isArray(options.buttons) && options.buttons.length;
+		const hasButtons = Array.isArray(options.buttons) &amp;&amp; options.buttons.length;
 		const dom = options.dom ?? (hasButtons ? config.datatables.domButtons : config.datatables.base.dom);
 		const select = options.select === true ? { style: "multi", selector: "td:first-child" } : (options.select ?? false);
 
@@ -158,7 +207,7 @@ const Table = {
 		if (width != null) column.width = width;
 
 		const hasCustomRender = typeof render === "function";
-		const hasTruncate = NumberHelper.isValid(truncate) && truncate > 0;
+		const hasTruncate = NumberHelper.isValid(truncate) &amp;&amp; truncate > 0;
 
 		if (hasCustomRender || hasTruncate) {
 			column.render = (val, type, row) => {
@@ -169,11 +218,11 @@ const Table = {
 				const processed = hasCustomRender ? render(val, type, row) : raw;
 				if (!hasTruncate || type !== "display") return processed;
 				const isCut = raw.length > truncate;
-				const tipAttr = tooltip && isCut ? ` title="${_escAttr(raw)}"` : "";
+				const tipAttr = tooltip &amp;&amp; isCut ? ` title="${_escAttr(raw)}"` : "";
 				if (hasCustomRender) {
-					return tooltip && isCut ? `<span${tipAttr}>${processed}</span>` : processed;
+					return tooltip &amp;&amp; isCut ? `&lt;span${tipAttr}>${processed}&lt;/span>` : processed;
 				}
-				return `<span${tipAttr}>${Strings.truncate(raw, truncate)}</span>`;
+				return `&lt;span${tipAttr}>${Strings.truncate(raw, truncate)}&lt;/span>`;
 			};
 		}
 		return column;
@@ -189,10 +238,10 @@ const Table = {
 	/** Columna de checkbox para selección múltiple. */
 	checkbox: () => ({
 		data: null,
-		title: '<input type="checkbox" class="form-check-input dt-select-all">',
+		title: '&lt;input type="checkbox" class="form-check-input dt-select-all">',
 		orderable: false, searchable: false,
 		className: "text-center dt-checkboxes-cell", width: 40,
-		render: () => '<input type="checkbox" class="form-check-input dt-check">',
+		render: () => '&lt;input type="checkbox" class="form-check-input dt-check">',
 		defaultContent: "",
 	}),
 
@@ -201,8 +250,8 @@ const Table = {
 		Table.col(data, title, {
 			className: "text-center",
 			render: (val) => val
-				? '<span class="badge bg-success">Activo</span>'
-				: '<span class="badge bg-secondary">Inactivo</span>',
+				? '&lt;span class="badge bg-success">Activo&lt;/span>'
+				: '&lt;span class="badge bg-secondary">Inactivo&lt;/span>',
 		}),
 
 	/** Columna boolean Sí / No. */
@@ -210,8 +259,8 @@ const Table = {
 		Table.col(data, title, {
 			className: "text-center",
 			render: (val) => val
-				? '<span class="badge bg-success"><i class="bi bi-check-lg me-1"></i>Sí</span>'
-				: '<span class="badge bg-secondary"><i class="bi bi-x-lg me-1"></i>No</span>',
+				? '&lt;span class="badge bg-success">&lt;i class="bi bi-check-lg me-1">&lt;/i>Sí&lt;/span>'
+				: '&lt;span class="badge bg-secondary">&lt;i class="bi bi-x-lg me-1">&lt;/i>No&lt;/span>',
 		}),
 
 	/**
@@ -225,8 +274,8 @@ const Table = {
 			render: (val) => {
 				const item = map[val];
 				return item
-					? `<span class="badge bg-${item.color}">${item.label}</span>`
-					: `<span class="badge bg-secondary">${val ?? ""}</span>`;
+					? `&lt;span class="badge bg-${item.color}">${item.label}&lt;/span>`
+					: `&lt;span class="badge bg-secondary">${val ?? ""}&lt;/span>`;
 			},
 		}),
 
@@ -306,43 +355,43 @@ const Table = {
 					.filter(Boolean);
 
 				// 🔹 Caso 1: 3 o menos → inline
-				if (resolved.length <= 3) {
+				if (resolved.length &lt;= 3) {
 					return `
-					<div class="table-actions d-flex gap-2 justify-content-center align-items-center">
+					&lt;div class="table-actions d-flex gap-2 justify-content-center align-items-center">
 						${resolved.map((btn) => `
-							<a href="javascript:void(0)"
+							&lt;a href="javascript:void(0)"
 							   data-action="${btn.action}"
 							   class="${btn.class ?? "text-primary"} text-decoration-none fs-5"
 							   title="${btn.title ?? ""}">
-								<i class="bi ${btn.icon ?? "bi-circle"}"></i>
-							</a>
+								&lt;i class="bi ${btn.icon ?? "bi-circle"}">&lt;/i>
+							&lt;/a>
 						`).join("")}
-					</div>
+					&lt;/div>
 				`;
 				}
 
 				// 🔹 Caso 2: más de 3 → dropdown
 				return `
-				<div class="btn-group">
-					<button class="btn btn-light btn-sm dropdown-toggle"
+				&lt;div class="btn-group">
+					&lt;button class="btn btn-light btn-sm dropdown-toggle"
 							type="button"
 							data-bs-toggle="dropdown"
 							aria-expanded="false">
-						<i class="bi ${icon.replace("bi ", "")}"></i>
-					</button>
-					<ul class="dropdown-menu dropdown-menu-end">
+						&lt;i class="bi ${icon.replace("bi ", "")}">&lt;/i>
+					&lt;/button>
+					&lt;ul class="dropdown-menu dropdown-menu-end">
 						${resolved.map((btn) => `
-							<li>
-								<a href="javascript:void(0)"
+							&lt;li>
+								&lt;a href="javascript:void(0)"
 								   class="dropdown-item d-flex align-items-center gap-2"
 								   data-action="${btn.action}">
-									<i class="bi ${btn.icon ?? "bi-circle"}"></i>
-									<span>${btn.title ?? btn.action}</span>
-								</a>
-							</li>
+									&lt;i class="bi ${btn.icon ?? "bi-circle"}">&lt;/i>
+									&lt;span>${btn.title ?? btn.action}&lt;/span>
+								&lt;/a>
+							&lt;/li>
 						`).join("")}
-					</ul>
-				</div>
+					&lt;/ul>
+				&lt;/div>
 			`;
 			},
 		});
@@ -423,16 +472,16 @@ const Table = {
 
 	/**
 	 * Genera config de botones para DataTables Buttons.
-	 * @param {Array<"excel"|"pdf"|"print"|"copy"|"csv">} [types=["excel","pdf","print"]]
+	 * @param {Array&lt;"excel"|"pdf"|"print"|"copy"|"csv">} [types=["excel","pdf","print"]]
 	 * @returns {Object[]}
 	 */
 	exportButtons: (types = ["excel", "pdf", "print"]) => {
 		const map = {
-			excel: { extend: "excelHtml5", text: '<i class="bi bi-file-earmark-excel me-1"></i>Excel', className: "btn btn-sm btn-success" },
-			pdf: { extend: "pdfHtml5", text: '<i class="bi bi-file-earmark-pdf me-1"></i>PDF', className: "btn btn-sm btn-danger" },
-			print: { extend: "print", text: '<i class="bi bi-printer me-1"></i>Imprimir', className: "btn btn-sm btn-secondary" },
-			copy: { extend: "copy", text: '<i class="bi bi-clipboard me-1"></i>Copiar', className: "btn btn-sm btn-info" },
-			csv: { extend: "csv", text: '<i class="bi bi-filetype-csv me-1"></i>CSV', className: "btn btn-sm btn-warning" },
+			excel: { extend: "excelHtml5", text: '&lt;i class="bi bi-file-earmark-excel me-1">&lt;/i>Excel', className: "btn btn-sm btn-success" },
+			pdf: { extend: "pdfHtml5", text: '&lt;i class="bi bi-file-earmark-pdf me-1">&lt;/i>PDF', className: "btn btn-sm btn-danger" },
+			print: { extend: "print", text: '&lt;i class="bi bi-printer me-1">&lt;/i>Imprimir', className: "btn btn-sm btn-secondary" },
+			copy: { extend: "copy", text: '&lt;i class="bi bi-clipboard me-1">&lt;/i>Copiar', className: "btn btn-sm btn-info" },
+			csv: { extend: "csv", text: '&lt;i class="bi bi-filetype-csv me-1">&lt;/i>CSV', className: "btn btn-sm btn-warning" },
 		};
 		return types.map((t) => map[t]).filter(Boolean);
 	},
@@ -448,8 +497,37 @@ const Table = {
 
 	/** Muestra mensaje de error en el contenedor de la tabla. */
 	renderError: (tbl) => {
-		_tbl(tbl).html(`<div class="alert alert-danger">Error al cargar datos.</div>`);
+		_tbl(tbl).html(`&lt;div class="alert alert-danger">Error al cargar datos.&lt;/div>`);
 	},
 };
 
 export default Table;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

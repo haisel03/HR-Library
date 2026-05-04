@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Currency.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Currency.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Currency
+ * @description
+ * Helper para formateo, conversión y operaciones con valores monetarios.
+ * Depende de config (locale, monedas) y NumberHelper (redondeo, formateo).
+ *
+ * @example
+ * Currency.format(1500);            // "RD$ 1,500.00"
+ * Currency.format(1500, "U");       // "USD$ 1,500.00"
+ * Currency.convert(100, 58.5);      // 5850
+ * Currency.percent(1000, 18);       // 180
+ * Currency.sum(10, "20", "RD$ 30"); // 60
+ *
+ * @version 3.0.0
+ */
+
+import config       from "../core/config.js";
+import NumberHelper from "./Number.js";
+
+const Currency = {
+
+  /* ── Configuración ── */
+
+  /** @param {string} code @returns {string} Símbolo de moneda o "" */
+  getSymbol: (code) => config.monedas?.[code] ?? "",
+
+  /** @returns {string} Locale configurado */
+  getLocale: () => config.formats?.locale ?? config.app?.locale ?? "es-DO",
+
+  /* ── Formateo ── */
+
+  /**
+   * Formatea un valor monetario con símbolo de moneda.
+   * @param {number|string} value
+   * @param {string} [code="P"]  Código: "P"=RD$, "U"=USD$, "E"=EUR€
+   * @param {number} [decimals=2]
+   * @returns {string}
+   * @example Currency.format(1500);       // "RD$ 1,500.00"
+   * @example Currency.format(1500, "U");  // "USD$ 1,500.00"
+   */
+  format: (value, code = "P", decimals = 2) => {
+    const symbol = Currency.getSymbol(code);
+    const n      = NumberHelper.formatNumber(value, decimals, Currency.getLocale());
+    return n ? `${symbol} ${n}` : "";
+  },
+
+  /**
+   * Formatea un valor numérico sin símbolo de moneda.
+   * @param {number|string} value @param {number} [decimals=2] @returns {string}
+   */
+  formatNumber: (value, decimals = 2) =>
+    NumberHelper.formatNumber(value, decimals, Currency.getLocale()),
+
+  /* ── Conversión ── */
+
+  /**
+   * Convierte un monto aplicando una tasa de cambio.
+   * @param {number|string} value @param {number} rate @param {number} [decimals=2]
+   * @returns {number|null}
+   * @example Currency.convert(100, 58.5); // 5850
+   */
+  convert: (value, rate, decimals = 2) => {
+    const n = NumberHelper.toNumber(value);
+    if (n === null) return null;
+    return NumberHelper.round(n * rate, decimals);
+  },
+
+  /**
+   * Convierte y formatea con símbolo.
+   * @param {number|string} value @param {number} rate @param {string} [code="P"] @param {number} [decimals=2]
+   * @returns {string}
+   */
+  convertAndFormat: (value, rate, code = "P", decimals = 2) => {
+    const converted = Currency.convert(value, rate, decimals);
+    if (converted === null) return "";
+    return Currency.format(converted, code, decimals);
+  },
+
+  /* ── Parsing ── */
+
+  /**
+   * Convierte un string monetario a número limpio.
+   * @param {string|number} value @returns {number|null}
+   * @example Currency.parse("RD$ 1,200.50"); // 1200.50
+   */
+  parse: (value) => {
+    if (value === null || value === undefined) return null;
+    if (typeof value === "number") return Number.isFinite(value) ? value : null;
+    return NumberHelper.toNumber(value);
+  },
+
+  /** @param {*} value @returns {boolean} */
+  isValid: (value) => {
+    const n = Currency.parse(value);
+    return n !== null &amp;&amp; Number.isFinite(n);
+  },
+
+  /* ── Operaciones ── */
+
+  /**
+   * Suma múltiples valores monetarios (ignora inválidos).
+   * @param {...(number|string)} values @returns {number}
+   * @example Currency.sum(10, "20", "RD$ 30"); // 60
+   */
+  sum: (...values) =>
+    values.reduce((acc, val) => acc + (Currency.parse(val) ?? 0), 0),
+
+  /**
+   * Resta dos valores monetarios.
+   * @param {number|string} a @param {number|string} b @returns {number}
+   */
+  subtract: (a, b) => (Currency.parse(a) ?? 0) - (Currency.parse(b) ?? 0),
+
+  /**
+   * Calcula el porcentaje de un monto.
+   * @param {number|string} value @param {number} percent @param {number} [decimals=2]
+   * @returns {number|null}
+   * @example Currency.percent(1000, 18); // 180
+   */
+  percent: (value, percent, decimals = 2) => {
+    const n = Currency.parse(value);
+    if (n === null) return null;
+    return NumberHelper.round(n * (percent / 100), decimals);
+  },
+
+  /** @returns {void} */
+  init() {},
+};
+
+export default Object.freeze(Currency);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

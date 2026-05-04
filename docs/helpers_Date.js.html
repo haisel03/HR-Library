@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Date.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Date.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module DateHelper
+ * @description
+ * Helper de fechas para HR Library.
+ * Combina la capa nativa de V1 (Tiempo.js: operaciones, comparaciones,
+ * startOfDay, endOfMonth, etc.) con las integraciones de V2
+ * (flatpickr config helper, fullCalendar config helper, auto-init por data-*).
+ *
+ * @example
+ * $Date.format("2026-03-08");                       // "08/03/2026"
+ * $Date.addDays(new Date(), 7);                     // Date +7 días
+ * $Date.diffDays("2026-01-01", "2026-12-31");       // 364
+ * $Date.flatpickr({ type: "datetime" });            // opciones para flatpickr
+ * $Date.flatpickr({ minDate: "today" });            // opciones fecha mínima
+ * $Date.fullCalendar({ initialView: "listWeek" });  // opciones para FullCalendar
+ *
+ * @version 3.0.0
+ */
+
+import config from "../core/config.js";
+
+/** @private */
+const _locale = () => config.app?.locale ?? "es-DO";
+
+/* ── Creación / Validación ─────────────────────────────────────────────────── */
+
+const DateHelper = {
+
+  /**
+   * Retorna la fecha/hora actual.
+   * @returns {Date}
+   */
+  now: () => new Date(),
+
+  /**
+   * Crea un objeto Date seguro desde cualquier valor.
+   * @param {Date|string|number} value
+   * @returns {Date|null}
+   * @example $Date.create("2026-03-08"); // Date
+   */
+  create(value) {
+    if (value instanceof Date) return isNaN(value.getTime()) ? null : new Date(value);
+    const d = new Date(value);
+    return isNaN(d.getTime()) ? null : d;
+  },
+
+  /**
+   * Verifica si un valor es una fecha válida.
+   * @param {Date|string|number} value
+   * @returns {boolean}
+   */
+  isValid: (value) => !isNaN(new Date(value).getTime()),
+
+  /* ── Formato ─────────────────────────────────────────────────────────────── */
+
+  /**
+   * Formatea una fecha usando Intl.DateTimeFormat.
+   * @param {Date|string|number} value
+   * @param {"date"|"time"|"datetime"} [type="date"]
+   * @param {string} [locale]  Por defecto usa config.app.locale.
+   * @returns {string}
+   * @example
+   * $Date.format("2026-03-08");             // "08/03/2026"
+   * $Date.format("2026-03-08","datetime");  // "08/03/2026, 12:00 a. m."
+   */
+  format(value, type = "date", locale = _locale()) {
+    const d = DateHelper.create(value);
+    if (!d) return "";
+    const opts = {
+      date:     { dateStyle: "short" },
+      time:     { timeStyle: "short" },
+      datetime: { dateStyle: "short", timeStyle: "short" },
+    };
+    return new Intl.DateTimeFormat(locale, opts[type] ?? opts.date).format(d);
+  },
+
+  /**
+   * Retorna la fecha en formato ISO YYYY-MM-DD.
+   * @param {Date|string|number} value
+   * @returns {string}
+   * @example $Date.toISODate(new Date()); // "2026-03-22"
+   */
+  toISODate(value) {
+    const d = DateHelper.create(value);
+    return d ? d.toISOString().split("T")[0] : "";
+  },
+
+  /**
+   * Retorna la fecha en formato ISO completo.
+   * @param {Date|string|number} value
+   * @returns {string}
+   */
+  toISOString(value) {
+    const d = DateHelper.create(value);
+    return d ? d.toISOString() : "";
+  },
+
+  /* ── Normalización ───────────────────────────────────────────────────────── */
+
+  /** @param {Date|string|number} value @returns {Date|null} */
+  startOfDay(value) {
+    const d = DateHelper.create(value);
+    if (!d) return null;
+    d.setHours(0, 0, 0, 0);
+    return d;
+  },
+
+  /** @param {Date|string|number} value @returns {Date|null} */
+  endOfDay(value) {
+    const d = DateHelper.create(value);
+    if (!d) return null;
+    d.setHours(23, 59, 59, 999);
+    return d;
+  },
+
+  /** @param {Date|string|number} value @returns {Date|null} */
+  startOfMonth(value) {
+    const d = DateHelper.create(value);
+    if (!d) return null;
+    return new Date(d.getFullYear(), d.getMonth(), 1);
+  },
+
+  /** @param {Date|string|number} value @returns {Date|null} */
+  endOfMonth(value) {
+    const d = DateHelper.create(value);
+    if (!d) return null;
+    return new Date(d.getFullYear(), d.getMonth() + 1, 0);
+  },
+
+  /* ── Operaciones ─────────────────────────────────────────────────────────── */
+
+  /**
+   * Retorna una nueva fecha sumando N días (no muta el original).
+   * @param {Date|string|number} value
+   * @param {number} days
+   * @returns {Date|null}
+   * @example $Date.addDays("2026-03-01", 7); // 2026-03-08
+   */
+  addDays(value, days) {
+    const d = DateHelper.create(value);
+    if (!d) return null;
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate() + Number(days));
+  },
+
+  /**
+   * Retorna una nueva fecha sumando N meses.
+   * @param {Date|string|number} value
+   * @param {number} months
+   * @returns {Date|null}
+   */
+  addMonths(value, months) {
+    const d = DateHelper.create(value);
+    if (!d) return null;
+    return new Date(d.getFullYear(), d.getMonth() + Number(months), d.getDate());
+  },
+
+  /**
+   * Retorna una nueva fecha sumando N años.
+   * @param {Date|string|number} value
+   * @param {number} years
+   * @returns {Date|null}
+   */
+  addYears(value, years) {
+    const d = DateHelper.create(value);
+    if (!d) return null;
+    return new Date(d.getFullYear() + Number(years), d.getMonth(), d.getDate());
+  },
+
+  /**
+   * Diferencia en días entre dos fechas (end - start).
+   * Positivo si end > start.
+   * @param {Date|string|number} start
+   * @param {Date|string|number} end
+   * @returns {number|null}
+   * @example $Date.diffDays("2026-01-01", "2026-12-31"); // 364
+   */
+  diffDays(start, end) {
+    const a = DateHelper.startOfDay(start);
+    const b = DateHelper.startOfDay(end);
+    if (!a || !b) return null;
+    return Math.round((b.getTime() - a.getTime()) / 86_400_000);
+  },
+
+  /* ── Comparaciones ───────────────────────────────────────────────────────── */
+
+  /** @param {Date|string|number} value @returns {boolean} */
+  isToday(value) {
+    return DateHelper.startOfDay(value)?.getTime() ===
+           DateHelper.startOfDay(new Date())?.getTime();
+  },
+
+  /** @param {Date|string|number} value @returns {boolean} */
+  isPast(value) {
+    const d = DateHelper.startOfDay(value);
+    const t = DateHelper.startOfDay(new Date());
+    return !!d &amp;&amp; !!t &amp;&amp; d &lt; t;
+  },
+
+  /** @param {Date|string|number} value @returns {boolean} */
+  isFuture(value) {
+    const d = DateHelper.startOfDay(value);
+    const t = DateHelper.startOfDay(new Date());
+    return !!d &amp;&amp; !!t &amp;&amp; d > t;
+  },
+
+  /**
+   * Verifica si una fecha está dentro de un rango inclusivo.
+   * @param {Date|string|number} value
+   * @param {Date|string|number} start
+   * @param {Date|string|number} end
+   * @returns {boolean}
+   */
+  between(value, start, end) {
+    const d = DateHelper.create(value);
+    const a = DateHelper.create(start);
+    const b = DateHelper.create(end);
+    return !!d &amp;&amp; !!a &amp;&amp; !!b &amp;&amp; d >= a &amp;&amp; d &lt;= b;
+  },
+
+  /* ── Utilidades ──────────────────────────────────────────────────────────── */
+
+  /**
+   * Retorna el nombre del mes en el locale configurado.
+   * @param {Date|string|number} value
+   * @param {string} [locale]
+   * @returns {string}
+   * @example $Date.monthName("2026-03-08"); // "marzo"
+   */
+  monthName(value, locale = _locale()) {
+    const d = DateHelper.create(value);
+    if (!d) return "";
+    return new Intl.DateTimeFormat(locale, { month: "long" }).format(d);
+  },
+
+  /**
+   * Retorna el nombre del día de la semana.
+   * @param {Date|string|number} value
+   * @param {string} [locale]
+   * @returns {string}
+   * @example $Date.dayName("2026-03-22"); // "domingo"
+   */
+  dayName(value, locale = _locale()) {
+    const d = DateHelper.create(value);
+    if (!d) return "";
+    return new Intl.DateTimeFormat(locale, { weekday: "long" }).format(d);
+  },
+
+  /**
+   * Retorna el número de días de un mes.
+   * @param {number} year
+   * @param {number} month  Base 0 (0=Enero, 11=Diciembre).
+   * @returns {number}
+   * @example $Date.daysInMonth(2026, 1); // 28
+   */
+  daysInMonth: (year, month) => new Date(year, month + 1, 0).getDate(),
+
+  /* ── Integración Flatpickr ───────────────────────────────────────────────── */
+
+  /**
+   * Retorna un objeto de opciones para Flatpickr listo para usar,
+   * fusionando la config base con el tipo y modificadores indicados.
+   *
+   * @param {Object} [overrides={}]
+   * @param {"date"|"datetime"|"time"|"range"} [overrides.type="date"]
+   *   Tipo de picker. Aplica la config de config.flatpickr.types[type].
+   * @param {"min"|"max"} [overrides.modifier]
+   *   Modificador rápido (minDate:"today" o maxDate:"today").
+   * @param {*} [overrides.*]
+   *   Cualquier otra opción Flatpickr se aplica directamente.
+   * @returns {Object}  Objeto de opciones para pasar a flatpickr(el, options).
+   *
+   * @example
+   * // Picker de fecha simple
+   * flatpickr("#input", $Date.flatpickr());
+   *
+   * // Picker de datetime
+   * flatpickr("#input", $Date.flatpickr({ type: "datetime" }));
+   *
+   * // Solo fechas futuras
+   * flatpickr("#input", $Date.flatpickr({ minDate: "today" }));
+   *
+   * // Rango con fecha mínima hoy
+   * flatpickr("#input", $Date.flatpickr({ type: "range", minDate: "today" }));
+   *
+   * // Con callback onChange
+   * flatpickr("#input", $Date.flatpickr({
+   *   type: "datetime",
+   *   onChange: (dates) => console.log(dates),
+   * }));
+   */
+  flatpickr(overrides = {}) {
+    const { type = "date", modifier, ...rest } = overrides;
+
+    const base     = config.flatpickr?.base     ?? { locale: "es", allowInput: true };
+    const typeOpts = config.flatpickr?.types?.[type] ?? {};
+    const modOpts  = modifier ? (config.flatpickr?.modifiers?.[modifier] ?? {}) : {};
+
+    return { ...base, ...typeOpts, ...modOpts, ...rest };
+  },
+
+  /* ── Integración FullCalendar ────────────────────────────────────────────── */
+
+  /**
+   * Retorna un objeto de opciones base para FullCalendar listo para usar,
+   * con locale español y vista inicial configurable.
+   *
+   * @param {Object} [overrides={}]  Opciones adicionales de FullCalendar.
+   * @returns {Object}
+   *
+   * @example
+   * const cal = new Calendar(el, $Date.fullCalendar({
+   *   events: "/api/eventos",
+   *   initialView: "timeGridWeek",
+   * }));
+   */
+  fullCalendar(overrides = {}) {
+    return {
+      locale:      "es",
+      initialView: "dayGridMonth",
+      firstDay:    1,          // semana empieza el lunes
+      buttonText: {
+        today:  "Hoy",
+        month:  "Mes",
+        week:   "Semana",
+        day:    "Día",
+        list:   "Agenda",
+      },
+      ...overrides,
+    };
+  },
+
+  /* ── Auto-init (data-flatpickr) ──────────────────────────────────────────── */
+
+  /**
+   * Auto-inicializa todos los elementos con `data-flatpickr` en un scope.
+   *
+   * Atributos data-* soportados:
+   * - `data-flatpickr`          — cualquier valor activa el picker (ej: data-flatpickr="date")
+   * - `data-flatpickr-type`     — "date" | "datetime" | "time" | "range"
+   * - `data-flatpickr-min`      — minDate (ej: "today" o "2026-01-01")
+   * - `data-flatpickr-max`      — maxDate
+   * - `data-flatpickr-default`  — defaultDate
+   *
+   * @param {HTMLElement|Document} [scope=document]
+   * @returns {void}
+   *
+   * @example
+   * // HTML:
+   * // &lt;input data-flatpickr data-flatpickr-type="datetime" data-flatpickr-min="today">
+   * $Date.init();
+   */
+  init(scope = document) {
+    // Importación lazy para no romper si flatpickr no está cargado
+    if (typeof flatpickr === "undefined") return;
+
+    (scope === document ? document : scope)
+      .querySelectorAll("[data-flatpickr]")
+      .forEach((el) => {
+        // No reinicializar
+        if (el._flatpickr) return;
+
+        const type    = el.dataset.flatpickrType     ?? "date";
+        const min     = el.dataset.flatpickrMin      ?? undefined;
+        const max     = el.dataset.flatpickrMax      ?? undefined;
+        const def     = el.dataset.flatpickrDefault  ?? undefined;
+
+        flatpickr(el, DateHelper.flatpickr({
+          type,
+          ...(min ? { minDate: min } : {}),
+          ...(max ? { maxDate: max } : {}),
+          ...(def ? { defaultDate: def } : {}),
+        }));
+      });
+  },
+};
+
+export default Object.freeze(DateHelper);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

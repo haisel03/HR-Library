@@ -7,7 +7,10 @@
  * @version 3.0.0
  */
 
-/** @type {Set<Object|Function>} @private */
+/**
+ * @type {Set<Object|Function>}
+ * @private
+ */
 const _installed = new Set();
 
 /**

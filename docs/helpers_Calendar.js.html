@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Calendar.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Calendar.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Calendar
+ * @description
+ * Helper para FullCalendar en HR Library.
+ * Gestiona instancias, eventos, navegación y calendarios arrastrables.
+ * Usa locale español y la configuración de $Date.fullCalendar() como base.
+ *
+ * @example
+ * const cal = Calendar.init("#divCal", {
+ *   events: "/api/eventos",
+ *   onEventClick: (info) => Modal.open("#mdlEvento"),
+ * });
+ * Calendar.addEvent("#divCal", { title: "Reunión", start: "2026-04-01" });
+ * Calendar.goTo("#divCal", "2026-06-01");
+ * Calendar.setView("#divCal", "timeGridWeek");
+ *
+ * @version 3.0.0
+ */
+
+import { Calendar as FC }   from "@fullcalendar/core";
+import { Draggable }         from "@fullcalendar/interaction";
+import dayGridPlugin          from "@fullcalendar/daygrid";
+import timeGridPlugin         from "@fullcalendar/timegrid";
+import listPlugin             from "@fullcalendar/list";
+import interactionPlugin      from "@fullcalendar/interaction";
+import esLocale               from "@fullcalendar/core/locales/es";
+
+/** Mapa de instancias activas: HTMLElement → FC. @private */
+const _instances = new Map();
+
+/** @param {string|HTMLElement} target @returns {HTMLElement|null} @private */
+const _el = (target) => {
+  if (!target)                       return null;
+  if (target instanceof HTMLElement) return target;
+  if (typeof target === "string")    return document.querySelector(target) ?? document.getElementById(target);
+  return null;
+};
+
+const Calendar = {
+
+  /* ── Inicialización ── */
+
+  /**
+   * Crea e inicializa un calendario FullCalendar.
+   * Si ya existe una instancia en ese elemento, la retorna sin crear otra.
+   *
+   * @param {string|HTMLElement} target
+   * @param {Object} [options={}]
+   * @param {string}   [options.initialView="dayGridMonth"]
+   * @param {boolean}  [options.editable=true]
+   * @param {boolean}  [options.selectable=true]
+   * @param {Array|string} [options.events]  Array o URL AJAX.
+   * @param {Function} [options.onEventClick]
+   * @param {Function} [options.onDateClick]
+   * @param {Function} [options.onEventDrop]
+   * @param {Function} [options.onSelect]
+   * @returns {FC|null}
+   */
+  init(target, options = {}) {
+    const el = _el(target);
+    if (!el) { console.warn("[Calendar] Elemento no encontrado:", target); return null; }
+    if (_instances.has(el)) return _instances.get(el);
+
+    const calendar = new FC(el, {
+      plugins:     [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
+      locale:      esLocale,
+      initialView: options.initialView ?? "dayGridMonth",
+      editable:    options.editable    ?? true,
+      selectable:  options.selectable  ?? true,
+      firstDay:    1,
+      buttonText:  { today: "Hoy", month: "Mes", week: "Semana", day: "Día", list: "Agenda" },
+      events:      options.events ?? [],
+      eventClick:  options.onEventClick  ? (i) => options.onEventClick(i)  : undefined,
+      dateClick:   options.onDateClick   ? (i) => options.onDateClick(i)   : undefined,
+      eventDrop:   options.onEventDrop   ? (i) => options.onEventDrop(i)   : undefined,
+      select:      options.onSelect      ? (i) => options.onSelect(i)      : undefined,
+      eventAdd:    options.onEventAdd    ? (i) => options.onEventAdd(i)    : undefined,
+      eventRemove: options.onEventRemove ? (i) => options.onEventRemove(i) : undefined,
+      // Permite sobreescribir cualquier opción
+      ...Object.fromEntries(
+        Object.entries(options).filter(([k]) =>
+          !["initialView","editable","selectable","events","onEventClick",
+            "onDateClick","onEventDrop","onSelect","onEventAdd","onEventRemove"].includes(k)
+        )
+      ),
+    });
+
+    calendar.render();
+    _instances.set(el, calendar);
+    return calendar;
+  },
+
+  /**
+   * Retorna la instancia FC de un elemento.
+   * @param {string|HTMLElement} target @returns {FC|null}
+   */
+  get(target) {
+    const el = _el(target);
+    return _instances.get(el) ?? null;
+  },
+
+  /**
+   * Destruye el calendario y limpia la instancia.
+   * @param {string|HTMLElement} target
+   */
+  destroy(target) {
+    const el = _el(target);
+    if (!el) return;
+    const cal = _instances.get(el);
+    if (cal) { cal.destroy(); _instances.delete(el); }
+  },
+
+  /* ── Eventos ── */
+
+  /**
+   * Agrega un evento al calendario.
+   * @param {string|HTMLElement} target
+   * @param {Object} event  Objeto de evento FullCalendar.
+   */
+  addEvent(target, event) {
+    this.get(target)?.addEvent(event);
+  },
+
+  /**
+   * Elimina un evento por su ID.
+   * @param {string|HTMLElement} target @param {string|number} eventId
+   */
+  removeEvent(target, eventId) {
+    const cal = this.get(target);
+    if (!cal) return;
+    cal.getEventById(String(eventId))?.remove();
+  },
+
+  /** Elimina todos los eventos. @param {string|HTMLElement} target */
+  clearEvents(target) {
+    this.get(target)?.removeAllEvents();
+  },
+
+  /** Recarga eventos desde la fuente AJAX. @param {string|HTMLElement} target */
+  refetchEvents(target) {
+    this.get(target)?.refetchEvents();
+  },
+
+  /* ── Navegación ── */
+
+  /**
+   * Navega a una fecha específica.
+   * @param {string|HTMLElement} target @param {Date|string} date
+   */
+  goTo(target, date) {
+    this.get(target)?.gotoDate(date);
+  },
+
+  /**
+   * Cambia la vista del calendario.
+   * @param {string|HTMLElement} target
+   * @param {"dayGridMonth"|"timeGridWeek"|"timeGridDay"|"listWeek"} view
+   */
+  setView(target, view) {
+    this.get(target)?.changeView(view);
+  },
+
+  /* ── Draggable ── */
+
+  /**
+   * Configura un contenedor como fuente de eventos arrastrables.
+   * @param {string|HTMLElement} container @param {Object} [options={}]
+   * @returns {Draggable|null}
+   */
+  draggable(container, options = {}) {
+    const el = _el(container);
+    if (!el) { console.warn("[Calendar] Contenedor draggable no encontrado:", container); return null; }
+    return new Draggable(el, {
+      itemSelector: ".fc-event",
+      eventData(eventEl) {
+        const style = window.getComputedStyle(eventEl);
+        return {
+          title:           eventEl.innerText.trim(),
+          backgroundColor: style.backgroundColor,
+          borderColor:     style.borderColor,
+        };
+      },
+      ...options,
+    });
+  },
+
+  /** @returns {void} */
+  /** Reservado para init.js — no hace nada en Calendar. @returns {void} */
+  initBoot() {},
+};
+
+export default Calendar;
+
+/* ── Alias boot-safe ── */
+// El init.js llama Calendar.init(scope). Cuando scope=document, el _el() retorna null
+// y la función retorna null silenciosamente. Es seguro.
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Humanize.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Humanize.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Humanize
+ * @description
+ * Helper para presentación legible de duraciones, fechas relativas y tamaños.
+ * Combina la riqueza de V1 (relativeDay, fileSize, percent) con V2 (timeAgo limpio).
+ *
+ * @example
+ * Humanize.duration(3600000);           // "1 hora"
+ * Humanize.duration(90000);             // "1 minuto, 30 segundos"
+ * Humanize.timeAgo("2026-03-01");       // "hace 7 días"
+ * Humanize.timeRemaining("2026-12-31"); // "en 9 meses, 23 días"
+ * Humanize.relativeDay(new Date());     // "Hoy"
+ * Humanize.fileSize(1048576);           // "1 MB"
+ *
+ * @version 3.0.0
+ */
+
+import humanizeDuration from "humanize-duration";
+import DateHelper from "./Date.js";
+
+/** Opciones base para humanize-duration. @private */
+const _DEFAULTS = Object.freeze({
+  language:  "es",
+  delimiter: ", ",
+  round:     true,
+  largest:   2,
+});
+
+const Humanize = {
+
+  /* ── Duraciones ── */
+
+  /**
+   * Humaniza una duración en milisegundos.
+   * @param {number}  ms
+   * @param {Object}  [options={}]  Opciones de humanize-duration.
+   * @returns {string}
+   * @example Humanize.duration(90000, { largest: 1 }); // "2 minutos"
+   */
+  duration(ms, options = {}) {
+    if (typeof ms !== "number" || ms &lt; 0) return "";
+    return humanizeDuration(ms, { ..._DEFAULTS, ...options });
+  },
+
+  /**
+   * Tiempo transcurrido desde una fecha hasta ahora.
+   * @param {Date|string|number} fromDate
+   * @param {Object} [options={}]
+   * @returns {string}
+   * @example Humanize.timeAgo("2026-03-01"); // "hace 7 días"
+   */
+  timeAgo(fromDate, options = {}) {
+    const from = DateHelper.create(fromDate);
+    if (!from) return "";
+    const diff = Date.now() - from.getTime();
+    if (diff &lt;= 0) return "Ahora mismo";
+    return `hace ${this.duration(diff, options)}`;
+  },
+
+  /**
+   * Tiempo restante desde ahora hasta una fecha futura.
+   * @param {Date|string|number} targetDate
+   * @param {Object} [options={}]
+   * @returns {string}
+   * @example Humanize.timeRemaining("2026-12-31"); // "en 9 meses, 23 días"
+   */
+  timeRemaining(targetDate, options = {}) {
+    const target = DateHelper.create(targetDate);
+    if (!target) return "";
+    const diff = target.getTime() - Date.now();
+    if (diff &lt;= 0) return "Tiempo agotado";
+    return `en ${this.duration(diff, options)}`;
+  },
+
+  /* ── Fechas relativas ── */
+
+  /**
+   * Descripción relativa del día: "Hoy", "Ayer", "Mañana" o fecha formateada.
+   * @param {Date|string|number} value
+   * @returns {string}
+   */
+  relativeDay(value) {
+    if (DateHelper.isToday(value)) return "Hoy";
+    const diff = DateHelper.diffDays(new Date(), value);
+    if (diff === -1) return "Ayer";
+    if (diff ===  1) return "Mañana";
+    return DateHelper.format(value);
+  },
+
+  /* ── Tamaños ── */
+
+  /**
+   * Formatea bytes a tamaño legible (KB, MB, GB...).
+   * @param {number} bytes
+   * @returns {string}
+   * @example Humanize.fileSize(1048576); // "1 MB"
+   */
+  fileSize(bytes) {
+    if (!bytes || bytes === 0) return "0 Bytes";
+    const k = 1024, sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
+  },
+
+  /**
+   * Formatea un porcentaje.
+   * @param {number} value  Valor entre 0 y 100.
+   * @param {number} [decimals=1]
+   * @returns {string}
+   * @example Humanize.percent(75.5); // "75.5%"
+   */
+  percent: (value, decimals = 1) =>
+    `${Math.round(value * 10 ** decimals) / 10 ** decimals}%`,
+
+  /** Invocado por init.js */
+  init() {},
+};
+
+export default Object.freeze(Humanize);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

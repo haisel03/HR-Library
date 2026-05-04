@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Dom.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Dom.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Dom
+ * @description
+ * Helper de utilidades DOM para HR Library.
+ * Fusiona la versión extendida de V1 (qa, dispatch, createElement, traversal)
+ * con la claridad y compacidad de V2.
+ *
+ * @example
+ * Dom.hide("#modal");
+ * Dom.text("#titulo", "Bienvenido");
+ * Dom.on("#btn", "click", () => console.log("click"));
+ * Dom.qa(".fila").forEach(el => Dom.hide(el));
+ *
+ * @version 3.0.0
+ */
+
+const HIDDEN_CLASS = "d-none";
+
+/* ── Normalizador ── */
+
+/**
+ * Normaliza un target a un elemento DOM.
+ * Acepta selector CSS, ID sin prefijo, HTMLElement, document o window.
+ * @param {string|HTMLElement|Window|Document|null|undefined} target
+ * @returns {HTMLElement|Window|Document|null}
+ */
+const _el = (target) => {
+  if (!target) return null;
+  if (target instanceof HTMLElement || target === document || target === window) return target;
+  if (typeof target === "string") {
+    return (target.startsWith("#") || target.startsWith("."))
+      ? document.querySelector(target)
+      : document.getElementById(target);
+  }
+  return null;
+};
+
+/* ── Dom ── */
+
+const Dom = {
+
+  /* ── Selección ── */
+
+  /**
+   * Normaliza un target a elemento DOM.
+   * @param {string|HTMLElement|Window|Document|null} target
+   * @returns {HTMLElement|Window|Document|null}
+   */
+  el: _el,
+
+  /**
+   * Selecciona el primer elemento que coincida.
+   * @param {string} selector
+   * @param {HTMLElement|Document} [context=document]
+   * @returns {HTMLElement|null}
+   */
+  q: (selector, context = document) => context.querySelector(selector),
+
+  /**
+   * Selecciona todos los elementos que coincidan.
+   * @param {string} selector
+   * @param {HTMLElement|Document} [context=document]
+   * @returns {HTMLElement[]}
+   */
+  qa: (selector, context = document) => Array.from(context.querySelectorAll(selector)),
+
+  /* ── Visibilidad ── */
+
+  show:          (t) => _el(t)?.classList.remove(HIDDEN_CLASS),
+  hide:          (t) => _el(t)?.classList.add(HIDDEN_CLASS),
+  toggle:        (t) => _el(t)?.classList.toggle(HIDDEN_CLASS),
+  isHidden:      (t) => _el(t)?.classList.contains(HIDDEN_CLASS) ?? true,
+  isVisible:     (t) => {
+    const e = _el(t);
+    if (!e) return false;
+    return e.offsetWidth > 0 &amp;&amp; e.offsetHeight > 0 &amp;&amp;
+           getComputedStyle(e).display !== "none" &amp;&amp;
+           getComputedStyle(e).visibility !== "hidden";
+  },
+
+  /* ── Estado ── */
+
+  enable:         (t) => { const e = _el(t); if (e) e.disabled = false; },
+  disable:        (t) => { const e = _el(t); if (e) e.disabled = true; },
+  toggleDisabled: (t) => { const e = _el(t); if (e) e.disabled = !e.disabled; },
+  isDisabled:     (t) => !!(_el(t)?.disabled),
+
+  /* ── Contenido ── */
+
+  /**
+   * Getter/setter de innerHTML.
+   * @param {string|HTMLElement} t
+   * @param {string} [html]
+   * @returns {string|null}
+   */
+  html: (t, html) => {
+    const e = _el(t);
+    if (!e) return null;
+    if (html !== undefined) { e.innerHTML = html; return null; }
+    return e.innerHTML;
+  },
+
+  /**
+   * Getter/setter de textContent.
+   * @param {string|HTMLElement} t
+   * @param {string} [text]
+   * @returns {string|null}
+   */
+  text: (t, text) => {
+    const e = _el(t);
+    if (!e) return null;
+    if (text !== undefined) { e.textContent = text; return null; }
+    return e.textContent;
+  },
+
+  /**
+   * Getter/setter de value.
+   * @param {string|HTMLElement} t
+   * @param {string|number} [value]
+   * @returns {string|null}
+   */
+  val: (t, value) => {
+    const e = _el(t);
+    if (!e) return null;
+    if (value !== undefined) { e.value = value; return null; }
+    return e.value;
+  },
+
+  clear:     (t) => { const e = _el(t); if (e) e.innerHTML = ""; },
+  clearVal:  (t) => { const e = _el(t); if (e) e.value = ""; },
+  changeDiv: (t, h) => Dom.html(t, h),
+
+  /* ── Clases ── */
+
+  addClass:    (t, classes) => {
+    const e = _el(t);
+    if (!e) return;
+    Array.isArray(classes) ? e.classList.add(...classes) : e.classList.add(classes);
+  },
+  removeClass: (t, classes) => {
+    const e = _el(t);
+    if (!e) return;
+    Array.isArray(classes) ? e.classList.remove(...classes) : e.classList.remove(classes);
+  },
+  toggleClass: (t, className) => _el(t)?.classList.toggle(className),
+  hasClass:    (t, className) => !!(_el(t)?.classList.contains(className)),
+
+  /* ── Atributos ── */
+
+  /**
+   * Getter/setter de atributo. Acepta mapa para multi-set.
+   * @param {string|HTMLElement} t
+   * @param {string|Object} attr
+   * @param {string} [value]
+   * @returns {string|null}
+   */
+  attr: (t, attr, value) => {
+    const e = _el(t);
+    if (!e) return null;
+    if (typeof attr === "object") { Object.entries(attr).forEach(([k, v]) => e.setAttribute(k, v)); return null; }
+    if (value !== undefined) { e.setAttribute(attr, value); return null; }
+    return e.getAttribute(attr);
+  },
+  removeAttr: (t, attr) => _el(t)?.removeAttribute(attr),
+
+  /**
+   * Getter/setter de dataset.
+   * @param {string|HTMLElement} t
+   * @param {string} key
+   * @param {*} [value]
+   */
+  data: (t, key, value) => {
+    const e = _el(t);
+    if (!e) return null;
+    if (value !== undefined) { e.dataset[key] = value; return null; }
+    return e.dataset[key] ?? null;
+  },
+
+  /* ── Eventos ── */
+
+  /**
+   * Agrega listener de evento.
+   * @param {string|HTMLElement} t
+   * @param {string} eventType
+   * @param {Function} handler
+   */
+  on:  (t, eventType, handler) => _el(t)?.addEventListener(eventType, handler),
+
+  /**
+   * Elimina listener de evento.
+   * @param {string|HTMLElement} t
+   * @param {string} eventType
+   * @param {Function} handler
+   */
+  off: (t, eventType, handler) => _el(t)?.removeEventListener(eventType, handler),
+
+  /**
+   * Dispara un evento personalizado.
+   * @param {string|HTMLElement} t
+   * @param {string} eventType
+   * @param {*} [detail]
+   * @example Dom.dispatch("#form", "hr:guardado", { id: 5 });
+   */
+  dispatch: (t, eventType, detail) => {
+    _el(t)?.dispatchEvent(new CustomEvent(eventType, { detail, bubbles: true }));
+  },
+
+  /* ── Traversal ── */
+
+  find:    (t, selector) => { const e = _el(t); return e ? Array.from(e.querySelectorAll(selector)) : []; },
+  findOne: (t, selector) => _el(t)?.querySelector(selector) ?? null,
+  parent:  (t)           => _el(t)?.parentElement ?? null,
+  is:      (t, selector) => !!(_el(t)?.matches(selector)),
+
+  /* ── Creación ── */
+
+  /**
+   * Crea un elemento DOM desde HTML string.
+   * @param {string} html
+   * @returns {HTMLElement|null}
+   * @example const btn = Dom.createElement('&lt;button class="btn">Guardar&lt;/button>');
+   */
+  createElement: (html) => {
+    const tpl = document.createElement("template");
+    tpl.innerHTML = html.trim();
+    return tpl.content.firstElementChild ?? null;
+  },
+
+  /**
+   * Crea múltiples elementos DOM desde HTML string.
+   * @param {string} html
+   * @returns {HTMLElement[]}
+   */
+  createAll: (html) => {
+    const tpl = document.createElement("template");
+    tpl.innerHTML = html.trim();
+    return Array.from(tpl.content.children);
+  },
+
+  /* ── DOM Ready ── */
+
+  /**
+   * Ejecuta callback cuando el DOM esté listo.
+   * Si ya está listo, lo ejecuta de inmediato.
+   * @param {Function} callback
+   */
+  ready: (callback) => {
+    document.readyState !== "loading"
+      ? callback()
+      : document.addEventListener("DOMContentLoaded", callback);
+  },
+
+  /** @returns {void} */
+  init() {},
+};
+
+export default Object.freeze(Dom);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

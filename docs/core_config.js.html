@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>core/config.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">core/config.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module config
+ * @description
+ * Configuración global de HR Library v3.0.
+ * Combina la estructura robusta de CS v1 (Config.js) con la riqueza
+ * de opciones de HR v2 (config.js). Consumida por todos los helpers.
+ *
+ * @author HR Library
+ * @version 3.0.0
+ */
+
+import spanish from "./spanish.js";
+
+const config = {
+
+  /* ── Aplicación ── */
+  app: {
+    name:        "HR Library",
+    version:     "3.0.0",
+    locale:      "es-DO",
+    timezone:    "America/Santo_Domingo",
+    dateFormat:  "d/m/Y",
+    timeFormat:  "H:i",
+    currency:    "DOP",
+    environment: "production", // "development" | "production"
+  },
+
+  /** Helper de idioma activo */
+  lang: spanish,
+
+  /* ── API / Rutas ── */
+  paths: {
+    base:   "/",
+    api:    "/api/v1",
+    assets: "/assets",
+  },
+
+  api: {
+    baseURL: "/api/v1",
+    timeout: 15_000,
+    retries: 0,
+  },
+
+  /* ── Assets (rutas de recursos estáticos) ── */
+  assets: {
+    basePath: "img",
+    logos: {
+      path: "/logos",
+      variants: {
+        default:             "logo-horizontal.svg",
+        horizontal:          "logo-horizontal.svg",
+        compact:             "logo-compact.svg",
+        sidebar:             "logo-sidebar.svg",
+        "sidebar-collapsed": "logo-sidebar-collapsed.svg",
+        login:               "logo-login.svg",
+        "login-dark":        "logo-login-dark.svg",
+        symbol:              "logo-symbol.svg",
+        "symbol-dark":       "logo-symbol-dark.svg",
+        "symbol-on-dark":    "logo-symbol-on-dark.svg",
+      }
+    },
+    avatars:      { path: "/avatars",      default: "avatar.jpg"  },
+    employees:    { path: "/employees",    default: "default.png" },
+    backgrounds:  { path: "/bg" },
+    placeholders: { path: "/placeholders" },
+  },
+
+  /* ── Monedas ── */
+  monedas: {
+    P: "RD$",   // Peso dominicano
+    U: "USD$",  // Dólar estadounidense
+    E: "EUR€",  // Euro
+  },
+
+  /* ── Formatos ── */
+  formats: {
+    locale:   "es-DO",
+    date:     "DD/MM/YYYY",
+    datetime: "DD/MM/YYYY HH:mm",
+    time:     "HH:mm",
+  },
+
+  /* ── Paginación ── */
+  pagination: {
+    pageLength: 10,
+    lengthMenu: [10, 25, 50, 100],
+  },
+
+  /* ── Storage ── */
+  storage: {
+    namespace: "HR",        // prefijo para namespacing en localStorage (V1 approach)
+    tokenKey:  "auth_token",
+  },
+
+  /* ── Validaciones (regex configurables) ── */
+  validation: {
+    emailRegex: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+    phoneRegex: /^[\d()\s\-+]{7,20}$/,
+    urlRegex:   /^https?:\/\/.+/,
+  },
+
+  /* ── Alertas (SweetAlert2) ── */
+  alerts: {
+    colors: { s: "success", d: "danger",  w: "warning", i: "info", p: "primary" },
+    icons: {
+      s: "bi-check-circle-fill",
+      d: "bi-x-circle-fill",
+      w: "bi-exclamation-triangle-fill",
+      i: "bi-info-circle-fill",
+      p: "bi-bell-fill",
+    },
+    titles: { s: "Éxito", d: "Error", w: "Advertencia", i: "Información", p: "Aviso" },
+  },
+
+  swal: {
+    backdrop:     true,
+    background:   "#fff",
+    clickOutside: true,
+    escapeKey:    true,
+    button: { confirm: "Aceptar", cancel: "Cancelar", deny: "No aceptar" },
+    toast:  { position: "top-end", timer: 3500 },
+  },
+
+  /* ── Mensajes del sistema ── */
+  messages: {
+    default: "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
+    success: "Operación realizada con éxito.",
+    error:   "Ha ocurrido un error. Por favor, inténtelo de nuevo.",
+    warning: "Advertencia: revise los datos ingresados.",
+    info:    "Información.",
+    saved:   "Registro guardado exitosamente.",
+    updated: "Registro actualizado exitosamente.",
+    deleted: "Registro eliminado exitosamente.",
+    noData:  "No hay datos disponibles.",
+    loading: { title: "Procesando...", subtitle: "Por favor, espere." },
+  },
+
+  /* ── DataTables ── */
+  datatables: {
+    base: {
+      language:   spanish.datatables,
+      pageLength: 10,
+      lengthMenu: [10, 25, 50, 100],
+      responsive: true,
+      autoWidth:  false,
+      processing: true,
+      serverSide: false,
+      dom: '&lt;"row align-items-center mb-2"&lt;"col-sm-12 col-md-6"l>&lt;"col-sm-12 col-md-6"f>>' +
+           '&lt;"row"&lt;"col-sm-12"tr>>' +
+           '&lt;"row mt-2"&lt;"col-sm-12 col-md-5"i>&lt;"col-sm-12 col-md-7"p>>',
+    },
+    domButtons:
+      '&lt;"row align-items-center mb-2"&lt;"col-sm-12 col-md-4"l>&lt;"col-sm-12 col-md-4"B>&lt;"col-sm-12 col-md-4"f>>' +
+      '&lt;"row"&lt;"col-sm-12"tr>>' +
+      '&lt;"row mt-2"&lt;"col-sm-12 col-md-5"i>&lt;"col-sm-12 col-md-7"p>>',
+  },
+
+  /* ── Acciones de DataTable ── */
+  dt_actions: {
+    view:        { icon: "bi-eye",                class: "text-primary",   title: "Ver",           action: "view"        },
+    edit:        { icon: "bi-pencil-square",      class: "text-warning",   title: "Editar",        action: "edit"        },
+    delete:      { icon: "bi-trash3",             class: "text-danger",    title: "Eliminar",      action: "delete",
+                   confirm: { title: "¿Eliminar registro?", text: "Esta acción no se puede deshacer." } },
+    print:       { icon: "bi-printer",            class: "text-secondary", title: "Imprimir",      action: "print"       },
+    duplicate:   { icon: "bi-files",              class: "text-info",      title: "Duplicar",      action: "duplicate"   },
+    download:    { icon: "bi-download",           class: "text-success",   title: "Descargar",     action: "download"    },
+    share:       { icon: "bi-share",              class: "text-primary",   title: "Compartir",     action: "share"       },
+    activate:    { icon: "bi-check-circle",       class: "text-success",   title: "Activar",       action: "activate"    },
+    deactivate:  { icon: "bi-slash-circle",       class: "text-warning",   title: "Desactivar",    action: "deactivate"  },
+    open:        { icon: "bi-box-arrow-up-right", class: "text-primary",   title: "Abrir",         action: "open"        },
+    history:     { icon: "bi-clock",              class: "text-muted",     title: "Historial",     action: "history"     },
+    permissions: { icon: "bi-lock",               class: "text-secondary", title: "Permisos",      action: "permissions" },
+    settings:    { icon: "bi-gear",               class: "text-dark",      title: "Configuración", action: "settings"    },
+    invoice:     { icon: "bi-file-earmark-text",  class: "text-primary",   title: "Factura",       action: "invoice"     },
+    payment:     { icon: "bi-credit-card",        class: "text-success",   title: "Registrar pago",action: "payment"     },
+    export:      { icon: "bi-upload",             class: "text-info",      title: "Exportar",      action: "export"      },
+  },
+
+  /* ── Flatpickr ── */
+  flatpickr: {
+    base: { locale: "es", allowInput: true },
+    types: {
+      date:     { dateFormat: "Y-m-d" },
+      datetime: { enableTime: true, dateFormat: "Y-m-d H:i" },
+      time:     { enableTime: true, noCalendar: true, dateFormat: "H:i" },
+      range:    { mode: "range" },
+    },
+    modifiers: { min: { minDate: "today" }, max: { maxDate: "today" } },
+  },
+
+  /* ── Charts (Chart.js) ── */
+  charts: {
+    base: {
+      responsive:          true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend:  { position: "top", labels: { font: { size: 13 } } },
+        tooltip: { enabled: true },
+      },
+    },
+  },
+
+  /* ── Editor (Quill) ── */
+  editor: {
+    theme: "snow",
+    base: {
+      placeholder: "Escribe aquí...",
+      modules: {
+        toolbar: [
+          [{ header: [1, 2, 3, false] }],
+          ["bold", "italic", "underline", "strike"],
+          [{ list: "ordered" }, { list: "bullet" }],
+          [{ align: [] }],
+          ["link", "image"],
+          ["clean"],
+        ],
+      },
+    },
+  },
+
+  /* ── Firma Digital ── */
+  signature: {
+    base: { penColor: "#3a7fe7", backgroundColor: "rgba(255,255,255,0)" },
+  },
+
+  /* ── Iconos ── */
+  icons: { fa: "fa", bi: "bi", feather: "feather", default: "bi" },
+
+  /* ── Sidebar ── */
+  sidebar: {
+    sidebarSelector: "#sidebar",
+    toggleSelector:  '[data-widget="sidebar-toggle"], [data-toggle="sidebar"]',
+    scrollSelector:  ".js-simplebar",
+    collapseClass:   "collapsed",
+  },
+
+  /* ── IframeTab ── */
+  iframeTab: {
+    tabsContainer:     "#iframe-tabs",
+    contentsContainer: "#iframe-contents",
+    emptyIcon:    "bi-window-plus",
+    emptyTitle:   "HR Library",
+    emptyMessage: "Selecciona una página en el menú para abrir una pestaña.",
+  },
+
+  /* ── Utilidades ── */
+
+  /** @returns {boolean} Indica si el entorno es desarrollo */
+  isDev() { return this.app.environment === "development"; },
+
+  /** @param {string} endpoint @returns {string} URL completa del endpoint */
+  apiUrl(endpoint) { return `${this.paths.api}${endpoint}`; },
+
+  /** @param {string} code @returns {string} Símbolo de la moneda */
+  moneda(code) { return this.monedas[code] ?? ""; },
+
+  /** Inicializa Config. Invocado por init.js */
+  init() {
+    if (this.isDev()) {
+      console.info(`[Config] ${this.app.name} v${this.app.version} — entorno: ${this.app.environment}`);
+    }
+  },
+};
+
+Object.freeze(config);
+export default config;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

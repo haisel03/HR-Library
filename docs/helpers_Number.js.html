@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Number.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Number.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Number
+ * @description
+ * Utilidades numéricas para HR Library.
+ * Combina la limpieza de conversión de V1 (elimina símbolos, comas) con
+ * los cálculos extendidos de V2 (percent, percentOf, avg, sum, currency).
+ *
+ * Nota: Se llama `NumberHelper` internamente para evitar colisión con el built-in `Number`.
+ *
+ * @example
+ * NumberHelper.formatNumber(1234567.89);     // "1,234,567.89"
+ * NumberHelper.currency(50000, "P");         // "RD$ 50,000.00"
+ * NumberHelper.toNumber("$ 1,200.50");       // 1200.50
+ * NumberHelper.percent(0.75);               // "75%"
+ * NumberHelper.avg([10, 20, 30]);           // 20
+ *
+ * @version 3.0.0
+ */
+
+import config from "../core/config.js";
+
+const NumberHelper = {
+
+  /* ── Conversión segura ── */
+
+  /**
+   * Convierte cualquier valor a número limpio (elimina símbolos y separadores de miles).
+   * @param {*} n
+   * @param {number|null} [defaultValue=null]
+   * @returns {number|null}
+   * @example NumberHelper.toNumber("$ 1,200.50"); // 1200.50
+   * @example NumberHelper.toNumber("abc");        // null
+   */
+  toNumber: (n, defaultValue = null) => {
+    if (n === null || n === undefined || n === "") return defaultValue;
+    if (typeof n === "number") return Number.isFinite(n) ? n : defaultValue;
+    const clean = String(n).replace(/[^\d.-]/g, "");
+    const num   = parseFloat(clean);
+    return isNaN(num) ? defaultValue : num;
+  },
+
+  /** @param {*} value @returns {boolean} Número finito válido */
+  isValid: (value) => { const n = Number(value); return !isNaN(n) &amp;&amp; isFinite(n); },
+
+  toInt:   (value, base = 10) => parseInt(value, base),
+  toFloat: (value)            => parseFloat(value),
+
+  /* ── Redondeo ── */
+
+  /**
+   * Redondea a los decimales indicados.
+   * @param {number} n @param {number} [d=2] @returns {number|null}
+   */
+  round: (n, d = 2) => {
+    const num = Number(n);
+    if (isNaN(num)) return null;
+    return Math.round(num * 10 ** d) / 10 ** d;
+  },
+
+  /** @param {number} n @param {number} [d=0] @returns {number} */
+  ceil: (n, d = 0) => {
+    const num = Number(n);
+    if (isNaN(num)) return 0;
+    return Math.ceil(num * 10 ** d) / 10 ** d;
+  },
+
+  /** @param {number} n @param {number} [d=0] @returns {number} */
+  floor: (n, d = 0) => {
+    const num = Number(n);
+    if (isNaN(num)) return 0;
+    return Math.floor(num * 10 ** d) / 10 ** d;
+  },
+
+  /* ── Formateo ── */
+
+  /**
+   * Formatea un número con separadores de miles y decimales según locale.
+   * @param {number} n @param {number} [d=2] @param {string} [locale] @returns {string}
+   */
+  formatNumber: (n, d = 2, locale = config?.formats?.locale ?? "es-DO") => {
+    const num = NumberHelper.toNumber(n);
+    if (num === null) return "";
+    return num.toLocaleString(locale, { minimumFractionDigits: d, maximumFractionDigits: d });
+  },
+
+  /**
+   * Alias de formatNumber (compatibilidad V1).
+   */
+  format: (value, decimals = 2, locale = config?.formats?.locale ?? "es-DO") =>
+    NumberHelper.formatNumber(value, decimals, locale),
+
+  /**
+   * Formatea como porcentaje.
+   * @param {number} value  Valor entre 0 y 1 (isDecimal=true) o entero (isDecimal=false)
+   * @param {number} [d=1]
+   * @param {boolean} [isDecimal=true]  Si true, multiplica por 100
+   * @returns {string}
+   * @example NumberHelper.percent(0.754);        // "75.4%"
+   * @example NumberHelper.percent(75, 0, false); // "75%"
+   */
+  percent: (value, d = 1, isDecimal = true) => {
+    const num = Number(value);
+    if (isNaN(num)) return "";
+    const pct = isDecimal ? num * 100 : num;
+    return `${NumberHelper.round(pct, d)}%`;
+  },
+
+  /**
+   * Formatea como moneda usando símbolos de config.monedas.
+   * @param {number} value @param {string} [code="P"] @param {number} [d=2] @returns {string}
+   * @example NumberHelper.currency(50000);       // "RD$ 50,000.00"
+   * @example NumberHelper.currency(1200, "U");   // "USD$ 1,200.00"
+   */
+  currency: (value, code = "P", d = 2) => {
+    const symbols = config?.monedas ?? { P: "RD$", U: "USD$", E: "EUR€" };
+    const symbol  = symbols[code] ?? code;
+    const n       = NumberHelper.formatNumber(value, d);
+    return n ? `${symbol} ${n}` : "";
+  },
+
+  /* ── Cálculos ── */
+
+  /** Entero aleatorio entre min y max (ambos inclusive). */
+  randomInt: (min, max) => Math.floor(Math.random() * (max - min + 1)) + min,
+
+  /** Decimal aleatorio entre min y max. */
+  random: (min, max) => Math.random() * (max - min) + min,
+
+  /**
+   * Clampea un número dentro de [min, max].
+   * @param {number} value @param {number} min @param {number} max @returns {number}
+   * @example NumberHelper.clamp(150, 0, 100); // 100
+   */
+  clamp: (value, min, max) => {
+    const n = Number(value);
+    if (isNaN(n)) return min;
+    return Math.min(Math.max(n, min), max);
+  },
+
+  /**
+   * Calcula qué porcentaje representa `part` de `total`.
+   * @param {number} part @param {number} total @param {number} [d=1] @returns {number|null}
+   * @example NumberHelper.percentOf(25, 200); // 12.5
+   */
+  percentOf: (part, total, d = 1) => {
+    if (!total || total === 0) return null;
+    return NumberHelper.round((part / total) * 100, d);
+  },
+
+  /**
+   * Suma un array de números de forma segura (ignora NaN).
+   * @param {number[]} arr @returns {number}
+   */
+  sum: (arr) => arr.reduce((acc, v) => acc + (NumberHelper.toNumber(v) ?? 0), 0),
+
+  /**
+   * Calcula el promedio de un array de números.
+   * @param {number[]} arr @returns {number|null}
+   */
+  avg: (arr) => {
+    if (!arr.length) return null;
+    return NumberHelper.round(NumberHelper.sum(arr) / arr.length, 2);
+  },
+
+  /** @returns {void} */
+  init() {},
+};
+
+export default Object.freeze(NumberHelper);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

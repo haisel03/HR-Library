@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Sidebar.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Sidebar.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import SimpleBar from "simplebar";
+import Config from "../core/config.js";
+
+/**
+ * @module Sidebar
+ * @description
+ * Helper para el sidebar: toggle, colapso, SimpleBar, active link y persistencia.
+ *
+ * Comportamiento según viewport:
+ * - Desktop (≥ lg): sidebar visible por defecto, `.collapsed` lo reduce a íconos.
+ * - Mobile (&lt; lg):  sidebar oculto por defecto, `.collapsed` lo muestra completo.
+ *
+ * El estado se persiste en localStorage usando la clave `sidebar:collapsed`.
+ *
+ * @example
+ * // Inicialización automática desde init.js:
+ * Sidebar.init();
+ *
+ * @example
+ * // Uso manual:
+ * Sidebar.toggle();
+ * Sidebar.isCollapsed(); // → true | false
+ */
+
+// ── Config ──────────────────────────────────────────────────────────────────
+
+const cfg = { ...Config.sidebar };
+
+// Clave de localStorage para persistir el estado
+const STORAGE_KEY = "sidebar:collapsed";
+
+// Breakpoint a partir del cual aplica la lógica de desktop (px)
+const DESKTOP_BREAKPOINT = 992; // equivalente a Bootstrap 'lg'
+
+// ── Estado interno ───────────────────────────────────────────────────────────
+
+let simplebarInstance = null;
+
+// ── Helpers privados ─────────────────────────────────────────────────────────
+
+/**
+ * Devuelve true si la pantalla es desktop (>= lg).
+ * @returns {boolean}
+ * @private
+ */
+const _isDesktop = () => window.innerWidth >= DESKTOP_BREAKPOINT;
+
+/**
+ * Guarda el estado colapsado en localStorage.
+ * @param {boolean} collapsed
+ * @private
+ */
+const _saveState = (collapsed) => {
+	try {
+		localStorage.setItem(STORAGE_KEY, collapsed ? "1" : "0");
+	} catch {
+		// localStorage puede no estar disponible (modo privado estricto)
+	}
+};
+
+/**
+ * Lee el estado persistido. Devuelve null si no existe.
+ * @returns {boolean|null}
+ * @private
+ */
+const _loadState = () => {
+	try {
+		const v = localStorage.getItem(STORAGE_KEY);
+		if (v === null) return null;
+		return v === "1";
+	} catch {
+		return null;
+	}
+};
+
+/**
+ * Despacha un evento `resize` al finalizar la transición CSS del sidebar.
+ * Necesario para que los gráficos (Chart.js, DataTables, etc.) recalculen
+ * su ancho después de que el sidebar termina de animarse.
+ * @param {HTMLElement} el
+ * @private
+ */
+const _dispatchResizeOnEnd = (el) => {
+	el.addEventListener(
+		"transitionend",
+		() => window.dispatchEvent(new Event("resize")),
+		{ once: true }
+	);
+};
+
+/**
+ * Marca el enlace activo en el sidebar comparando el href con la URL actual.
+ * Sube hasta encontrar el `.sidebar-item` padre y le agrega `.active`.
+ * Si el enlace activo está dentro de un dropdown colapsado, lo expande.
+ * @private
+ */
+const _markActiveLink = () => {
+	const currentPage = window.location.pathname.split("/").pop() || "index.html";
+
+	document
+		.querySelectorAll(`${cfg.sidebarSelector} .sidebar-link[href]`)
+		.forEach((link) => {
+			const href = link.getAttribute("href");
+			if (!href || href === "#") return;
+
+			const linkPage = href.split("/").pop().split("?")[0];
+
+			if (linkPage === currentPage) {
+				// Marcar el item padre como activo
+				link.closest(".sidebar-item")?.classList.add("active");
+
+				// Si está dentro de un dropdown, expandirlo
+				const dropdown = link.closest(".sidebar-dropdown");
+				if (dropdown) {
+					dropdown.classList.add("show");
+
+					// Actualizar el toggle del collapse padre
+					const collapseId = dropdown.id;
+					const toggle = document.querySelector(
+						`[data-bs-target="#${collapseId}"]`
+					);
+					if (toggle) {
+						toggle.classList.remove("collapsed");
+						toggle.setAttribute("aria-expanded", "true");
+					}
+				}
+			}
+		});
+};
+
+// ── API pública ───────────────────────────────────────────────────────────────
+
+const Sidebar = {
+
+	/**
+	 * Devuelve el elemento `&lt;nav id="sidebar">`.
+	 * @returns {HTMLElement|null}
+	 */
+	getSidebar: () => document.querySelector(cfg.sidebarSelector),
+
+	/**
+	 * Inicializa el sidebar completo.
+	 * Llama a: initScroll, initToggle, initActiveLink, initState.
+	 *
+	 * @param {Object} [overrides={}]  Sobreescribe valores de config en runtime
+	 *
+	 * @example
+	 * Sidebar.init(); // usa config por defecto
+	 * Sidebar.init({ collapseClass: "mini" }); // override puntual
+	 */
+	init: (overrides = {}) => {
+		Object.assign(cfg, overrides);
+		Sidebar.initScroll();
+		Sidebar.initToggle();
+		Sidebar.initActiveLink();
+		Sidebar.initState();
+	},
+
+	/**
+	 * Inicializa SimpleBar en el contenedor `.js-simplebar` del sidebar.
+	 * Recalcula SimpleBar cuando un collapse de Bootstrap se abre o cierra.
+	 */
+	initScroll: () => {
+		// BUG del original: buscaba por #sidebar-scroll (id) pero el HBS
+		// usa .js-simplebar (clase). Ahora busca por .js-simplebar dentro del sidebar.
+		const el = document.querySelector(
+			`${cfg.sidebarSelector} .js-simplebar`
+		);
+		if (!el) return;
+
+		simplebarInstance = new SimpleBar(el, {
+			autoHide: false,          // barra siempre visible para indicar scroll
+			scrollbarMinSize: 24,
+		});
+
+		// Recalcular SimpleBar cuando un accordion Bootstrap cambia de altura
+		document
+			.querySelectorAll(`${cfg.sidebarSelector} [data-bs-parent]`)
+			.forEach((collapse) => {
+				collapse.addEventListener("shown.bs.collapse",  Sidebar.refresh);
+				collapse.addEventListener("hidden.bs.collapse", Sidebar.refresh);
+			});
+	},
+
+	/**
+	 * Inicializa el listener del botón hamburger.
+	 * Delega el click en `document` para soportar botones creados dinámicamente.
+	 */
+	initToggle: () => {
+		document.addEventListener("click", (e) => {
+			const toggle  = e.target.closest(cfg.toggleSelector);
+			const sidebar = Sidebar.getSidebar();
+			if (!toggle || !sidebar) return;
+
+			Sidebar.toggle();
+			_dispatchResizeOnEnd(sidebar);
+		});
+	},
+
+	/**
+	 * Marca automáticamente el enlace del sidebar que corresponde a la página actual.
+	 * En mobile también hace scroll hasta el enlace activo para que sea visible.
+	 */
+	initActiveLink: () => {
+		_markActiveLink();
+
+		// Scroll hasta el link activo en SimpleBar (útil en sidebars largos)
+		const activeLink = document.querySelector(
+			`${cfg.sidebarSelector} .sidebar-item.active > .sidebar-link`
+		);
+
+		if (activeLink &amp;&amp; simplebarInstance) {
+			setTimeout(() => {
+				const scrollEl = simplebarInstance.getScrollElement();
+				const offset   = activeLink.offsetTop - scrollEl.clientHeight / 2;
+				scrollEl.scrollTop = Math.max(0, offset);
+			}, 100);
+		}
+	},
+
+	/**
+	 * Restaura el estado colapsado desde localStorage.
+	 * Solo aplica en desktop — en mobile el estado inicial siempre es abierto.
+	 */
+	initState: () => {
+		if (!_isDesktop()) return;
+
+		const saved = _loadState();
+		if (saved === true)  Sidebar.collapse();
+		if (saved === false) Sidebar.expand();
+		// null → no hay estado guardado → respetar el CSS por defecto
+	},
+
+	/**
+	 * Colapsa el sidebar (agrega `.collapsed`).
+	 * En desktop reduce a íconos; en mobile oculta el sidebar.
+	 */
+	collapse: () => {
+		const sidebar = Sidebar.getSidebar();
+		if (!sidebar) return;
+		sidebar.classList.add(cfg.collapseClass);
+		_saveState(true);
+	},
+
+	/**
+	 * Expande el sidebar (remueve `.collapsed`).
+	 */
+	expand: () => {
+		const sidebar = Sidebar.getSidebar();
+		if (!sidebar) return;
+		sidebar.classList.remove(cfg.collapseClass);
+		_saveState(false);
+	},
+
+	/**
+	 * Alterna entre colapsado y expandido.
+	 * @returns {boolean} Nuevo estado — `true` si quedó colapsado
+	 */
+	toggle: () => {
+		const sidebar = Sidebar.getSidebar();
+		if (!sidebar) return false;
+
+		const willCollapse = !sidebar.classList.contains(cfg.collapseClass);
+		sidebar.classList.toggle(cfg.collapseClass, willCollapse);
+		_saveState(willCollapse);
+		return willCollapse;
+	},
+
+	/**
+	 * Recalcula las dimensiones de SimpleBar.
+	 * Llamar después de agregar o remover contenido dinámico en el sidebar.
+	 */
+	refresh: () => {
+		simplebarInstance?.recalculate();
+	},
+
+	/**
+	 * Devuelve `true` si el sidebar está actualmente colapsado.
+	 * @returns {boolean}
+	 */
+	isCollapsed: () =>
+		Sidebar.getSidebar()?.classList.contains(cfg.collapseClass) ?? false,
+
+	/**
+	 * Devuelve la instancia de SimpleBar, o null si no fue inicializado.
+	 * @returns {SimpleBar|null}
+	 */
+	getSimpleBar: () => simplebarInstance,
+};
+
+export default Sidebar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

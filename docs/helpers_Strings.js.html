@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Strings.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Strings.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Strings
+ * @description
+ * Utilidades para manipulación y formateo de cadenas de texto en HR Library.
+ * Fusiona los métodos de máscara, highlight y formateo de documentos dominicanos
+ * de V2 con slugify, format (plantilla), reverse y extras de V1.
+ *
+ * @example
+ * Strings.slug("Gestión Académica 2024");       // "gestion-academica-2024"
+ * Strings.mask("8095551234", "###-###-####");    // "809-555-1234"
+ * Strings.formatCedula("00102345678");           // "001-0234567-8"
+ * Strings.highlight("María García", "garcia");   // "María &lt;mark>García&lt;/mark>"
+ * Strings.format("Hola {nombre}", { nombre: "Ana" }); // "Hola Ana"
+ *
+ * @version 3.0.0
+ */
+
+const Strings = {
+
+  /* ── Transformación básica ── */
+
+  /**
+   * Capitaliza la primera letra de la cadena.
+   * @param {string} text @returns {string}
+   */
+  capitalize: (text) => {
+    if (typeof text !== "string" || !text.length) return "";
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  },
+
+  /**
+   * Convierte cada palabra a mayúscula inicial (title case).
+   * @param {string} text @returns {string}
+   * @example Strings.titleCase("juan pablo duarte"); // "Juan Pablo Duarte"
+   */
+  titleCase: (text) => {
+    if (typeof text !== "string") return "";
+    return text.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+  },
+
+  upper: (text) => (typeof text === "string" ? text.toUpperCase() : ""),
+  lower: (text) => (typeof text === "string" ? text.toLowerCase() : ""),
+  trim:  (text) => (typeof text === "string" ? text.trim()        : ""),
+
+  /**
+   * Invierte una cadena.
+   * @param {string} str @returns {string}
+   * @example Strings.reverse("hola"); // "aloh"
+   */
+  reverse: (str) => (typeof str !== "string" || !str ? "" : [...str].reverse().join("")),
+
+  /* ── Normalización ── */
+
+  /**
+   * Elimina acentos y diacríticos.
+   * @param {string} text @returns {string}
+   * @example Strings.normalize("María García"); // "Maria Garcia"
+   */
+  normalize: (text) => {
+    if (typeof text !== "string") return "";
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  },
+
+  /**
+   * Reemplaza múltiples espacios/tabs/saltos por un solo espacio.
+   * @param {string} text @returns {string}
+   */
+  cleanSpaces: (text) => {
+    if (typeof text !== "string") return "";
+    return text.replace(/\s+/g, " ").trim();
+  },
+
+  /* ── Recorte / Formato ── */
+
+  /**
+   * Trunca un texto a longitud máxima con sufijo.
+   * @param {string} text @param {number} max @param {string} [suffix="..."] @returns {string}
+   */
+  truncate: (text, max, suffix = "...") => {
+    if (typeof text !== "string") return "";
+    if (text.length &lt;= max) return text;
+    return text.substring(0, max) + suffix;
+  },
+
+  /**
+   * Rellena a la izquierda hasta la longitud indicada.
+   * @param {string|number} value @param {number} length @param {string} [char="0"] @returns {string}
+   * @example Strings.padStart(5, 4); // "0005"
+   */
+  padStart: (value, length, char = "0") => String(value).padStart(length, char),
+
+  /**
+   * Rellena a la derecha hasta la longitud indicada.
+   * @param {string|number} value @param {number} length @param {string} [char=" "] @returns {string}
+   */
+  padEnd: (value, length, char = " ") => String(value).padEnd(length, char),
+
+  /** Repite una cadena N veces. */
+  repeat: (str, times) => (typeof str !== "string" || times &lt; 1 ? "" : str.repeat(times)),
+
+  /* ── URLs / Identifiers ── */
+
+  /**
+   * Convierte texto a slug amigable para URLs.
+   * @param {string} text @returns {string}
+   * @example Strings.slug("Gestión Académica 2024"); // "gestion-academica-2024"
+   */
+  slug: (text) => {
+    if (typeof text !== "string") return "";
+    return Strings.normalize(text)
+      .toLowerCase().trim()
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+  },
+
+  /** Alias de slug para compatibilidad con V1 */
+  slugify: (text) => Strings.slug(text),
+
+  /**
+   * Genera un ID único alfanumérico aleatorio.
+   * @param {number} [length=8] @returns {string}
+   * @example Strings.uid(); // "a3f8b2c1"
+   */
+  uid: (length = 8) => Math.random().toString(36).substring(2, 2 + length),
+
+  /* ── Búsqueda / Comparación ── */
+
+  /**
+   * Verifica si una cadena contiene un texto (case-insensitive, sin acentos).
+   * @param {string} text @param {string} search @returns {boolean}
+   * @example Strings.contains("María García", "garcia"); // true
+   */
+  contains: (text, search) => {
+    if (typeof text !== "string" || typeof search !== "string") return false;
+    return Strings.normalize(text.toLowerCase())
+      .includes(Strings.normalize(search.toLowerCase()));
+  },
+
+  startsWith: (str, prefix) => typeof str === "string" &amp;&amp; str.startsWith(String(prefix)),
+  endsWith:   (str, suffix) => typeof str === "string" &amp;&amp; str.endsWith(String(suffix)),
+
+  /**
+   * Cuenta las ocurrencias de una subcadena.
+   * @param {string} text @param {string} search @returns {number}
+   * @example Strings.countOccurrences("banana", "a"); // 3
+   */
+  countOccurrences: (text, search) => {
+    if (!text || !search) return 0;
+    return text.split(search).length - 1;
+  },
+
+  replaceAll: (str, search, replace) =>
+    (typeof str !== "string" ? "" : str.replaceAll(search, replace)),
+
+  /* ── Plantilla / Interpolación ── */
+
+  /**
+   * Interpola variables en una plantilla usando {clave}.
+   * @param {string} template @param {Object} data @returns {string}
+   * @example Strings.format("Hola {nombre}, tienes {n} mensajes.", { nombre: "Ana", n: 3 });
+   */
+  format: (template, data) => {
+    if (!template || typeof data !== "object" || data === null) return String(template ?? "");
+    return String(template).replace(/\{(\w+)\}/g, (_, key) =>
+      Object.prototype.hasOwnProperty.call(data, key) ? String(data[key]) : `{${key}}`
+    );
+  },
+
+  /* ── Máscara / Formateo de datos ── */
+
+  /**
+   * Aplica una máscara de caracteres. `#` se reemplaza con cada dígito del valor.
+   * @param {string|number} value @param {string} mask @returns {string}
+   * @example Strings.mask("8095551234", "###-###-####"); // "809-555-1234"
+   */
+  mask: (value, mask) => {
+    const str = String(value).replace(/\D/g, "");
+    let result = "", si = 0;
+    for (let mi = 0; mi &lt; mask.length &amp;&amp; si &lt; str.length; mi++) {
+      result += mask[mi] === "#" ? str[si++] : mask[mi];
+    }
+    return result;
+  },
+
+  /** Formatea número de teléfono dominicano (10 dígitos → ###-###-####). */
+  formatPhone:  (phone)  => Strings.mask(String(phone).replace(/\D/g, ""), "###-###-####"),
+
+  /** Formatea cédula dominicana (11 dígitos → ###-#######-#). */
+  formatCedula: (cedula) => Strings.mask(String(cedula).replace(/\D/g, ""), "###-#######-#"),
+
+  /** Formatea RNC dominicano (9 dígitos → ###-#####-#). */
+  formatRNC:    (rnc)    => Strings.mask(String(rnc).replace(/\D/g, ""), "###-#####-#"),
+
+  /* ── Utilidades ── */
+
+  /**
+   * Escapa caracteres HTML especiales para prevenir XSS.
+   * @param {string} text @returns {string}
+   */
+  escapeHtml: (text = "") =>
+    String(text).replace(/[&amp;&lt;>"']/g, (m) => ({"&amp;":"&amp;amp;","&lt;":"&amp;lt;",">":"&amp;gt;",'"':"&amp;quot;","'":"&amp;#039;"}[m])),
+
+  /**
+   * Resalta coincidencias de una búsqueda en HTML con &lt;mark>.
+   * @param {string} text @param {string} search @returns {string}
+   * @example Strings.highlight("María García", "garcia"); // "María &lt;mark>García&lt;/mark>"
+   */
+  highlight: (text, search) => {
+    if (!search || typeof text !== "string") return text;
+    const escaped = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&amp;");
+    return text.replace(new RegExp(`(${escaped})`, "gi"), "&lt;mark>$1&lt;/mark>");
+  },
+
+  /** Elimina todas las etiquetas HTML de una cadena. */
+  stripHtml: (html) => (typeof html !== "string" ? "" : html.replace(/&lt;[^>]*>/g, "")),
+
+  /** @returns {void} */
+  init() {},
+};
+
+export default Object.freeze(Strings);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

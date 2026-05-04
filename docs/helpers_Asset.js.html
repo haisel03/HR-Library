@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Asset.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Asset.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import config from "../core/config.js";
+
+/**
+ * @module Asset
+ * @description
+ * Helper para la gestión de recursos estáticos: logos, avatares, fondos e imágenes.
+ * Todas las rutas se resuelven desde `config.assets` en core/config.js.
+ *
+ * @example
+ * $Asset.logo("sidebar");           // → "img/logos/logo-sidebar.svg"
+ * $Asset.avatar("avatar-3.jpg");    // → "img/avatars/avatar-3.jpg"
+ * $Asset.placeholder("user");       // → "img/placeholders/user.png"
+ */
+
+const Asset = {
+
+	/**
+	 * Devuelve la ruta base de imágenes configurada.
+	 * @returns {string}  Ej: "img"
+	 */
+	basePath: () => config.assets?.basePath ?? "img",
+
+	/**
+	 * Devuelve la URL de una variante del logo.
+	 * Variantes: default · horizontal · compact · sidebar · sidebar-collapsed
+	 *            login · login-dark · symbol · symbol-dark · symbol-on-dark
+	 *
+	 * @param {string} [variant="default"]
+	 * @returns {string}
+	 * @example $Asset.logo("sidebar");   // "img/logos/logo-sidebar.svg"
+	 */
+	logo: (variant = "default") => {
+		const cfg      = config.assets?.logos ?? {};
+		const path     = cfg.path ?? "/logos";
+		// BUG corregido: config usa logos.variants{}, no logos[variant] directamente
+		const map      = cfg.variants ?? {};
+		const fileName = map[variant] ?? map.default ?? "logo-horizontal.svg";
+		return `${Asset.basePath()}${path}/${fileName}`;
+	},
+
+	/**
+	 * Devuelve la URL de un archivo de avatar.
+	 * Sin argumento devuelve el avatar por defecto del config.
+	 *
+	 * @param {string} [fileName]
+	 * @returns {string}
+	 * @example $Asset.avatar("avatar-3.jpg");  // "img/avatars/avatar-3.jpg"
+	 */
+	avatar: (fileName) => {
+		const cfg  = config.assets?.avatars ?? {};
+		const path = cfg.path ?? "/avatars";
+		const file = fileName ?? cfg.default ?? "avatar.jpg";
+		return `${Asset.basePath()}${path}/${file}`;
+	},
+
+	/**
+	 * Devuelve la URL de una imagen de fondo.
+	 * @param {string} fileName
+	 * @returns {string}
+	 */
+	bg: (fileName) => {
+		const cfg  = config.assets?.backgrounds ?? {};
+		const path = cfg.path ?? "/bg";
+		return `${Asset.basePath()}${path}/${fileName}`;
+	},
+
+	/**
+	 * Devuelve la URL de la foto de un empleado/usuario.
+	 * Acepta ID numérico (→ `{id}.png`) o nombre de archivo.
+	 *
+	 * @param {string|number} id
+	 * @returns {string}
+	 * @example $Asset.user(5);            // "img/employees/5.png"
+	 */
+	user: (id) => {
+		const cfg      = config.assets?.employees ?? {};
+		const path     = cfg.path ?? "/employees";
+		// BUG corregido: id=0 es válido, usar ?? en lugar de ||
+		const fileName = typeof id === "number"
+			? `${id}.png`
+			: (id ?? cfg.default ?? "default.png");
+		return `${Asset.basePath()}${path}/${fileName}`;
+	},
+
+	/**
+	 * Devuelve la URL de cualquier imagen por ruta relativa.
+	 * @param {string} subPath  Subdirectorio dentro de la carpeta base
+	 * @param {string} fileName
+	 * @returns {string}
+	 */
+	img: (subPath, fileName) =>
+		`${Asset.basePath()}/${subPath}/${fileName}`,
+
+	/**
+	 * Devuelve la URL del placeholder para imágenes faltantes o rotas.
+	 * @param {"user"|"image"|"logo"} [type="image"]
+	 * @returns {string}
+	 */
+	placeholder: (type = "image") => {
+		const cfg  = config.assets?.placeholders ?? {};
+		const file = cfg[type] ?? "image.png";
+		return `${Asset.basePath()}/placeholders/${file}`;
+	},
+
+	/**
+	 * Handler para `&lt;img onerror>` — reemplaza src con placeholder.
+	 * Evita loop infinito si el placeholder también falla.
+	 *
+	 * @param {HTMLImageElement} imgEl
+	 * @param {"user"|"image"} [type="user"]
+	 *
+	 * @example
+	 * // En HBS:
+	 * &lt;img src="{{avatar}}" onerror="$Asset.onError(this, 'user')">
+	 */
+	onError: (imgEl, type = "user") => {
+		imgEl.onerror = null; // evitar loop infinito
+		imgEl.src = Asset.placeholder(type);
+	},
+};
+
+export default Asset;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

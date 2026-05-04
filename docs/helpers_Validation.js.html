@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>helpers/Validation.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Drag.html">Drag</a></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-IframeTab.html">IframeTab</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="HR.html">HR</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-IframeTab-IframeTab.html">IframeTab</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">helpers/Validation.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @module Validation
+ * @description
+ * Funciones de validación para HR Library.
+ * Fusiona la organización modular de V2 con las validaciones adicionales de V1.
+ * Los regex de email/phone son configurables desde config.validation.
+ *
+ * @example
+ * Validation.isNullOrEmpty("");            // true
+ * Validation.isValidEmail("x@y.com");     // true
+ * Validation.isValidCedula("001-1234567-8"); // true/false
+ * Validation.isValidPlaca("A123456");     // true
+ * Validation.isCurrency("1,500.00");      // true
+ *
+ * @version 3.0.0
+ */
+
+import config from "../core/config.js";
+
+/* ── Regex internos (no configurables) ── */
+const REGEX = Object.freeze({
+  time:      /^([01]\d|2[0-3]):([0-5]\d)$/,
+  currency:  /^-?\d{1,3}(,\d{3})*(\.\d{1,2})?$|^-?\d+(\.\d{1,2})?$/,
+  rnc:       /^\d{9}$/,
+  alpha:     /^[\p{L}\s]+$/u,
+  alphaNum:  /^[\p{L}\p{N}]+$/u,
+  placa:     /^[A-Z]{1,2}\d{5,6}$/,
+});
+
+const Validation = {
+
+  /* ── Vacío / Nulo ── */
+
+  /**
+   * Verifica si un valor es null, undefined o cadena vacía/solo espacios.
+   * @param {*} value @returns {boolean}
+   */
+  isNullOrEmpty: (value) =>
+    value === null || value === undefined ||
+    (typeof value === "string" &amp;&amp; value.trim() === ""),
+
+  /**
+   * Verifica si un valor está vacío.
+   * Cubre: null, undefined, string vacío, array vacío, objeto vacío.
+   * @param {*} value @returns {boolean}
+   */
+  isEmpty: (value) => {
+    if (Validation.isNullOrEmpty(value)) return true;
+    if (Array.isArray(value))            return value.length === 0;
+    if (typeof value === "object")       return Object.keys(value).length === 0;
+    return false;
+  },
+
+  /** Verifica que un campo no esté vacío (campo obligatorio). */
+  required: (value) => !Validation.isEmpty(value),
+
+  /* ── Números ── */
+
+  /** @param {*} value @returns {boolean} Número finito válido */
+  isNumber:   (value) => { const n = Number(value); return !isNaN(n) &amp;&amp; isFinite(n); },
+  isInteger:  (value) => Validation.isNumber(value) &amp;&amp; Number.isInteger(Number(value)),
+  isPositive: (value) => Validation.isNumber(value) &amp;&amp; Number(value) > 0,
+  isNegative: (value) => Validation.isNumber(value) &amp;&amp; Number(value) &lt; 0,
+  isDecimal:  (value) => Validation.isNumber(value) &amp;&amp; !Number.isInteger(Number(value)),
+
+  /**
+   * Verifica si un número está dentro de un rango inclusivo.
+   * @param {number} value @param {number} min @param {number} max @returns {boolean}
+   */
+  isInRange: (value, min, max) => {
+    const n = Number(value);
+    return Validation.isNumber(n) &amp;&amp; n >= min &amp;&amp; n &lt;= max;
+  },
+
+  /* ── Texto ── */
+
+  isAlpha:        (value) => typeof value === "string" &amp;&amp; REGEX.alpha.test(value),
+  isAlphanumeric: (value) => typeof value === "string" &amp;&amp; REGEX.alphaNum.test(value),
+  minLength:      (value, n) => typeof value === "string" &amp;&amp; value.length >= n,
+  maxLength:      (value, n) => typeof value === "string" &amp;&amp; value.length &lt;= n,
+  matchesRegex:   (value, regex) => typeof value === "string" &amp;&amp; regex.test(value),
+
+  /* ── Email / Teléfono ── */
+
+  /**
+   * Valida dirección de correo electrónico.
+   * Regex configurable via config.validation.emailRegex.
+   * @param {string} email @param {RegExp} [regex] @returns {boolean}
+   */
+  isValidEmail: (email, regex = config.validation.emailRegex) =>
+    typeof email === "string" &amp;&amp; regex.test(email.trim()),
+
+  /**
+   * Valida número de teléfono.
+   * Formato: 809-555-1234 / (809) 555 1234 / 8095551234
+   * @param {string} phone @param {RegExp} [regex] @returns {boolean}
+   */
+  isValidPhone: (phone, regex = config.validation.phoneRegex) =>
+    typeof phone === "string" &amp;&amp; regex.test(phone.trim()),
+
+  /* ── Documentos dominicanos ── */
+
+  /**
+   * Valida cédula dominicana con dígito verificador (módulo 10).
+   * Acepta: "00102345678" o "001-0234567-8"
+   * @param {string} cedula @returns {boolean}
+   */
+  isValidCedula: (cedula) => {
+    if (typeof cedula !== "string") return false;
+    const v = cedula.replace(/-/g, "");
+    if (!/^\d{11}$/.test(v)) return false;
+    let sum = 0;
+    for (let i = 0; i &lt; 10; i++) {
+      let n = parseInt(v[i]) * ((i % 2) + 1);
+      sum += n > 9 ? n - 9 : n;
+    }
+    return (10 - (sum % 10)) % 10 === parseInt(v[10]);
+  },
+
+  /**
+   * Valida RNC dominicano (9 dígitos, con o sin guiones).
+   * @param {string} rnc @returns {boolean}
+   */
+  isValidRNC: (rnc) => {
+    if (typeof rnc !== "string") return false;
+    return REGEX.rnc.test(rnc.replace(/-/g, ""));
+  },
+
+  /**
+   * Valida placa vehicular dominicana.
+   * Formatos aceptados: A123456, AB12345
+   * @param {string} placa @returns {boolean}
+   */
+  isValidPlaca: (placa) => {
+    if (typeof placa !== "string") return false;
+    return REGEX.placa.test(placa.trim().toUpperCase());
+  },
+
+  /* ── URLs ── */
+
+  /**
+   * Verifica si es una URL válida (http o https).
+   * @param {string} url @returns {boolean}
+   */
+  isValidUrl: (url) => {
+    if (typeof url !== "string") return false;
+    try { const u = new URL(url); return u.protocol === "http:" || u.protocol === "https:"; }
+    catch { return false; }
+  },
+
+  /* ── Fechas ── */
+
+  /**
+   * Verifica si un valor es una fecha válida.
+   * @param {string|Date|number} value @returns {boolean}
+   */
+  isValidDate: (value) => {
+    if (!value) return false;
+    const d = new Date(value);
+    return !isNaN(d.getTime());
+  },
+
+  /** @param {string|Date} date @param {string|Date} after @returns {boolean} */
+  isAfter: (date, after) => {
+    const a = new Date(date), b = new Date(after);
+    return Validation.isValidDate(a) &amp;&amp; Validation.isValidDate(b) &amp;&amp; a > b;
+  },
+
+  /** @param {string|Date} date @param {string|Date} before @returns {boolean} */
+  isBefore: (date, before) => {
+    const a = new Date(date), b = new Date(before);
+    return Validation.isValidDate(a) &amp;&amp; Validation.isValidDate(b) &amp;&amp; a &lt; b;
+  },
+
+  /* ── Tiempo ── */
+
+  /** Valida hora en formato HH:MM (24 horas). */
+  isTime: (value) => typeof value === "string" &amp;&amp; REGEX.time.test(value),
+
+  /* ── Monedas ── */
+
+  /**
+   * Valida un monto monetario. Acepta: 1000, 1000.00, 1,000.00, -500.
+   * @param {string|number} value @returns {boolean}
+   */
+  isCurrency: (value) => REGEX.currency.test(String(value)),
+
+  /* ── Archivos ── */
+
+  /**
+   * Verifica si un archivo tiene una extensión permitida.
+   * @param {File|string} file @param {string[]} allowed @returns {boolean}
+   */
+  isAllowedExtension: (file, allowed = []) => {
+    const name = file instanceof File ? file.name : String(file);
+    const ext  = name.split(".").pop()?.toLowerCase() ?? "";
+    return allowed.map((e) => e.toLowerCase()).includes(ext);
+  },
+
+  /**
+   * Verifica si un archivo no supera el tamaño máximo.
+   * @param {File} file @param {number} maxMB @returns {boolean}
+   */
+  isValidFileSize: (file, maxMB) =>
+    file instanceof File &amp;&amp; file.size &lt;= maxMB * 1024 * 1024,
+
+  /* ── Estructuras ── */
+
+  isArray:       (value) => Array.isArray(value),
+  isEmptyArray:  (value) => Array.isArray(value) &amp;&amp; value.length === 0,
+  isObject:      (value) => typeof value === "object" &amp;&amp; value !== null &amp;&amp; !Array.isArray(value),
+  isEmptyObject: (value) => Validation.isObject(value) &amp;&amp; Object.keys(value).length === 0,
+  equals:        (a, b)  => a === b,
+  oneOf:         (value, list) => Array.isArray(list) &amp;&amp; list.includes(value),
+
+  /** @returns {void} */
+  init() {},
+};
+
+export default Object.freeze(Validation);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sun May 03 2026 19:58:41 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>
