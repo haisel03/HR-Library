@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 4-utilities/_sweetalert.scss
 // Fusión: CoffeeSchools (estética rica) + HR Library (loading popup, spinner)
@@ -25,43 +27,43 @@
 
 .swal2-icon {
   &.swal2-success {
-    border-color: rgba($success, .3) !important;
-    .swal2-success-ring { border-color: rgba($success, .25) !important; }
+    border-color: color.change($success, $alpha: .3) !important;
+    .swal2-success-ring { border-color: color.change($success, $alpha: .25) !important; }
     [class^=swal2-success-line] { background: $success !important; }
   }
-  &.swal2-warning { border-color: rgba($warning, .4) !important; color: $warning !important; }
+  &.swal2-warning { border-color: color.change($warning, $alpha: .4) !important; color: $warning !important; }
   &.swal2-error {
-    border-color: rgba($danger, .35) !important;
+    border-color: color.change($danger, $alpha: .35) !important;
     .swal2-x-mark-line-left,
     .swal2-x-mark-line-right { background: $danger !important; }
   }
-  &.swal2-question { border-color: rgba($info, .3) !important; color: $info !important; }
-  &.swal2-info     { border-color: rgba($info, .3) !important; color: $info !important; }
+  &.swal2-question { border-color: color.change($info, $alpha: .3) !important; color: $info !important; }
+  &.swal2-info     { border-color: color.change($info, $alpha: .3) !important; color: $info !important; }
 }
 
 /* ── Botones ─────────────────────────────────────────────────────────────── */
 
 .swal2-confirm {
-  background:    linear-gradient(135deg, $primary, darken($primary, 12%)) !important;
+  background:    linear-gradient(135deg, $primary, color.adjust($primary, $lightness: -12%)) !important;
   border:        none !important;
-  box-shadow:    0 3px 10px rgba($primary, .35) !important;
+  box-shadow:    0 3px 10px color.change($primary, $alpha: .35) !important;
   font-weight:   700 !important;
   letter-spacing: .03em !important;
-  &:focus { box-shadow: 0 0 0 3px rgba($primary, .3) !important; }
+  &:focus { box-shadow: 0 0 0 3px color.change($primary, $alpha: .3) !important; }
 }
 
 .swal2-cancel {
-  background:    rgba($primary, .08) !important;
+  background:    color.change($primary, $alpha: .08) !important;
   color:         $secondary !important;
   border:        1px solid $input-border-color !important;
   font-weight:   700 !important;
-  &:hover { background: rgba($primary, .15) !important; }
+  &:hover { background: color.change($primary, $alpha: .15) !important; }
 }
 
 .swal2-deny {
-  background:  rgba($danger, .1) !important;
+  background:  color.change($danger, $alpha: .1) !important;
   color:       $danger !important;
-  border:      1px solid rgba($danger, .25) !important;
+  border:      1px solid color.change($danger, $alpha: .25) !important;
   font-weight: 700 !important;
 }
 
@@ -73,7 +75,7 @@
 
 /* ── Backdrop ────────────────────────────────────────────────────────────── */
 
-.swal2-backdrop-show { background: rgba($dark, .55) !important; }
+.swal2-backdrop-show { background: color.change($dark, $alpha: .55) !important; }
 
 /* ── Loading popup (HR Library style) ───────────────────────────────────── */
 
@@ -110,7 +112,7 @@
   width:         42px;
   height:        42px;
   border-radius: 50%;
-  border:        3px solid rgba($white, .15);
+  border:        3px solid color.change($white, $alpha: .15);
   border-top-color: $primary;
   animation:     swal-spin .9s linear infinite;
 }

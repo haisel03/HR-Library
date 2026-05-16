@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "sass:map";
+
 // ============================================================================
 // 3-components/_sidebar.scss
 // Fusión: HR Library (estructura, SimpleBar, variables) + CoffeeSchools
@@ -18,9 +21,9 @@
 
 	// Textura sutil (visible en tema café oscuro)
 	background-image: linear-gradient(180deg,
-			rgba($primary, .04) 0%,
+			color.change($primary, $alpha: .04) 0%,
 			transparent 40%,
-			rgba(#000, .12) 100%);
+			color.change(#000, $alpha: .12) 100%);
 
 	// Línea lateral decorativa
 	&::before {
@@ -89,9 +92,9 @@
 				left: 100%;
 				top: 0;
 				min-width: 200px;
-				background: darken($sidebar-bg, 3%);
+				background: color.adjust($sidebar-bg, $lightness: -3%);
 				border-radius: 0 $border-radius-lg $border-radius-lg 0;
-				box-shadow: 4px 4px 16px rgba(#000, .3);
+				box-shadow: 4px 4px 16px color.change(#000, $alpha: .3);
 				padding: .5rem 0;
 				z-index: 1050;
 
@@ -118,7 +121,7 @@
 	}
 
 	// Mobile: colapsado por defecto
-	@media (max-width: #{map-get($grid-breakpoints, 'lg') - .02px}) {
+	@media (max-width: #{map.get($grid-breakpoints, 'lg') - .02px}) {
 		margin-left: -$sidebar-width;
 
 		&.collapsed {
@@ -226,8 +229,8 @@
 	.brand-icon {
 		width: 36px;
 		height: 36px;
-		background: rgba($primary, .18);
-		border: 1px solid rgba($primary, .3);
+		background: color.change($primary, $alpha: .18);
+		border: 1px solid color.change($primary, $alpha: .3);
 		border-radius: .6rem;
 		display: flex;
 		align-items: center;
@@ -273,15 +276,15 @@
 	gap: .8rem;
 	padding: .9rem $sidebar-brand-padding-x;
 	border-bottom: 1px solid $sidebar-brand-border-color;
-	background: rgba(#000, .15);
+	background: color.change(#000, $alpha: .15);
 	flex-shrink: 0;
 
 	.user-avatar {
 		width: 38px;
 		height: 38px;
 		border-radius: 50%;
-		border: 2px solid rgba($primary, .4);
-		background: rgba($primary, .15);
+		border: 2px solid color.change($primary, $alpha: .4);
+		background: color.change($primary, $alpha: .15);
 		color: $primary;
 		font-size: .72rem;
 		font-weight: 700;
@@ -329,7 +332,7 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background: rgba($primary, .25);
+		background: color.change($primary, $alpha: .25);
 		border-radius: 2px;
 	}
 
@@ -499,9 +502,9 @@ a.sidebar-link {
 	padding: .15em .5rem;
 	margin-left: auto;
 	flex-shrink: 0;
-	background: rgba($primary, .18);
+	background: color.change($primary, $alpha: .18);
 	color: $primary;
-	border: 1px solid rgba($primary, .25);
+	border: 1px solid color.change($primary, $alpha: .25);
 	border-radius: 20px;
 }
 
@@ -517,7 +520,7 @@ a.sidebar-link {
 
 .sidebar-divider {
 	height: 1px;
-	background: linear-gradient(90deg, transparent, rgba($primary, .2), transparent);
+	background: linear-gradient(90deg, transparent, color.change($primary, $alpha: .2), transparent);
 	margin: .5rem $sidebar-brand-padding-x;
 }
 
@@ -545,7 +548,7 @@ a.sidebar-link {
 
 .sidebar-cta-text {
 	font-size: $sidebar-cta-text-size;
-	color: rgba($sidebar-brand-color, .55);
+	color: color.change($sidebar-brand-color, $alpha: .55);
 	margin-bottom: 0;
 }
 
@@ -562,7 +565,7 @@ a.sidebar-link {
 	flex-shrink: 0;
 
 	&:hover {
-		background: rgba(#000, .08);
+		background: color.change(#000, $alpha: .08);
 	}
 }
 
@@ -572,7 +575,7 @@ a.sidebar-link {
 	display: none;
 	position: fixed;
 	inset: 0;
-	background: rgba($dark, .65);
+	background: color.change($dark, $alpha: .65);
 	z-index: 1029;
 	backdrop-filter: blur(3px);
 
@@ -588,7 +591,7 @@ a.sidebar-link {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-	background: rgba($primary, .25);
+	background: color.change($primary, $alpha: .25);
 	border-radius: 2px;
 }
 

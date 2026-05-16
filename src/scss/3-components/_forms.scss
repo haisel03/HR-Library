@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 3-components/_forms.scss
 // Fusión: HR Library (estructura BS5, Select2) + CoffeeSchools (visual refinado)
@@ -38,12 +40,12 @@ label.form-label {
     outline:      0;
   }
 
-  &::placeholder { color: rgba($secondary, .45); }
+  &::placeholder { color: color.change($secondary, $alpha: .45); }
 
   &.is-valid {
     border-color:   $success;
     background-image: none;
-    &:focus { border-color: $success; box-shadow: 0 0 0 .2rem rgba($success, .15); }
+    &:focus { border-color: $success; box-shadow: 0 0 0 .2rem color.change($success, $alpha: .15); }
   }
 
   &.is-invalid {
@@ -57,7 +59,7 @@ label.form-label {
 
 .input-group {
   .input-group-text {
-    background:  rgba($primary, .08);
+    background:  color.change($primary, $alpha: .08);
     border:      1px solid $input-border-color;
     color:       $secondary;
     font-weight: $font-weight-bold;
@@ -91,7 +93,7 @@ label.form-label {
     border-color:     $primary;
   }
 
-  &:focus { box-shadow: 0 0 0 3px rgba($primary, .15); }
+  &:focus { box-shadow: 0 0 0 3px color.change($primary, $alpha: .15); }
 }
 
 /* ── Select2 Bootstrap-5 ─────────────────────────────────────────────────── */
@@ -107,7 +109,7 @@ label.form-label {
     height:        auto;
     background:    $input-bg;
     cursor:        pointer;
-    &:hover { border-color: darken($input-border-color, 8%); }
+    &:hover { border-color: color.adjust($input-border-color, $lightness: -8%); }
   }
 
   &.select2-container--focus .select2-selection {
@@ -135,7 +137,7 @@ label.form-label {
     cursor:        pointer;
 
     &--highlighted   { background-color: $primary; color: $white; }
-    &[aria-selected="true"] { background-color: rgba($primary, .1); color: $primary; font-weight: $font-weight-bold; }
+    &[aria-selected="true"] { background-color: color.change($primary, $alpha: .1); color: $primary; font-weight: $font-weight-bold; }
   }
 
   .select2-search--dropdown .select2-search__field {
@@ -143,7 +145,7 @@ label.form-label {
     border-radius: $border-radius;
     padding:       .35rem .5rem;
     font-size:     $font-size-sm;
-    &:focus { border-color: $primary; outline: 0; box-shadow: 0 0 0 .15rem rgba($primary, .1); }
+    &:focus { border-color: $primary; outline: 0; box-shadow: 0 0 0 .15rem color.change($primary, $alpha: .1); }
   }
 
   .select2-selection__choice {
@@ -156,7 +158,7 @@ label.form-label {
   }
 
   .select2-selection__choice__remove {
-    color: rgba($white, .85);
+    color: color.change($white, $alpha: .85);
     margin-right: .25rem;
     &:hover { color: $white; }
   }

@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "sass:map";
 // Theme colors - Soft professional palette (A–Z)
 $aqua: #00FFFF !default;
@@ -169,4 +170,4 @@ $body-bg-dark: #0b0e14 !default;
 $body-color-dark: $gray-100 !default;
 
 $sidebar-bg: #002144 !default; // Darker DR blue for sidebar
-$sidebar-cta-bg: lighten($sidebar-bg, 5%) !default;
+$sidebar-cta-bg: color.adjust($sidebar-bg, $lightness: 5%) !default;

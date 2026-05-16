@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 3-components/_auth.scss
 // De HR Library — pantalla de login/registro con gradiente animado.
@@ -13,7 +15,7 @@
   overflow:        hidden;
 
   // Gradiente animado usa los colores del tema activo
-  background:      linear-gradient(270deg, $primary, darken($primary, 15%), $success);
+  background:      linear-gradient(270deg, $primary, color.adjust($primary, $lightness: -15%), $success);
   background-size: 600% 600%;
   animation:       gradientMove 12s ease infinite;
 
@@ -22,8 +24,8 @@
     position:   absolute;
     inset:      0;
     background:
-      radial-gradient(circle at top left,  rgba($white, .15), transparent 40%),
-      radial-gradient(circle at bottom right, rgba($dark, .25), transparent 50%);
+      radial-gradient(circle at top left,  color.change($white, $alpha: .15), transparent 40%),
+      radial-gradient(circle at bottom right, color.change($dark, $alpha: .25), transparent 50%);
     z-index:    1;
   }
 
@@ -31,17 +33,17 @@
 
   // Card glassmorphism
   .card {
-    background:     rgba($white, .92);
+    background:     color.change($white, $alpha: .92);
     backdrop-filter: blur(12px);
     border-radius:  18px;
-    border:         1px solid rgba($white, .2);
-    box-shadow:     0 25px 70px rgba($dark, .35);
+    border:         1px solid color.change($white, $alpha: .2);
+    box-shadow:     0 25px 70px color.change($dark, $alpha: .35);
     overflow:       hidden;
     transition:     all .3s ease;
 
     &:hover {
       transform:  translateY(-4px) scale(1.01);
-      box-shadow: 0 35px 90px rgba($dark, .4);
+      box-shadow: 0 35px 90px color.change($dark, $alpha: .4);
     }
 
     .card-body { padding: 3rem 2.5rem; }
@@ -68,7 +70,7 @@
     &:focus {
       background:   $white;
       border-color: $primary;
-      box-shadow:   0 0 0 4px rgba($primary, .1);
+      box-shadow:   0 0 0 4px color.change($primary, $alpha: .1);
     }
   }
 
@@ -93,14 +95,14 @@
 
   // Botón submit
   .btn-primary {
-    background:    linear-gradient(135deg, $primary, lighten($primary, 10%));
+    background:    linear-gradient(135deg, $primary, color.adjust($primary, $lightness: 10%));
     border:        none;
     border-radius: 10px;
     padding:       .9rem;
     font-weight:   700;
     letter-spacing: 1px;
     transition:    all .3s ease;
-    &:hover  { transform: translateY(-2px); box-shadow: 0 10px 25px rgba($primary, .4); }
+    &:hover  { transform: translateY(-2px); box-shadow: 0 10px 25px color.change($primary, $alpha: .4); }
     &:active { transform: scale(.98); }
   }
 
@@ -129,7 +131,7 @@
   border-radius: 50%;
   border:        4px solid $white;
   margin:        0 auto 1.5rem;
-  box-shadow:    0 10px 30px rgba($dark, .2);
+  box-shadow:    0 10px 30px color.change($dark, $alpha: .2);
   object-fit:    cover;
   transition:    transform .3s ease;
   &:hover { transform: scale(1.05); }

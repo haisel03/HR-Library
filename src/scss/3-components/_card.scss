@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 3-components/_card.scss
 // Fusión: HR Library (base, variantes BT) + CoffeeSchools (hover, accent, header)
@@ -24,7 +26,7 @@
 	}
 
 	&:hover {
-		box-shadow: 0 8px 24px rgba($dark, .08);
+		box-shadow: 0 8px 24px color.change($dark, $alpha: .08);
 		transform: translateY(-2px);
 
 		&::before {
@@ -35,7 +37,7 @@
 
 .card-header {
 	border-bottom: 1px solid $card-border-color;
-	background-color: rgba($primary, .03);
+	background-color: color.change($primary, $alpha: .03);
 	padding: $card-cap-padding-y $card-cap-padding-x;
 	display: flex;
 	align-items: center;
@@ -45,7 +47,7 @@
 }
 
 .card-footer {
-	background-color: rgba($primary, .02);
+	background-color: color.change($primary, $alpha: .02);
 	border-top: 1px solid $card-border-color;
 	padding-top: $card-cap-padding-y;
 	padding-bottom: $card-cap-padding-y;
@@ -73,7 +75,7 @@
 
 // Variante card destacada
 .card--accent {
-	border-color: rgba($primary, .4);
+	border-color: color.change($primary, $alpha: .4);
 
 	&::before {
 		opacity: 1;

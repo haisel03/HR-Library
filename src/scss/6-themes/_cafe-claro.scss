@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 6-themes/_cafe-claro.scss
 //
@@ -43,7 +45,7 @@ $card-cap-padding-y:     1rem;
 $card-cap-padding-x:     1.25rem;
 $card-bg:                #fff;
 $card-border-width:      0;
-$card-shadow:            0 4px 12px rgba(#2B2F36, .04);
+$card-shadow:            0 4px 12px color.change(#2B2F36, $alpha: .04);
 $card-title-color:       $primary;
 $card-title-font-size:   .925rem;
 $card-title-font-weight: 700;
@@ -51,7 +53,7 @@ $card-title-font-weight: 700;
 // ── Inputs ────────────────────────────────────────────────────────────────────
 $input-border-color:       #ced4da;
 $input-focus-border-color: $primary;
-$input-focus-box-shadow:   0 0 0 .2rem rgba($primary, .1);
+$input-focus-box-shadow:   0 0 0 .2rem color.change($primary, $alpha: .1);
 $input-bg:                 #fff;
 $input-color:              #495057;
 $input-disabled-bg:        #e9ecef;
@@ -64,7 +66,7 @@ $btn-font-weight:   600;
 
 // ── Tablas ────────────────────────────────────────────────────────────────────
 $table-border-color:   #e9ecef;
-$table-hover-bg:       rgba($primary, .04);
+$table-hover-bg:       color.change($primary, $alpha: .04);
 $table-striped-bg:     #f8f9fa;
 $table-cell-padding-y: .75rem;
 $table-cell-padding-x: .75rem;
@@ -73,22 +75,22 @@ $table-cell-padding-x: .75rem;
 $sidebar-width:           260px;
 $sidebar-collapsed-width: 68px;
 $sidebar-bg:              #002144;   // Azul marino DR oscurecido
-$sidebar-cta-bg:          lighten(#002144, 5%);
+$sidebar-cta-bg:          color.adjust(#002144, $lightness: 5%);
 
 $sidebar-brand-color:        #f8f9fa;
-$sidebar-brand-border-color: rgba(#fff, .06);
+$sidebar-brand-border-color: color.change(#fff, $alpha: .06);
 $sidebar-brand-font-weight:  700;
 $sidebar-brand-font-size:    1.1rem;
 $sidebar-brand-padding-y:    1rem;
 $sidebar-brand-padding-x:    1.25rem;
 
-$sidebar-header-color:          rgba(#fff, .3);
+$sidebar-header-color:          color.change(#fff, $alpha: .3);
 $sidebar-header-font-size:      .7rem;
 $sidebar-header-font-weight:    600;
 $sidebar-header-letter-spacing: .08em;
 $sidebar-header-padding:        1.25rem 1.5rem .3rem;
 
-$sidebar-link-color:              rgba(#fff, .55);
+$sidebar-link-color:              color.change(#fff, $alpha: .55);
 $sidebar-link-bg:                 transparent;
 $sidebar-link-font-size:          .875rem;
 $sidebar-link-font-weight:        400;
@@ -99,18 +101,18 @@ $sidebar-link-border-left-color:  transparent;
 $sidebar-link-border-radius:      0;
 
 $sidebar-link-hover-color:             #fff;
-$sidebar-link-hover-bg:               rgba(#fff, .04);
+$sidebar-link-hover-bg:               color.change(#fff, $alpha: .04);
 $sidebar-link-hover-border-left-color: $danger;
 $sidebar-link-icon-hover-color:        #fff;
 
 $sidebar-link-active-color:             #fff;
-$sidebar-link-active-bg:               linear-gradient(90deg, rgba($primary, .15) 0%, rgba($primary, .06) 60%, rgba($primary, 0) 100%);
+$sidebar-link-active-bg:               linear-gradient(90deg, color.change($primary, $alpha: .15) 0%, color.change($primary, $alpha: .06) 60%, color.change($primary, $alpha: 0) 100%);
 $sidebar-link-active-border-left-color: $danger;
-$sidebar-link-icon-color:              rgba(#fff, .55);
+$sidebar-link-icon-color:              color.change(#fff, $alpha: .55);
 $sidebar-link-icon-active-color:       #fff;
 
 $sidebar-dropdown-padding-left:    2.75rem;
-$sidebar-dropdown-link-color:      rgba(#fff, .45);
+$sidebar-dropdown-link-color:      color.change(#fff, $alpha: .45);
 $sidebar-dropdown-link-hover-color: #fff;
 $sidebar-dropdown-link-active-color: #fff;
 $sidebar-dropdown-link-font-size:  .8125rem;
@@ -118,7 +120,7 @@ $sidebar-badge-font-size:          .6rem;
 $sidebar-cta-padding:              1.25rem;
 $sidebar-cta-margin:               1rem 1rem 1.25rem;
 $sidebar-cta-border-radius:        $border-radius-lg;
-$sidebar-cta-color:                rgba(#fff, .85);
+$sidebar-cta-color:                color.change(#fff, $alpha: .85);
 $sidebar-cta-title-size:           .8125rem;
 $sidebar-cta-text-size:            .75rem;
 
@@ -129,7 +131,7 @@ $sidebar-transition:
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 $navbar-bg:                 #fff;
-$navbar-box-shadow:         0 0 2rem 0 rgba(#2B2F36, .1);
+$navbar-box-shadow:         0 0 2rem 0 color.change(#2B2F36, $alpha: .1);
 $navbar-border-bottom:      0;
 $navbar-padding-y:          .875rem;
 $navbar-padding-x:          1.375rem;
@@ -156,9 +158,9 @@ $content-padding-mobile:  1rem;
 $topbar-height:           60px;
 
 // ── Shadows ───────────────────────────────────────────────────────────────────
-$box-shadow-sm: 0 0.05rem 0.2rem rgba(#2B2F36, .05);
-$box-shadow:    0 0.1rem  0.2rem rgba(#2B2F36, .05);
-$box-shadow-lg: 0 0.2rem  0.2rem rgba(#2B2F36, .05);
+$box-shadow-sm: 0 0.05rem 0.2rem color.change(#2B2F36, $alpha: .05);
+$box-shadow:    0 0.1rem  0.2rem color.change(#2B2F36, $alpha: .05);
+$box-shadow-lg: 0 0.2rem  0.2rem color.change(#2B2F36, $alpha: .05);
 
 // ── SweetAlert2 ───────────────────────────────────────────────────────────────
 $swal-radius:    1rem;
@@ -177,7 +179,7 @@ $modal-content-border-width: 0;
 $modal-header-border-width:  1px;
 $modal-footer-border-width:  1px;
 $simplebar-scrollbar-bg:     #fff;
-$stat-bg:                    lighten($primary, 55%);
+$stat-bg:                    color.adjust($primary, $lightness: 55%);
 $stat-icon-color:            $primary;
 
 // ── Opciones Bootstrap ────────────────────────────────────────────────────────

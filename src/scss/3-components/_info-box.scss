@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "sass:map";
+
 //
 // Component: Info Box
 //
@@ -11,14 +14,14 @@
   width: 100%;
   min-height: 80px;
   padding: .5rem;
-  margin-bottom: map-get($spacers, 3);
+  margin-bottom: map.get($spacers, 3);
   color: $body-color;
   background-color: $body-bg;
 
   .progress {
     height: 2px;
     margin: 5px 0;
-    background-color: rgba($card-cap-bg, .125);
+    background-color: color.change($card-cap-bg, $alpha: .125);
 
 		@each $color, $value in $theme-colors {
 			&.prgress-bar#{$color} {

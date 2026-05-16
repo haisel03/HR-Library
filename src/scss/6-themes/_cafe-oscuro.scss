@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 6-themes/_cafe-oscuro.scss
 //
@@ -42,7 +44,7 @@ $card-cap-padding-y:  1rem;
 $card-cap-padding-x:  1.35rem;
 $card-bg:             #FFFAF4;
 $card-border-width:   1px;
-$card-shadow:         0 2px 8px rgba(#1A0E0A, .05), 0 1px 2px rgba(#1A0E0A, .04);
+$card-shadow:         0 2px 8px color.change(#1A0E0A, $alpha: .05), 0 1px 2px color.change(#1A0E0A, $alpha: .04);
 $card-title-color:    #1A0E0A;
 $card-title-font-size: 1rem;
 $card-title-font-weight: 700;
@@ -50,10 +52,10 @@ $card-title-font-weight: 700;
 // ── Inputs ────────────────────────────────────────────────────────────────────
 $input-border-color:       #C4A882;
 $input-focus-border-color: #C68642;
-$input-focus-box-shadow:   0 0 0 .22rem rgba(#C68642, .18);
+$input-focus-box-shadow:   0 0 0 .22rem color.change(#C68642, $alpha: .18);
 $input-bg:                 #FFFAF4;
 $input-color:              #1A0E0A;
-$input-disabled-bg:        rgba(#C68642, .06);
+$input-disabled-bg:        color.change(#C68642, $alpha: .06);
 $form-label-color:         #2C1810;
 
 // ── Botones ───────────────────────────────────────────────────────────────────
@@ -63,8 +65,8 @@ $btn-font-weight:   600;
 
 // ── Tablas ────────────────────────────────────────────────────────────────────
 $table-border-color: #DFC9AD;
-$table-hover-bg:     rgba(#C68642, .06);
-$table-striped-bg:   rgba(#C68642, .03);
+$table-hover-bg:     color.change(#C68642, $alpha: .06);
+$table-striped-bg:   color.change(#C68642, $alpha: .03);
 $table-cell-padding-y: .75rem;
 $table-cell-padding-x: .75rem;
 
@@ -75,13 +77,13 @@ $sidebar-bg:              #1A0E0A;
 $sidebar-cta-bg:          #120A06;
 
 $sidebar-brand-color:        #F5ECD7;
-$sidebar-brand-border-color: rgba(#C68642, .1);
+$sidebar-brand-border-color: color.change(#C68642, $alpha: .1);
 $sidebar-brand-font-weight:  700;
 $sidebar-brand-font-size:    1.05rem;
 $sidebar-brand-padding-y:    0;
 $sidebar-brand-padding-x:    1.35rem;
 
-$sidebar-header-color:          rgba(#C68642, .45);
+$sidebar-header-color:          color.change(#C68642, $alpha: .45);
 $sidebar-header-font-size:      .62rem;
 $sidebar-header-font-weight:    700;
 $sidebar-header-letter-spacing: .12em;
@@ -98,18 +100,18 @@ $sidebar-link-border-left-color:  transparent;
 $sidebar-link-border-radius:      0;
 
 $sidebar-link-hover-color:             #F5ECD7;
-$sidebar-link-hover-bg:               rgba(#C68642, .07);
+$sidebar-link-hover-bg:               color.change(#C68642, $alpha: .07);
 $sidebar-link-hover-border-left-color: #C68642;
 $sidebar-link-icon-hover-color:        #F5ECD7;
 
 $sidebar-link-active-color:             #E8C9A0;
-$sidebar-link-active-bg:               rgba(#C68642, .16);
+$sidebar-link-active-bg:               color.change(#C68642, $alpha: .16);
 $sidebar-link-active-border-left-color: #C68642;
-$sidebar-link-icon-color:              rgba(#C4A882, .75);
+$sidebar-link-icon-color:              color.change(#C4A882, $alpha: .75);
 $sidebar-link-icon-active-color:       #C68642;
 
 $sidebar-dropdown-padding-left:    2.1rem;
-$sidebar-dropdown-link-color:      rgba(#C4A882, .75);
+$sidebar-dropdown-link-color:      color.change(#C4A882, $alpha: .75);
 $sidebar-dropdown-link-hover-color: #F5ECD7;
 $sidebar-dropdown-link-active-color: #C68642;
 $sidebar-dropdown-link-font-size:  .82rem;
@@ -117,7 +119,7 @@ $sidebar-badge-font-size:          .63rem;
 $sidebar-cta-padding:              1.25rem;
 $sidebar-cta-margin:               1rem 1rem 1.25rem;
 $sidebar-cta-border-radius:        $border-radius-lg;
-$sidebar-cta-color:                rgba(#F5ECD7, .85);
+$sidebar-cta-color:                color.change(#F5ECD7, $alpha: .85);
 $sidebar-cta-title-size:           .8125rem;
 $sidebar-cta-text-size:            .75rem;
 
@@ -128,8 +130,8 @@ $sidebar-transition:
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 $navbar-bg:                 #FFFAF4;
-$navbar-box-shadow:         0 2px 12px rgba(#1A0E0A, .06);
-$navbar-border-bottom:      2px solid rgba(#C68642, .25);
+$navbar-box-shadow:         0 2px 12px color.change(#1A0E0A, $alpha: .06);
+$navbar-border-bottom:      2px solid color.change(#C68642, $alpha: .25);
 $navbar-padding-y:          0;
 $navbar-padding-x:          1.75rem;
 $navbar-brand-color:        #1A0E0A;
@@ -138,7 +140,7 @@ $navbar-brand-font-weight:  700;
 $navbar-brand-padding-y:    0;
 $navbar-brand-padding-x:    0;
 $navbar-brand-icon-color:   #C68642;
-$navbar-input-bg:           rgba(#C68642, .08);
+$navbar-input-bg:           color.change(#C68642, $alpha: .08);
 $navbar-nav-link-padding-x: .5rem;
 
 // ── Colores de cuerpo y contenido ─────────────────────────────────────────────
@@ -155,13 +157,13 @@ $content-padding-mobile:  1rem;
 $topbar-height:           62px;
 
 // ── Shadows ───────────────────────────────────────────────────────────────────
-$box-shadow-sm: 0 0.05rem 0.2rem rgba(#1A0E0A, .06);
-$box-shadow:    0 0.1rem  0.2rem rgba(#1A0E0A, .08);
-$box-shadow-lg: 0 0.2rem  0.4rem rgba(#1A0E0A, .1);
+$box-shadow-sm: 0 0.05rem 0.2rem color.change(#1A0E0A, $alpha: .06);
+$box-shadow:    0 0.1rem  0.2rem color.change(#1A0E0A, $alpha: .08);
+$box-shadow-lg: 0 0.2rem  0.4rem color.change(#1A0E0A, $alpha: .1);
 
 // ── SweetAlert2 ───────────────────────────────────────────────────────────────
 $swal-radius:    1rem;
-$swal-shadow:    0 16px 48px rgba(#1A0E0A, .16);
+$swal-shadow:    0 16px 48px color.change(#1A0E0A, $alpha: .16);
 $swal-bg:        #FFFAF4;
 $swal-bg-dark:   #1C0F09;
 $swal-text-main: #2C1810;
@@ -170,13 +172,13 @@ $swal-text-muted:#A0522D;
 $swal-header-bg: $primary;
 
 // ── Otros componentes ─────────────────────────────────────────────────────────
-$footer-bg:                  rgba(#FFFAF4, .9);
+$footer-bg:                  color.change(#FFFAF4, $alpha: .9);
 $dropdown-bg:                #FFFAF4;
 $modal-content-border-width: 0;
 $modal-header-border-width:  1px;
 $modal-footer-border-width:  1px;
-$simplebar-scrollbar-bg:     rgba(#C68642, .4);
-$stat-bg:                    rgba(#C68642, .12);
+$simplebar-scrollbar-bg:     color.change(#C68642, $alpha: .4);
+$stat-bg:                    color.change(#C68642, $alpha: .12);
 $stat-icon-color:            #C68642;
 
 // ── Opciones Bootstrap ────────────────────────────────────────────────────────
