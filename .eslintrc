@@ -1,9 +1,59 @@
 {
   "parserOptions": {
-    "ecmaVersion": 2017,
+    "ecmaVersion": 2022,
     "sourceType": "module"
   },
   "env": {
-    "es7": true
+    "es2021": true,
+    "browser": true,
+    "jquery": true
+  },
+  "extends": ["eslint:recommended", "prettier"],
+  "rules": {
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  },
+  "globals": {
+    "$HR": "readonly",
+    "$Helper": "readonly",
+    "$Alert": "readonly",
+    "$Api": "readonly",
+    "$Forms": "readonly",
+    "$Table": "readonly",
+    "$Date": "readonly",
+    "$Dom": "readonly",
+    "$Storage": "readonly",
+    "$Modal": "readonly",
+    "$Validation": "readonly",
+    "$Icons": "readonly",
+    "$Select2": "readonly",
+    "$Calendar": "readonly",
+    "$Charts": "readonly",
+    "$Codes": "readonly",
+    "$Currency": "readonly",
+    "$Editor": "readonly",
+    "$Event": "readonly",
+    "$Excel": "readonly",
+    "$File": "readonly",
+    "$Fullscreen": "readonly",
+    "$Humanize": "readonly",
+    "$Iframe": "readonly",
+    "$Num": "readonly",
+    "$Number": "readonly",
+    "$Print": "readonly",
+    "$Sidebar": "readonly",
+    "$Signature": "readonly",
+    "$String": "readonly",
+    "Chart": "readonly",
+    "flatpickr": "readonly",
+    "Quill": "readonly",
+    "jsVectorMap": "readonly",
+    "SimpleBar": "readonly",
+    "dragula": "readonly",
+    "feather": "readonly",
+    "moment": "readonly",
+    "Inputmask": "readonly",
+    "SignaturePad": "readonly",
+    "jsPDF": "readonly",
+    "XLSX": "readonly"
   }
 }

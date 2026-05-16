@@ -31,12 +31,12 @@ const config = {
   /* ── API / Rutas ── */
   paths: {
     base:   "/",
-    api:    "/api/v1",
-    assets: "/assets",
+    api:    "/api",
+    assets: "/hr-library",
   },
 
   api: {
-    baseURL: "/api/v1",
+    baseURL: "/api",
     timeout: 15_000,
     retries: 0,
   },
