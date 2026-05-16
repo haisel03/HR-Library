@@ -113,43 +113,36 @@ export default function handlebarsPlugin(options = {}) {
     },
 
     configureServer(server) {
-      return () => {
-        server.middlewares.use((req, res, next) => {
-          let url = req.url || "";
+      server.middlewares.use((req, res, next) => {
+        let url = req.url || "";
 
-          if (url.includes("?")) url = url.split("?")[0];
+        if (url.includes("?")) url = url.split("?")[0];
 
-          if (url.endsWith(".html") || url === "/" || url === "") {
-            let pageName =
-              url.replace(".html", "").replace(/\/$/, "") || "index";
-            if (url === "/" || url === "") pageName = "index";
+        const pageName =
+          url.replace(/\.html$/, "").replace(/^\/|\/$/g, "") || "index";
 
-            if (!getPages().includes(pageName)) {
-              next();
-              return;
-            }
+        if (!getPages().includes(pageName)) {
+          next();
+          return;
+        }
 
-            try {
-              const content = compilePage(pageName);
-              if (!content) {
-                next();
-                return;
-              }
-              const html = buildHtmlDocument(pageName, content);
-              res.setHeader("Content-Type", "text/html; charset=utf-8");
-              res.end(html);
-            } catch (err) {
-              console.error(
-                `[vite-handlebars] Error compiling ${pageName}:`,
-                err,
-              );
-              next();
-            }
-          } else {
+        try {
+          const content = compilePage(pageName);
+          if (!content) {
             next();
+            return;
           }
-        });
-      };
+          const html = buildHtmlDocument(pageName, content);
+          res.setHeader("Content-Type", "text/html; charset=utf-8");
+          res.end(html);
+        } catch (err) {
+          console.error(
+            `[vite-handlebars] Error compiling ${pageName}:`,
+            err,
+          );
+          next();
+        }
+      });
     },
   };
 }
