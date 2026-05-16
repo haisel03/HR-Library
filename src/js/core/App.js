@@ -795,6 +795,17 @@ const App = {
 	 */
 	diffDays: DateHelper.diffDays,
 
+	/**
+	 * Retorna opciones de configuración para flatpickr según el tipo.
+	 * @param {Object} [overrides={}] Opciones adicionales
+	 * @param {"date"|"datetime"|"time"|"range"} [overrides.type="date"] Tipo de picker
+	 * @returns {Object} Objeto de opciones para flatpickr(el, options)
+	 *
+	 * @example
+	 * flatpickr("#input", App.flatpickrOptions({ type: "datetime" }));
+	 */
+	flatpickrOptions: DateHelper.flatpickr,
+
 	/* ── Storage (localStorage) ── */
 
 	/**
@@ -1962,6 +1973,14 @@ const App = {
 	 * @returns {Promise<void>}
 	 */
 	select2Reload: Select2.reload,
+
+	/**
+	 * Inicializa Select2 en todos los `<select class="select2">` del scope.
+	 * @param {HTMLElement|Document} [scope=document] Scope de búsqueda
+	 * @param {Object} [options={}] Opciones adicionales de Select2
+	 * @returns {void}
+	 */
+	select2Init: Select2.init,
 
 	/* ── Sidebar ── */
 

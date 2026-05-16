@@ -5,7 +5,6 @@
 
 $(async () => {
 	const events = await getEvents();
-	console.log(events);
 });
 
 async function getEvents() {

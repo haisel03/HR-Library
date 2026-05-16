@@ -1,15 +1,10 @@
 @use "sass:color";
 
 // ============================================================================
-// 6-themes/_cafe-claro.scss
+// _bootstrap-overrides.scss
 //
-// Tema "Café Claro" — paleta profesional clara inspirada en latte y crema.
-// Versión diurna: fondos blancos, acentos cálidos, sidebar azul institucional
-// de HR Library mezclado con los acentos dorados de CoffeeSchools.
-//
-// Paleta:
-//   Azul DR   #003876 · Rojo DR  #CE1126 · Dorado  #C9A227
-//   Crema     #FFFAF4 · Arena    #E6D8C3 · Miel    #C68642
+// Overrides de variables Bootstrap — paleta profesional clara.
+// Azul institucional, acentos cálidos, sidebar oscuro.
 // ============================================================================
 
 // ── Semánticos Bootstrap ──────────────────────────────────────────────────────
@@ -39,7 +34,7 @@ $border-color: #dee2e6;
 
 // ── Cards ─────────────────────────────────────────────────────────────────────
 $card-border-color: #e9ecef;
-$card-border-radius: $border-radius-lg;
+$card-border-radius: $border-radius;
 $card-cap-bg: #fff;
 $card-cap-padding-y: 1rem;
 $card-cap-padding-x: 1.25rem;

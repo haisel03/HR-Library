@@ -58,7 +58,7 @@ $(async function () {
 		setTimeout(() => {
 			App.loading(false);
 			App.success("¡Formulario procesado con éxito! Los datos han sido validados y serializados correctamente.");
-			console.log("Form Data:", data);
+
 		}, 1500);
 	});
 

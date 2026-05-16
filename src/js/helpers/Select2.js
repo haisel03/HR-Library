@@ -2,6 +2,7 @@
  * @module Select2
  * @description
  * Helper para Select2 con Bootstrap 5 en HR Library.
+ * Acceso principal via App.Select2.
  * Auto-inicialización, control de valores y eventos.
  * Detecta si el select está dentro de un modal y ajusta dropdownParent.
  *

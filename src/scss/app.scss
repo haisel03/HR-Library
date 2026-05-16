@@ -1,50 +1,24 @@
 // ============================================================================
-// app.scss — HR Library v3 · Entry point
+// app.scss — HR Library · Entry point
 //
-// TEMA ACTIVO: Café Claro (por defecto)
-// Para cambiar al tema oscuro, usar app-cafe-oscuro.scss como entry point,
-// o reemplazar el @import de tema abajo.
-//
-// ORDEN OBLIGATORIO:
-//   1. Bootstrap functions (sin variables aún)
-//   2. Tema (sobreescribe las variables !default)
-//   3. Variables HR (las que el tema no sobreescribió quedan con su default)
-//   4. Bootstrap completo
-//   5. Mixins
-//   6. Componentes
-//   7. Utilidades
-//   8. Vendors
+// Solo código custom. Bootstrap y vendors se compilan en vendor.scss.
 // ============================================================================
 
-// ── 1. Bootstrap functions (necesarias para lighten(), darken(), etc.) ────────
 @import "bootstrap/scss/functions";
-
-// ── 2. Tema activo ────────────────────────────────────────────────────────────
-//    Descomenta UNO de los dos:
-@import "6-themes/cafe-claro";
-// @import "6-themes/cafe-oscuro";
-
-// ── 3. Variables HR ───────────────────────────────────────────────────────────
+@import "1-variables/bootstrap-overrides";
 @import "1-variables/app";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
 
-// ── 4. Bootstrap completo ─────────────────────────────────────────────────────
-@import "1-variables/bootstrap";
-
-$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
-@import "bootstrap-icons/font/bootstrap-icons";
-
-// ── 5. Mixins ─────────────────────────────────────────────────────────────────
 @import "2-mixins/button";
 @import "2-mixins/table";
 @import "2-mixins/card";
 
-// ── 6. Componentes ────────────────────────────────────────────────────────────
 @import "3-components/index";
 
-// ── 7. Utilidades ─────────────────────────────────────────────────────────────
 @import "4-utilities/cursors";
 @import "4-utilities/dark-mode";
 @import "4-utilities/sweetalert";
-
-// ── 8. Vendors ────────────────────────────────────────────────────────────────
-@import "5-vendor/vendors";

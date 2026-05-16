@@ -34,6 +34,17 @@
 		z-index: 2;
 	}
 
+	// Logo texto elegante
+	.auth-logo {
+		font-family: $headings-font-family;
+		font-size: 2rem;
+		font-weight: 800;
+		color: $white;
+		letter-spacing: -0.5px;
+		text-shadow: 0 2px 10px color.change($dark, $alpha: 0.2);
+		margin: 0;
+	}
+
 	// Card glassmorphism
 	.card {
 		background: color.change($white, $alpha: 0.92);

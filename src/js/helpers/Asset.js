@@ -7,9 +7,9 @@ import config from "../core/config.js";
  * Todas las rutas se resuelven desde `config.assets` en core/config.js.
  *
  * @example
- * $Asset.logo("sidebar");           // → "img/logos/logo-sidebar.svg"
- * $Asset.avatar("avatar-3.jpg");    // → "img/avatars/avatar-3.jpg"
- * $Asset.placeholder("user");       // → "img/placeholders/user.png"
+ * App.Asset.logo("sidebar");           // → "img/logos/logo-sidebar.svg"
+ * App.Asset.avatar("avatar-3.jpg");    // → "img/avatars/avatar-3.jpg"
+ * App.Asset.placeholder("user");       // → "img/placeholders/user.png"
  */
 
 const Asset = {

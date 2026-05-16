@@ -17,23 +17,9 @@
 		transform 0.2s;
 	position: relative;
 
-	// Línea superior decorativa (aparece en hover)
-	&::before {
-		content: "";
-		display: block;
-		height: 3px;
-		background: linear-gradient(90deg, $primary, $secondary, $primary);
-		opacity: 0;
-		transition: opacity 0.2s;
-	}
-
 	&:hover {
 		box-shadow: 0 8px 24px color.change($dark, $alpha: 0.08);
 		transform: translateY(-2px);
-
-		&::before {
-			opacity: 1;
-		}
 	}
 }
 
@@ -78,10 +64,6 @@
 // Variante card destacada
 .card--accent {
 	border-color: color.change($primary, $alpha: 0.4);
-
-	&::before {
-		opacity: 1;
-	}
 }
 
 // Card header actions helper

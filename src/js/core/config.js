@@ -1,12 +1,9 @@
 /**
  * @module config
  * @description
- * Configuración global de HR Library v3.0.
- * Combina la estructura robusta de CS v1 (Config.js) con la riqueza
- * de opciones de HR v2 (config.js). Consumida por todos los helpers.
+ * Configuración global de HR Library v4.0.
  *
- * @author HR Library
- * @version 3.0.0
+ * @version 4.0.0
  */
 
 import spanish from "./spanish.js";
@@ -15,7 +12,7 @@ const config = {
 	/* ── Aplicación ── */
 	app: {
 		name: "HR Library",
-		version: "3.0.0",
+		version: "4.0.0",
 		locale: "es-DO",
 		timezone: "America/Santo_Domingo",
 		dateFormat: "d/m/Y",

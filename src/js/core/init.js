@@ -31,7 +31,7 @@
  * 23.  Excel        — depende de XLSX
  * 24.  Calendar     — depende de FullCalendar
  *
- * @version 3.0.0
+ * @version 4.0.0
  */
 
 import config from "./config.js";

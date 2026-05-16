@@ -53,6 +53,7 @@ npm run build     # Build producción
 ### Commits
 
 Usa prefijos descriptivos:
+
 - `feat:` nueva funcionalidad
 - `fix:` corrección de bug
 - `refactor:` refactorización
