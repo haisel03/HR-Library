@@ -3,14 +3,14 @@
  * @description Dashboard principal — charts, mapa vectorial y calendar widget.
  *
  * CAMBIOS v3:
- * - $HR.lang.short_months → no existe. Los meses están en $HR.lang.months_short
- * - flatpickr(el, $Date.flatpickr({...})) — ya estaba bien, solo verificar
+ * - App.lang.short_months → no existe. Los meses están en App.lang.months_short
+ * - flatpickr(el, App.flatpickrOptions({...})) — ya estaba bien, solo verificar
  */
 
 document.addEventListener("DOMContentLoaded", function () {
 
 	// Meses cortos para labels de gráficas — desde spanish.js
-	const shortMonths = $HR.lang.months_short;
+	const shortMonths = App.lang.months_short;
 
 	// ── Line Chart ──────────────────────────────────────────────────────
 	new Chart(document.getElementById("chartjs-dashboard-line"), {
@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	// ── Mini Calendar (Flatpickr inline) ─────────────────────────────────
 	const dateEl = document.getElementById("datetimepicker-dashboard");
 	if (dateEl) {
-		flatpickr(dateEl, $Date.flatpickr({
+		flatpickr(dateEl, App.flatpickrOptions({
 			inline:    true,
 			prevArrow: '<span title="Mes anterior">&laquo;</span>',
 			nextArrow: '<span title="Mes siguiente">&raquo;</span>',

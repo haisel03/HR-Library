@@ -3,13 +3,13 @@
  * @description Demo de Reporte con exportaciones usando $Api y DataTables.
  *
  * CAMBIOS v3:
- * - $HR.msgLoading()     → $Alert.loading()
- * - $HR.msgLoading(true) → $Alert.loading(false)
- * - $HR.msgError         → $Alert.error
- * - $HR.getApi           → $Api.get  (o se puede mantener $HR.getApi que es alias)
- * - $HR.createTbl        → $Table.initTable
- * - $HR.tblButtons('icons') → $Table.exportButtons([...])  — 'icons' no existe
- * - $HR.tblCol(data, title, render) → $Table.col(data, title, { render })
+ * - App.msgLoading()     → App.loading()
+ * - App.msgLoading(true) → App.loading(false)
+ * - App.msgError         → App.error
+ * - App.getApi           → $Api.get  (o se puede mantener App.getApi que es alias)
+ * - App.createTbl        → $Table.initTable
+ * - App.tblButtons('icons') → App.tblButtons([...])  — 'icons' no existe
+ * - App.tblCol(data, title, render) → App.tblCol(data, title, { render })
  *   render va dentro de options object, no como 3er argumento directo
  */
 
@@ -17,25 +17,25 @@ $(async function () {
 	const API_URL = "https://jsonplaceholder.typicode.com/users";
 	let dt = null;
 
-	$Alert.loading();
+	App.loading();
 
 	try {
-		const users = await $Api.get(API_URL);
+		const users = await App.getApi(API_URL);
 
-		dt = $Table.initTable("#reportUsersTable", {
+		dt = App.initTable("#reportUsersTable", {
 			data:   users,
 			dom:    "Bfrtip",
 			// exportButtons() — tblButtons("icons") no existe
-			buttons: $Table.exportButtons(["excel", "pdf", "print", "copy", "csv"]),
+			buttons: App.tblButtons(["excel", "pdf", "print", "copy", "csv"]),
 			columns: [
-				$Table.col("id",           "#"),
-				$Table.col("name",         "Nombre Completo"),
-				$Table.col("email",        "Correo Electrónico"),
-				$Table.col("company.name", "Empresa"),
-				$Table.col("address.city", "Ciudad"),
-				$Table.col("phone",        "Teléfono"),
+				App.tblCol("id",           "#"),
+				App.tblCol("name",         "Nombre Completo"),
+				App.tblCol("email",        "Correo Electrónico"),
+				App.tblCol("company.name", "Empresa"),
+				App.tblCol("address.city", "Ciudad"),
+				App.tblCol("phone",        "Teléfono"),
 				// render dentro de options object
-				$Table.col("website", "Sitio Web", {
+				App.tblCol("website", "Sitio Web", {
 					render: (data) =>
 						`<a href="http://${data}" target="_blank"
 						    class="text-primary text-decoration-none border-bottom border-primary border-opacity-25">${data}</a>`,
@@ -45,10 +45,10 @@ $(async function () {
 			order:      [[1, "asc"]],
 		});
 
-		$Alert.loading(false);
+		App.loading(false);
 	} catch (error) {
-		$Alert.loading(false);
-		$Alert.error("Error al generar el reporte de usuarios.");
+		App.loading(false);
+		App.error("Error al generar el reporte de usuarios.");
 		console.error(error);
 	}
 });

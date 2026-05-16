@@ -153,7 +153,7 @@ export default function init(scope = document) {
   } else {
     // Reinicialización parcial en scope (modal recién abierto, contenido dinámico)
     const scoped = [Forms, Select2, Table, Editor, Signature, DateHelper, Icons, Codes];
-    scoped.forEach(({ init: fn, constructor: { name } = {} }) => {
+    scoped.forEach(({ init: fn }) => {
       if (typeof fn === "function") {
         try { fn(root); } catch (e) { console.warn(`[Init] Error parcial:`, e); }
       }

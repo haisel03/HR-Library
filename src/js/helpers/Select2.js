@@ -15,7 +15,6 @@
  */
 
 import $      from "jquery";
-import config from "../core/config.js";
 
 /* ── Config base Select2 ── */
 const _S2_BASE = Object.freeze({

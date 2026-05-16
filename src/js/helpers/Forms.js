@@ -15,7 +15,6 @@
  */
 
 import Dom        from "./Dom.js";
-import Validation from "./Validation.js";
 import Api        from "./Api.js";
 import Alert      from "./Alert.js";
 import config     from "../core/config.js";

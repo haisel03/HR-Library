@@ -3,24 +3,24 @@
  * @description Lógica para la demostración de formularios enriquecidos.
  *
  * CAMBIOS v3:
- * - $('.datetimepicker').flatpickr($Date.flatpickr({...}))
- *   → flatpickr('.datetimepicker', $Date.flatpickr({...}))
+ * - $('.datetimepicker').flatpickr(App.flatpickrOptions({...}))
+ *   → flatpickr('.datetimepicker', App.flatpickrOptions({...}))
  *   jQuery .flatpickr() no existe — usar la función global flatpickr()
- * - $HR.isValidForm     → $Forms.isValidForm
- * - $HR.serializeForm   → $Forms.serialize
- * - $HR.clearForm       → $Forms.clear
- * - $HR.msgLoading()    → $Alert.loading()
- * - $HR.msgLoading(true)→ $Alert.loading(false)  (true=abrir, false=cerrar)
- * - $HR.msgSuccess      → $Alert.success  (un solo argumento de texto)
- * - $HR.msgWarning      → $Alert.warning
- * - $HR.msgConfirm      → $Alert.confirm
+ * - App.isValidForm     → $Forms.isValidForm
+ * - App.serializeForm   → $Forms.serialize
+ * - App.clearForm       → $Forms.clear
+ * - App.msgLoading()    → App.loading()
+ * - App.msgLoading(true)→ App.loading(false)  (true=abrir, false=cerrar)
+ * - App.msgSuccess      → App.success  (un solo argumento de texto)
+ * - App.msgWarning      → App.warning
+ * - App.msgConfirm      → App.confirm
  * - $Signature.getSignatureData → $Signature.toDataURL
  */
 
 $(async function () {
 	// 1. Inicializar Componentes
-	const editor    = $Editor.create("#full-editor");
-	const signature = $Signature.create("#signature-pad");
+	const editor    = App.createEditor("#full-editor");
+	const signature = App.createSignature("#signature-pad");
 
 	// 2. Select2 — inicialización nativa (no usa $Select2.init aquí para mayor control)
 	$(".select2").each(function () {
@@ -32,7 +32,7 @@ $(async function () {
 	});
 
 	// 3. Flatpickr — flatpickr(selector, opciones), NO jQuery .flatpickr()
-	flatpickr(".datetimepicker", $Date.flatpickr({
+	flatpickr(".datetimepicker", App.flatpickrOptions({
 		type:      "datetime",
 		altInput:  true,
 		altFormat: "F j, Y - H:i",
@@ -40,7 +40,7 @@ $(async function () {
 
 	// 5. Manejo de Firma
 	$("#clear-signature").on("click", function () {
-		$Signature.clear("#signature-pad");
+		App.clearSignature("#signature-pad");
 		$("#signature-input").val("");
 		updateDebugger();
 	});
@@ -49,39 +49,39 @@ $(async function () {
 	$("#richForm").on("submit", function (e) {
 		e.preventDefault();
 
-		if (!$Forms.isValidForm(this)) {
-			$Alert.warning("Por favor completa los campos requeridos.");
+		if (!App.isValidForm(this)) {
+			App.warning("Por favor completa los campos requeridos.");
 			return;
 		}
 
-		const data        = $Forms.serialize(this);
-		data.description  = $Editor.getHtml("#full-editor");
+		const data        = App.serializeForm(this);
+		data.description  = App.getEditorHtml("#full-editor");
 		// $Signature.toDataURL — reemplaza getSignatureData que no existe
-		data.signature    = $Signature.toDataURL("#signature-pad");
+		data.signature    = App.getSignatureData("#signature-pad");
 
 		if (!data.signature) {
-			$Alert.warning("La firma es obligatoria para este registro.");
+			App.warning("La firma es obligatoria para este registro.");
 			return;
 		}
 
 		// loading() = abrir, loading(false) = cerrar
-		$Alert.loading();
+		App.loading();
 
 		setTimeout(() => {
-			$Alert.loading(false);
-			$Alert.success("¡Formulario procesado con éxito! Los datos han sido validados y serializados correctamente.");
+			App.loading(false);
+			App.success("¡Formulario procesado con éxito! Los datos han sido validados y serializados correctamente.");
 			console.log("Form Data:", data);
 		}, 1500);
 	});
 
 	$("#btnReset").on("click", function () {
-		$Alert.confirm("¿Reiniciar formulario?", "Se perderán todos los cambios ingresados.", () => {
-			$Forms.clear("#richForm");
-			$Signature.clear("#signature-pad");
-			$Editor.setHtml("#full-editor", "<p>Escribe aquí los detalles del registro...</p>");
+		App.confirm("¿Reiniciar formulario?", "Se perderán todos los cambios ingresados.", () => {
+			App.clearForm("#richForm");
+			App.clearSignature("#signature-pad");
+			App.setEditorHtml("#full-editor", "<p>Escribe aquí los detalles del registro...</p>");
 			$(".select2").val(null).trigger("change");
 			updateDebugger();
-			$Alert.toast.info("Formulario reiniciado");
+			App.toastInfo("Formulario reiniciado");
 		});
 	});
 
@@ -89,8 +89,8 @@ $(async function () {
 	$("input, select, textarea").on("input change", updateDebugger);
 
 	function updateDebugger() {
-		const data = $Forms.serialize("#richForm");
-		const sig  = $Signature.toDataURL("#signature-pad");
+		const data = App.serializeForm("#richForm");
+		const sig  = App.getSignatureData("#signature-pad");
 		if (sig) data.signature = "[Base64 Signature Data]";
 		$("#form-debugger").text(JSON.stringify(data, null, 4));
 	}

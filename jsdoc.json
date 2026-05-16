@@ -1,7 +1,6 @@
 {
   "source": {
     "include": [
-      "src/js/HR.js",
       "src/js/core",
       "src/js/helpers"
     ],

@@ -3,18 +3,18 @@
  * @description Demo CRUD con HR.table helper.
  *
  * CAMBIOS v3:
- * - $HR.msgLoading()     → $Alert.loading()
- * - $HR.msgLoading(true) → $Alert.loading(false)
- * - $HR.msgError         → $Alert.error
- * - $HR.msgSuccess       → $Alert.success
- * - $HR.toastSuccess     → $Alert.toast.success
- * - $HR.getApi           → $Api.get
- * - $HR.deleteApi        → $Api.delete
- * - $HR.putApi           → $Api.put
- * - $HR.postApi          → $Api.post
- * - $HR.text             → $Dom.text
- * - $HR.val              → $Dom.val
- * - $HR.clearForm        → $Forms.clear
+ * - App.msgLoading()     → App.loading()
+ * - App.msgLoading(true) → App.loading(false)
+ * - App.msgError         → App.error
+ * - App.msgSuccess       → App.success
+ * - App.toastSuccess     → App.toast.success
+ * - App.getApi           → $Api.get
+ * - App.deleteApi        → $Api.delete
+ * - App.putApi           → $Api.put
+ * - App.postApi          → $Api.post
+ * - App.text             → App.text
+ * - App.val              → App.val
+ * - App.clearForm        → $Forms.clear
  * - $Table.modal.open / close → permanece igual (es parte de Table v3)
  */
 
@@ -26,26 +26,26 @@ $(async function () {
 
 	const initTable = async () => {
 		try {
-			$Alert.loading();
+			App.loading();
 
-			const users = await $Api.get(API_URL);
+			const users = await App.getApi(API_URL);
 
-			$Alert.loading(false);
+			App.loading(false);
 
-			dt = $Table.initTable("#usersTable", {
+			dt = App.initTable("#usersTable", {
 				data: users,
 				columns: [
-					$Table.col("id",       "#"),
-					$Table.col("name",     "Nombre"),
-					$Table.col("username", "Usuario"),
-					$Table.col("email",    "Email"),
-					$Table.col("phone",    "Teléfono"),
-					$Table.actions(["edit", "delete"]),
+					App.tblCol("id",       "#"),
+					App.tblCol("name",     "Nombre"),
+					App.tblCol("username", "Usuario"),
+					App.tblCol("email",    "Email"),
+					App.tblCol("phone",    "Teléfono"),
+					App.tblActionsCol(["edit", "delete"]),
 				],
 			});
 		} catch (error) {
-			$Alert.loading(false);
-			$Alert.error("No se pudieron cargar los datos de la API.");
+			App.loading(false);
+			App.error("No se pudieron cargar los datos de la API.");
 		}
 	};
 
@@ -53,24 +53,24 @@ $(async function () {
 
 	/* ── ACTIONS ── */
 
-	$Table.onAction("#usersTable", async ({ action, row, button }) => {
+	App.onTableAction("#usersTable", async ({ action, row, button }) => {
 
 		if (action === "edit") {
-			$Dom.text("#userModalTitle", "Editar Usuario");
-			$Table.modal.open("userModal", row);
+			App.text("#userModalTitle", "Editar Usuario");
+			App.modalOpen("userModal", row);
 		}
 
 		// "delete" ya tiene confirmación automática desde config.dt_actions.delete.confirm
 		if (action === "delete") {
 			try {
-				$Alert.loading();
-				await $Api.delete(`${API_URL}/${row.id}`);
-				$Alert.loading(false);
-				$Alert.toast.success("Usuario eliminado (Simulado)");
-				$Table.removeRow("#usersTable", button);
+				App.loading();
+				await App.deleteApi(`${API_URL}/${row.id}`);
+				App.loading(false);
+				App.toastSuccess("Usuario eliminado (Simulado)");
+				App.removeTblRow("#usersTable", button);
 			} catch (error) {
-				$Alert.loading(false);
-				$Alert.error("No se pudo eliminar el recurso.");
+				App.loading(false);
+				App.error("No se pudo eliminar el recurso.");
 			}
 		}
 
@@ -82,10 +82,10 @@ $(async function () {
 	/* ── CREATE ── */
 
 	$("#btnAddUser").on("click", () => {
-		$Forms.clear("#userForm");
-		$Dom.val("#userId", "");
-		$Dom.text("#userModalTitle", "Nuevo Usuario");
-		$Table.modal.open("userModal");
+		App.clearForm("#userForm");
+		App.val("#userId", "");
+		App.text("#userModalTitle", "Nuevo Usuario");
+		App.modalOpen("userModal");
 	});
 
 	/* ── SAVE (CREATE / UPDATE) ── */
@@ -93,40 +93,40 @@ $(async function () {
 	$("#userForm").on("submit", async function (e) {
 		e.preventDefault();
 
-		const id   = $Dom.val("#userId");
+		const id   = App.val("#userId");
 		const data = {
-			name:     $Dom.val("#userName"),
-			email:    $Dom.val("#userEmail"),
-			username: $Dom.val("#userUsername"),
-			phone:    $Dom.val("#userPhone"),
+			name:     App.val("#userName"),
+			email:    App.val("#userEmail"),
+			username: App.val("#userUsername"),
+			phone:    App.val("#userPhone"),
 		};
 
 		try {
-			$Alert.loading();
+			App.loading();
 			let response;
 
 			if (id) {
-				response = await $Api.put(`${API_URL}/${id}`, data);
-				$Table.updateRow("#usersTable", `[data-id="${id}"]`, response);
-				$Alert.success(`Usuario "${response.name}" actualizado (Simulado)`);
+				response = await App.putApi(`${API_URL}/${id}`, data);
+				App.updateTblRow("#usersTable", `[data-id="${id}"]`, response);
+				App.success(`Usuario "${response.name}" actualizado (Simulado)`);
 			} else {
-				response = await $Api.post(API_URL, data);
-				$Table.addRow("#usersTable", response);
-				$Alert.success(`Usuario "${response.name}" creado (Simulado)`);
+				response = await App.postApi(API_URL, data);
+				App.addTblRow("#usersTable", response);
+				App.success(`Usuario "${response.name}" creado (Simulado)`);
 			}
 
-			$Alert.loading(false);
-			$Table.modal.close("userModal");
+			App.loading(false);
+			App.modalClose("userModal");
 		} catch (error) {
-			$Alert.loading(false);
-			$Alert.error("Ocurrió un error al guardar los datos.");
+			App.loading(false);
+			App.error("Ocurrió un error al guardar los datos.");
 		}
 	});
 
 	/* ── CANCEL ── */
 
 	$("#btnCancelUser").on("click", () => {
-		$Forms.clear("#userForm");
-		$Table.modal.close("userModal");
+		App.clearForm("#userForm");
+		App.modalClose("userModal");
 	});
 });

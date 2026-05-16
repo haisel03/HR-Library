@@ -126,7 +126,7 @@ const Storage = {
   /** @returns {void} */
   init() {
     // Restaurar token si existe en session
-    import("../core/config.js").then(({ default: cfg }) => {
+    import("../core/config.js").then(({ default: _cfg }) => {
       // Delegado a Api.init() para evitar circular
     });
   },
