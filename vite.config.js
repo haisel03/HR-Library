@@ -12,7 +12,7 @@ function vendorCssPlugin() {
 		transformIndexHtml(html) {
 			return html.replace(
 				"</head>",
-				`  <link rel="stylesheet" crossorigin href="${BASE}assets/vendor.css">\n</head>`,
+				'  <link rel="stylesheet" crossorigin href="./assets/vendor.css">\n</head>',
 			);
 		},
 	};
@@ -60,10 +60,8 @@ function postProcessHtml() {
 	};
 }
 
-const BASE = "/hr-library/";
-
 export default defineConfig({
-	base: BASE,
+	base: "",
 	plugins: [
 		vendorCssPlugin(),
 		postProcessHtml(),
