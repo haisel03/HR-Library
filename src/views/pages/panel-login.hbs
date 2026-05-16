@@ -37,14 +37,5 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('panelLoginForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        App.loading("Validando credenciales...");
-        setTimeout(() => {
-            window.location.href = "panel.html";
-        }, 1000);
-    });
-</script>
 
 {{/layout-auth}}

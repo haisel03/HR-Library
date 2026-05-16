@@ -2,19 +2,7 @@
  * @file form-editor.js
  * @description Lógica para la demostración de formularios enriquecidos.
  *
- * CAMBIOS v3:
- * - $('.datetimepicker').flatpickr(App.flatpickrOptions({...}))
- *   → flatpickr('.datetimepicker', App.flatpickrOptions({...}))
- *   jQuery .flatpickr() no existe — usar la función global flatpickr()
- * - App.isValidForm     → $Forms.isValidForm
- * - App.serializeForm   → $Forms.serialize
- * - App.clearForm       → $Forms.clear
- * - App.msgLoading()    → App.loading()
- * - App.msgLoading(true)→ App.loading(false)  (true=abrir, false=cerrar)
- * - App.msgSuccess      → App.success  (un solo argumento de texto)
- * - App.msgWarning      → App.warning
- * - App.msgConfirm      → App.confirm
- * - $Signature.getSignatureData → $Signature.toDataURL
+ * $/
  */
 
 $(async function () {
@@ -97,3 +85,4 @@ $(async function () {
 
 	updateDebugger();
 });
+

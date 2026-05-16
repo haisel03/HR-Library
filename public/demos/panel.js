@@ -2,9 +2,7 @@
  * @file panel.js
  * @description Demo del modo Iframe (AdminLTE style)
  *
- * CAMBIOS v3:
- * - App.msgConfirm → App.confirm
- * (resto ya usa $Iframe directamente — correcto)
+ * $/
  */
 
 $(function () {
@@ -42,3 +40,4 @@ $(function () {
 		});
 	});
 });
+

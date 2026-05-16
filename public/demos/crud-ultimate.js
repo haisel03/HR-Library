@@ -2,15 +2,7 @@
  * @file crud-ultimate.js
  * @description Demo avanzada que integra casi todos los helpers del framework.
  *
- * CAMBIOS v3:
- * - Table.col(data, title, options)  — render va en options.render, NO como 3er arg directo
- * - App.currencyFormat(val, "P")       — código "P"/"U"/"E", NO "DOP"
- * - App.tblButtons([...])      — reemplaza $Table.buttons("icons") que no existe
- * - flatpickr("#el", App.flatpickrOptions(...)) — App.flatpickrOptions() devuelve opciones, no inicializa
- * - App.getSignatureData("#el")      — era signaturePad.isEmpty() (instancia directa)
- * - $Forms.serialize / $Forms.clear  — reemplaza serializeForm / clearForm (aliases existen)
- * - App.modalOpen("#id") / App.modalClose("#id") — con # selector
- * - App.confirmDelete(cb)         — en lugar de App.confirm manual para delete
+ * $/
  */
 
 $(async function () {
@@ -225,3 +217,4 @@ $(async function () {
 		});
 	});
 });
+

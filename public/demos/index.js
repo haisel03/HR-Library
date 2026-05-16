@@ -2,12 +2,10 @@
  * @file index.js
  * @description Dashboard principal — charts, mapa vectorial y calendar widget.
  *
- * CAMBIOS v3:
- * - App.lang.short_months → no existe. Los meses están en App.lang.months_short
- * - flatpickr(el, App.flatpickrOptions({...})) — ya estaba bien, solo verificar
+ * $/
  */
 
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
 
 	// Meses cortos para labels de gráficas — desde spanish.js
 	const shortMonths = App.lang.months_short;
@@ -126,3 +124,5 @@ document.addEventListener("DOMContentLoaded", function () {
 		}));
 	}
 });
+
+

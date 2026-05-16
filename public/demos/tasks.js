@@ -2,21 +2,7 @@
  * @file tasks.js
  * @description Demo de Tablero Kanban con datos JSON y humanización de tiempos.
  *
- * CAMBIOS v3:
- * - App.msgLoading()              → App.loading()
- * - App.msgLoading(true)          → App.loading(false)
- * - App.msgError                  → App.error
- * - App.msgWarning                → App.warning
- * - App.msgConfirm                → App.confirm
- * - App.getApi                    → $Api.get
- * - App.clearForm                 → $Forms.clear
- * - App.text                      → App.text  (no usado aquí)
- * - App.openModal / closeModal    → $Modal.open / $Modal.close
- * - App.serializeForm             → $Forms.serialize
- * - App.formatDate(date)          → App.formatDate(date)
- * - App.now()                     → App.now()
- * - App.humanizeTimeAgo           → $Humanize.timeAgo
- * - App.humanizeTimeRemaining     → $Humanize.timeRemaining
+ * $/
  */
 
 $(async function () {
@@ -181,3 +167,4 @@ $(async function () {
 		});
 	}
 });
+

@@ -2,20 +2,7 @@
  * @file events.js
  * @description Demo de Calendario Avanzado con eventos arrastrables.
  *
- * CAMBIOS v3:
- * - App.el('calendar')         → App.el('#calendar') — necesita # para selector
- * - App.calendarDraggable('external-events', ...) → App.calendarDraggable('#external-events', ...)
- * - App.initCalendar('calendar', ...) → App.initCalendar('#calendar', ...)
- * - flatpickr("#el", App.flatpickrOptions({...})) — App.flatpickrOptions() devuelve opciones
- *   type no es necesario cuando se pasan overrides directos (enableTime funciona directo)
- * - App.clearForm  → $Forms.clear
- * - App.val        → App.val
- * - App.openModal  → $Modal.open
- * - App.closeModal → $Modal.close
- * - App.msgWarning → App.warning
- * - App.msgConfirm → App.confirm
- * - App.text       → App.text
- * - App.humanizeTimeRemaining → $Humanize.timeRemaining
+ * $/
  */
 
 $(async function () {
@@ -165,3 +152,4 @@ $(async function () {
 
 	setTimeout(calculateNextEvent, 500);
 });
+

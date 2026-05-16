@@ -1,14 +1,9 @@
 /**
  * @file settings.js
- * CAMBIOS v3:
- * - App.isValidForm      → $Forms.isValidForm
- * - App.msgLoading()     → App.loading()
- * - App.msgLoading(true) → App.loading(false)
- * - App.msgSuccess(t, m) → App.success(texto)
- * - App.msgInfo          → App.info
+ * $/
  */
 
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
 	$("form").on("submit", function (e) {
 		e.preventDefault();
 		const $form = $(this);
@@ -32,3 +27,5 @@ document.addEventListener("DOMContentLoaded", function () {
 		App.info("Selecciona el archivo oficial para tu perfil institucional.");
 	});
 });
+
+

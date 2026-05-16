@@ -1,8 +1,6 @@
 /**
  * @file crud.js
- * CAMBIOS v3:
- * - App.config.api.baseUrl  → App.config.api.baseURL  (con mayúscula L)
- * - $Api.fetch()            → App.getApi()  (no existe fetch en la librería)
+ * $/
  */
 
 $(async () => {
@@ -17,3 +15,4 @@ async function getEvents() {
 	const response = await App.getApi(url);
 	return response;
 }
+

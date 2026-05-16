@@ -2,15 +2,7 @@
  * @file report-users.js
  * @description Demo de Reporte con exportaciones usando $Api y DataTables.
  *
- * CAMBIOS v3:
- * - App.msgLoading()     → App.loading()
- * - App.msgLoading(true) → App.loading(false)
- * - App.msgError         → App.error
- * - App.getApi           → $Api.get  (o se puede mantener App.getApi que es alias)
- * - App.createTbl        → $Table.initTable
- * - App.tblButtons('icons') → App.tblButtons([...])  — 'icons' no existe
- * - App.tblCol(data, title, render) → App.tblCol(data, title, { render })
- *   render va dentro de options object, no como 3er argumento directo
+ * $/
  */
 
 $(async function () {
@@ -52,3 +44,4 @@ $(async function () {
 		console.error(error);
 	}
 });
+

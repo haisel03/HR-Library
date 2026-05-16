@@ -2,20 +2,7 @@
  * @file table.js
  * @description Demo CRUD con HR.table helper.
  *
- * CAMBIOS v3:
- * - App.msgLoading()     → App.loading()
- * - App.msgLoading(true) → App.loading(false)
- * - App.msgError         → App.error
- * - App.msgSuccess       → App.success
- * - App.toastSuccess     → App.toast.success
- * - App.getApi           → $Api.get
- * - App.deleteApi        → $Api.delete
- * - App.putApi           → $Api.put
- * - App.postApi          → $Api.post
- * - App.text             → App.text
- * - App.val              → App.val
- * - App.clearForm        → $Forms.clear
- * - $Table.modal.open / close → permanece igual (es parte de Table v3)
+ * $/
  */
 
 $(async function () {
@@ -130,3 +117,4 @@ $(async function () {
 		App.modalClose("userModal");
 	});
 });
+

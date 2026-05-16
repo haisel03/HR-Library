@@ -1,13 +1,9 @@
 /**
  * @file profile.js
- * CAMBIOS v3:
- * - App.msgSuccess(t, m) → App.success(texto)
- * - App.msgLoading()     → App.loading()
- * - App.msgLoading(true) → App.loading(false)
- * - App.msgInfo(t, m)    → App.info(texto)
+ * $/
  */
 
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
 	$("#btn-seguir").on("click", function () {
 		const $btn     = $(this);
 		const isActive = $btn.hasClass("btn-success");
@@ -30,3 +26,5 @@ document.addEventListener("DOMContentLoaded", function () {
 		}, 1000);
 	});
 });
+
+

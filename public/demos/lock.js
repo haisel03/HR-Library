@@ -1,13 +1,9 @@
 /**
  * @file lock.js
- * CAMBIOS v3:
- * - App.isValidForm      → $Forms.isValidForm
- * - App.msgLoading()     → App.loading()
- * - App.msgLoading(true) → App.loading(false)
- * - App.toast.success → ya estaba bien
+ * $/
  */
 
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
 	$("#lockForm").on("submit", function (e) {
 		e.preventDefault();
 
@@ -21,3 +17,5 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 });
+
+

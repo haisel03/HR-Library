@@ -1,13 +1,9 @@
 /**
  * @file reset-password.js
- * CAMBIOS v3:
- * - App.isValidForm      → $Forms.isValidForm
- * - App.msgLoading()     → App.loading()
- * - App.msgLoading(true) → App.loading(false)
- * - App.msgSuccess       → App.success
+ * $/
  */
 
-document.addEventListener("DOMContentLoaded", function () {
+$(function () {
 	$("#resetForm").on("submit", function (e) {
 		e.preventDefault();
 
@@ -21,3 +17,5 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 });
+
+
