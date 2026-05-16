@@ -138,7 +138,7 @@ export default defineConfig({
 						return "css/vendor.css";
 					}
 					if (chunkInfo.name.endsWith(".css")) {
-						return "css/[name]-[hash].css";
+						return "css/[name].min.css";
 					}
 					if (/\.(woff2?|eot|ttf|otf)$/.test(chunkInfo.name)) {
 						return "fonts/[name]-[hash][extname]";
