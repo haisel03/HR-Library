@@ -20,21 +20,23 @@
 	top: 0;
 
 	// Textura sutil (visible en tema café oscuro)
-	background-image: linear-gradient(180deg,
-			color.change($primary, $alpha: .04) 0%,
-			transparent 40%,
-			color.change(#000, $alpha: .12) 100%);
+	background-image: linear-gradient(
+		180deg,
+		color.change($primary, $alpha: 0.04) 0%,
+		transparent 40%,
+		color.change(#000, $alpha: 0.12) 100%
+	);
 
 	// Línea lateral decorativa
 	&::before {
-		content: '';
+		content: "";
 		position: absolute;
 		left: 0;
 		top: 0;
 		bottom: 0;
 		width: 3px;
 		background: linear-gradient(180deg, transparent, $primary 30%, $secondary 70%, transparent);
-		opacity: .4;
+		opacity: 0.4;
 		pointer-events: none;
 	}
 
@@ -70,7 +72,7 @@
 
 		.sidebar-link {
 			justify-content: center;
-			padding: .65rem 0;
+			padding: 0.65rem 0;
 		}
 
 		.sidebar-link i {
@@ -78,15 +80,15 @@
 		}
 
 		// Submenús como flyout popup al hacer hover
-		.sidebar-nav>.sidebar-item {
+		.sidebar-nav > .sidebar-item {
 			position: relative;
 
 			// Flyout para items CON submenú
-			>.sidebar-dropdown {
+			> .sidebar-dropdown {
 				display: none !important;
 			}
 
-			&:hover>.sidebar-dropdown {
+			&:hover > .sidebar-dropdown {
 				display: block !important;
 				position: absolute;
 				left: 100%;
@@ -94,13 +96,13 @@
 				min-width: 200px;
 				background: color.adjust($sidebar-bg, $lightness: -3%);
 				border-radius: 0 $border-radius-lg $border-radius-lg 0;
-				box-shadow: 4px 4px 16px color.change(#000, $alpha: .3);
-				padding: .5rem 0;
+				box-shadow: 4px 4px 16px color.change(#000, $alpha: 0.3);
+				padding: 0.5rem 0;
 				z-index: 1050;
 
 				.sidebar-link,
 				a.sidebar-link {
-					padding: .45rem 1rem .45rem 1.25rem;
+					padding: 0.45rem 1rem 0.45rem 1.25rem;
 					white-space: nowrap;
 
 					&::before {
@@ -112,7 +114,7 @@
 			}
 
 			// Tooltip con nombre para items SIN submenú
-			&:not(:has(.sidebar-dropdown))>.sidebar-link {
+			&:not(:has(.sidebar-dropdown)) > .sidebar-link {
 				&:hover::after {
 					content: attr(data-bs-original-title);
 				}
@@ -188,7 +190,6 @@
 
 // SimpleBar wrappers también deben permitir overflow en modo colapsado
 .sidebar.collapsed {
-
 	.simplebar-wrapper,
 	.simplebar-mask,
 	.simplebar-offset,
@@ -208,20 +209,20 @@
 	text-decoration: none;
 	border-bottom: 1px solid $sidebar-brand-border-color;
 	min-height: 64px;
-	transition: padding .3s ease-in-out;
+	transition: padding 0.3s ease-in-out;
 	flex-shrink: 0;
 
 	&:hover,
 	&:focus {
 		text-decoration: none;
-		opacity: .85;
+		opacity: 0.85;
 		outline: 0;
 	}
 
 	.brand-link {
 		display: flex;
 		align-items: center;
-		gap: .8rem;
+		gap: 0.8rem;
 		text-decoration: none;
 		color: $sidebar-brand-color;
 	}
@@ -229,9 +230,9 @@
 	.brand-icon {
 		width: 36px;
 		height: 36px;
-		background: color.change($primary, $alpha: .18);
-		border: 1px solid color.change($primary, $alpha: .3);
-		border-radius: .6rem;
+		background: color.change($primary, $alpha: 0.18);
+		border: 1px solid color.change($primary, $alpha: 0.3);
+		border-radius: 0.6rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -257,10 +258,10 @@
 		border: none;
 		color: $sidebar-link-color;
 		font-size: 1.05rem;
-		padding: .3rem;
-		border-radius: .35rem;
+		padding: 0.3rem;
+		border-radius: 0.35rem;
 		cursor: pointer;
-		transition: color .15s;
+		transition: color 0.15s;
 
 		&:hover {
 			color: $sidebar-brand-color;
@@ -273,20 +274,20 @@
 .sidebar-user {
 	display: flex;
 	align-items: center;
-	gap: .8rem;
-	padding: .9rem $sidebar-brand-padding-x;
+	gap: 0.8rem;
+	padding: 0.9rem $sidebar-brand-padding-x;
 	border-bottom: 1px solid $sidebar-brand-border-color;
-	background: color.change(#000, $alpha: .15);
+	background: color.change(#000, $alpha: 0.15);
 	flex-shrink: 0;
 
 	.user-avatar {
 		width: 38px;
 		height: 38px;
 		border-radius: 50%;
-		border: 2px solid color.change($primary, $alpha: .4);
-		background: color.change($primary, $alpha: .15);
+		border: 2px solid color.change($primary, $alpha: 0.4);
+		background: color.change($primary, $alpha: 0.15);
 		color: $primary;
-		font-size: .72rem;
+		font-size: 0.72rem;
 		font-weight: 700;
 		display: flex;
 		align-items: center;
@@ -297,7 +298,7 @@
 	.user-name {
 		display: block;
 		color: $sidebar-brand-color;
-		font-size: .85rem;
+		font-size: 0.85rem;
 		font-weight: 700;
 		line-height: 1.2;
 	}
@@ -305,15 +306,15 @@
 	.user-role {
 		display: block;
 		color: $sidebar-link-color;
-		font-size: .73rem;
-		letter-spacing: .04em;
+		font-size: 0.73rem;
+		letter-spacing: 0.04em;
 	}
 }
 
 /* ── Nav lista ───────────────────────────────────────────────────────────── */
 
 .sidebar-nav {
-	padding: .5rem 0;
+	padding: 0.5rem 0;
 	margin-bottom: 0;
 	list-style: none;
 	flex-grow: 1;
@@ -332,7 +333,7 @@
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background: color.change($primary, $alpha: .25);
+		background: color.change($primary, $alpha: 0.25);
 		border-radius: 2px;
 	}
 
@@ -352,7 +353,7 @@
 	color: $sidebar-header-color;
 	text-transform: uppercase;
 	letter-spacing: $sidebar-header-letter-spacing;
-	transition: opacity .2s ease-in-out;
+	transition: opacity 0.2s ease-in-out;
 	white-space: nowrap;
 	overflow: hidden;
 	user-select: none;
@@ -375,10 +376,10 @@ a.sidebar-link {
 	position: relative;
 	border-left: $sidebar-link-border-left-width solid $sidebar-link-border-left-color;
 	transition:
-		color .15s ease-in-out,
-		background .15s ease-in-out,
-		border-left-color .15s ease-in-out,
-		padding-left .15s;
+		color 0.15s ease-in-out,
+		background 0.15s ease-in-out,
+		border-left-color 0.15s ease-in-out,
+		padding-left 0.15s;
 	white-space: nowrap;
 	overflow: hidden;
 
@@ -387,8 +388,10 @@ a.sidebar-link {
 		flex-shrink: 0;
 		font-size: 1rem;
 		color: $sidebar-link-icon-color;
-		opacity: .75;
-		transition: color .15s ease-in-out, opacity .15s;
+		opacity: 0.75;
+		transition:
+			color 0.15s ease-in-out,
+			opacity 0.15s;
 		margin: 0;
 	}
 
@@ -400,9 +403,11 @@ a.sidebar-link {
 
 	.icon-right {
 		flex-shrink: 0;
-		font-size: .68rem;
-		opacity: .5;
-		transition: transform .2s ease-in-out, opacity .15s;
+		font-size: 0.68rem;
+		opacity: 0.5;
+		transition:
+			transform 0.2s ease-in-out,
+			opacity 0.15s;
 		margin-left: auto;
 	}
 
@@ -419,7 +424,7 @@ a.sidebar-link {
 		color: $sidebar-link-hover-color;
 		background: $sidebar-link-hover-bg;
 		border-left-color: $sidebar-link-hover-border-left-color;
-		padding-left: calc(#{nth($sidebar-link-padding, 2)} + .2rem);
+		padding-left: calc(#{nth($sidebar-link-padding, 2)} + 0.2rem);
 
 		i,
 		svg {
@@ -434,7 +439,7 @@ a.sidebar-link {
 }
 
 // Link activo
-.sidebar-item.active>.sidebar-link,
+.sidebar-item.active > .sidebar-link,
 .sidebar-item.active .sidebar-link:hover {
 	color: $sidebar-link-active-color;
 	background: $sidebar-link-active-bg;
@@ -451,7 +456,6 @@ a.sidebar-link {
 /* ── Dropdown hijos ──────────────────────────────────────────────────────── */
 
 .sidebar-dropdown {
-
 	.sidebar-link,
 	a.sidebar-link {
 		padding-left: $sidebar-dropdown-padding-left;
@@ -460,15 +464,17 @@ a.sidebar-link {
 		border-left-color: transparent;
 
 		&::before {
-			content: '';
+			content: "";
 			display: inline-block;
 			width: 4px;
 			height: 4px;
 			border-radius: 50%;
 			background: currentColor;
 			flex-shrink: 0;
-			opacity: .5;
-			transition: opacity .15s, transform .15s;
+			opacity: 0.5;
+			transition:
+				opacity 0.15s,
+				transform 0.15s;
 		}
 
 		&:hover {
@@ -483,7 +489,7 @@ a.sidebar-link {
 		}
 	}
 
-	.sidebar-item.active>.sidebar-link {
+	.sidebar-item.active > .sidebar-link {
 		color: $sidebar-dropdown-link-active-color;
 		background: $sidebar-link-active-bg;
 		border-left-color: $sidebar-link-active-border-left-color;
@@ -499,12 +505,12 @@ a.sidebar-link {
 
 .sidebar-badge {
 	font-size: $sidebar-badge-font-size;
-	padding: .15em .5rem;
+	padding: 0.15em 0.5rem;
 	margin-left: auto;
 	flex-shrink: 0;
-	background: color.change($primary, $alpha: .18);
+	background: color.change($primary, $alpha: 0.18);
 	color: $primary;
-	border: 1px solid color.change($primary, $alpha: .25);
+	border: 1px solid color.change($primary, $alpha: 0.25);
 	border-radius: 20px;
 }
 
@@ -520,8 +526,8 @@ a.sidebar-link {
 
 .sidebar-divider {
 	height: 1px;
-	background: linear-gradient(90deg, transparent, color.change($primary, $alpha: .2), transparent);
-	margin: .5rem $sidebar-brand-padding-x;
+	background: linear-gradient(90deg, transparent, color.change($primary, $alpha: 0.2), transparent);
+	margin: 0.5rem $sidebar-brand-padding-x;
 }
 
 /* ── CTA / Footer ────────────────────────────────────────────────────────── */
@@ -543,12 +549,12 @@ a.sidebar-link {
 	font-size: $sidebar-cta-title-size;
 	font-weight: 700;
 	color: $sidebar-brand-color;
-	margin-bottom: .2rem;
+	margin-bottom: 0.2rem;
 }
 
 .sidebar-cta-text {
 	font-size: $sidebar-cta-text-size;
-	color: color.change($sidebar-brand-color, $alpha: .55);
+	color: color.change($sidebar-brand-color, $alpha: 0.55);
 	margin-bottom: 0;
 }
 
@@ -565,7 +571,7 @@ a.sidebar-link {
 	flex-shrink: 0;
 
 	&:hover {
-		background: color.change(#000, $alpha: .08);
+		background: color.change(#000, $alpha: 0.08);
 	}
 }
 
@@ -575,7 +581,7 @@ a.sidebar-link {
 	display: none;
 	position: fixed;
 	inset: 0;
-	background: color.change($dark, $alpha: .65);
+	background: color.change($dark, $alpha: 0.65);
 	z-index: 1029;
 	backdrop-filter: blur(3px);
 
@@ -591,7 +597,7 @@ a.sidebar-link {
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-	background: color.change($primary, $alpha: .25);
+	background: color.change($primary, $alpha: 0.25);
 	border-radius: 2px;
 }
 

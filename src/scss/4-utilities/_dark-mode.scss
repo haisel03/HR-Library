@@ -7,209 +7,304 @@
 // ============================================================================
 
 [data-bs-theme="dark"] {
+	// ── Cuerpo ──────────────────────────────────────────────────────────────
+	--bs-body-bg: #{$body-bg-dark};
+	--bs-body-color: #{$body-color-dark};
 
-  // ── Cuerpo ──────────────────────────────────────────────────────────────
-  --bs-body-bg:    #{$body-bg-dark};
-  --bs-body-color: #{$body-color-dark};
+	body {
+		background: $body-bg-dark;
+		color: $body-color-dark;
+	}
 
-  body { background: $body-bg-dark; color: $body-color-dark; }
+	// ── Sidebar ─────────────────────────────────────────────────────────────
+	.sidebar {
+		background: color.adjust($sidebar-bg, $lightness: -5%);
+		background-image: linear-gradient(
+			180deg,
+			color.change($primary, $alpha: 0.05) 0%,
+			transparent 50%,
+			color.change(#000, $alpha: 0.2) 100%
+		);
+	}
+	.sidebar-content {
+		background: color.adjust($sidebar-bg, $lightness: -5%);
+	}
+	.sidebar-user {
+		background: color.change(#000, $alpha: 0.25);
+	}
 
-  // ── Sidebar ─────────────────────────────────────────────────────────────
-  .sidebar {
-    background: color.adjust($sidebar-bg, $lightness: -5%);
-    background-image: linear-gradient(
-      180deg,
-      color.change($primary, $alpha: .05) 0%,
-      transparent 50%,
-      color.change(#000, $alpha: .2) 100%
-    );
-  }
-  .sidebar-content { background: color.adjust($sidebar-bg, $lightness: -5%); }
-  .sidebar-user    { background: color.change(#000, $alpha: .25); }
+	// ── Navbar / Topbar ──────────────────────────────────────────────────────
+	.navbar,
+	.topbar {
+		background: color.adjust($body-bg-dark, $lightness: -3%);
+		border-color: color.change($primary, $alpha: 0.2);
+		box-shadow: 0 2px 12px color.change(#000, $alpha: 0.2);
+	}
 
-  // ── Navbar / Topbar ──────────────────────────────────────────────────────
-  .navbar,
-  .topbar {
-    background:    color.adjust($body-bg-dark, $lightness: -3%);
-    border-color:  color.change($primary, $alpha: .2);
-    box-shadow:    0 2px 12px color.change(#000, $alpha: .2);
-  }
+	.topbar-search {
+		background: color.change($primary, $alpha: 0.06);
+		border-color: color.change($primary, $alpha: 0.15);
+		input {
+			color: $body-color-dark;
+		}
+	}
 
-  .topbar-search {
-    background:  color.change($primary, $alpha: .06);
-    border-color: color.change($primary, $alpha: .15);
-    input { color: $body-color-dark; }
-  }
+	.topbar-toggle,
+	.topbar-btn {
+		color: color.change($body-color-dark, $alpha: 0.6);
+		&:hover {
+			background: color.change($primary, $alpha: 0.1);
+			color: $body-color-dark;
+		}
+	}
 
-  .topbar-toggle,
-  .topbar-btn {
-    color: color.change($body-color-dark, $alpha: .6);
-    &:hover { background: color.change($primary, $alpha: .1); color: $body-color-dark; }
-  }
+	.topbar-btn__badge {
+		border-color: color.adjust($body-bg-dark, $lightness: -3%);
+	}
 
-  .topbar-btn__badge { border-color: color.adjust($body-bg-dark, $lightness: -3%); }
+	.topbar-profile {
+		color: $body-color-dark;
+		.profile-avatar {
+			background: color.change($primary, $alpha: 0.15);
+		}
+		&:hover {
+			background: color.change($primary, $alpha: 0.08);
+		}
+	}
 
-  .topbar-profile {
-    color: $body-color-dark;
-    .profile-avatar { background: color.change($primary, $alpha: .15); }
-    &:hover { background: color.change($primary, $alpha: .08); }
-  }
+	.navbar-brand {
+		color: $body-color-dark;
+	}
 
-  .navbar-brand { color: $body-color-dark; }
+	.nav-icon,
+	.nav-flag {
+		color: color.change($body-color-dark, $alpha: 0.55);
+		&:hover {
+			color: $primary;
+		}
+	}
 
-  .nav-icon,
-  .nav-flag { color: color.change($body-color-dark, $alpha: .55); &:hover { color: $primary; } }
+	// ── Cards ────────────────────────────────────────────────────────────────
+	.card,
+	.stat-card {
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		border-color: color.change($primary, $alpha: 0.15);
+	}
+	.card-header,
+	.card-footer {
+		background: color.change($primary, $alpha: 0.04);
+		border-color: color.change($primary, $alpha: 0.12);
+	}
+	.card-title,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: $body-color-dark;
+	}
+	.stat-card__value {
+		color: $body-color-dark;
+	}
+	.page-title {
+		color: $body-color-dark;
+	}
 
-  // ── Cards ────────────────────────────────────────────────────────────────
-  .card,
-  .stat-card {
-    background:   color.adjust($body-bg-dark, $lightness: 4%);
-    border-color: color.change($primary, $alpha: .15);
-  }
-  .card-header,
-  .card-footer {
-    background:   color.change($primary, $alpha: .04);
-    border-color: color.change($primary, $alpha: .12);
-  }
-  .card-title,
-  h1, h2, h3, h4, h5, h6 { color: $body-color-dark; }
-  .stat-card__value       { color: $body-color-dark; }
-  .page-title             { color: $body-color-dark; }
+	// ── Layout ───────────────────────────────────────────────────────────────
+	.main {
+		background: color.adjust($body-bg-dark, $lightness: -2%);
+	}
+	.wrapper {
+		background: color.adjust($sidebar-bg, $lightness: -5%);
+	}
 
-  // ── Layout ───────────────────────────────────────────────────────────────
-  .main    { background: color.adjust($body-bg-dark, $lightness: -2%); }
-  .wrapper { background: color.adjust($sidebar-bg, $lightness: -5%); }
+	.content-footer {
+		background: color.adjust($body-bg-dark, $lightness: -3%);
+		border-color: color.change($primary, $alpha: 0.15);
+		color: color.change($body-color-dark, $alpha: 0.55);
+	}
 
-  .content-footer {
-    background:   color.adjust($body-bg-dark, $lightness: -3%);
-    border-color: color.change($primary, $alpha: .15);
-    color:        color.change($body-color-dark, $alpha: .55);
-  }
+	// ── Formularios ──────────────────────────────────────────────────────────
+	.form-control,
+	.form-select {
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		border-color: color.change($primary, $alpha: 0.25);
+		color: $body-color-dark;
 
-  // ── Formularios ──────────────────────────────────────────────────────────
-  .form-control,
-  .form-select {
-    background:   color.adjust($body-bg-dark, $lightness: 4%);
-    border-color: color.change($primary, $alpha: .25);
-    color:        $body-color-dark;
+		&:focus {
+			background: color.adjust($body-bg-dark, $lightness: 4%);
+			border-color: $primary;
+			color: $body-color-dark;
+		}
 
-    &:focus {
-      background:   color.adjust($body-bg-dark, $lightness: 4%);
-      border-color: $primary;
-      color:        $body-color-dark;
-    }
+		&::placeholder {
+			color: color.change($body-color-dark, $alpha: 0.35);
+		}
+	}
 
-    &::placeholder { color: color.change($body-color-dark, $alpha: .35); }
-  }
+	.form-label {
+		color: color.change($body-color-dark, $alpha: 0.8);
+	}
+	.input-group-text {
+		background: color.change($primary, $alpha: 0.12);
+		border-color: color.change($primary, $alpha: 0.25);
+		color: color.change($body-color-dark, $alpha: 0.7);
+	}
+	.form-check-input {
+		border-color: color.change($primary, $alpha: 0.35);
+	}
 
-  .form-label     { color: color.change($body-color-dark, $alpha: .8); }
-  .input-group-text {
-    background:   color.change($primary, $alpha: .12);
-    border-color: color.change($primary, $alpha: .25);
-    color:        color.change($body-color-dark, $alpha: .7);
-  }
-  .form-check-input { border-color: color.change($primary, $alpha: .35); }
+	// Select2
+	.select2-container--bootstrap-5 {
+		.select2-selection {
+			background: color.adjust($body-bg-dark, $lightness: 4%);
+			border-color: color.change($primary, $alpha: 0.25);
+			color: $body-color-dark;
+		}
+		.select2-dropdown {
+			background: color.adjust($body-bg-dark, $lightness: 4%);
+			border-color: color.change($primary, $alpha: 0.2);
+		}
+		.select2-results__option {
+			color: $body-color-dark;
+		}
+	}
 
-  // Select2
-  .select2-container--bootstrap-5 {
-    .select2-selection {
-      background:   color.adjust($body-bg-dark, $lightness: 4%);
-      border-color: color.change($primary, $alpha: .25);
-      color:        $body-color-dark;
-    }
-    .select2-dropdown {
-      background:   color.adjust($body-bg-dark, $lightness: 4%);
-      border-color: color.change($primary, $alpha: .2);
-    }
-    .select2-results__option { color: $body-color-dark; }
-  }
+	// ── Tablas ───────────────────────────────────────────────────────────────
+	.table {
+		color: $body-color-dark;
+		th {
+			color: color.change($body-color-dark, $alpha: 0.55);
+			border-color: color.change($primary, $alpha: 0.2) !important;
+		}
+		td {
+			border-color: color.change($primary, $alpha: 0.1);
+		}
+		&.table-hover > tbody > tr:hover > * {
+			background: color.change($primary, $alpha: 0.06);
+		}
+	}
+	.table-light {
+		--bs-table-bg: #{color.change($primary, $alpha: 0.06)};
+		color: color.change($body-color-dark, $alpha: 0.6);
+	}
 
-  // ── Tablas ───────────────────────────────────────────────────────────────
-  .table {
-    color: $body-color-dark;
-    th    { color: color.change($body-color-dark, $alpha: .55); border-color: color.change($primary, $alpha: .2) !important; }
-    td    { border-color: color.change($primary, $alpha: .1); }
-    &.table-hover > tbody > tr:hover > * { background: color.change($primary, $alpha: .06); }
-  }
-  .table-light { --bs-table-bg: #{color.change($primary, $alpha: .06)}; color: color.change($body-color-dark, $alpha: .6); }
+	// DataTables dark
+	.dataTables_wrapper {
+		.dataTables_filter input,
+		.dataTables_length select {
+			background: color.adjust($body-bg-dark, $lightness: 4%);
+			border-color: color.change($primary, $alpha: 0.25);
+			color: $body-color-dark;
+		}
+		.dataTables_info,
+		.dataTables_length label,
+		.dataTables_filter label {
+			color: color.change($body-color-dark, $alpha: 0.55);
+		}
+		.paginate_button {
+			color: color.change($body-color-dark, $alpha: 0.55) !important;
+			&:hover {
+				background: color.change($primary, $alpha: 0.1) !important;
+				color: $body-color-dark !important;
+			}
+			&.current {
+				background: $primary !important;
+				color: $white !important;
+			}
+		}
+	}
 
-  // DataTables dark
-  .dataTables_wrapper {
-    .dataTables_filter input,
-    .dataTables_length select {
-      background:   color.adjust($body-bg-dark, $lightness: 4%);
-      border-color: color.change($primary, $alpha: .25);
-      color:        $body-color-dark;
-    }
-    .dataTables_info,
-    .dataTables_length label,
-    .dataTables_filter label { color: color.change($body-color-dark, $alpha: .55); }
-    .paginate_button {
-      color: color.change($body-color-dark, $alpha: .55) !important;
-      &:hover { background: color.change($primary, $alpha: .1) !important; color: $body-color-dark !important; }
-      &.current { background: $primary !important; color: $white !important; }
-    }
-  }
+	// ── Dropdowns ────────────────────────────────────────────────────────────
+	.dropdown-menu {
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		border-color: color.change($primary, $alpha: 0.2);
+	}
+	.dropdown-item {
+		color: $body-color-dark;
+		&:hover {
+			background: color.change($primary, $alpha: 0.08);
+			color: color.adjust($body-color-dark, $lightness: 15%);
+		}
+	}
+	.dropdown-divider {
+		border-color: color.change($primary, $alpha: 0.15);
+	}
+	.dropdown-header {
+		border-color: color.change($primary, $alpha: 0.15);
+		color: $body-color-dark;
+	}
 
-  // ── Dropdowns ────────────────────────────────────────────────────────────
-  .dropdown-menu {
-    background:   color.adjust($body-bg-dark, $lightness: 4%);
-    border-color: color.change($primary, $alpha: .2);
-  }
-  .dropdown-item {
-    color: $body-color-dark;
-    &:hover { background: color.change($primary, $alpha: .08); color: color.adjust($body-color-dark, $lightness: 15%); }
-  }
-  .dropdown-divider  { border-color: color.change($primary, $alpha: .15); }
-  .dropdown-header   { border-color: color.change($primary, $alpha: .15); color: $body-color-dark; }
+	// ── Notificaciones ────────────────────────────────────────────────────────
+	.notification-item {
+		border-color: color.change($primary, $alpha: 0.08);
+		&:hover {
+			background: color.change($primary, $alpha: 0.06);
+		}
+	}
+	.notification-body p {
+		color: $body-color-dark;
+	}
+	.notification-dropdown {
+		border-color: color.change($primary, $alpha: 0.2) !important;
+	}
 
-  // ── Notificaciones ────────────────────────────────────────────────────────
-  .notification-item {
-    border-color: color.change($primary, $alpha: .08);
-    &:hover { background: color.change($primary, $alpha: .06); }
-  }
-  .notification-body p       { color: $body-color-dark; }
-  .notification-dropdown     { border-color: color.change($primary, $alpha: .2) !important; }
+	// ── Misc ─────────────────────────────────────────────────────────────────
+	.activity-item {
+		border-color: color.change($primary, $alpha: 0.1);
+	}
+	.breadcrumb-item a {
+		color: color.change($body-color-dark, $alpha: 0.55);
+		&:hover {
+			color: $primary;
+		}
+	}
+	.breadcrumb-item.active {
+		color: $body-color-dark;
+	}
 
-  // ── Misc ─────────────────────────────────────────────────────────────────
-  .activity-item     { border-color: color.change($primary, $alpha: .1); }
-  .breadcrumb-item a { color: color.change($body-color-dark, $alpha: .55); &:hover { color: $primary; } }
-  .breadcrumb-item.active { color: $body-color-dark; }
+	.page-link {
+		color: color.change($body-color-dark, $alpha: 0.6);
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		border-color: color.change($primary, $alpha: 0.2);
+		&:hover {
+			background: color.change($primary, $alpha: 0.1);
+			color: $body-color-dark;
+		}
+	}
+	.page-item.active .page-link {
+		background: $primary;
+		border-color: color.adjust($primary, $lightness: -8%);
+		color: $white;
+	}
 
-  .page-link {
-    color:        color.change($body-color-dark, $alpha: .6);
-    background:   color.adjust($body-bg-dark, $lightness: 4%);
-    border-color: color.change($primary, $alpha: .2);
-    &:hover { background: color.change($primary, $alpha: .1); color: $body-color-dark; }
-  }
-  .page-item.active .page-link {
-    background:   $primary;
-    border-color: color.adjust($primary, $lightness: -8%);
-    color:        $white;
-  }
+	// ── SweetAlert2 ──────────────────────────────────────────────────────────
+	.swal2-popup {
+		background: color.adjust($body-bg-dark, $lightness: 4%) !important;
+		border-color: color.change($primary, $alpha: 0.2) !important;
+	}
+	.swal2-title {
+		color: $body-color-dark !important;
+	}
+	.swal2-html-container {
+		color: color.change($body-color-dark, $alpha: 0.8) !important;
+	}
 
-  // ── SweetAlert2 ──────────────────────────────────────────────────────────
-  .swal2-popup {
-    background:   color.adjust($body-bg-dark, $lightness: 4%) !important;
-    border-color: color.change($primary, $alpha: .2) !important;
-  }
-  .swal2-title          { color: $body-color-dark !important; }
-  .swal2-html-container { color: color.change($body-color-dark, $alpha: .8) !important; }
+	// ── IFrame tabs ──────────────────────────────────────────────────────────
+	.nav-tabs-iframe .nav-link {
+		background: color.adjust($body-bg-dark, $lightness: -2%);
+		color: color.change($body-color-dark, $alpha: 0.7);
+		border-color: color.change($primary, $alpha: 0.15);
+		&.active {
+			background: color.adjust($body-bg-dark, $lightness: 4%);
+			color: $primary;
+		}
+	}
 
-  // ── IFrame tabs ──────────────────────────────────────────────────────────
-  .nav-tabs-iframe .nav-link {
-    background: color.adjust($body-bg-dark, $lightness: -2%);
-    color:      color.change($body-color-dark, $alpha: .7);
-    border-color: color.change($primary, $alpha: .15);
-    &.active {
-      background: color.adjust($body-bg-dark, $lightness: 4%);
-      color:      $primary;
-    }
-  }
-
-  // ── Info-box ─────────────────────────────────────────────────────────────
-  .info-box {
-    background-color: color.adjust($body-bg-dark, $lightness: 4%);
-    color:            $body-color-dark;
-  }
+	// ── Info-box ─────────────────────────────────────────────────────────────
+	.info-box {
+		background-color: color.adjust($body-bg-dark, $lightness: 4%);
+		color: $body-color-dark;
+	}
 }

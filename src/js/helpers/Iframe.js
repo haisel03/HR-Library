@@ -91,7 +91,7 @@ const Iframe = {
 	refresh: () => {
 		const activeIframe = $(contentsContainer + " .tab-pane.active iframe")[0];
 		if (activeIframe) {
-activeIframe.src = activeIframe.src + "";
+			activeIframe.src = activeIframe.src + "";
 		}
 	},
 

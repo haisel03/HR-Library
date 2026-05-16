@@ -8,179 +8,213 @@
 /* ── Labels ──────────────────────────────────────────────────────────────── */
 
 label.form-label {
-  margin-bottom: .2rem;
-  font-weight:   $font-weight-bold;
-  color:         $form-label-color;
-  text-decoration: none;
+	margin-bottom: 0.2rem;
+	font-weight: $font-weight-bold;
+	color: $form-label-color;
+	text-decoration: none;
 
-  &.required::after {
-    content:     " *";
-    font-weight: $font-weight-bold;
-    color:       $danger;
-  }
+	&.required::after {
+		content: " *";
+		font-weight: $font-weight-bold;
+		color: $danger;
+	}
 }
 
 /* ── Inputs y Selects ────────────────────────────────────────────────────── */
 
 .form-control,
 .form-select {
-  background:    $input-bg;
-  border:        1px solid $input-border-color;
-  border-radius: $border-radius;
-  color:         $input-color;
-  font-size:     .875rem;
-  padding:       .5rem .75rem;
-  transition:    border-color .15s, box-shadow .15s;
+	background: $input-bg;
+	border: 1px solid $input-border-color;
+	border-radius: $border-radius;
+	color: $input-color;
+	font-size: 0.875rem;
+	padding: 0.5rem 0.75rem;
+	transition:
+		border-color 0.15s,
+		box-shadow 0.15s;
 
-  &:focus {
-    background:   $input-bg;
-    border-color: $input-focus-border-color;
-    box-shadow:   $input-focus-box-shadow;
-    color:        $input-color;
-    outline:      0;
-  }
+	&:focus {
+		background: $input-bg;
+		border-color: $input-focus-border-color;
+		box-shadow: $input-focus-box-shadow;
+		color: $input-color;
+		outline: 0;
+	}
 
-  &::placeholder { color: color.change($secondary, $alpha: .45); }
+	&::placeholder {
+		color: color.change($secondary, $alpha: 0.45);
+	}
 
-  &.is-valid {
-    border-color:   $success;
-    background-image: none;
-    &:focus { border-color: $success; box-shadow: 0 0 0 .2rem color.change($success, $alpha: .15); }
-  }
+	&.is-valid {
+		border-color: $success;
+		background-image: none;
+		&:focus {
+			border-color: $success;
+			box-shadow: 0 0 0 0.2rem color.change($success, $alpha: 0.15);
+		}
+	}
 
-  &.is-invalid {
-    border-color:   $danger;
-    background-image: none;
-    &:focus { border-color: $danger; box-shadow: 0 0 0 .2rem rgba($danger, .15); }
-  }
+	&.is-invalid {
+		border-color: $danger;
+		background-image: none;
+		&:focus {
+			border-color: $danger;
+			box-shadow: 0 0 0 0.2rem rgba($danger, 0.15);
+		}
+	}
 }
 
 /* ── Input Group ─────────────────────────────────────────────────────────── */
 
 .input-group {
-  .input-group-text {
-    background:  color.change($primary, $alpha: .08);
-    border:      1px solid $input-border-color;
-    color:       $secondary;
-    font-weight: $font-weight-bold;
-    text-align:  center;
-  }
+	.input-group-text {
+		background: color.change($primary, $alpha: 0.08);
+		border: 1px solid $input-border-color;
+		color: $secondary;
+		font-weight: $font-weight-bold;
+		text-align: center;
+	}
 
-  .form-control,
-  .form-select {
-    border-left: none;
-    &:last-child {
-      border-top-right-radius:    $border-radius;
-      border-bottom-right-radius: $border-radius;
-    }
-  }
+	.form-control,
+	.form-select {
+		border-left: none;
+		&:last-child {
+			border-top-right-radius: $border-radius;
+			border-bottom-right-radius: $border-radius;
+		}
+	}
 }
 
 /* ── Floating labels ─────────────────────────────────────────────────────── */
 
 .form-floating > .form-control:focus ~ label,
 .form-floating > .form-control:not(:placeholder-shown) ~ label {
-  color: $primary;
+	color: $primary;
 }
 
 /* ── Checkboxes / Radios ─────────────────────────────────────────────────── */
 
 .form-check-input {
-  border-color: $input-border-color;
+	border-color: $input-border-color;
 
-  &:checked {
-    background-color: $primary;
-    border-color:     $primary;
-  }
+	&:checked {
+		background-color: $primary;
+		border-color: $primary;
+	}
 
-  &:focus { box-shadow: 0 0 0 3px color.change($primary, $alpha: .15); }
+	&:focus {
+		box-shadow: 0 0 0 3px color.change($primary, $alpha: 0.15);
+	}
 }
 
 /* ── Select2 Bootstrap-5 ─────────────────────────────────────────────────── */
 
 .select2-container--bootstrap-5 {
+	.select2-selection {
+		font-weight: $font-weight-bold;
+		color: $dark;
+		border: 1px solid $input-border-color;
+		border-radius: $border-radius;
+		padding: 0.5rem 0.75rem;
+		height: auto;
+		background: $input-bg;
+		cursor: pointer;
+		&:hover {
+			border-color: color.adjust($input-border-color, $lightness: -8%);
+		}
+	}
 
-  .select2-selection {
-    font-weight:   $font-weight-bold;
-    color:         $dark;
-    border:        1px solid $input-border-color;
-    border-radius: $border-radius;
-    padding:       .5rem .75rem;
-    height:        auto;
-    background:    $input-bg;
-    cursor:        pointer;
-    &:hover { border-color: color.adjust($input-border-color, $lightness: -8%); }
-  }
+	&.select2-container--focus .select2-selection {
+		border-color: $input-focus-border-color;
+		box-shadow: $input-focus-box-shadow;
+		outline: 0;
+	}
 
-  &.select2-container--focus .select2-selection {
-    border-color: $input-focus-border-color;
-    box-shadow:   $input-focus-box-shadow;
-    outline:      0;
-  }
+	.select2-selection.is-valid {
+		border-color: $success;
+	}
+	.select2-selection.is-invalid {
+		border-color: $danger;
+	}
 
-  .select2-selection.is-valid  { border-color: $success; }
-  .select2-selection.is-invalid { border-color: $danger; }
+	.select2-dropdown {
+		background: $input-bg;
+		border: 1px solid $input-border-color;
+		border-radius: $border-radius;
+		padding: 0.2rem;
+		box-shadow: $box-shadow;
+	}
 
-  .select2-dropdown {
-    background:    $input-bg;
-    border:        1px solid $input-border-color;
-    border-radius: $border-radius;
-    padding:       .2rem;
-    box-shadow:    $box-shadow;
-  }
+	.select2-results__option {
+		font-size: $font-size-sm;
+		color: $dark;
+		padding: 0.35rem 0.75rem;
+		border-radius: calc(#{$border-radius} - 2px);
+		cursor: pointer;
 
-  .select2-results__option {
-    font-size:     $font-size-sm;
-    color:         $dark;
-    padding:       .35rem .75rem;
-    border-radius: calc(#{$border-radius} - 2px);
-    cursor:        pointer;
+		&--highlighted {
+			background-color: $primary;
+			color: $white;
+		}
+		&[aria-selected="true"] {
+			background-color: color.change($primary, $alpha: 0.1);
+			color: $primary;
+			font-weight: $font-weight-bold;
+		}
+	}
 
-    &--highlighted   { background-color: $primary; color: $white; }
-    &[aria-selected="true"] { background-color: color.change($primary, $alpha: .1); color: $primary; font-weight: $font-weight-bold; }
-  }
+	.select2-search--dropdown .select2-search__field {
+		border: 1px solid $input-border-color;
+		border-radius: $border-radius;
+		padding: 0.35rem 0.5rem;
+		font-size: $font-size-sm;
+		&:focus {
+			border-color: $primary;
+			outline: 0;
+			box-shadow: 0 0 0 0.15rem color.change($primary, $alpha: 0.1);
+		}
+	}
 
-  .select2-search--dropdown .select2-search__field {
-    border:        1px solid $input-border-color;
-    border-radius: $border-radius;
-    padding:       .35rem .5rem;
-    font-size:     $font-size-sm;
-    &:focus { border-color: $primary; outline: 0; box-shadow: 0 0 0 .15rem color.change($primary, $alpha: .1); }
-  }
+	.select2-selection__choice {
+		background-color: $primary;
+		border: none;
+		color: $white;
+		font-size: $font-size-sm;
+		border-radius: $border-radius;
+		padding: 0.1rem 0.5rem;
+	}
 
-  .select2-selection__choice {
-    background-color: $primary;
-    border:           none;
-    color:            $white;
-    font-size:        $font-size-sm;
-    border-radius:    $border-radius;
-    padding:          .1rem .5rem;
-  }
-
-  .select2-selection__choice__remove {
-    color: color.change($white, $alpha: .85);
-    margin-right: .25rem;
-    &:hover { color: $white; }
-  }
+	.select2-selection__choice__remove {
+		color: color.change($white, $alpha: 0.85);
+		margin-right: 0.25rem;
+		&:hover {
+			color: $white;
+		}
+	}
 }
 
 /* ── Mensajes de validación ──────────────────────────────────────────────── */
 
 .invalid-feedback {
-  display:    none;
-  font-size:  $font-size-sm;
-  color:      $danger;
-  margin-top: .25rem;
+	display: none;
+	font-size: $font-size-sm;
+	color: $danger;
+	margin-top: 0.25rem;
 }
 
 .is-invalid ~ .invalid-feedback,
-.select2.is-invalid ~ .invalid-feedback { display: block; }
-
-.valid-feedback {
-  display:    none;
-  font-size:  $font-size-sm;
-  color:      $success;
-  margin-top: .25rem;
+.select2.is-invalid ~ .invalid-feedback {
+	display: block;
 }
 
-.is-valid ~ .valid-feedback { display: block; }
+.valid-feedback {
+	display: none;
+	font-size: $font-size-sm;
+	color: $success;
+	margin-top: 0.25rem;
+}
+
+.is-valid ~ .valid-feedback {
+	display: block;
+}

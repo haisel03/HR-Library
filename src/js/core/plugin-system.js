@@ -30,22 +30,22 @@ const _installed = new Set();
  * });
  */
 export function installPlugin(HR, plugin) {
-  if (_installed.has(plugin)) return;
+	if (_installed.has(plugin)) return;
 
-  if (typeof plugin?.install === "function") {
-    plugin.install(HR);
-  } else if (typeof plugin === "function") {
-    plugin(HR);
-  } else {
-    console.warn("[HR] Plugin inválido — debe tener install() o ser una función:", plugin);
-    return;
-  }
+	if (typeof plugin?.install === "function") {
+		plugin.install(HR);
+	} else if (typeof plugin === "function") {
+		plugin(HR);
+	} else {
+		console.warn("[HR] Plugin inválido — debe tener install() o ser una función:", plugin);
+		return;
+	}
 
-  _installed.add(plugin);
+	_installed.add(plugin);
 
-  if (HR.config?.isDev?.()) {
-    console.info(`[HR] Plugin instalado: ${plugin.name ?? "anónimo"}`);
-  }
+	if (HR.config?.isDev?.()) {
+		console.info(`[HR] Plugin instalado: ${plugin.name ?? "anónimo"}`);
+	}
 }
 
 /** @param {Object|Function} plugin @returns {boolean} */

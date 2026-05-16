@@ -6,8 +6,6 @@
  * @version 4.0.0
  */
 
-
-
 // ── Estilos ──
 import "../scss/app.scss";
 
@@ -41,13 +39,12 @@ import App from "./core/App.js";
 /* ── Exposición global ── */
 
 if (typeof window !== "undefined") {
-  window.App = App;
+	window.App = App;
 }
 
 // ── Inicialización ──
 $(function () {
-  App.init();
+	App.init();
 });
 
 export default App;
-

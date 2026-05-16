@@ -34,102 +34,139 @@ const _key = (key) => `${config.storage.namespace}:${key}`;
  * @private
  */
 const _wrap = (store) => ({
-  set(key, value) {
-    try   { store.setItem(_key(key), JSON.stringify(value)); return true; }
-    catch { return false; }
-  },
-  get(key, defaultValue = null) {
-    try {
-      const v = store.getItem(_key(key));
-      if (v === null) return defaultValue;
-      return JSON.parse(v);
-    } catch { return defaultValue; }
-  },
-  has:    (key) => { try { return store.getItem(_key(key)) !== null; } catch { return false; } },
-  remove: (key) => { try { store.removeItem(_key(key)); } catch { /* noop */ } },
-  keys() {
-    const prefix = `${config.storage.namespace}:`;
-    try { return Object.keys(store).filter((k) => k.startsWith(prefix)).map((k) => k.slice(prefix.length)); }
-    catch { return []; }
-  },
-  clear() { this.keys().forEach((k) => this.remove(k)); },
+	set(key, value) {
+		try {
+			store.setItem(_key(key), JSON.stringify(value));
+			return true;
+		} catch {
+			return false;
+		}
+	},
+	get(key, defaultValue = null) {
+		try {
+			const v = store.getItem(_key(key));
+			if (v === null) return defaultValue;
+			return JSON.parse(v);
+		} catch {
+			return defaultValue;
+		}
+	},
+	has: (key) => {
+		try {
+			return store.getItem(_key(key)) !== null;
+		} catch {
+			return false;
+		}
+	},
+	remove: (key) => {
+		try {
+			store.removeItem(_key(key));
+		} catch {
+			/* noop */
+		}
+	},
+	keys() {
+		const prefix = `${config.storage.namespace}:`;
+		try {
+			return Object.keys(store)
+				.filter((k) => k.startsWith(prefix))
+				.map((k) => k.slice(prefix.length));
+		} catch {
+			return [];
+		}
+	},
+	clear() {
+		this.keys().forEach((k) => this.remove(k));
+	},
 });
 
 /* ── Storage ── */
 
 const Storage = {
+	/* ── localStorage ── */
 
-  /* ── localStorage ── */
+	/** Guarda un valor en localStorage (JSON stringify automático). @returns {boolean} */
+	set: (key, value) => _wrap(localStorage).set(key, value),
+	/** Obtiene un valor de localStorage. */
+	get: (key, defaultValue = null) => _wrap(localStorage).get(key, defaultValue),
+	/** Verifica si una clave existe en localStorage. */
+	has: (key) => _wrap(localStorage).has(key),
+	/** Elimina una clave de localStorage. */
+	remove: (key) => _wrap(localStorage).remove(key),
+	/** Lista las claves del namespace en localStorage. */
+	keys: () => _wrap(localStorage).keys(),
+	/** Limpia solo las claves del namespace en localStorage (no afecta otras apps). */
+	clear: () => _wrap(localStorage).clear(),
 
-  /** Guarda un valor en localStorage (JSON stringify automático). @returns {boolean} */
-  set:    (key, value)           => _wrap(localStorage).set(key, value),
-  /** Obtiene un valor de localStorage. */
-  get:    (key, defaultValue = null) => _wrap(localStorage).get(key, defaultValue),
-  /** Verifica si una clave existe en localStorage. */
-  has:    (key)                  => _wrap(localStorage).has(key),
-  /** Elimina una clave de localStorage. */
-  remove: (key)                  => _wrap(localStorage).remove(key),
-  /** Lista las claves del namespace en localStorage. */
-  keys:   ()                     => _wrap(localStorage).keys(),
-  /** Limpia solo las claves del namespace en localStorage (no afecta otras apps). */
-  clear:  ()                     => _wrap(localStorage).clear(),
+	/* ── TTL (Time To Live) ── */
 
-  /* ── TTL (Time To Live) ── */
+	/**
+	 * Guarda un valor con tiempo de vida en segundos.
+	 * @param {string} key
+	 * @param {*}      value
+	 * @param {number} ttlSeconds
+	 * @returns {boolean}
+	 * @example Storage.setTtl("session", userData, 1800); // 30 min
+	 */
+	setTtl: (key, value, ttlSeconds) => Storage.set(key, { __v: value, __expires: Date.now() + ttlSeconds * 1000 }),
 
-  /**
-   * Guarda un valor con tiempo de vida en segundos.
-   * @param {string} key
-   * @param {*}      value
-   * @param {number} ttlSeconds
-   * @returns {boolean}
-   * @example Storage.setTtl("session", userData, 1800); // 30 min
-   */
-  setTtl: (key, value, ttlSeconds) =>
-    Storage.set(key, { __v: value, __expires: Date.now() + ttlSeconds * 1000 }),
+	/**
+	 * Obtiene un valor con TTL. Elimina la clave si expiró.
+	 * @param {string} key
+	 * @param {*} [defaultValue=null]
+	 * @returns {*}  null (o defaultValue) si expiró o no existe
+	 */
+	getTtl: (key, defaultValue = null) => {
+		const stored = Storage.get(key);
+		if (!stored || typeof stored !== "object" || !stored.__expires) return defaultValue;
+		if (Date.now() > stored.__expires) {
+			Storage.remove(key);
+			return defaultValue;
+		}
+		return stored.__v ?? defaultValue;
+	},
 
-  /**
-   * Obtiene un valor con TTL. Elimina la clave si expiró.
-   * @param {string} key
-   * @param {*} [defaultValue=null]
-   * @returns {*}  null (o defaultValue) si expiró o no existe
-   */
-  getTtl: (key, defaultValue = null) => {
-    const stored = Storage.get(key);
-    if (!stored || typeof stored !== "object" || !stored.__expires) return defaultValue;
-    if (Date.now() > stored.__expires) { Storage.remove(key); return defaultValue; }
-    return stored.__v ?? defaultValue;
-  },
+	/* ── sessionStorage (métodos planos, más ergonómicos que sub-objeto) ── */
 
-  /* ── sessionStorage (métodos planos, más ergonómicos que sub-objeto) ── */
+	/**
+	 * @param {string} key
+	 * @param {*} value
+	 * @returns {boolean}
+	 */
+	setSession: (key, value) => _wrap(sessionStorage).set(key, value),
+	/**
+	 * @param {string} key
+	 * @param {*} [defaultValue]
+	 * @returns {*}
+	 */
+	getSession: (key, defaultValue = null) => _wrap(sessionStorage).get(key, defaultValue),
+	/**
+	 * @param {string} key
+	 * @returns {boolean}
+	 */
+	hasSession: (key) => _wrap(sessionStorage).has(key),
+	/** @param {string} key */
+	removeSession: (key) => _wrap(sessionStorage).remove(key),
+	/** Limpia las claves del namespace en sessionStorage */
+	clearSession: () => _wrap(sessionStorage).clear(),
 
-  /** @param {string} key @param {*} value @returns {boolean} */
-  setSession:    (key, value)             => _wrap(sessionStorage).set(key, value),
-  /** @param {string} key @param {*} [defaultValue] @returns {*} */
-  getSession:    (key, defaultValue=null) => _wrap(sessionStorage).get(key, defaultValue),
-  /** @param {string} key @returns {boolean} */
-  hasSession:    (key)                    => _wrap(sessionStorage).has(key),
-  /** @param {string} key */
-  removeSession: (key)                    => _wrap(sessionStorage).remove(key),
-  /** Limpia las claves del namespace en sessionStorage */
-  clearSession:  ()                       => _wrap(sessionStorage).clear(),
+	/* ── Sub-objeto session (compatibilidad V1) ── */
+	session: {
+		set: (key, value) => _wrap(sessionStorage).set(key, value),
+		get: (key, defaultValue = null) => _wrap(sessionStorage).get(key, defaultValue),
+		has: (key) => _wrap(sessionStorage).has(key),
+		remove: (key) => _wrap(sessionStorage).remove(key),
+		keys: () => _wrap(sessionStorage).keys(),
+		clear: () => _wrap(sessionStorage).clear(),
+	},
 
-  /* ── Sub-objeto session (compatibilidad V1) ── */
-  session: {
-    set:    (key, value)             => _wrap(sessionStorage).set(key, value),
-    get:    (key, defaultValue=null) => _wrap(sessionStorage).get(key, defaultValue),
-    has:    (key)                    => _wrap(sessionStorage).has(key),
-    remove: (key)                    => _wrap(sessionStorage).remove(key),
-    keys:   ()                       => _wrap(sessionStorage).keys(),
-    clear:  ()                       => _wrap(sessionStorage).clear(),
-  },
-
-  /** @returns {void} */
-  init() {
-    // Restaurar token si existe en session
-    import("../core/config.js").then(({ default: _cfg }) => {
-      // Delegado a Api.init() para evitar circular
-    });
-  },
+	/** @returns {void} */
+	init() {
+		// Restaurar token si existe en session
+		import("../core/config.js").then(({ default: _cfg }) => {
+			// Delegado a Api.init() para evitar circular
+		});
+	},
 };
 
 export default Object.freeze(Storage);

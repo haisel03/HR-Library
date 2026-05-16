@@ -1,11 +1,21 @@
 import {
 	Chart,
-	BarController, BarElement,
-	LineController, LineElement, PointElement,
-	PieController, ArcElement,
+	BarController,
+	BarElement,
+	LineController,
+	LineElement,
+	PointElement,
+	PieController,
+	ArcElement,
 	DoughnutController,
-	CategoryScale, LinearScale, LogarithmicScale, TimeScale,
-	Filler, Legend, Title, Tooltip,
+	CategoryScale,
+	LinearScale,
+	LogarithmicScale,
+	TimeScale,
+	Filler,
+	Legend,
+	Title,
+	Tooltip,
 } from "chart.js";
 import config from "../core/config.js";
 
@@ -20,22 +30,31 @@ import config from "../core/config.js";
 
 // Registro selectivo — evita importar chart.js/auto que registra TODO
 Chart.register(
-	BarController, BarElement,
-	LineController, LineElement, PointElement,
-	PieController, ArcElement,
+	BarController,
+	BarElement,
+	LineController,
+	LineElement,
+	PointElement,
+	PieController,
+	ArcElement,
 	DoughnutController,
-	CategoryScale, LinearScale, LogarithmicScale, TimeScale,
-	Filler, Legend, Title, Tooltip
+	CategoryScale,
+	LinearScale,
+	LogarithmicScale,
+	TimeScale,
+	Filler,
+	Legend,
+	Title,
+	Tooltip,
 );
 
 // Defaults globales desde config
-Chart.defaults.color       = window.theme?.["gray-600"] || "#6c757d";
+Chart.defaults.color = window.theme?.["gray-600"] || "#6c757d";
 Chart.defaults.font.family = "'Roboto', 'Helvetica Neue', sans-serif";
 
 const instances = new Map();
 
 const Charts = {
-
 	/**
 	 * Crea o reemplaza un gráfico en el canvas especificado.
 	 * Si ya existe un gráfico en ese canvas, lo destruye primero.
@@ -81,7 +100,7 @@ const Charts = {
 	 */
 	updateData: (el, data) => {
 		const canvas = typeof el === "string" ? document.querySelector(el) : el;
-		const chart  = instances.get(canvas);
+		const chart = instances.get(canvas);
 		if (!chart) return;
 
 		chart.data = data;
@@ -96,7 +115,7 @@ const Charts = {
 	 */
 	setOption: (el, optionPath, value) => {
 		const canvas = typeof el === "string" ? document.querySelector(el) : el;
-		const chart  = instances.get(canvas);
+		const chart = instances.get(canvas);
 		if (!chart) return;
 
 		const parts = optionPath.split(".");

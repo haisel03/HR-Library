@@ -35,8 +35,8 @@ const ExportTbl = {
 		if (!$table.length) return;
 
 		const dt = ExportTbl._dt($table);
-		let headers = [];
-		let rows = [];
+		let headers;
+		let rows;
 
 		if (dt) {
 			headers = dt
@@ -57,14 +57,12 @@ const ExportTbl = {
 					$(tr)
 						.find("td")
 						.map((_, td) => td.innerText)
-						.get()
+						.get(),
 				)
 				.get();
 		}
 
-		const data = rows.map((row) =>
-			Array.isArray(row) ? row : headers.map((h) => row[h] ?? "")
-		);
+		const data = rows.map((row) => (Array.isArray(row) ? row : headers.map((h) => row[h] ?? "")));
 
 		const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
 		const wb = XLSX.utils.book_new();

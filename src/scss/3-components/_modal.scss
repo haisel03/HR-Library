@@ -1,7 +1,5 @@
 .modal {
-
 	&.modal-swal {
-
 		.modal-content {
 			border: none;
 			border-radius: $swal-radius;
@@ -31,12 +29,12 @@
 		.modal-footer {
 			border-top: none;
 			padding: 1rem 1.25rem;
-			gap: .5rem;
+			gap: 0.5rem;
 		}
 
 		.btn-close {
 			filter: invert(1);
-			opacity: .8;
+			opacity: 0.8;
 
 			&:hover {
 				opacity: 1;

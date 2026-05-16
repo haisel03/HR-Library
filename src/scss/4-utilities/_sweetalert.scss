@@ -8,115 +8,141 @@
 /* ── Popup base ──────────────────────────────────────────────────────────── */
 
 .swal2-popup {
-  font-family:   $font-family-sans-serif !important;
-  border:        1px solid $card-border-color !important;
-  border-radius: $swal-radius !important;
-  box-shadow:    $swal-shadow !important;
-  background:    $swal-bg !important;
+	font-family: $font-family-sans-serif !important;
+	border: 1px solid $card-border-color !important;
+	border-radius: $swal-radius !important;
+	box-shadow: $swal-shadow !important;
+	background: $swal-bg !important;
 }
 
 .swal2-title {
-  font-family: $headings-font-family, Georgia, serif !important;
-  color:        $dark !important;
-  font-size:    1.4rem !important;
+	font-family: $headings-font-family, Georgia, serif !important;
+	color: $dark !important;
+	font-size: 1.4rem !important;
 }
 
-.swal2-html-container { color: $body-color !important; font-size: .9rem !important; }
+.swal2-html-container {
+	color: $body-color !important;
+	font-size: 0.9rem !important;
+}
 
 /* ── Iconos ──────────────────────────────────────────────────────────────── */
 
 .swal2-icon {
-  &.swal2-success {
-    border-color: color.change($success, $alpha: .3) !important;
-    .swal2-success-ring { border-color: color.change($success, $alpha: .25) !important; }
-    [class^=swal2-success-line] { background: $success !important; }
-  }
-  &.swal2-warning { border-color: color.change($warning, $alpha: .4) !important; color: $warning !important; }
-  &.swal2-error {
-    border-color: color.change($danger, $alpha: .35) !important;
-    .swal2-x-mark-line-left,
-    .swal2-x-mark-line-right { background: $danger !important; }
-  }
-  &.swal2-question { border-color: color.change($info, $alpha: .3) !important; color: $info !important; }
-  &.swal2-info     { border-color: color.change($info, $alpha: .3) !important; color: $info !important; }
+	&.swal2-success {
+		border-color: color.change($success, $alpha: 0.3) !important;
+		.swal2-success-ring {
+			border-color: color.change($success, $alpha: 0.25) !important;
+		}
+		[class^="swal2-success-line"] {
+			background: $success !important;
+		}
+	}
+	&.swal2-warning {
+		border-color: color.change($warning, $alpha: 0.4) !important;
+		color: $warning !important;
+	}
+	&.swal2-error {
+		border-color: color.change($danger, $alpha: 0.35) !important;
+		.swal2-x-mark-line-left,
+		.swal2-x-mark-line-right {
+			background: $danger !important;
+		}
+	}
+	&.swal2-question {
+		border-color: color.change($info, $alpha: 0.3) !important;
+		color: $info !important;
+	}
+	&.swal2-info {
+		border-color: color.change($info, $alpha: 0.3) !important;
+		color: $info !important;
+	}
 }
 
 /* ── Botones ─────────────────────────────────────────────────────────────── */
 
 .swal2-confirm {
-  background:    linear-gradient(135deg, $primary, color.adjust($primary, $lightness: -12%)) !important;
-  border:        none !important;
-  box-shadow:    0 3px 10px color.change($primary, $alpha: .35) !important;
-  font-weight:   700 !important;
-  letter-spacing: .03em !important;
-  &:focus { box-shadow: 0 0 0 3px color.change($primary, $alpha: .3) !important; }
+	background: linear-gradient(135deg, $primary, color.adjust($primary, $lightness: -12%)) !important;
+	border: none !important;
+	box-shadow: 0 3px 10px color.change($primary, $alpha: 0.35) !important;
+	font-weight: 700 !important;
+	letter-spacing: 0.03em !important;
+	&:focus {
+		box-shadow: 0 0 0 3px color.change($primary, $alpha: 0.3) !important;
+	}
 }
 
 .swal2-cancel {
-  background:    color.change($primary, $alpha: .08) !important;
-  color:         $secondary !important;
-  border:        1px solid $input-border-color !important;
-  font-weight:   700 !important;
-  &:hover { background: color.change($primary, $alpha: .15) !important; }
+	background: color.change($primary, $alpha: 0.08) !important;
+	color: $secondary !important;
+	border: 1px solid $input-border-color !important;
+	font-weight: 700 !important;
+	&:hover {
+		background: color.change($primary, $alpha: 0.15) !important;
+	}
 }
 
 .swal2-deny {
-  background:  color.change($danger, $alpha: .1) !important;
-  color:       $danger !important;
-  border:      1px solid color.change($danger, $alpha: .25) !important;
-  font-weight: 700 !important;
+	background: color.change($danger, $alpha: 0.1) !important;
+	color: $danger !important;
+	border: 1px solid color.change($danger, $alpha: 0.25) !important;
+	font-weight: 700 !important;
 }
 
 /* ── Timer bar ───────────────────────────────────────────────────────────── */
 
 .swal2-timer-progress-bar {
-  background: linear-gradient(90deg, $primary, $secondary) !important;
+	background: linear-gradient(90deg, $primary, $secondary) !important;
 }
 
 /* ── Backdrop ────────────────────────────────────────────────────────────── */
 
-.swal2-backdrop-show { background: color.change($dark, $alpha: .55) !important; }
+.swal2-backdrop-show {
+	background: color.change($dark, $alpha: 0.55) !important;
+}
 
 /* ── Loading popup (HR Library style) ───────────────────────────────────── */
 
 .swal-loading-popup {
-  border-radius: $swal-radius;
-  padding:       2.5rem 2rem;
-  box-shadow:    $swal-shadow;
-  background:    $swal-bg-dark;
+	border-radius: $swal-radius;
+	padding: 2.5rem 2rem;
+	box-shadow: $swal-shadow;
+	background: $swal-bg-dark;
 }
 
 .swal-loading-container {
-  display:        flex;
-  flex-direction: column;
-  align-items:    center;
-  gap:            1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
 }
 
 .swal-loading-title {
-  color:       $swal-text-main;
-  font-size:   1.1rem;
-  font-weight: 600;
-  margin:      0;
+	color: $swal-text-main;
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin: 0;
 }
 
 .swal-loading-subtitle {
-  color:     $swal-text-muted;
-  font-size: .9rem;
-  margin:    0;
+	color: $swal-text-muted;
+	font-size: 0.9rem;
+	margin: 0;
 }
 
 /* ── Spinner ─────────────────────────────────────────────────────────────── */
 
 .swal-spinner {
-  width:         42px;
-  height:        42px;
-  border-radius: 50%;
-  border:        3px solid color.change($white, $alpha: .15);
-  border-top-color: $primary;
-  animation:     swal-spin .9s linear infinite;
+	width: 42px;
+	height: 42px;
+	border-radius: 50%;
+	border: 3px solid color.change($white, $alpha: 0.15);
+	border-top-color: $primary;
+	animation: swal-spin 0.9s linear infinite;
 }
 
 @keyframes swal-spin {
-  to { transform: rotate(360deg); }
+	to {
+		transform: rotate(360deg);
+	}
 }

@@ -81,11 +81,7 @@ const _loadState = () => {
  * @private
  */
 const _dispatchResizeOnEnd = (el) => {
-	el.addEventListener(
-		"transitionend",
-		() => window.dispatchEvent(new Event("resize")),
-		{ once: true }
-	);
+	el.addEventListener("transitionend", () => window.dispatchEvent(new Event("resize")), { once: true });
 };
 
 /**
@@ -97,41 +93,36 @@ const _dispatchResizeOnEnd = (el) => {
 const _markActiveLink = () => {
 	const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
-	document
-		.querySelectorAll(`${cfg.sidebarSelector} .sidebar-link[href]`)
-		.forEach((link) => {
-			const href = link.getAttribute("href");
-			if (!href || href === "#") return;
+	document.querySelectorAll(`${cfg.sidebarSelector} .sidebar-link[href]`).forEach((link) => {
+		const href = link.getAttribute("href");
+		if (!href || href === "#") return;
 
-			const linkPage = href.split("/").pop().split("?")[0];
+		const linkPage = href.split("/").pop().split("?")[0];
 
-			if (linkPage === currentPage) {
-				// Marcar el item padre como activo
-				link.closest(".sidebar-item")?.classList.add("active");
+		if (linkPage === currentPage) {
+			// Marcar el item padre como activo
+			link.closest(".sidebar-item")?.classList.add("active");
 
-				// Si está dentro de un dropdown, expandirlo
-				const dropdown = link.closest(".sidebar-dropdown");
-				if (dropdown) {
-					dropdown.classList.add("show");
+			// Si está dentro de un dropdown, expandirlo
+			const dropdown = link.closest(".sidebar-dropdown");
+			if (dropdown) {
+				dropdown.classList.add("show");
 
-					// Actualizar el toggle del collapse padre
-					const collapseId = dropdown.id;
-					const toggle = document.querySelector(
-						`[data-bs-target="#${collapseId}"]`
-					);
-					if (toggle) {
-						toggle.classList.remove("collapsed");
-						toggle.setAttribute("aria-expanded", "true");
-					}
+				// Actualizar el toggle del collapse padre
+				const collapseId = dropdown.id;
+				const toggle = document.querySelector(`[data-bs-target="#${collapseId}"]`);
+				if (toggle) {
+					toggle.classList.remove("collapsed");
+					toggle.setAttribute("aria-expanded", "true");
 				}
 			}
-		});
+		}
+	});
 };
 
 // ── API pública ───────────────────────────────────────────────────────────────
 
 const Sidebar = {
-
 	/**
 	 * Devuelve el elemento `<nav id="sidebar">`.
 	 * @returns {HTMLElement|null}
@@ -163,23 +154,19 @@ const Sidebar = {
 	initScroll: () => {
 		// BUG del original: buscaba por #sidebar-scroll (id) pero el HBS
 		// usa .js-simplebar (clase). Ahora busca por .js-simplebar dentro del sidebar.
-		const el = document.querySelector(
-			`${cfg.sidebarSelector} .js-simplebar`
-		);
+		const el = document.querySelector(`${cfg.sidebarSelector} .js-simplebar`);
 		if (!el) return;
 
 		simplebarInstance = new SimpleBar(el, {
-			autoHide: false,          // barra siempre visible para indicar scroll
+			autoHide: false, // barra siempre visible para indicar scroll
 			scrollbarMinSize: 24,
 		});
 
 		// Recalcular SimpleBar cuando un accordion Bootstrap cambia de altura
-		document
-			.querySelectorAll(`${cfg.sidebarSelector} [data-bs-parent]`)
-			.forEach((collapse) => {
-				collapse.addEventListener("shown.bs.collapse",  Sidebar.refresh);
-				collapse.addEventListener("hidden.bs.collapse", Sidebar.refresh);
-			});
+		document.querySelectorAll(`${cfg.sidebarSelector} [data-bs-parent]`).forEach((collapse) => {
+			collapse.addEventListener("shown.bs.collapse", Sidebar.refresh);
+			collapse.addEventListener("hidden.bs.collapse", Sidebar.refresh);
+		});
 	},
 
 	/**
@@ -188,7 +175,7 @@ const Sidebar = {
 	 */
 	initToggle: () => {
 		document.addEventListener("click", (e) => {
-			const toggle  = e.target.closest(cfg.toggleSelector);
+			const toggle = e.target.closest(cfg.toggleSelector);
 			const sidebar = Sidebar.getSidebar();
 			if (!toggle || !sidebar) return;
 
@@ -205,14 +192,12 @@ const Sidebar = {
 		_markActiveLink();
 
 		// Scroll hasta el link activo en SimpleBar (útil en sidebars largos)
-		const activeLink = document.querySelector(
-			`${cfg.sidebarSelector} .sidebar-item.active > .sidebar-link`
-		);
+		const activeLink = document.querySelector(`${cfg.sidebarSelector} .sidebar-item.active > .sidebar-link`);
 
 		if (activeLink && simplebarInstance) {
 			setTimeout(() => {
 				const scrollEl = simplebarInstance.getScrollElement();
-				const offset   = activeLink.offsetTop - scrollEl.clientHeight / 2;
+				const offset = activeLink.offsetTop - scrollEl.clientHeight / 2;
 				scrollEl.scrollTop = Math.max(0, offset);
 			}, 100);
 		}
@@ -226,7 +211,7 @@ const Sidebar = {
 		if (!_isDesktop()) return;
 
 		const saved = _loadState();
-		if (saved === true)  Sidebar.collapse();
+		if (saved === true) Sidebar.collapse();
 		if (saved === false) Sidebar.expand();
 		// null → no hay estado guardado → respetar el CSS por defecto
 	},
@@ -278,8 +263,7 @@ const Sidebar = {
 	 * Devuelve `true` si el sidebar está actualmente colapsado.
 	 * @returns {boolean}
 	 */
-	isCollapsed: () =>
-		Sidebar.getSidebar()?.classList.contains(cfg.collapseClass) ?? false,
+	isCollapsed: () => Sidebar.getSidebar()?.classList.contains(cfg.collapseClass) ?? false,
 
 	/**
 	 * Devuelve la instancia de SimpleBar, o null si no fue inicializado.

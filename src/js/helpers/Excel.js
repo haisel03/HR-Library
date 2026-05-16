@@ -51,7 +51,7 @@ const Excel = {
 	 */
 	jsonToCsv: (data, filename = "data.csv") => {
 		const worksheet = XLSX.utils.json_to_sheet(data);
-		const workbook  = XLSX.utils.book_new();
+		const workbook = XLSX.utils.book_new();
 		XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
 		// BUG corregido: el segundo arg debe ser el filename (string), no un objeto de opciones
 		XLSX.writeFile(workbook, filename, { bookType: "csv" });

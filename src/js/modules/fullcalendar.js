@@ -11,15 +11,15 @@ import esLocale from "@fullcalendar/core/locales/es";
 
 // Exponer global si quieres
 window.FullCalendar = {
-  Calendar,
-  plugins: {
-    dayGridPlugin,
-    timeGridPlugin,
-    listPlugin,
-    interactionPlugin,
-    bootstrap5Plugin,
-  },
-  locales: {
-    es: esLocale,
-  },
+	Calendar,
+	plugins: {
+		dayGridPlugin,
+		timeGridPlugin,
+		listPlugin,
+		interactionPlugin,
+		bootstrap5Plugin,
+	},
+	locales: {
+		es: esLocale,
+	},
 };
