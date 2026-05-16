@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 3-components/_card.scss
 // Fusión: HR Library (base, variantes BT) + CoffeeSchools (hover, accent, header)
@@ -10,32 +12,20 @@
 	border-radius: $card-border-radius;
 	box-shadow: $card-shadow;
 	overflow: hidden;
-	transition: box-shadow .2s, transform .2s;
+	transition:
+		box-shadow 0.2s,
+		transform 0.2s;
 	position: relative;
 
-	// Línea superior decorativa (aparece en hover)
-	&::before {
-		content: '';
-		display: block;
-		height: 3px;
-		background: linear-gradient(90deg, $primary, $secondary, $primary);
-		opacity: 0;
-		transition: opacity .2s;
-	}
-
 	&:hover {
-		box-shadow: 0 8px 24px rgba($dark, .08);
+		box-shadow: 0 8px 24px color.change($dark, $alpha: 0.08);
 		transform: translateY(-2px);
-
-		&::before {
-			opacity: 1;
-		}
 	}
 }
 
 .card-header {
 	border-bottom: 1px solid $card-border-color;
-	background-color: rgba($primary, .03);
+	background-color: color.change($primary, $alpha: 0.03);
 	padding: $card-cap-padding-y $card-cap-padding-x;
 	display: flex;
 	align-items: center;
@@ -45,7 +35,7 @@
 }
 
 .card-footer {
-	background-color: rgba($primary, .02);
+	background-color: color.change($primary, $alpha: 0.02);
 	border-top: 1px solid $card-border-color;
 	padding-top: $card-cap-padding-y;
 	padding-bottom: $card-cap-padding-y;
@@ -63,7 +53,7 @@
 	i {
 		font-size: 1.5rem;
 		color: $dark;
-		margin-right: .5rem;
+		margin-right: 0.5rem;
 	}
 }
 
@@ -73,18 +63,14 @@
 
 // Variante card destacada
 .card--accent {
-	border-color: rgba($primary, .4);
-
-	&::before {
-		opacity: 1;
-	}
+	border-color: color.change($primary, $alpha: 0.4);
 }
 
 // Card header actions helper
 .card-header-actions {
 	display: flex;
 	align-items: center;
-	gap: .5rem;
+	gap: 0.5rem;
 }
 
 // Variantes BT (border-top coloreado)
@@ -101,8 +87,7 @@
 	@include img-fluid;
 }
 
-.card>.table>tbody {
-
+.card > .table > tbody {
 	tr:last-child td:first-child,
 	tr:last-child th:first-child {
 		border-bottom-left-radius: $card-border-radius;

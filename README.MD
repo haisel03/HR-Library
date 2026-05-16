@@ -1,154 +1,168 @@
-# 🚀 HR-Library
+# HR-Library
 
-[![Versión](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/haisel03/HR-Library)
+[![Versión](https://img.shields.io/badge/version-4.0.0-blue.svg)](https://github.com/haisel03/HR-Library)
 [![Licencia](https://img.shields.io/badge/license-ISC-green.svg)](https://github.com/haisel03/HR-Library)
+![CI](https://github.com/haisel03/HR-Library/actions/workflows/ci.yml/badge.svg)
 
 **HR-Library** es un toolkit premium de desarrollo frontend "todo en uno". Centraliza el poder de los plugins estándar de la industria (Bootstrap 5, DataTables, Quill, Axios, SweetAlert2) en una API única, unificada y fácil de usar.
 
 ---
 
-## ✨ Características Principales
+## Stack
 
-- 📦 **Dependencias Consolidadas**: Maneja UI, Datos, API y Utilidades a través de una sola librería.
-- 🪄 **Inicialización Automágica**: La mayoría de los componentes se pueden configurar mediante atributos de datos HTML estándar.
-- 🛠️ **API HR Unificada**: Una experiencia de desarrollo consistente en todos los módulos.
-- 🎨 **Estética Moderna**: Soporte integrado para Bootstrap 5 y temas premium de terceros.
-- 📑 **Herramientas Completas**: Incluye helpers integrados para Fechas, Moneda, manipulación del DOM, Formularios y más.
-- 🖥️ **Modo Iframe**: Soporte para diseños de iframe con pestañas, similar a las plantillas de administración profesionales.
+| Herramienta | Versión |
+| :--- | :--- |
+| Node.js | 24.15.0 |
+| Vite | 8.x |
+| Sass | 1.99+ |
+| Vitest | 3.x |
+| ESLint | 9.x (flat config) |
+| Prettier | 3.x |
+| Handlebars | 4.x |
 
 ---
 
-## 📂 Estructura del Proyecto
+## Características Principales
+
+- **API Unificada `App`**: Un solo objeto global para acceder a toda la funcionalidad.
+- **Inicialización Automágica**: Componentes configurables mediante atributos `data-*` HTML.
+- **Plugins Integrados**: Bootstrap 5, DataTables, Chart.js, FullCalendar, Quill, Select2, Flatpickr, SweetAlert2, y más.
+- **Helpers Especializados**: Validation, Strings, Date, Number, Forms, DOM, Alertas, API, Storage, etc.
+- **Soporte Multi-tema**: Temas claro/oscuro, café, y más.
+- **Modo Iframe**: Diseños con pestañas tipo panel de administración profesional.
+- **Exportación**: Excel (XLSX), PDF, CSV, impresión.
+- **Build Optimizado**: Code splitting por vendor, CSS dividido por página.
+
+---
+
+## Estructura del Proyecto
 
 ```text
 HR-Library/
-├── dist/                # Archivos de producción (CSS, JS)
-├── docs/                # Documentación técnica (JSDoc)
-├── public/              # Páginas de demo y activos estáticos
-│   └── demos/           # Scripts de demostración en JavaScript
-├── src/                 # Código fuente
-│   ├── js/              # Módulos y helpers de JavaScript
-│   │   ├── core/        # Lógica central de la librería
-│   │   ├── helpers/     # Funciones de utilidad especializadas
-│   │   └── modules/     # Envoltorios de plugins
-│   ├── scss/            # Archivos fuente de estilos
-│   └── views/           # Plantillas de Handlebars
-└── webpack/             # Configuración de compilación
+├── dist/                    # Build de producción
+├── docs/                    # Documentación JSDoc (generada)
+├── public/demos/            # Scripts de demostración
+├── src/
+│   ├── js/
+│   │   ├── core/            # App facade, config, init, plugin-system
+│   │   ├── helpers/         # 31 helpers especializados
+│   │   └── modules/         # Envoltorios de plugins
+│   ├── scss/                # Estilos Sass con arquitectura 7-1
+│   └── views/               # Plantillas Handlebars (layouts, pages, partials)
+├── .github/workflows/       # CI con GitHub Actions
+├── vite.config.js           # Configuración de Vite
+├── eslint.config.js         # ESLint flat config
+└── vitest.config.js         # Configuración de Vitest
 ```
 
 ---
 
-## 🛠️ Módulos y Helpers
+## Empezando
 
-| Categoría | Helpers Incluidos |
-| :--- | :--- |
-| **UI y Layout** | `sidebar`, `modal`, `fullscreen`, `iframe`, `icons` |
-| **Datos y Tablas** | `table`, `exportTbl`, `charts` |
-| **Formularios e Inputs** | `forms`, `validation`, `select2`, `flatpickr`, `inputmask`, `signature` |
-| **Excel** | `excelExport`, `excelImport`, `jsonToExcel`, `jsonToCsv` |
-| **Utilidades** | `api`, `date`, `currency`, `string`, `number`, `storage`, `humanize` |
-| **Feedback** | `alert` (SweetAlert2), `toast` |
+### Requisitos
 
----
-
-## 🚀 Empezando
-
-### Requisitos Previos
-
-- [Node.js](https://nodejs.org/) (v16.x o superior recomendado)
-- [NPM](https://www.npmjs.com/)
+- Node.js 22+
+- npm
 
 ### Instalación
 
-1. **Clonar el repositorio:**
-   ```bash
-   git clone https://github.com/haisel03/HR-Library.git
-   cd HR-Library
-   ```
+```bash
+git clone https://github.com/haisel03/HR-Library.git
+cd HR-Library
+npm install
+```
 
-2. **Instalar dependencias:**
-   ```bash
-   npm install
-   ```
+### Desarrollo
 
-3. **Compilar el proyecto:**
-   ```bash
-   npm run build
-   ```
+```bash
+npm run dev        # Servidor de desarrollo (puerto 9000)
+npm run build      # Build de producción
+npm run preview    # Vista previa del build
+```
+
+### Calidad
+
+```bash
+npm run lint       # ESLint
+npm run format     # Prettier (check)
+npm test           # Vitest (124+ tests)
+npm run docs       # Generar documentación JSDoc
+```
 
 ---
 
-## 📖 Uso Básico
+## API de JavaScript
 
-### 1. Incluir Activos
-Incluye el CSS y JS compilado en tu proyecto:
-```html
-<link rel="stylesheet" href="dist/app.css">
-<script src="dist/app.js"></script>
-```
+Toda la funcionalidad se accede a través del objeto global `App`:
 
-### 2. Inicialización HTML
-Usa atributos de datos para una configuración rápida:
-```html
-<select class="select2" data-placeholder="Elige una opción">
-    <option value="1">Opción A</option>
-</select>
-```
-
-### 3. API de JavaScript
-Accede a toda la funcionalidad a través del objeto global `HR`:
 ```javascript
-// Inicializar los componentes de HR-Library
-HR.init();
+// Inicializar componentes en la página
+App.init();
 
-// Mostrar un mensaje de éxito
-HR.msgSuccess("¡Operación completada con éxito!");
+// Alertas
+App.success("Guardado correctamente");
+App.error("Ocurrió un error");
+App.loading("Procesando...");
 
-// Llamada simple a la API
-HR.getApi('/api/data').then(response => {
-    console.log(response);
-});
-```
+// Peticiones HTTP
+const users = await App.getApi("/api/usuarios");
+const user  = await App.postApi("/api/usuarios", { name: "Juan" });
 
-### 4. Exportar e Importar Excel
-Maneja archivos Excel fácilmente:
-```javascript
-// Exportar datos a Excel
-const usuarios = [
-    { nombre: 'Juan', edad: 30, ciudad: 'Santo Domingo' },
-    { nombre: 'María', edad: 25, ciudad: 'Santiago' }
-];
-HR.excelExport(usuarios, 'usuarios.xlsx');
-
-// Importar desde Excel
-const fileInput = document.querySelector('#file-input');
-fileInput.addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    const data = await HR.excelImport(file);
-    console.log(data); // Array de objetos
+// Tablas DataTable
+const dt = App.initTable("#tabla", {
+  data: users,
+  columns: [App.tblCol("name", "Nombre")],
 });
 
-// Exportar múltiples hojas
-const reporteCompleto = {
-    Ventas: [{ producto: 'Laptop', cantidad: 5 }],
-    Clientes: [{ nombre: 'Juan', email: 'juan@example.com' }]
-};
-HR.excelExportMultiple(reporteCompleto, 'reporte.xlsx');
+// Formularios
+App.fillForm("#userForm", { name: "Juan" });
+const data = App.serializeForm("#userForm");
+
+// Fechas
+App.DateHelper.format("2026-03-08");         // "08/03/2026"
+App.DateHelper.addDays(new Date(), 7);       // Date +7 días
+
+// Validación
+App.Validation.isValidEmail("user@ex.com");  // true
+App.Validation.isValidCedula("001-0234567-8");
+
+// Strings
+App.Strings.slug("Gestión Académica");       // "gestion-academica"
+App.Strings.escapeHtml("<script>xss</script>");
 ```
 
----
+### Plugins Pesados (Carga Bajo Demanda)
 
-## 📚 Documentación y Demos
-
-- **JSDoc**: Ejecuta `npm run docs` y abre `docs/index.html`.
-- **Demos**: Explora la carpeta `public/` para ver ejemplos de implementación de cada módulo.
-
----
-
-## 📄 Licencia
-
-Este proyecto está bajo la **Licencia ISC**.
+Quill, FullCalendar y Chart.js están separados en chunks independientes.
+Se cargan automáticamente al usar `App.createEditor()`, `App.initCalendar()`
+o `App.createChart()` respectivamente.
 
 ---
 
-Desarrollado con ❤️ por [Haisel Ramirez](https://github.com/haisel03)
+## Comandos
+
+| Comando | Descripción |
+| :--- | :--- |
+| `npm run dev` | Servidor de desarrollo |
+| `npm run build` | Build producción |
+| `npm test` | Ejecutar tests |
+| `npm run lint` | ESLint |
+| `npm run format` | Prettier (check) |
+| `npm run format:fix` | Prettier (auto-fix) |
+| `npm run docs` | Generar JSDoc |
+| `npm run api` | Iniciar JSON Server mock |
+| `npm run api:reset` | Resetear base de datos mock |
+| `npm run build:lib` | Build para CDN/distribución |
+
+---
+
+## Documentación y Demos
+
+- **JSDoc**: `npm run docs` y abre `docs/index.html`.
+- **Demos**: Explora las páginas en el servidor de desarrollo (cada `.html` es una demo).
+
+---
+
+## Licencia
+
+ISC — Desarrollado por [Haisel Ramirez](https://github.com/haisel03)

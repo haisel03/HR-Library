@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 3-components/_auth.scss
 // De HR Library — pantalla de login/registro con gradiente animado.
@@ -5,139 +7,186 @@
 // ============================================================================
 
 .auth-body {
-  position:        relative;
-  min-height:      100vh;
-  display:         flex;
-  align-items:     center;
-  justify-content: center;
-  overflow:        hidden;
+	position: relative;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
 
-  // Gradiente animado usa los colores del tema activo
-  background:      linear-gradient(270deg, $primary, darken($primary, 15%), $success);
-  background-size: 600% 600%;
-  animation:       gradientMove 12s ease infinite;
+	// Gradiente animado usa los colores del tema activo
+	background: linear-gradient(270deg, $primary, color.adjust($primary, $lightness: -15%), $success);
+	background-size: 600% 600%;
+	animation: gradientMove 12s ease infinite;
 
-  &::before {
-    content:    '';
-    position:   absolute;
-    inset:      0;
-    background:
-      radial-gradient(circle at top left,  rgba($white, .15), transparent 40%),
-      radial-gradient(circle at bottom right, rgba($dark, .25), transparent 50%);
-    z-index:    1;
-  }
+	&::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			radial-gradient(circle at top left, color.change($white, $alpha: 0.15), transparent 40%),
+			radial-gradient(circle at bottom right, color.change($dark, $alpha: 0.25), transparent 50%);
+		z-index: 1;
+	}
 
-  .container { position: relative; z-index: 2; }
+	.container {
+		position: relative;
+		z-index: 2;
+	}
 
-  // Card glassmorphism
-  .card {
-    background:     rgba($white, .92);
-    backdrop-filter: blur(12px);
-    border-radius:  18px;
-    border:         1px solid rgba($white, .2);
-    box-shadow:     0 25px 70px rgba($dark, .35);
-    overflow:       hidden;
-    transition:     all .3s ease;
+	// Logo texto elegante
+	.auth-logo {
+		font-family: $headings-font-family;
+		font-size: 2rem;
+		font-weight: 800;
+		color: $white;
+		letter-spacing: -0.5px;
+		text-shadow: 0 2px 10px color.change($dark, $alpha: 0.2);
+		margin: 0;
+	}
 
-    &:hover {
-      transform:  translateY(-4px) scale(1.01);
-      box-shadow: 0 35px 90px rgba($dark, .4);
-    }
+	// Card glassmorphism
+	.card {
+		background: color.change($white, $alpha: 0.92);
+		backdrop-filter: blur(12px);
+		border-radius: 18px;
+		border: 1px solid color.change($white, $alpha: 0.2);
+		box-shadow: 0 25px 70px color.change($dark, $alpha: 0.35);
+		overflow: hidden;
+		transition: all 0.3s ease;
 
-    .card-body { padding: 3rem 2.5rem; }
+		&:hover {
+			transform: translateY(-4px) scale(1.01);
+			box-shadow: 0 35px 90px color.change($dark, $alpha: 0.4);
+		}
 
-    .card-title {
-      color:          $primary;
-      font-weight:    800;
-      text-align:     center;
-      margin-bottom:  2rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-  }
+		.card-body {
+			padding: 3rem 2.5rem;
+		}
 
-  // Floating inputs
-  .form-floating > .form-control {
-    background:    $gray-100;
-    border:        2px solid $gray-300;
-    border-radius: 10px;
-    height:        calc(3.5rem + 2px);
-    font-weight:   500;
-    transition:    all .25s ease;
+		.card-title {
+			color: $primary;
+			font-weight: 800;
+			text-align: center;
+			margin-bottom: 2rem;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+	}
 
-    &:focus {
-      background:   $white;
-      border-color: $primary;
-      box-shadow:   0 0 0 4px rgba($primary, .1);
-    }
-  }
+	// Floating inputs
+	.form-floating > .form-control {
+		background: $gray-100;
+		border: 2px solid $gray-300;
+		border-radius: 10px;
+		height: calc(3.5rem + 2px);
+		font-weight: 500;
+		transition: all 0.25s ease;
 
-  .form-floating > label { color: $primary; font-weight: 600; padding-left: 1rem; }
+		&:focus {
+			background: $white;
+			border-color: $primary;
+			box-shadow: 0 0 0 4px color.change($primary, $alpha: 0.1);
+		}
+	}
 
-  // Toggle password
-  .password-wrapper {
-    position: relative;
+	.form-floating > label {
+		color: $primary;
+		font-weight: 600;
+		padding-left: 1rem;
+	}
 
-    .toggle-password {
-      position:  absolute;
-      top:       50%;
-      right:     15px;
-      transform: translateY(-50%);
-      cursor:    pointer;
-      color:     $gray-600;
-      font-size: 1.2rem;
-      transition: all .2s;
-      &:hover { color: $primary; transform: translateY(-50%) scale(1.1); }
-    }
-  }
+	// Toggle password
+	.password-wrapper {
+		position: relative;
 
-  // Botón submit
-  .btn-primary {
-    background:    linear-gradient(135deg, $primary, lighten($primary, 10%));
-    border:        none;
-    border-radius: 10px;
-    padding:       .9rem;
-    font-weight:   700;
-    letter-spacing: 1px;
-    transition:    all .3s ease;
-    &:hover  { transform: translateY(-2px); box-shadow: 0 10px 25px rgba($primary, .4); }
-    &:active { transform: scale(.98); }
-  }
+		.toggle-password {
+			position: absolute;
+			top: 50%;
+			right: 15px;
+			transform: translateY(-50%);
+			cursor: pointer;
+			color: $gray-600;
+			font-size: 1.2rem;
+			transition: all 0.2s;
+			&:hover {
+				color: $primary;
+				transform: translateY(-50%) scale(1.1);
+			}
+		}
+	}
 
-  // Footer
-  .auth-footer {
-    text-align:  center;
-    margin-top:  1.5rem;
-    font-size:   .9rem;
-    color:       $white;
+	// Botón submit
+	.btn-primary {
+		background: linear-gradient(135deg, $primary, color.adjust($primary, $lightness: 10%));
+		border: none;
+		border-radius: 10px;
+		padding: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 1px;
+		transition: all 0.3s ease;
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 10px 25px color.change($primary, $alpha: 0.4);
+		}
+		&:active {
+			transform: scale(0.98);
+		}
+	}
 
-    a {
-      color:           $white;
-      font-weight:     700;
-      text-decoration: none;
-      position:        relative;
-      &::after { content: ''; position: absolute; width: 0%; height: 2px; bottom: -2px; left: 0; background: $white; transition: width .3s; }
-      &:hover::after { width: 100%; }
-    }
-  }
+	// Footer
+	.auth-footer {
+		text-align: center;
+		margin-top: 1.5rem;
+		font-size: 0.9rem;
+		color: $white;
+
+		a {
+			color: $white;
+			font-weight: 700;
+			text-decoration: none;
+			position: relative;
+			&::after {
+				content: "";
+				position: absolute;
+				width: 0%;
+				height: 2px;
+				bottom: -2px;
+				left: 0;
+				background: $white;
+				transition: width 0.3s;
+			}
+			&:hover::after {
+				width: 100%;
+			}
+		}
+	}
 }
 
 // Avatar de lock screen
 .lock-avatar {
-  width:         110px;
-  height:        110px;
-  border-radius: 50%;
-  border:        4px solid $white;
-  margin:        0 auto 1.5rem;
-  box-shadow:    0 10px 30px rgba($dark, .2);
-  object-fit:    cover;
-  transition:    transform .3s ease;
-  &:hover { transform: scale(1.05); }
+	width: 110px;
+	height: 110px;
+	border-radius: 50%;
+	border: 4px solid $white;
+	margin: 0 auto 1.5rem;
+	box-shadow: 0 10px 30px color.change($dark, $alpha: 0.2);
+	object-fit: cover;
+	transition: transform 0.3s ease;
+	&:hover {
+		transform: scale(1.05);
+	}
 }
 
 // Animación gradiente
 @keyframes gradientMove {
-  0%   { background-position: 0%   50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0%   50%; }
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

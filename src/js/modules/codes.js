@@ -4,7 +4,6 @@ window.JsBarcode = JsBarcode;
 window.Qr = Qr;
 
 export default {
-  JsBarcode,
-  Qr
-}
-
+	JsBarcode,
+	Qr,
+};

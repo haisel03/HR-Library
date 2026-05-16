@@ -1,73 +1,50 @@
 /**
  * @file app.js
- * @description Entry point de HR Library.
- * Importa todos los módulos de terceros en orden correcto,
- * inicializa $HR y expone globalmente.
+ * @description Entry point de HR Library v4.0.
+ * Importa estilos, módulos de terceros y la fachada App.
  *
- * @version 3.0.0
+ * @version 4.0.0
  */
 
-// ── Estilos ──────────────────────────────────────────
-import "../scss/app.scss"; // Manejar via Vite/webpack
+// ── Estilos ──
+import "../scss/app.scss";
 
-// ── Base ─────────────────────────────────────────────
-import "./modules/jquery.js";        // 1. jQuery primero (base de Select2, DataTables)
-import "./modules/axios.js";         // 2. Axios con interceptores
-import "./modules/bootstrap.js";     // 3. Bootstrap componentes
+// ── Módulos de terceros (side effects) ──
+import "./modules/jquery.js";
+import "./modules/axios.js";
+import "./modules/bootstrap.js";
+import "./modules/swal.js";
+import "./modules/select2.js";
+import "./modules/inputmask.js";
+import "./modules/flatpickr.js";
+import "./modules/validation.js";
+import "./modules/datatables.js";
+import "./modules/chartjs.js";
+import "./modules/vector-maps.js";
+import "./modules/fullcalendar.js";
+import "./modules/dayjs.js";
+import "./modules/quill.js";
+import "./modules/signature_pad.js";
+import "./modules/xlsx.js";
+import "./modules/codes.js";
+import "./modules/sortablejs.js";
+import "./modules/simplebar.js";
+import "./modules/humanizer.js";
+import "./modules/feather.js";
+import "./modules/theme.js";
+import "./modules/access_control.js";
 
-// ── Notificaciones ────────────────────────────────────
-import "./modules/swal.js";          // 4. SweetAlert2
-import "./modules/notyf.js";         // 5. Notyf (alternativa toast)
-import "./modules/toastify.js";      // 6. Toastify (alternativa toast)
+import App from "./core/App.js";
 
-// ── Formularios ───────────────────────────────────────
-import "./modules/select2.js";       // 7. Select2 (requiere jQuery)
-import "./modules/inputmask.js";     // 8. Inputmask con aliases RD
-import "./modules/flatpickr.js";     // 9. Flatpickr con locale ES
-import "./modules/validation.js";    // 10. Validación nativa
+/* ── Exposición global ── */
 
-// ── Tablas ────────────────────────────────────────────
-import "./modules/datatables.js";    // 11. DataTables con plugins
+if (typeof window !== "undefined") {
+	window.App = App;
+}
 
-// ── Gráficos ──────────────────────────────────────────
-import "./modules/chartjs.js";       // 12. Chart.js
-import "./modules/vector-maps.js";   // 13. Mapas vectoriales
-
-// ── Calendarios ───────────────────────────────────────
-import "./modules/fullcalendar.js";  // 14. FullCalendar con plugins
-import "./modules/dayjs.js";         // 15. Day.js para fechas
-
-// ── Editores ──────────────────────────────────────────
-import "./modules/quill.js";         // 16. Quill WYSIWYG
-import "./modules/signature_pad.js"; // 17. Firma digital
-
-// ── Archivos / Exportación ────────────────────────────
-import "./modules/xlsx.js";          // 18. SheetJS Excel
-
-// ── Códigos ───────────────────────────────────────────
-import "./modules/codes.js";         // 19. JsBarcode + QRCode
-
-// ── Utilidades ───────────────────────────────────────
-import "./modules/dragula.js";       // 20. Dragula drag & drop
-import "./modules/simplebar.js";     // 21. SimpleBar scroll personalizado
-import "./modules/humanizer.js";     // 22. Humanize duration
-import "./modules/feather.js";       // 23. Feather Icons
-
-// ── UI / Template ─────────────────────────────────────
-import "./modules/theme.js";         // 25. Tema / dark mode
-import "./modules/access_control.js";// 26. Control de acceso
-
-// ── Iconos ────────────────────────────────────────────
-// Bootstrap Icons: via SCSS
-// Font Awesome: importar si se usa FA
-// import "@fortawesome/fontawesome-free/css/all.min.css";
-
-// ── HR Library ────────────────────────────────────────
-import $HR from "./HR.js";
-
-// ── Inicialización ────────────────────────────────────
+// ── Inicialización ──
 $(function () {
-  $HR.init();
+	App.init();
 });
 
-export default $HR;
+export default App;

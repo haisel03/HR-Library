@@ -1,14 +1,16 @@
-$navbar-input-bg: darken($body-bg, 0.5%) !default;
+@use "sass:color";
+
+$navbar-input-bg: color.adjust($body-bg, $lightness: -0.5%) !default;
 
 // Navbar
-$navbar-padding-y: $spacer*0.875 !default;
-$navbar-padding-x: $spacer*1.375 !default;
-$navbar-nav-link-padding-x: .5rem !default;
+$navbar-padding-y: $spacer * 0.875 !default;
+$navbar-padding-x: $spacer * 1.375 !default;
+$navbar-nav-link-padding-x: 0.5rem !default;
 $navbar-border-bottom: 0 !default;
-$navbar-box-shadow: 0 0 2rem 0 rgba($dark, .1) !default;
+$navbar-box-shadow: 0 0 2rem 0 color.change($dark, $alpha: 0.1) !default;
 
 // Navbar brand
-$navbar-brand-padding-y: $spacer*0.875 !default;
+$navbar-brand-padding-y: $spacer * 0.875 !default;
 $navbar-brand-padding-x: 0 !default;
 $navbar-brand-color: $gray-100 !default;
 $navbar-brand-font-weight: $font-weight-normal !default;

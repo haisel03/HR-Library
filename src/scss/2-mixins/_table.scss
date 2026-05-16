@@ -1,3 +1,5 @@
+@use "sass:color";
+
 // ============================================================================
 // 2-mixins/_table-header.scss
 //
@@ -17,9 +19,9 @@
 //   .table-h-navy { @include table-header($navy); }
 //
 //   // Con borde explícito:
-//   .table-h-brand { @include table-header(#1a4f99, darken(#1a4f99, 12%)); }
+//   .table-h-brand { @include table-header(#1a4f99, color.adjust(#1a4f99, $lightness: -12%)); }
 
-@mixin table-header($bg, $border: darken($bg, 8%)) {
+@mixin table-header($bg, $border: color.adjust($bg, $lightness: -8%)) {
 	thead {
 		background-color: $bg;
 

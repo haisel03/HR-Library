@@ -52,20 +52,21 @@ const _dt = (el) => {
 
 /** @private */
 const _title = (title, icon, iconClass = "text-muted") =>
-	icon
-		? `<span class="me-1"><i class="${icon} ${iconClass}"></i></span>${title}`
-		: title;
+	icon ? `<span class="me-1"><i class="${icon} ${iconClass}"></i></span>${title}` : title;
 
 /** @private */
 // Escapa caracteres para atributos HTML
 const _escAttr = (str) =>
-	String(str).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#39;")
-		.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+	String(str)
+		.replace(/&/g, "&amp;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#39;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;");
 
 /* ── Table ── */
 
 const Table = {
-
 	/**
 	 * @type {Function[]}
 	 * Plugins registrados
@@ -77,7 +78,10 @@ const Table = {
 	 * @param {Function} plugin
 	 */
 	use: (plugin) => {
-		if (typeof plugin === "function") { plugin(Table); Table._plugins.push(plugin); }
+		if (typeof plugin === "function") {
+			plugin(Table);
+			Table._plugins.push(plugin);
+		}
 	},
 
 	/* ── Inicialización ── */
@@ -87,8 +91,12 @@ const Table = {
 	 * @param {HTMLElement|Document} [scope=document]
 	 */
 	init: (scope = document) => {
-		$(_dt ? scope : document).find('table[data-target="dt"]').each((_, el) => Table.initTable(el));
-		$(scope).find('table[data-target="dt"]').each((_, el) => Table.initTable(el));
+		$(_dt ? scope : document)
+			.find('table[data-target="dt"]')
+			.each((_, el) => Table.initTable(el));
+		$(scope)
+			.find('table[data-target="dt"]')
+			.each((_, el) => Table.initTable(el));
 	},
 
 	/**
@@ -99,7 +107,10 @@ const Table = {
 	 */
 	initTable(el, options = {}) {
 		const $table = _tbl(el);
-		if (!$table.length) { console.warn("[Table] Elemento no encontrado:", el); return null; }
+		if (!$table.length) {
+			console.warn("[Table] Elemento no encontrado:", el);
+			return null;
+		}
 		if ($.fn.DataTable?.isDataTable($table)) return $table.DataTable();
 
 		const hasButtons = Array.isArray(options.buttons) && options.buttons.length;
@@ -121,7 +132,10 @@ const Table = {
 	/* ── Core ── */
 
 	/** Destruye una DataTable liberando memoria. */
-	destroy: (el) => { const dt = _dt(el); if (dt) dt.clear().destroy(); },
+	destroy: (el) => {
+		const dt = _dt(el);
+		if (dt) dt.clear().destroy();
+	},
 
 	/**
 	 * Recarga datos vía AJAX.
@@ -141,12 +155,22 @@ const Table = {
 
 	/**
 	 * Columna estándar configurable.
-	 * @param {string|null} data @param {string} title @param {Object} [options={}]
+	 * @param {string|null} data
+	 * @param {string} title
+	 * @param {Object} [options={}]
 	 */
 	col(data, title, options = {}) {
 		const {
-			render, className = "", orderable = true, searchable = true,
-			width, icon, iconClass = "text-white", truncate = null, tooltip = false, autoIcon = false,
+			render,
+			className = "",
+			orderable = true,
+			searchable = true,
+			width,
+			icon,
+			iconClass = "text-white",
+			truncate = null,
+			tooltip = false,
+			autoIcon = false,
 		} = options;
 
 		const defaultIcons = { nombre: "bi bi-person", email: "bi bi-envelope", fecha: "bi bi-calendar" };
@@ -163,9 +187,9 @@ const Table = {
 		if (hasCustomRender || hasTruncate) {
 			column.render = (val, type, row) => {
 				if (type === "sort" || type === "filter") {
-					return (val === null || val === undefined) ? "" : String(val);
+					return val === null || val === undefined ? "" : String(val);
 				}
-				const raw = (val === null || val === undefined) ? "" : String(val);
+				const raw = val === null || val === undefined ? "" : String(val);
 				const processed = hasCustomRender ? render(val, type, row) : raw;
 				if (!hasTruncate || type !== "display") return processed;
 				const isCut = raw.length > truncate;
@@ -181,8 +205,12 @@ const Table = {
 
 	/** Columna de índice (número de fila, 1-based). */
 	index: (title = "#") => ({
-		data: null, title, orderable: false, searchable: false,
-		className: "text-center", width: 40,
+		data: null,
+		title,
+		orderable: false,
+		searchable: false,
+		className: "text-center",
+		width: 40,
 		render: (_, __, ___, meta) => meta.row + 1,
 	}),
 
@@ -190,8 +218,10 @@ const Table = {
 	checkbox: () => ({
 		data: null,
 		title: '<input type="checkbox" class="form-check-input dt-select-all">',
-		orderable: false, searchable: false,
-		className: "text-center dt-checkboxes-cell", width: 40,
+		orderable: false,
+		searchable: false,
+		className: "text-center dt-checkboxes-cell",
+		width: 40,
 		render: () => '<input type="checkbox" class="form-check-input dt-check">',
 		defaultContent: "",
 	}),
@@ -200,23 +230,24 @@ const Table = {
 	status: (data, title = "Estado") =>
 		Table.col(data, title, {
 			className: "text-center",
-			render: (val) => val
-				? '<span class="badge bg-success">Activo</span>'
-				: '<span class="badge bg-secondary">Inactivo</span>',
+			render: (val) =>
+				val ? '<span class="badge bg-success">Activo</span>' : '<span class="badge bg-secondary">Inactivo</span>',
 		}),
 
 	/** Columna boolean Sí / No. */
 	boolean: (data, title = "") =>
 		Table.col(data, title, {
 			className: "text-center",
-			render: (val) => val
-				? '<span class="badge bg-success"><i class="bi bi-check-lg me-1"></i>Sí</span>'
-				: '<span class="badge bg-secondary"><i class="bi bi-x-lg me-1"></i>No</span>',
+			render: (val) =>
+				val
+					? '<span class="badge bg-success"><i class="bi bi-check-lg me-1"></i>Sí</span>'
+					: '<span class="badge bg-secondary"><i class="bi bi-x-lg me-1"></i>No</span>',
 		}),
 
 	/**
 	 * Columna badge con mapa de valores.
-	 * @param {string} data @param {string} title
+	 * @param {string} data
+	 * @param {string} title
 	 * @param {Object} map  `{ valor: { color: "success", label: "Texto" } }`
 	 */
 	badge: (data, title, map = {}) =>
@@ -232,7 +263,9 @@ const Table = {
 
 	/**
 	 * Columna de fecha formateada.
-	 * @param {string} data @param {string} [title="Fecha"] @param {"date"|"datetime"|"time"} [type="date"]
+	 * @param {string} data
+	 * @param {string} [title="Fecha"]
+	 * @param {"date"|"datetime"|"time"} [type="date"]
 	 */
 	date: (data, title = "Fecha", type = "date") =>
 		Table.col(data, title, {
@@ -251,22 +284,26 @@ const Table = {
 
 	/**
 	 * Columna monetaria.
-	 * @param {string} data @param {string} [title="Monto"] @param {string} [moneda="P"]
+	 * @param {string} data
+	 * @param {string} [title="Monto"]
+	 * @param {string} [moneda="P"]
 	 */
 	money: (data, title = "Monto", moneda = "P") =>
 		Table.col(data, title, {
 			className: "text-end",
-			render: (val) => val != null ? NumberHelper.currency(val, moneda) : "",
+			render: (val) => (val != null ? NumberHelper.currency(val, moneda) : ""),
 		}),
 
 	/**
 	 * Columna numérica formateada.
-	 * @param {string} data @param {string} [title=""] @param {number} [decimals=2]
+	 * @param {string} data
+	 * @param {string} [title=""]
+	 * @param {number} [decimals=2]
 	 */
 	number: (data, title = "", decimals = 2) =>
 		Table.col(data, title, {
 			className: "text-end",
-			render: (val) => val != null ? NumberHelper.formatNumber(val, decimals) : "",
+			render: (val) => (val != null ? NumberHelper.formatNumber(val, decimals) : ""),
 		}),
 
 	/* ── Acciones ── */
@@ -301,22 +338,24 @@ const Table = {
 				}
 
 				const list = typeof actions === "function" ? actions(row) : actions;
-				const resolved = list
-					.map((key) => (typeof key === "string" ? config.dt_actions[key] : key))
-					.filter(Boolean);
+				const resolved = list.map((key) => (typeof key === "string" ? config.dt_actions[key] : key)).filter(Boolean);
 
 				// 🔹 Caso 1: 3 o menos → inline
 				if (resolved.length <= 3) {
 					return `
 					<div class="table-actions d-flex gap-2 justify-content-center align-items-center">
-						${resolved.map((btn) => `
+						${resolved
+							.map(
+								(btn) => `
 							<a href="javascript:void(0)"
 							   data-action="${btn.action}"
 							   class="${btn.class ?? "text-primary"} text-decoration-none fs-5"
 							   title="${btn.title ?? ""}">
 								<i class="bi ${btn.icon ?? "bi-circle"}"></i>
 							</a>
-						`).join("")}
+						`,
+							)
+							.join("")}
 					</div>
 				`;
 				}
@@ -331,7 +370,9 @@ const Table = {
 						<i class="bi ${icon.replace("bi ", "")}"></i>
 					</button>
 					<ul class="dropdown-menu dropdown-menu-end">
-						${resolved.map((btn) => `
+						${resolved
+							.map(
+								(btn) => `
 							<li>
 								<a href="javascript:void(0)"
 								   class="dropdown-item d-flex align-items-center gap-2"
@@ -340,7 +381,9 @@ const Table = {
 									<span>${btn.title ?? btn.action}</span>
 								</a>
 							</li>
-						`).join("")}
+						`,
+							)
+							.join("")}
 					</ul>
 				</div>
 			`;
@@ -385,17 +428,35 @@ const Table = {
 		return dt ? dt.row($tr).data() : null;
 	},
 
-	addRow: (el, row) => { const dt = _dt(el); if (dt) dt.row.add(row).draw(false); },
-	removeRow: (el, trigger) => { const dt = _dt(el); if (dt) dt.row($(trigger).closest("tr")).remove().draw(false); },
-	updateRow: (el, trigger, d) => { const dt = _dt(el); if (dt) dt.row($(trigger).closest("tr")).data(d).draw(false); },
-	refresh: (el, data = []) => { const dt = _dt(el); if (dt) dt.clear().rows.add(data).draw(); },
+	addRow: (el, row) => {
+		const dt = _dt(el);
+		if (dt) dt.row.add(row).draw(false);
+	},
+	removeRow: (el, trigger) => {
+		const dt = _dt(el);
+		if (dt) dt.row($(trigger).closest("tr")).remove().draw(false);
+	},
+	updateRow: (el, trigger, d) => {
+		const dt = _dt(el);
+		if (dt) dt.row($(trigger).closest("tr")).data(d).draw(false);
+	},
+	refresh: (el, data = []) => {
+		const dt = _dt(el);
+		if (dt) dt.clear().rows.add(data).draw();
+	},
 
 	/* ── Selección ── */
 
-	selected: (el) => { const dt = _dt(el); return dt ? dt.rows({ selected: true }).data().toArray() : []; },
+	selected: (el) => {
+		const dt = _dt(el);
+		return dt ? dt.rows({ selected: true }).data().toArray() : [];
+	},
 	selectedCount: (el) => _dt(el)?.rows({ selected: true }).count() ?? 0,
 	selectAll: (el) => _dt(el)?.rows().select(),
-	clearSelection: (el) => { const dt = _dt(el); if (dt?.rows) dt.rows().deselect(); },
+	clearSelection: (el) => {
+		const dt = _dt(el);
+		if (dt?.rows) dt.rows().deselect();
+	},
 	onSelect: (el, cb) => {
 		const dt = _dt(el);
 		if (!dt || typeof cb !== "function") return;
@@ -428,9 +489,21 @@ const Table = {
 	 */
 	exportButtons: (types = ["excel", "pdf", "print"]) => {
 		const map = {
-			excel: { extend: "excelHtml5", text: '<i class="bi bi-file-earmark-excel me-1"></i>Excel', className: "btn btn-sm btn-success" },
-			pdf: { extend: "pdfHtml5", text: '<i class="bi bi-file-earmark-pdf me-1"></i>PDF', className: "btn btn-sm btn-danger" },
-			print: { extend: "print", text: '<i class="bi bi-printer me-1"></i>Imprimir', className: "btn btn-sm btn-secondary" },
+			excel: {
+				extend: "excelHtml5",
+				text: '<i class="bi bi-file-earmark-excel me-1"></i>Excel',
+				className: "btn btn-sm btn-success",
+			},
+			pdf: {
+				extend: "pdfHtml5",
+				text: '<i class="bi bi-file-earmark-pdf me-1"></i>PDF',
+				className: "btn btn-sm btn-danger",
+			},
+			print: {
+				extend: "print",
+				text: '<i class="bi bi-printer me-1"></i>Imprimir',
+				className: "btn btn-sm btn-secondary",
+			},
 			copy: { extend: "copy", text: '<i class="bi bi-clipboard me-1"></i>Copiar', className: "btn btn-sm btn-info" },
 			csv: { extend: "csv", text: '<i class="bi bi-filetype-csv me-1"></i>CSV', className: "btn btn-sm btn-warning" },
 		};

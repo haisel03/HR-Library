@@ -14,29 +14,8 @@ const es = {
 		"noviembre",
 		"diciembre",
 	],
-	short_months: [
-		"ene",
-		"feb",
-		"mar",
-		"abr",
-		"may",
-		"jun",
-		"jul",
-		"ago",
-		"sep",
-		"oct",
-		"nov",
-		"dic",
-	],
-	days: [
-		"domingo",
-		"lunes",
-		"martes",
-		"miercoles",
-		"jueves",
-		"viernes",
-		"sabado",
-	],
+	short_months: ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"],
+	days: ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"],
 	short_days: ["do", "lu", "ma", "mi", "ju", "vi", "sa"],
 
 	datatables: {
@@ -234,8 +213,7 @@ const es = {
 				title: "Múltiples Valores",
 				info: "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, hacer click o tap aquí, de lo contrario conservarán sus valores individuales.",
 				restore: "Deshacer Cambios",
-				noMulti:
-					"Este registro puede ser editado individualmente, pero no como parte de un grupo.",
+				noMulti: "Este registro puede ser editado individualmente, pero no como parte de un grupo.",
 			},
 		},
 		info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
@@ -267,11 +245,8 @@ const es = {
 			renameTitle: "Cambiar Nombre Estado",
 		},
 	},
-
-
 };
 
 export default es;
 
 window.es = es;
-

@@ -1,0 +1,16 @@
+// ============================================================================
+// vendor.scss — Vendor CSS bundle
+//
+// Bootstrap completo + Bootstrap Icons + vendor overrides.
+// Se compila a vendor.css, separado de app.css (código custom).
+// ============================================================================
+
+@import "bootstrap/scss/functions";
+@import "1-variables/bootstrap-overrides";
+@import "1-variables/app";
+@import "1-variables/bootstrap";
+
+$bootstrap-icons-font-dir: "bootstrap-icons/font/fonts";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+@import "5-vendor/vendors";

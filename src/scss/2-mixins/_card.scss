@@ -1,4 +1,6 @@
-@mixin card-bt($color, $border: darken($color, 8%)) {
+@use "sass:color";
+
+@mixin card-bt($color, $border: color.adjust($color, $lightness: -8%)) {
 	border: none;
 	border-top: 3px solid $color;
 }

@@ -40,9 +40,7 @@ const ICON_MAP = {
  */
 function resolveTheme(pref) {
 	if (pref === "auto") {
-		return window.matchMedia("(prefers-color-scheme: dark)").matches
-			? "dark"
-			: "light";
+		return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 	}
 	return pref;
 }
@@ -102,12 +100,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Reaccionar a cambios del sistema (solo si la preferencia es "auto")
-window
-	.matchMedia("(prefers-color-scheme: dark)")
-	.addEventListener("change", () => {
-		if (getPreference() === "auto") {
-			applyTheme("auto");
-		}
-	});
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+	if (getPreference() === "auto") {
+		applyTheme("auto");
+	}
+});
 
 window.setTheme = setTheme;

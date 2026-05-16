@@ -2,21 +2,7 @@
  * @file tasks.js
  * @description Demo de Tablero Kanban con datos JSON y humanización de tiempos.
  *
- * CAMBIOS v3:
- * - $HR.msgLoading()              → $Alert.loading()
- * - $HR.msgLoading(true)          → $Alert.loading(false)
- * - $HR.msgError                  → $Alert.error
- * - $HR.msgWarning                → $Alert.warning
- * - $HR.msgConfirm                → $Alert.confirm
- * - $HR.getApi                    → $Api.get
- * - $HR.clearForm                 → $Forms.clear
- * - $HR.text                      → $Dom.text  (no usado aquí)
- * - $HR.openModal / closeModal    → $Modal.open / $Modal.close
- * - $HR.serializeForm             → $Forms.serialize
- * - $HR.formatDate(date)          → $Date.format(date)
- * - $HR.now()                     → $Date.now()
- * - $HR.humanizeTimeAgo           → $Humanize.timeAgo
- * - $HR.humanizeTimeRemaining     → $Humanize.timeRemaining
+ * $/
  */
 
 $(async function () {
@@ -27,7 +13,7 @@ $(async function () {
 		document.getElementById("tasks-completed"),
 	];
 
-	const drake = $Drag.create("kanban", containers, {
+	const drake = App.dragCreate("kanban", containers, {
 		moves:   () => true,
 		accepts: () => true,
 	});
@@ -42,33 +28,33 @@ $(async function () {
 		$(el).find(".task-check").prop("checked", isCompleted);
 		refreshCardTime(el, status);
 
-		$Alert.toast.info(`Tarea movida a ${$(target).closest(".card").find(".card-title").text()}`);
+		App.toastInfo(`Tarea movida a ${$(target).closest(".card").find(".card-title").text()}`);
 	});
 
 	// 3. Cargar Tareas desde JSON
-	$Alert.loading();
+	App.loading();
 	try {
-		const tasks = await $Api.get("json/tasks.json");
+		const tasks = await App.getApi("json/tasks.json");
 		tasks.forEach((t) => $(`#tasks-${t.status}`).append(createTaskCard(t)));
 		updateCounts();
-		$Alert.loading(false);
+		App.loading(false);
 	} catch (e) {
-		$Alert.loading(false);
-		$Alert.error("No se pudieron cargar las tareas.");
+		App.loading(false);
+		App.error("No se pudieron cargar las tareas.");
 	}
 
 	// 4. Crear Tarea
 	$("#btnNewTask").on("click", function () {
-		$Forms.clear("#taskForm");
-		$Dom.text("#taskModalTitle", "Crear Nueva Tarea");
-		$Modal.open("#taskModal");
+		App.clearForm("#taskForm");
+		App.text("#taskModalTitle", "Crear Nueva Tarea");
+		App.modalOpen("#taskModal");
 	});
 
 	$("#taskForm").on("submit", function (e) {
 		e.preventDefault();
 
-		const data = $Forms.serialize("#taskForm");
-		if (!data.title) return $Alert.warning("Por favor ingresa un título");
+		const data = App.serializeForm("#taskForm");
+		if (!data.title) return App.warning("Por favor ingresa un título");
 
 		const t = {
 			id:          "task-" + Date.now(),
@@ -82,8 +68,8 @@ $(async function () {
 		};
 
 		$("#tasks-pending").append(createTaskCard(t));
-		$Modal.close("#taskModal");
-		$Alert.toast.success("Tarea agregada correctamente");
+		App.modalClose("#taskModal");
+		App.toastSuccess("Tarea agregada correctamente");
 		updateCounts();
 	});
 
@@ -100,7 +86,7 @@ $(async function () {
 	// 6. Eliminar Tarea
 	$(document).on("click", ".btn-delete-task", function () {
 		const card = $(this).closest(".task-card");
-		$Alert.confirm("¿Eliminar tarea?", "¿Estás seguro?", () => {
+		App.confirm("¿Eliminar tarea?", "¿Estás seguro?", () => {
 			card.fadeOut(300, function () { $(this).remove(); updateCounts(); });
 		});
 	});
@@ -136,7 +122,7 @@ $(async function () {
 					<div class="d-flex justify-content-between align-items-center">
 						${priorityBadge}
 						<small class="text-muted" style="font-size:.7rem;">
-							<i class="bi bi-calendar-event me-1"></i>${$Date.format(t.end_date)}
+							<i class="bi bi-calendar-event me-1"></i>${App.formatDate(t.end_date)}
 						</small>
 					</div>
 				</div>
@@ -145,15 +131,15 @@ $(async function () {
 
 	function getTimeHtml(t) {
 		if (t.status === "completed") {
-			const date = t.completed_at || $Date.now();
-			return `<i class="bi bi-check2-all text-success me-1"></i>Finalizado hace ${$Humanize.timeAgo(date)}`;
+			const date = t.completed_at || App.now();
+			return `<i class="bi bi-check2-all text-success me-1"></i>Finalizado hace ${App.humanizeTimeAgo(date)}`;
 		}
-		return `<i class="bi bi-hourglass-split text-warning me-1"></i>Faltan ${$Humanize.timeRemaining(t.end_date)}`;
+		return `<i class="bi bi-hourglass-split text-warning me-1"></i>Faltan ${App.humanizeTimeRemaining(t.end_date)}`;
 	}
 
 	function refreshCardTime(el, status) {
 		const card = $(el);
-		const t    = { status, end_date: card.data("end"), completed_at: status === "completed" ? $Date.now() : null };
+		const t    = { status, end_date: card.data("end"), completed_at: status === "completed" ? App.now() : null };
 		card.find(".time-info").html(getTimeHtml(t));
 	}
 
@@ -181,3 +167,4 @@ $(async function () {
 		});
 	}
 });
+
