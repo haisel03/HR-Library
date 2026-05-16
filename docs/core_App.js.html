@@ -1,4 +1,53 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>core/App.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/haisel03/HR-Library" target="_blank" class="menu-item" id="menu-repo" >HR Library</a></h2><h3>Modules</h3><ul><li><a href="module-Alert.html">Alert</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Alert.html#~show">show</a></li></ul></li><li><a href="module-Api.html">Api</a></li><li><a href="module-App.html">App</a></li><li><a href="module-Asset.html">Asset</a></li><li><a href="module-Calendar.html">Calendar</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Calendar.html#~_el">_el</a></li></ul></li><li><a href="module-Charts.html">Charts</a></li><li><a href="module-Codes.html">Codes</a></li><li><a href="module-Currency.html">Currency</a></li><li><a href="module-DateHelper.html">DateHelper</a></li><li><a href="module-Dom.html">Dom</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Dom.html#~_el">_el</a></li></ul></li><li><a href="module-Editor.html">Editor</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Editor.html#~_el">_el</a></li></ul></li><li><a href="module-Event.html">Event</a></li><li><a href="module-Excel.html">Excel</a></li><li><a href="module-ExportTbl.html">ExportTbl</a></li><li><a href="module-File.html">File</a></li><li><a href="module-Forms.html">Forms</a></li><li><a href="module-Fullscreen.html">Fullscreen</a><ul class='methods'><li data-type='method' style='display: none;'><a href="module-Fullscreen.html#~_syncIcons">_syncIcons</a></li></ul></li><li><a href="module-Humanize.html">Humanize</a></li><li><a href="module-Icons.html">Icons</a></li><li><a href="module-Iframe.html">Iframe</a></li><li><a href="module-Modal.html">Modal</a></li><li><a href="module-Number.html">Number</a></li><li><a href="module-Print.html">Print</a></li><li><a href="module-Select2.html">Select2</a></li><li><a href="module-Sidebar.html">Sidebar</a></li><li><a href="module-Signature.html">Signature</a></li><li><a href="module-Storage.html">Storage</a></li><li><a href="module-Strings.html">Strings</a></li><li><a href="module-Table.html">Table</a></li><li><a href="module-Validation.html">Validation</a></li><li><a href="module-config.html">config</a></li><li><a href="module-init.html">init</a></li><li><a href="module-plugin-system.html">plugin-system</a><ul class='methods'></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Alert.toast.html">toast</a></li><li><a href="module-Event-Event.html">Event</a><ul class='methods'></ul></li><li><a href="module-Modal-Modal.html">Modal</a><ul class='methods'></ul></li><li><a href="module-Print-Print.html">Print</a><ul class='methods'></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">core/App.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @module App
  * @description
  * Fachada unificada de HR Library v4.0.
@@ -123,7 +172,7 @@ const App = {
    * @param {string} url URL del recurso
    * @param {Object} [params={}] Parámetros de consulta (query string)
    * @param {Object} [options={}] Opciones adicionales de Axios
-   * @returns {Promise<*>} Respuesta del servidor
+   * @returns {Promise&lt;*>} Respuesta del servidor
    *
    * @example
    * const users = await App.getApi("/api/usuarios");
@@ -136,7 +185,7 @@ const App = {
    * @param {string} url URL del recurso
    * @param {Object|FormData} [data={}] Datos a enviar en el cuerpo
    * @param {Object} [options={}] Opciones adicionales de Axios
-   * @returns {Promise<*>} Recurso creado
+   * @returns {Promise&lt;*>} Recurso creado
    *
    * @example
    * const user = await App.postApi("/api/usuarios", { name: "Juan" });
@@ -148,7 +197,7 @@ const App = {
    * @param {string} url URL del recurso
    * @param {Object|FormData} [data={}] Datos actualizados
    * @param {Object} [options={}] Opciones adicionales de Axios
-   * @returns {Promise<*>} Recurso actualizado
+   * @returns {Promise&lt;*>} Recurso actualizado
    */
   putApi: Api.put,
 
@@ -157,7 +206,7 @@ const App = {
    * @param {string} url URL del recurso
    * @param {Object|FormData} [data={}] Datos parciales a actualizar
    * @param {Object} [options={}] Opciones adicionales de Axios
-   * @returns {Promise<*>} Recurso actualizado
+   * @returns {Promise&lt;*>} Recurso actualizado
    */
   patchApi: Api.patch,
 
@@ -165,7 +214,7 @@ const App = {
    * Petición HTTP DELETE.
    * @param {string} url URL del recurso a eliminar
    * @param {Object} [options={}] Opciones adicionales de Axios
-   * @returns {Promise<*>} Confirmación de eliminación
+   * @returns {Promise&lt;*>} Confirmación de eliminación
    *
    * @example
    * await App.deleteApi("/api/usuarios/5");
@@ -177,16 +226,16 @@ const App = {
    * @param {string} url URL del endpoint
    * @param {FormData} formData Datos del formulario con archivos
    * @param {Object} [options={}] Opciones adicionales de Axios
-   * @returns {Promise<*>} Respuesta del servidor
+   * @returns {Promise&lt;*>} Respuesta del servidor
    */
   uploadApi: Api.upload,
 
   /**
-   * Llena un elemento &lt;select&gt; con opciones obtenidas de la API.
+   * Llena un elemento &amp;lt;select&amp;gt; con opciones obtenidas de la API.
    * @param {string|HTMLElement} el Selector o elemento select
    * @param {string} url URL que devuelve un array de opciones
    * @param {Object} [options={}] Opciones de configuración (valueField, textField, etc.)
-   * @returns {Promise<void>}
+   * @returns {Promise&lt;void>}
    *
    * @example
    * await App.getSelect("#pais", "/api/paises");
@@ -205,7 +254,7 @@ const App = {
    * Muestra una alerta de éxito.
    * @param {string} text Mensaje a mostrar
    * @param {Function} [cb] Callback al cerrar la alerta
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    *
    * @example
    * App.success("Usuario guardado correctamente");
@@ -217,7 +266,7 @@ const App = {
    * Muestra una alerta informativa.
    * @param {string} text Mensaje a mostrar
    * @param {Function} [cb] Callback al cerrar
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   info: Alert.info,
 
@@ -225,7 +274,7 @@ const App = {
    * Muestra una alerta de advertencia.
    * @param {string} text Mensaje a mostrar
    * @param {Function} [cb] Callback al cerrar
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   warning: Alert.warning,
 
@@ -233,7 +282,7 @@ const App = {
    * Muestra una alerta de error.
    * @param {string} text Mensaje a mostrar
    * @param {Function} [cb] Callback al cerrar
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   error: Alert.error,
 
@@ -243,7 +292,7 @@ const App = {
    * @param {string} [question=""] Pregunta o descripción
    * @param {Function} [cb] Callback si acepta (recibe true/false)
    * @param {string} [type="warning"] Tipo de ícono (warning, success, error, info, question)
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    *
    * @example
    * App.confirm("¿Eliminar?", "No se podrá recuperar", (ok) => { if (ok) eliminar(); });
@@ -270,21 +319,21 @@ const App = {
   /**
    * Confirmación preconfigurada para eliminación de registros.
    * @param {Function} cb Callback si confirma la eliminación
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   confirmDelete: Alert.confirmDelete,
 
   /**
    * Confirmación preconfigurada para inserción de registros.
    * @param {Function} cb Callback si confirma la inserción
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   confirmInsert: Alert.confirmInsert,
 
   /**
    * Confirmación preconfigurada para actualización de registros.
    * @param {Function} cb Callback si confirma la actualización
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   confirmUpdate: Alert.confirmUpdate,
 
@@ -292,7 +341,7 @@ const App = {
    * Confirmación de eliminación mostrando el nombre del registro.
    * @param {string} name Nombre del registro a eliminar
    * @param {Function} cb Callback si confirma
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   confirmDeleteByName: Alert.confirmDeleteByName,
 
@@ -325,7 +374,7 @@ const App = {
    * @param {string} text Mensaje a mostrar
    * @param {string} [type="info"] Tipo: success, info, warning, error, question
    * @param {Function} [cb] Callback al cerrar
-   * @returns {Promise<boolean>}
+   * @returns {Promise&lt;boolean>}
    */
   alert: Alert.show,
 
@@ -1576,7 +1625,7 @@ const App = {
   strEndsWith: Strings.endWith,
 
   /**
-   * Resalta ocurrencias de una subcadena envolviéndolas en &lt;mark&gt;.
+   * Resalta ocurrencias de una subcadena envolviéndolas en &amp;lt;mark&amp;gt;.
    * @param {string} text Texto completo
    * @param {string} search Término a resaltar
    * @returns {string} HTML con marcas resaltadas
@@ -1686,7 +1735,7 @@ const App = {
   setDefaultIcon: Icons.setDefault,
 
   /**
-   * Crea un elemento &lt;i&gt; con el icono especificado.
+   * Crea un elemento &amp;lt;i&amp;gt; con el icono especificado.
    * @param {string} name Nombre del icono
    * @param {string} [lib] Librería (opcional, usa la default)
    * @param {Object} [options={}] Opciones adicionales (class, size, color)
@@ -1785,7 +1834,7 @@ const App = {
    */
   currencyConvert: Currency.convert,
 
-  /* ── Drag & Drop ── */
+  /* ── Drag &amp; Drop ── */
 
   /**
    * Activa arrastre en contenedores usando SortableJS.
@@ -1849,14 +1898,14 @@ const App = {
   /**
    * Lee un archivo como data URL (base64).
    * @param {File} file Objeto File
-   * @returns {Promise<string>} Data URL del archivo
+   * @returns {Promise&lt;string>} Data URL del archivo
    */
   fileReadBase64: FileHelper.readAsBase64,
 
   /**
    * Lee un archivo de texto como string.
    * @param {File} file Objeto File
-   * @returns {Promise<string>} Contenido del archivo
+   * @returns {Promise&lt;string>} Contenido del archivo
    */
   fileReadText: FileHelper.readAsText,
 
@@ -1960,7 +2009,7 @@ const App = {
   /**
    * Recarga las opciones de un Select2 desde la API.
    * @param {string|HTMLElement} el Selector o elemento select
-   * @returns {Promise<void>}
+   * @returns {Promise&lt;void>}
    */
   select2Reload: Select2.reload,
 
@@ -2051,7 +2100,7 @@ const App = {
   /**
    * Importa datos desde un archivo Excel (lectura).
    * @param {File} file Objeto File del input
-   * @returns {Promise<Object[]>} Array de objetos con los datos
+   * @returns {Promise&lt;Object[]>} Array de objetos con los datos
    */
   excelImport: Excel.excelToJson,
 
@@ -2066,7 +2115,7 @@ const App = {
   /**
    * Alias de {@link App.excelImport}.
    * @param {File} file Objeto File
-   * @returns {Promise<Object[]>}
+   * @returns {Promise&lt;Object[]>}
    */
   excelToJson: Excel.excelToJson,
 
@@ -2081,13 +2130,13 @@ const App = {
   /**
    * Importa múltiples hojas desde un archivo Excel.
    * @param {File} file Objeto File
-   * @returns {Promise<Object<string, Object[]>>} Objeto con nombre de hoja como clave
+   * @returns {Promise&lt;Object&lt;string, Object[]>>} Objeto con nombre de hoja como clave
    */
   excelImportMultiple: Excel.excelToJsonMultiple,
 
   /**
    * Exporta múltiples arrays a diferentes hojas en un Excel.
-   * @param {Object<string, Object[]>} sheets Objeto con nombre de hoja y datos
+   * @param {Object&lt;string, Object[]>} sheets Objeto con nombre de hoja y datos
    * @param {string} [filename="export.xlsx"] Nombre del archivo
    * @returns {void}
    */
@@ -2136,7 +2185,7 @@ const App = {
    * @param {string|HTMLFormElement} form Selector o elemento form
    * @param {string} url URL del endpoint
    * @param {Object} [options={}] Opciones (method, onSuccess, onError, reset, etc.)
-   * @returns {Promise<*>} Respuesta del servidor
+   * @returns {Promise&lt;*>} Respuesta del servidor
    */
   submitForm: Forms.submit,
 
@@ -2336,3 +2385,32 @@ App.isInstalled = isInstalled;
 App.plugins = installedPlugins;
 
 export default App;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Sat May 16 2026 07:07:53 GMT-0400 (hora estándar del Atlántico) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>
