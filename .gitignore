@@ -12,7 +12,8 @@
 .env.*.local
 
 # documentation
-/docs
+/docs/*
+!/docs/community/
 
 # misc
 .DS_Store

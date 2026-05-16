@@ -12,21 +12,22 @@ function vendorCssPlugin() {
 		transformIndexHtml(html) {
 			return html.replace(
 				"</head>",
-				'  <link rel="stylesheet" crossorigin href="./assets/vendor.css">\n</head>',
+				'  <link rel="stylesheet" crossorigin href="./css/vendor.css">\n</head>',
 			);
 		},
 	};
 }
 
-/** Mueve los <script> de <head> a </body> y limpia JS huérfanos de entries CSS */
+/** Mueve los <script> de <head> a </body>, mueve HTML a pages/ y reescribe rutas relativas */
 function postProcessHtml() {
 	return {
 		name: "post-process-html",
 		apply: "build",
 		writeBundle() {
 			const dist = path.resolve(__dirname, "dist");
-			const htmlFiles = [];
 
+			// 1. Mover scripts de <head> a </body>
+			const htmlFiles = [];
 			function walk(dir) {
 				if (!fs.existsSync(dir)) return;
 				for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
@@ -44,17 +45,35 @@ function postProcessHtml() {
 
 				const headContent = headMatch[0];
 				const scripts = headContent.match(/<script[\s\S]*?<\/script>/g);
-				if (!scripts || scripts.length === 0) continue;
-
-				let newHead = headContent;
-				const removed = [];
-				for (const s of scripts) {
-					newHead = newHead.replace(s, "");
-					removed.push(s);
+				if (scripts && scripts.length > 0) {
+					let newHead = headContent;
+					const removed = [];
+					for (const s of scripts) {
+						newHead = newHead.replace(s, "");
+						removed.push(s);
+					}
+					html = html.replace(headContent, newHead);
+					html = html.replace("</body>", removed.join("\n") + "\n</body>");
 				}
-				html = html.replace(headContent, newHead);
-				html = html.replace("</body>", removed.join("\n") + "\n</body>");
 				fs.writeFileSync(file, html, "utf-8");
+			}
+
+			// 2. Mover HTML a pages/ y reescribir rutas relativas
+			const pagesDir = path.join(dist, "pages");
+			if (!fs.existsSync(pagesDir)) {
+				fs.mkdirSync(pagesDir, { recursive: true });
+			}
+
+			for (const file of htmlFiles) {
+				let html = fs.readFileSync(file, "utf-8");
+				// Agregar ../ a rutas relativas de assets: css/, js/, img/, fonts/, json/, demos/
+				html = html.replace(
+					/(src|href)="(\.\/)?(css|js|img|fonts|json|demos)\//g,
+					'$1="../$3/',
+				);
+				const filename = path.basename(file);
+				fs.writeFileSync(path.join(pagesDir, filename), html, "utf-8");
+				fs.unlinkSync(file);
 			}
 		},
 	};
@@ -116,10 +135,16 @@ export default defineConfig({
 				},
 				assetFileNames(chunkInfo) {
 					if (chunkInfo.name === "vendor_css.css") {
-						return "assets/vendor.css";
+						return "css/vendor.css";
 					}
 					if (chunkInfo.name.endsWith(".css")) {
-						return "assets/[name]-[hash].css";
+						return "css/[name]-[hash].css";
+					}
+					if (/\.(woff2?|eot|ttf|otf)$/.test(chunkInfo.name)) {
+						return "fonts/[name]-[hash][extname]";
+					}
+					if (/\.(png|jpe?g|gif|svg|ico|webp)$/i.test(chunkInfo.name)) {
+						return "img/[name]-[hash][extname]";
 					}
 					return "assets/[name]-[hash][extname]";
 				},
