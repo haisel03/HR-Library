@@ -6,6 +6,7 @@ export default [
   js.configs.recommended,
   {
     files: ["src/js/**/*.js"],
+    ignores: ["src/js/**/*.test.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
@@ -28,6 +29,22 @@ export default [
     },
     rules: {
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+    },
+  },
+  {
+    files: ["src/js/**/*.test.js"],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        vi: "writable",
+        describe: "readonly",
+        it: "readonly",
+        expect: "readonly",
+      },
+    },
+    rules: {
+      "no-undef": "off",
+      "no-unused-vars": "off",
     },
   },
   prettier,
