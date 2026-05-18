@@ -89,7 +89,6 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
-
     "@fullcalendar/bootstrap5": "^6.1.15",
     "@fullcalendar/core": "^6.1.15",
     "@fullcalendar/daygrid": "^6.1.15",
@@ -101,6 +100,7 @@
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
     "chart.js": "^4.4.7",
+    "choices.js": "^11.2.3",
     "datatables.net": "^2.2.2",
     "datatables.net-bs5": "^2.2.2",
     "datatables.net-buttons": "^3.2.2",

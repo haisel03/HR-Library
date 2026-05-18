@@ -1,0 +1,178 @@
+{{#> layout-capotiao-admin icon="bi bi-credit-card-2-front" title="M&eacute;todos de Pago" description="Gesti&oacute;n de m&eacute;todos de pago de colegios" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-credit-card-2-front me-2"></i>Listado de M&eacute;todos de Pago</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddMethod">
+			<i class="bi bi-plus-circle me-1"></i> Nuevo M&eacute;todo
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="methodsTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Colegio</th>
+						<th>Tipo</th>
+						<th>Titular</th>
+						<th>Terminaci&oacute;n</th>
+						<th>Expira</th>
+						<th>Predet.</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="methodModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="methodModalTitle">M&eacute;todo de Pago</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="methodForm">
+					<input type="hidden" id="methodId" name="id">
+					<div class="row g-3">
+						<div class="col-12">
+							<label class="form-label required">Colegio</label>
+							<select class="form-select choices" id="methodTenant" name="tenant_id" required>
+								<option value="">Seleccionar...</option>
+								<option value="1">Colegio San Jos&eacute;</option>
+								<option value="2">Instituto Moderno</option>
+								<option value="3">Liceo Cultural</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Tipo</label>
+							<select class="form-select choices" id="methodType" name="type" required>
+								<option value="">Seleccionar...</option>
+								<option value="credit_card">Tarjeta de Cr&eacute;dito</option>
+								<option value="debit_card">Tarjeta de D&eacute;bito</option>
+								<option value="transfer">Transferencia</option>
+								<option value="paypal">PayPal</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Titular</label>
+							<input type="text" class="form-control" id="methodHolder" name="holder" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">N&uacute;mero (4 &uacute;ltimos)</label>
+							<input type="text" class="form-control" id="methodLast4" name="last_four" maxlength="4" pattern="[0-9]{4}" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de expiraci&oacute;n</label>
+							<input type="month" class="form-control" id="methodExp" name="expires_at" required>
+						</div>
+						<div class="col-12">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="methodDefault" name="is_default">
+								<label class="form-check-label" for="methodDefault">M&eacute;todo predeterminado</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="methodForm" class="btn btn-primary" id="btnSaveMethod">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const tenantNames = { 1: 'Colegio San Jos&eacute;', 2: 'Instituto Moderno', 3: 'Liceo Cultural' };
+	const typeLabels = { credit_card: 'Tarjeta de Cr&eacute;dito', debit_card: 'Tarjeta de D&eacute;bito', transfer: 'Transferencia', paypal: 'PayPal' };
+	const mediaMap = {
+		credit_card: '<i class="bi bi-credit-card me-1 text-primary"></i>',
+		debit_card: '<i class="bi bi-credit-card-2-front me-1 text-success"></i>',
+		transfer: '<i class="bi bi-bank me-1 text-info"></i>',
+		paypal: '<i class="bi bi-paypal me-1 text-primary"></i>',
+	};
+
+	const mockData = [
+		{ id: 1, tenant_id: 1, tenant_name: 'Colegio San Jos&eacute;', type: 'credit_card', type_label: 'Tarjeta de Cr&eacute;dito', holder: 'Juan P&eacute;rez', last_four: '4242', expires_at: '2028-12', is_default: true },
+		{ id: 2, tenant_id: 2, tenant_name: 'Instituto Moderno', type: 'transfer', type_label: 'Transferencia', holder: 'Instituto Moderno', last_four: '--', expires_at: '--', is_default: true },
+		{ id: 3, tenant_id: 1, tenant_name: 'Colegio San Jos&eacute;', type: 'debit_card', type_label: 'Tarjeta de D&eacute;bito', holder: 'Mar&iacute;a Garc&iacute;a', last_four: '9876', expires_at: '2027-06', is_default: false },
+	];
+
+	let currentId = 3;
+
+	/* ── Mock API ── */
+	async function createMethod(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const t = tenantNames[payload.tenant_id];
+		const item = { ...payload, id: ++currentId, tenant_name: t, type_label: typeLabels[payload.type] };
+		mockData.unshift(item);
+		return App.makeResponse('S', 'M\u00e9todo de pago agregado', { ...item });
+	}
+	async function updateMethod(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(m => m.id === id);
+		if (idx === -1) return App.makeResponse('D', 'M\u00e9todo no encontrado');
+		const t = tenantNames[payload.tenant_id];
+		Object.assign(mockData[idx], payload, { tenant_name: t, type_label: typeLabels[payload.type] });
+		return App.makeResponse('S', 'M\u00e9todo actualizado', { ...mockData[idx] });
+	}
+	async function removeMethod(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(m => m.id === id);
+		if (idx === -1) return App.makeResponse('D', 'M\u00e9todo no encontrado');
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', 'M\u00e9todo de pago eliminado');
+	}
+
+	/* ── DataTable ── */
+	const table = $('#methodsTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('tenant_name', 'Colegio'),
+			App.tblCol(null, 'Tipo', { render: d => (mediaMap[d.type] || '') + ' ' + d.type_label }),
+			App.tblCol('holder', 'Titular'),
+			App.tblCol('last_four', 'Terminaci\u00f3n', { render: v => v === '--' ? '---' : '**** ' + v }),
+			App.tblCol('expires_at', 'Expira'),
+			App.tblBoolean('is_default', 'Predet.'),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'asc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddMethod').on('click', () => App.openCrudModal('#methodModal', '#methodForm', 'create', {}, {
+		titleCreate: 'Nuevo M\u00e9todo',
+		titleEdit: 'Editar M\u00e9todo',
+	}));
+
+	App.onTableAction('#methodsTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#methodModal', '#methodForm', 'edit', row, { titleEdit: 'Editar M\u00e9todo' });
+		}
+		if (action === 'delete') {
+			removeMethod(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#methodsTable', mockData)));
+		}
+	});
+
+	$('#btnSaveMethod').on('click', () => App.crudSave({
+		form: '#methodForm',
+		modal: '#methodModal',
+		table: '#methodsTable',
+		dataArray: mockData,
+		onCreate: (p) => createMethod(p),
+		onUpdate: (id, p) => updateMethod(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-admin}}

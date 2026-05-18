@@ -10,20 +10,20 @@
 .swal2-popup {
 	font-family: $font-family-sans-serif !important;
 	border: 1px solid $card-border-color !important;
-	border-radius: $swal-radius !important;
-	box-shadow: $swal-shadow !important;
+	border-radius: none !important;
+	box-shadow: none !important;
 	background: $swal-bg !important;
 }
 
 .swal2-title {
 	font-family: $headings-font-family, Georgia, serif !important;
 	color: $dark !important;
-	font-size: 1.4rem !important;
+	font-size: 1.5rem !important;
 }
 
 .swal2-html-container {
 	color: $body-color !important;
-	font-size: 0.9rem !important;
+	font-size: 1rem !important;
 }
 
 /* ── Iconos ──────────────────────────────────────────────────────────────── */
@@ -62,14 +62,8 @@
 /* ── Botones ─────────────────────────────────────────────────────────────── */
 
 .swal2-confirm {
-	background: linear-gradient(135deg, $primary, color.adjust($primary, $lightness: -12%)) !important;
-	border: none !important;
-	box-shadow: 0 3px 10px color.change($primary, $alpha: 0.35) !important;
 	font-weight: 700 !important;
 	letter-spacing: 0.03em !important;
-	&:focus {
-		box-shadow: 0 0 0 3px color.change($primary, $alpha: 0.3) !important;
-	}
 }
 
 .swal2-cancel {

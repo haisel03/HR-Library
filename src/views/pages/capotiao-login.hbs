@@ -1,0 +1,42 @@
+{{#> layout-capotiao-auth title="Iniciar Sesi&oacute;n" description="Ingresa tus credenciales para continuar." authFooter='<small class="text-white-50">¿Eres administrador? <a href="capotiao-admin-dashboard.html" class="text-white-50">Acceso interno</a></small>'}}
+
+<form id="loginForm">
+	<div class="form-floating mb-4">
+		<input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com" value="admin@capotiao.test" required>
+		<label for="email"><i class="bi bi-envelope me-1"></i> Correo Electr&oacute;nico</label>
+	</div>
+	<div class="form-floating mb-3 password-wrapper">
+		<input type="password" class="form-control" id="password" name="password" placeholder="Contrase&ntilde;a" value="password" required>
+		<label for="password"><i class="bi bi-lock me-1"></i> Contrase&ntilde;a</label>
+		<i class="bi bi-eye toggle-password" id="togglePassword"></i>
+	</div>
+	<div class="form-check form-switch mb-4">
+		<input class="form-check-input" type="checkbox" id="rememberMe" name="remember" checked>
+		<label class="form-check-label" for="rememberMe">Recordar sesi&oacute;n</label>
+	</div>
+	<div class="d-grid">
+		<button type="submit" class="btn btn-primary btn-lg">
+			<i class="bi bi-box-arrow-in-right me-2"></i> Acceder al Portal
+		</button>
+	</div>
+</form>
+
+<div class="text-center mt-3">
+	<a href="capotiao-register.html" class="text-decoration-none">Registrar nuevo colegio</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	$('#loginForm').on('submit', function(e) {
+		e.preventDefault();
+		const email = $('#email').val();
+		if (email.includes('admin')) {
+			window.location.href = 'capotiao-admin-dashboard.html';
+		} else {
+			window.location.href = 'capotiao-school-dashboard.html';
+		}
+	});
+});
+</script>
+
+{{/layout-capotiao-auth}}

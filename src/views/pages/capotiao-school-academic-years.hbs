@@ -1,0 +1,143 @@
+{{#> layout-capotiao-tenant icon="bi bi-calendar-range" title="A&ntilde;os Escolares" description="Gesti&oacute;n de periodos acad&eacute;micos" userName="Juan P&eacute;rez" userBadge="Director"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-calendar-range me-2"></i>Listado de A&ntilde;os Escolares</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddYear">
+			<i class="bi bi-plus-circle me-1"></i> Nuevo A&ntilde;o Escolar
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="yearsTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>A&ntilde;o</th>
+						<th>Fecha Inicio</th>
+						<th>Fecha Fin</th>
+						<th>Activo</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="yearModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="yearModalTitle">A&ntilde;o Escolar</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="yearForm">
+					<input type="hidden" id="yearId" name="id">
+					<div class="row g-3">
+						<div class="col-12">
+							<label class="form-label required">Nombre del a&ntilde;o</label>
+							<input type="text" class="form-control" id="yearName" name="name" required placeholder="Ej: 2026-2027">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de inicio</label>
+							<input type="date" class="form-control" id="yearStart" name="starts_at" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de fin</label>
+							<input type="date" class="form-control" id="yearEnd" name="ends_at" required>
+						</div>
+						<div class="col-12">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="yearActive" name="is_active">
+								<label class="form-check-label" for="yearActive">A&ntilde;o activo</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="yearForm" class="btn btn-primary" id="btnSaveYear">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const mockData = [
+		{ id: 1, name: '2024-2025', starts_at: '2024-09-01', ends_at: '2025-06-30', is_active: false },
+		{ id: 2, name: '2025-2026', starts_at: '2025-09-01', ends_at: '2026-06-30', is_active: true },
+	];
+
+	let currentId = 2;
+
+	/* ── Mock API ── */
+	async function createYear(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const item = { ...payload, id: ++currentId };
+		mockData.unshift(item);
+		return App.makeResponse('S', 'A\u00f1o escolar creado correctamente', { ...item });
+	}
+	async function updateYear(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(y => y.id === id);
+		if (idx === -1) return App.makeResponse('D', 'A\u00f1o escolar no encontrado');
+		Object.assign(mockData[idx], payload);
+		return App.makeResponse('S', 'A\u00f1o escolar actualizado', { ...mockData[idx] });
+	}
+	async function removeYear(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(y => y.id === id);
+		if (idx === -1) return App.makeResponse('D', 'A\u00f1o escolar no encontrado');
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', 'A\u00f1o escolar eliminado');
+	}
+
+	/* ── DataTable ── */
+	const table = $('#yearsTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('name', 'A\u00f1o'),
+			App.tblCol('starts_at', 'Inicio'),
+			App.tblCol('ends_at', 'Fin'),
+			App.tblBoolean('is_active', 'Activo'),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'desc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddYear').on('click', () => App.openCrudModal('#yearModal', '#yearForm', 'create', {}, {
+		titleCreate: 'Nuevo A\u00f1o Escolar',
+		titleEdit: 'Editar A\u00f1o Escolar',
+	}));
+
+	App.onTableAction('#yearsTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#yearModal', '#yearForm', 'edit', row, { titleEdit: 'Editar A\u00f1o Escolar' });
+		}
+		if (action === 'delete') {
+			removeYear(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#yearsTable', mockData)));
+		}
+	});
+
+	$('#btnSaveYear').on('click', () => App.crudSave({
+		form: '#yearForm',
+		modal: '#yearModal',
+		table: '#yearsTable',
+		dataArray: mockData,
+		onCreate: (p) => createYear(p),
+		onUpdate: (id, p) => updateYear(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-tenant}}

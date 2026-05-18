@@ -57,12 +57,12 @@ const show = (text, type = "info", cb = null) => {
 	return Swal.fire({
 		...baseOptions(key),
 		html: `
-      <div class="d-flex align-items-start gap-3 text-start">
-        <i class="bi ${icons[key] ?? "bi-info-circle-fill"} fs-2 text-${colors[key] ?? "info"} flex-shrink-0 mt-1"></i>
-        <div>
-          <strong class="d-block mb-1">${titles[key] ?? "Aviso"}</strong>
-          <span class="text-muted small">${msg}</span>
+      <div class="text-center">
+        <div class="d-flex align-items-center justify-content-center gap-2 mb-3">
+          <i class="bi ${icons[key] ?? "bi-info-circle-fill"} fs-1 text-${colors[key] ?? "info"}"></i>
+          <span class="fw-semibold fs-2">${titles[key] ?? "Aviso"}</span>
         </div>
+        <span class="text-dark fs-4">${msg}</span>
       </div>`,
 		confirmButtonText: config.swal.button.confirm,
 	}).then((r) => {
@@ -85,18 +85,25 @@ const toast = {
 	show: (text, type = "info") => {
 		const key = resolveType(type);
 		const { icons, colors } = config.alerts;
+		const color = colors[key] ?? "info";
+		const isDark = { success: true, danger: true, primary: true }[color] ?? false;
 		return Swal.fire({
 			toast: true,
 			position: config.swal.toast.position,
 			timer: config.swal.toast.timer,
-			timerProgressBar: true,
 			showConfirmButton: false,
+			backdrop: false,
 			html: `
-        <div class="d-flex align-items-center gap-2">
-          <i class="bi ${icons[key] ?? "bi-info-circle-fill"} text-${colors[key] ?? "info"}"></i>
-          <span>${text}</span>
+        <div class="d-flex p-0" style="overflow:hidden;border-radius:none;min-height:60px">
+          <div class="d-flex align-items-center justify-content-center bg-${color}" style="width:20%">
+            <i class="bi ${icons[key] ?? "bi-info-circle-fill"} fs-4 ${isDark ? "text-white" : "text-dark"}"></i>
+          </div>
+          <div class="d-flex align-items-center p-3" style="width:80%">
+            <span class="fw-semibold text-${color} text-start">${text}</span>
+          </div>
         </div>`,
 			didOpen: (popup) => {
+				popup.style.padding = "0";
 				popup.addEventListener("mouseenter", Swal.stopTimer);
 				popup.addEventListener("mouseleave", Swal.resumeTimer);
 			},
@@ -204,7 +211,7 @@ const Alert = {
 		}
 		Swal.fire({
 			title: config.messages.loading.title,
-			html: `<span class="text-muted small">${config.messages.loading.subtitle}</span>`,
+			html: `<span class="text-muted text-center d-block">${config.messages.loading.subtitle}</span>`,
 			allowOutsideClick: false,
 			allowEscapeKey: false,
 			showConfirmButton: false,

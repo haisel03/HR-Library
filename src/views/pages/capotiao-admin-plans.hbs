@@ -1,0 +1,157 @@
+{{#> layout-capotiao-admin icon="bi bi-boxes" title="Planes" description="Gesti&oacute;n de planes de suscripci&oacute;n" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-boxes me-2"></i>Listado de Planes</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddPlan">
+			<i class="bi bi-plus-circle me-1"></i> Nuevo Plan
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="plansTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Almacenamiento</th>
+						<th>Usuarios</th>
+						<th>Duraci&oacute;n</th>
+						<th>Activo</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="planModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="planModalTitle">Plan</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="planForm">
+					<input type="hidden" id="planId" name="id">
+					<div class="row g-3">
+						<div class="col-12">
+							<label class="form-label required">Nombre del plan</label>
+							<input type="text" class="form-control" id="planName" name="name" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Precio mensual ($)</label>
+							<input type="number" class="form-control" id="planPrice" name="price" step="0.01" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Almacenamiento (GB)</label>
+							<input type="number" class="form-control" id="planStorage" name="storage_gb" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Usuarios m&aacute;ximos</label>
+							<input type="number" class="form-control" id="planUsers" name="max_users" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Duraci&oacute;n (d&iacute;as)</label>
+							<input type="number" class="form-control" id="planDuration" name="duration_days" value="30" required>
+						</div>
+						<div class="col-12">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="planActive" name="is_active" checked>
+								<label class="form-check-label" for="planActive">Plan activo</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="planForm" class="btn btn-primary" id="btnSavePlan">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const mockData = [
+		{ id: 1, name: 'B&aacute;sico', price: 49.99, storage_gb: 5, max_users: 30, duration_days: 30, is_active: true },
+		{ id: 2, name: 'Premium', price: 99.99, storage_gb: 20, max_users: 100, duration_days: 30, is_active: true },
+		{ id: 3, name: 'Ilimitado', price: 149.99, storage_gb: 100, max_users: 999, duration_days: 30, is_active: true },
+	];
+
+	let currentId = 3;
+
+	/* ── Mock API ── */
+	async function createPlan(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const item = { ...payload, id: ++currentId };
+		mockData.push(item);
+		return App.makeResponse('S', `Plan "${item.name}" creado correctamente`, { ...item });
+	}
+	async function updatePlan(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(p => p.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Plan no encontrado');
+		Object.assign(mockData[idx], payload);
+		return App.makeResponse('S', `Plan "${mockData[idx].name}" actualizado`, { ...mockData[idx] });
+	}
+	async function removePlan(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(p => p.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Plan no encontrado');
+		const name = mockData[idx].name;
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', `Plan "${name}" eliminado`);
+	}
+
+	/* ── DataTable ── */
+	const table = $('#plansTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('name', 'Nombre'),
+			App.tblMoney('price', 'Precio', '$'),
+			App.tblCol('storage_gb', 'Almacenamiento', { render: v => v + ' GB' }),
+			App.tblCol('max_users', 'Usuarios', { render: v => v === 999 ? 'Ilimitados' : v }),
+			App.tblCol('duration_days', 'Duraci\u00f3n', { render: v => v + ' d\u00edas' }),
+			App.tblBoolean('is_active', 'Activo'),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'asc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddPlan').on('click', () => App.openCrudModal('#planModal', '#planForm', 'create', {}, {
+		titleCreate: 'Nuevo Plan',
+		titleEdit: 'Editar Plan',
+	}));
+
+	App.onTableAction('#plansTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#planModal', '#planForm', 'edit', row, { titleEdit: 'Editar Plan' });
+		}
+		if (action === 'delete') {
+			removePlan(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#plansTable', mockData)));
+		}
+	});
+
+	$('#btnSavePlan').on('click', () => App.crudSave({
+		form: '#planForm',
+		modal: '#planModal',
+		table: '#plansTable',
+		dataArray: mockData,
+		onCreate: (p) => createPlan(p),
+		onUpdate: (id, p) => updatePlan(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-admin}}

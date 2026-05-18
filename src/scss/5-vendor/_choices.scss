@@ -1,0 +1,163 @@
+// ============================================================================
+// 5-vendor/_choices.scss
+//
+// Importa el CSS base de Choices JS + estilos consistentes con Bootstrap 5.
+// Sigue el mismo patrón visual que Select2 en _forms.scss.
+// ============================================================================
+
+@use "choices.js/public/assets/styles/choices.min.css";
+@use "sass:color";
+
+/* ── Widget base ── */
+
+.choices {
+	&.is-focused .choices__inner {
+		border-color: $input-focus-border-color;
+		box-shadow: $input-focus-box-shadow;
+		outline: 0;
+	}
+
+	&.is-disabled .choices__inner {
+		background: $input-disabled-bg;
+		cursor: not-allowed;
+	}
+}
+
+/* ── Inner (caja del select) ── */
+
+.choices__inner {
+	background: $input-bg;
+	border: 1px solid $input-border-color;
+	border-radius: $border-radius;
+	color: $input-color;
+	font-size: $font-size-base;
+	padding: 0.375rem 0.75rem !important;
+	min-height: auto;
+	transition:
+		border-color 0.15s,
+		box-shadow 0.15s;
+	cursor: pointer;
+
+	&:hover {
+		border-color: color.adjust($input-border-color, $lightness: -8%);
+	}
+}
+
+/* ── Input de búsqueda ── */
+
+.choices__input {
+	font-size: $font-size-base;
+	color: $input-color;
+	background: transparent;
+	padding: 0;
+	margin: 0;
+
+	&::placeholder {
+		color: color.change($secondary, $alpha: 0.45);
+	}
+}
+
+.choices[data-type*="select-one"] .choices__input {
+	padding: 0.5rem 0.75rem;
+	border-bottom: 1px solid $border-color;
+}
+
+/* ── Placeholder ── */
+
+.choices__placeholder {
+	color: color.change($secondary, $alpha: 0.45);
+	opacity: 1;
+}
+
+/* ── Lista single ── */
+
+.choices__list--single {
+	padding: 0;
+	.choices__item {
+		color: $input-color;
+		font-size: $font-size-base;
+	}
+}
+
+/* ── Dropdown ── */
+
+.choices__list--dropdown {
+	background: $input-bg;
+	border: 1px solid $input-border-color;
+	border-radius: $border-radius;
+	margin-top: 4px;
+	box-shadow: 0 4px 12px color.change(#2b2f36, $alpha: 0.1);
+	z-index: 1050;
+
+	.choices__list {
+		padding: 0.25rem;
+		max-height: 240px;
+	}
+
+	.choices__item--choice {
+		font-size: $font-size-base;
+		color: $dark;
+		padding: 0.35rem 0.75rem;
+		border-radius: calc(#{$border-radius} - 2px);
+		cursor: pointer;
+
+		&.is-selected {
+			background: color.change($primary, $alpha: 0.1);
+			color: $primary;
+			font-weight: 600;
+		}
+
+		&.is-highlighted {
+			background: $primary;
+			color: $white;
+		}
+	}
+
+	.choices__placeholder {
+		display: none;
+	}
+}
+
+.choices[data-type*="select-one"] .choices__list--dropdown .choices__item--choice {
+	padding: 0.35rem 0.75rem;
+}
+
+/* ── Multiple ── */
+
+.choices__list--multiple {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+
+	.choices__item {
+		background: $primary;
+		border: none;
+		color: $white;
+		font-size: $font-size-sm;
+		border-radius: $border-radius;
+		padding: 0.1rem 0.5rem;
+		font-weight: 500;
+		line-height: 1.5;
+	}
+}
+
+.choices__button {
+	border-left: 1px solid color.change($white, $alpha: 0.25);
+	margin-left: 0.35rem;
+	padding-left: 0.35rem;
+	opacity: 0.85;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+/* ── Validación ── */
+
+.choices.is-valid .choices__inner {
+	border-color: $success;
+}
+
+.choices.is-invalid .choices__inner {
+	border-color: $danger;
+}

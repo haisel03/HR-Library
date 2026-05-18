@@ -1,0 +1,166 @@
+{{#> layout-capotiao-admin icon="bi bi-file-text" title="Facturas" description="Gesti&oacute;n de facturaci&oacute;n" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-file-text me-2"></i>Listado de Facturas</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddInvoice">
+			<i class="bi bi-plus-circle me-1"></i> Nueva Factura
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="invoicesTable">
+				<thead>
+					<tr>
+						<th>#Factura</th>
+						<th>Colegio</th>
+						<th>Monto</th>
+						<th>Emisi&oacute;n</th>
+						<th>Vencimiento</th>
+						<th>Estado</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="invoiceModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="invoiceModalTitle">Factura</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="invoiceForm">
+					<input type="hidden" id="invId" name="id">
+					<div class="row g-3">
+						<div class="col-12">
+							<label class="form-label required">Colegio</label>
+							<select class="form-select choices" id="invTenant" name="tenant_id" required>
+								<option value="">Seleccionar...</option>
+								<option value="1">Colegio San Jos&eacute;</option>
+								<option value="2">Instituto Moderno</option>
+								<option value="3">Liceo Cultural</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Monto ($)</label>
+							<input type="number" class="form-control" id="invAmount" name="amount" step="0.01" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Estado</label>
+							<select class="form-select choices" id="invStatus" name="status" required>
+								<option value="pending">Pendiente</option>
+								<option value="paid">Pagada</option>
+								<option value="overdue">Vencida</option>
+								<option value="cancelled">Cancelada</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de emisi&oacute;n</label>
+							<input type="date" class="form-control" id="invDate" name="issue_date" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de vencimiento</label>
+							<input type="date" class="form-control" id="invDue" name="due_date" required>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="invoiceForm" class="btn btn-primary" id="btnSaveInv">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const tenantNames = { 1: 'Colegio San Jos&eacute;', 2: 'Instituto Moderno', 3: 'Liceo Cultural' };
+	const mockData = [
+		{ id: 'INV-001', tenant_id: 1, tenant_name: 'Colegio San Jos&eacute;', amount: 99.99, issue_date: '2026-04-01', due_date: '2026-04-15', status: 'paid' },
+		{ id: 'INV-002', tenant_id: 2, tenant_name: 'Instituto Moderno', amount: 49.99, issue_date: '2026-04-01', due_date: '2026-04-15', status: 'paid' },
+		{ id: 'INV-003', tenant_id: 3, tenant_name: 'Liceo Cultural', amount: 99.99, issue_date: '2026-04-01', due_date: '2026-04-15', status: 'pending' },
+		{ id: 'INV-004', tenant_id: 1, tenant_name: 'Colegio San Jos&eacute;', amount: 99.99, issue_date: '2026-05-01', due_date: '2026-05-15', status: 'pending' },
+	];
+	let invCounter = 4;
+
+	/* ── Mock API ── */
+	async function createInvoice(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const t = tenantNames[payload.tenant_id] || 'Desconocido';
+		const item = { ...payload, id: 'INV-' + String(++invCounter).padStart(3, '0'), tenant_name: t };
+		mockData.unshift(item);
+		return App.makeResponse('S', `Factura ${item.id} creada correctamente`, { ...item });
+	}
+	async function updateInvoice(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(s => s.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Factura no encontrada');
+		const t = tenantNames[payload.tenant_id] || 'Desconocido';
+		Object.assign(mockData[idx], payload, { tenant_name: t });
+		return App.makeResponse('S', `Factura ${id} actualizada`, { ...mockData[idx] });
+	}
+	async function removeInvoice(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(s => s.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Factura no encontrada');
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', `Factura ${id} eliminada`);
+	}
+
+	/* ── DataTable ── */
+	const table = $('#invoicesTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#Factura'),
+			App.tblCol('tenant_name', 'Colegio'),
+			App.tblMoney('amount', 'Monto', '$'),
+			App.tblCol('issue_date', 'Emisi\u00f3n'),
+			App.tblCol('due_date', 'Vencimiento'),
+			App.tblBadge('status', 'Estado', {
+				paid: { color: 'success', label: 'Pagada' },
+				pending: { color: 'warning', label: 'Pendiente' },
+				overdue: { color: 'danger', label: 'Vencida' },
+				cancelled: { color: 'secondary', label: 'Cancelada' },
+			}),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[3, 'desc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddInvoice').on('click', () => App.openCrudModal('#invoiceModal', '#invoiceForm', 'create', {}, {
+		titleCreate: 'Nueva Factura',
+		titleEdit: 'Editar Factura',
+	}));
+
+	App.onTableAction('#invoicesTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#invoiceModal', '#invoiceForm', 'edit', row, { titleEdit: 'Editar Factura' });
+		}
+		if (action === 'delete') {
+			removeInvoice(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#invoicesTable', mockData)));
+		}
+	});
+
+	$('#btnSaveInv').on('click', () => App.crudSave({
+		form: '#invoiceForm',
+		modal: '#invoiceModal',
+		table: '#invoicesTable',
+		dataArray: mockData,
+		onCreate: (p) => createInvoice(p),
+		onUpdate: (id, p) => updateInvoice(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-admin}}

@@ -7,6 +7,9 @@
  */
 
 // ── Estilos ──
+if (import.meta.env.DEV) {
+	import("../scss/vendor.scss");
+}
 import "../scss/app.scss";
 
 // ── Módulos de terceros (side effects) ──
@@ -31,8 +34,9 @@ import "./modules/sortablejs.js";
 import "./modules/simplebar.js";
 import "./modules/humanizer.js";
 import "./modules/feather.js";
+import "./modules/choices.js";
 import "./modules/theme.js";
-import "./modules/access_control.js";
+import initAccessControl from "./modules/access_control.js";
 
 import App from "./core/App.js";
 
@@ -45,6 +49,7 @@ if (typeof window !== "undefined") {
 // ── Inicialización ──
 $(function () {
 	App.init();
+	initAccessControl();
 });
 
 export default App;

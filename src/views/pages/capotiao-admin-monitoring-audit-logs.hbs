@@ -1,0 +1,64 @@
+{{#> layout-capotiao-admin icon="bi bi-journal-code" title="Auditor&iacute;a" description="Registro de actividades del sistema" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3">
+		<h6 class="fw-bold mb-0"><i class="bi bi-journal-code me-2"></i>Registro de Auditor&iacute;a</h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="auditTable">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Usuario</th>
+						<th>Acci&oacute;n</th>
+						<th>Entidad</th>
+						<th>ID Entidad</th>
+						<th>IP</th>
+						<th>Fecha</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const mockData = [
+		{ id: 1, user: 'admin@capotiao.test', action: 'created', entity: 'tenant', entity_id: 5, ip: '192.168.1.100', created_at: '2026-05-16 10:30:00' },
+		{ id: 2, user: 'admin@capotiao.test', action: 'updated', entity: 'plan', entity_id: 2, ip: '192.168.1.100', created_at: '2026-05-16 09:15:00' },
+		{ id: 3, user: 'admin@capotiao.test', action: 'deleted', entity: 'coupon', entity_id: 4, ip: '192.168.1.100', created_at: '2026-05-15 18:45:00' },
+		{ id: 4, user: 'admin@capotiao.test', action: 'login', entity: 'user', entity_id: 1, ip: '192.168.1.100', created_at: '2026-05-15 08:00:00' },
+		{ id: 5, user: 'admin@capotiao.test', action: 'updated', entity: 'tenant', entity_id: 3, ip: '192.168.1.100', created_at: '2026-05-14 14:20:00' },
+		{ id: 6, user: 'admin@capotiao.test', action: 'created', entity: 'subscription', entity_id: 4, ip: '192.168.1.100', created_at: '2026-05-14 11:00:00' },
+	];
+
+	const badgeMap = {
+		created: '<span class="badge bg-success">Crear</span>',
+		updated: '<span class="badge bg-primary">Actualizar</span>',
+		deleted: '<span class="badge bg-danger">Eliminar</span>',
+		login: '<span class="badge bg-info">Login</span>',
+		logout: '<span class="badge bg-secondary">Logout</span>',
+	};
+
+	$('#auditTable').DataTable({
+		data: mockData,
+		columns: [
+			{ data: 'id' },
+			{ data: 'user' },
+			{ data: 'action', render: v => badgeMap[v] || v },
+			{ data: 'entity' },
+			{ data: 'entity_id' },
+			{ data: 'ip' },
+			{ data: 'created_at' },
+		],
+		order: [[6, 'desc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 25
+	});
+});
+</script>
+
+{{/layout-capotiao-admin}}

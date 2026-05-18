@@ -1,0 +1,163 @@
+{{#> layout-capotiao-admin icon="bi bi-ticket-perforated" title="Cupones" description="Gesti&oacute;n de cupones de descuento" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-ticket-perforated me-2"></i>Listado de Cupones</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddCoupon">
+			<i class="bi bi-plus-circle me-1"></i> Nuevo Cup&oacute;n
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="couponsTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>C&oacute;digo</th>
+						<th>Descuento</th>
+						<th>Tipo</th>
+						<th>Usos</th>
+						<th>Vencimiento</th>
+						<th>Activo</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="couponModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="couponModalTitle">Cup&oacute;n</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="couponForm">
+					<input type="hidden" id="coupId" name="id">
+					<div class="row g-3">
+						<div class="col-md-6">
+							<label class="form-label required">C&oacute;digo</label>
+							<input type="text" class="form-control" id="coupCode" name="code" required placeholder="EJ: BIENVENIDO20">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Tipo</label>
+							<select class="form-select select2" id="coupType" name="type" required>
+								<option value="percentage">Porcentaje</option>
+								<option value="fixed">Monto fijo</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Valor</label>
+							<input type="number" class="form-control" id="coupValue" name="value" step="0.01" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Usos m&aacute;ximos</label>
+							<input type="number" class="form-control" id="coupMaxUses" name="max_uses" value="100" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de vencimiento</label>
+							<input type="date" class="form-control" id="coupExp" name="expires_at" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">&nbsp;</label>
+							<div class="form-check form-switch pt-2">
+								<input class="form-check-input" type="checkbox" id="coupActive" name="is_active" checked>
+								<label class="form-check-label" for="coupActive">Activo</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="couponForm" class="btn btn-primary" id="btnSaveCoupon">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const mockData = [
+		{ id: 1, code: 'BIENVENIDO20', type: 'percentage', value: 20, max_uses: 100, used: 45, expires_at: '2026-12-31', is_active: true },
+		{ id: 2, code: 'PREMIUM10', type: 'fixed', value: 10, max_uses: 50, used: 12, expires_at: '2026-09-30', is_active: true },
+		{ id: 3, code: 'ESCOLAR2026', type: 'percentage', value: 15, max_uses: 200, used: 0, expires_at: '2026-06-30', is_active: true },
+	];
+
+	let currentId = 3;
+
+	/* ── Mock API ── */
+	async function createCoupon(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const item = { ...payload, id: ++currentId, used: 0 };
+		mockData.unshift(item);
+		return App.makeResponse('S', 'Cup\u00f3n creado correctamente', { ...item });
+	}
+	async function updateCoupon(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(c => c.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Cup\u00f3n no encontrado');
+		Object.assign(mockData[idx], payload);
+		return App.makeResponse('S', 'Cup\u00f3n actualizado', { ...mockData[idx] });
+	}
+	async function removeCoupon(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(c => c.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Cup\u00f3n no encontrado');
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', 'Cup\u00f3n eliminado');
+	}
+
+	/* ── DataTable ── */
+	const table = $('#couponsTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('code', 'C\u00f3digo', { render: v => '<strong>' + v + '</strong>' }),
+			App.tblCol(null, 'Descuento', { render: d => d.type === 'percentage' ? d.value + '%' : '$' + d.value.toFixed(2) }),
+			App.tblBadge('type', 'Tipo', {
+				percentage: { color: 'info', label: 'Porcentaje' },
+				fixed: { color: 'primary', label: 'Fijo' },
+			}),
+			App.tblCol(null, 'Usos', { render: d => d.used + ' / ' + d.max_uses }),
+			App.tblCol('expires_at', 'Vencimiento'),
+			App.tblBoolean('is_active', 'Activo'),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'asc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddCoupon').on('click', () => App.openCrudModal('#couponModal', '#couponForm', 'create', {}, {
+		titleCreate: 'Nuevo Cup\u00f3n',
+		titleEdit: 'Editar Cup\u00f3n',
+	}));
+
+	App.onTableAction('#couponsTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#couponModal', '#couponForm', 'edit', row, { titleEdit: 'Editar Cup\u00f3n' });
+		}
+		if (action === 'delete') {
+			removeCoupon(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#couponsTable', mockData)));
+		}
+	});
+
+	$('#btnSaveCoupon').on('click', () => App.crudSave({
+		form: '#couponForm',
+		modal: '#couponModal',
+		table: '#couponsTable',
+		dataArray: mockData,
+		onCreate: (p) => createCoupon(p),
+		onUpdate: (id, p) => updateCoupon(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-admin}}

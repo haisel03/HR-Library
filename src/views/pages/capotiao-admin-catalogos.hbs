@@ -1,0 +1,96 @@
+{{#> layout-capotiao-admin icon="bi bi-bookmarks" title="Cat&aacute;logos" description="Administraci&oacute;n de cat&aacute;logos del sistema" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="row g-4">
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="countries">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-globe-americas display-3 text-primary mb-3 d-block"></i>
+				<h6 class="fw-bold">Pa&iacute;ses</h6>
+				<small class="text-muted">Gesti&oacute;n de pa&iacute;ses</small>
+			</div>
+		</a>
+	</div>
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="states">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-map display-3 text-success mb-3 d-block"></i>
+				<h6 class="fw-bold">Estados / Provincias</h6>
+				<small class="text-muted">Divisiones geogr&aacute;ficas</small>
+			</div>
+		</a>
+	</div>
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="cities">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-building display-3 text-info mb-3 d-block"></i>
+				<h6 class="fw-bold">Ciudades</h6>
+				<small class="text-muted">Cat&aacute;logo de ciudades</small>
+			</div>
+		</a>
+	</div>
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="currencies">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-currency-dollar display-3 text-warning mb-3 d-block"></i>
+				<h6 class="fw-bold">Monedas</h6>
+				<small class="text-muted">Tipos de moneda</small>
+			</div>
+		</a>
+	</div>
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="languages">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-translate display-3 text-danger mb-3 d-block"></i>
+				<h6 class="fw-bold">Idiomas</h6>
+				<small class="text-muted">Idiomas del sistema</small>
+			</div>
+		</a>
+	</div>
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="document-types">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-file-earmark-text display-3 text-secondary mb-3 d-block"></i>
+				<h6 class="fw-bold">Tipos de Documento</h6>
+				<small class="text-muted">DNI, RUC, Pasaporte, etc.</small>
+			</div>
+		</a>
+	</div>
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="education-levels">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-bar-chart-steps display-3 text-primary mb-3 d-block"></i>
+				<h6 class="fw-bold">Niveles Educativos</h6>
+				<small class="text-muted">Inicial, Primaria, Secundaria</small>
+			</div>
+		</a>
+	</div>
+	<div class="col-xl-3 col-lg-4 col-md-6">
+		<a href="#" class="card catalog-card shadow-sm text-decoration-none" data-catalog="payment-methods">
+			<div class="card-body text-center py-5">
+				<i class="bi bi-credit-card-2-back display-3 text-success mb-3 d-block"></i>
+				<h6 class="fw-bold">M&eacute;todos de Pago</h6>
+				<small class="text-muted">Tipos de pago disponibles</small>
+			</div>
+		</a>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	$('.catalog-card').on('click', function(e) {
+		e.preventDefault();
+		const catalog = $(this).data('catalog');
+		App.info({
+			title: 'Cat&aacute;logo: ' + catalog,
+			text: 'Aqu&iacute; se mostrar&aacute; la gesti&oacute;n del cat&aacute;logo "' + catalog + '" con un DataTable y modal CRUD.',
+		});
+	});
+});
+</script>
+
+<style>
+.catalog-card { transition: transform .2s, box-shadow .2s; cursor: pointer; }
+.catalog-card:hover { transform: translateY(-4px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; }
+</style>
+
+{{/layout-capotiao-admin}}

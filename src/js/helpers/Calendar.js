@@ -3,10 +3,9 @@
  * @description
  * Helper para FullCalendar en HR Library.
  * Gestiona instancias, eventos, navegación y calendarios arrastrables.
- * Usa locale español y la configuración de $Date.fullCalendar() como base.
  *
  * @example
- * const cal = Calendar.init("#divCal", {
+ * const cal = Calendar.create("#divCal", {
  *   events: "/api/eventos",
  *   onEventClick: (info) => Modal.open("#mdlEvento"),
  * });
@@ -14,7 +13,7 @@
  * Calendar.goTo("#divCal", "2026-06-01");
  * Calendar.setView("#divCal", "timeGridWeek");
  *
- * @version 3.0.0
+ * @version 4.0.0
  */
 
 import { Calendar as FC } from "@fullcalendar/core";
@@ -24,6 +23,7 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
 import esLocale from "@fullcalendar/core/locales/es";
+import config from "../core/config.js";
 
 /** Mapa de instancias activas: HTMLElement → FC. @private */
 const _instances = new Map();
@@ -41,17 +41,42 @@ const _el = (target) => {
 };
 
 const Calendar = {
-	/* ── Inicialización ── */
+	/* ── Inicialización (sistema) ── */
 
 	/**
-	 * Crea e inicializa un calendario FullCalendar.
+	 * Inicializa los calendarios del scope.
+	 * Busca elementos con data-calendar y los instancia con opciones del data-atributo.
+	 * Llamado automáticamente por init.js.
+	 *
+	 * @param {HTMLElement|Document} [scope=document]
+	 */
+	init(scope = document) {
+		const root = scope === document ? document : _el(scope);
+		if (!root) return;
+
+		const els = root.querySelectorAll("[data-calendar]");
+		els.forEach((el) => {
+			let opts = {};
+			try {
+				opts = JSON.parse(el.dataset.calendarOptions || "{}");
+			} catch {
+				/* ignore */
+			}
+			this.create(el, opts);
+		});
+	},
+
+	/* ── Creación de calendario ── */
+
+	/**
+	 * Crea e inicializa un calendario FullCalendar en un elemento.
 	 * Si ya existe una instancia en ese elemento, la retorna sin crear otra.
 	 *
 	 * @param {string|HTMLElement} target
 	 * @param {Object} [options={}]
-	 * @param {string}   [options.initialView="dayGridMonth"]
-	 * @param {boolean}  [options.editable=true]
-	 * @param {boolean}  [options.selectable=true]
+	 * @param {string}   [options.initialView]
+	 * @param {boolean}  [options.editable]
+	 * @param {boolean}  [options.selectable]
 	 * @param {Array|string} [options.events]  Array o URL AJAX.
 	 * @param {Function} [options.onEventClick]
 	 * @param {Function} [options.onDateClick]
@@ -59,7 +84,7 @@ const Calendar = {
 	 * @param {Function} [options.onSelect]
 	 * @returns {FC|null}
 	 */
-	init(target, options = {}) {
+	create(target, options = {}) {
 		const el = _el(target);
 		if (!el) {
 			console.warn("[Calendar] Elemento no encontrado:", target);
@@ -67,14 +92,22 @@ const Calendar = {
 		}
 		if (_instances.has(el)) return _instances.get(el);
 
+		const cfg = config.fullcalendar || {};
 		const calendar = new FC(el, {
 			plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
 			locale: esLocale,
-			initialView: options.initialView ?? "dayGridMonth",
-			editable: options.editable ?? true,
-			selectable: options.selectable ?? true,
-			firstDay: 1,
-			buttonText: { today: "Hoy", month: "Mes", week: "Semana", day: "Día", list: "Agenda" },
+			initialView: options.initialView ?? cfg.initialView ?? "dayGridMonth",
+			editable: options.editable ?? cfg.editable ?? true,
+			selectable: options.selectable ?? cfg.selectable ?? true,
+			firstDay: cfg.firstDay ?? 1,
+			buttonText: cfg.buttonText ?? {
+				today: "Hoy", month: "Mes", week: "Semana", day: "Día", list: "Agenda",
+			},
+			headerToolbar: cfg.headerToolbar ?? {
+				left: "prev,next today",
+				center: "title",
+				right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+			},
 			events: options.events ?? [],
 			eventClick: options.onEventClick ? (i) => options.onEventClick(i) : undefined,
 			dateClick: options.onDateClick ? (i) => options.onDateClick(i) : undefined,
@@ -210,14 +243,6 @@ const Calendar = {
 			...options,
 		});
 	},
-
-	/** @returns {void} */
-	/** Reservado para init.js — no hace nada en Calendar. @returns {void} */
-	initBoot() {},
 };
 
 export default Calendar;
-
-/* ── Alias boot-safe ── */
-// El init.js llama Calendar.init(scope). Cuando scope=document, el _el() retorna null
-// y la función retorna null silenciosamente. Es seguro.

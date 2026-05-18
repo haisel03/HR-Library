@@ -1,0 +1,175 @@
+{{#> layout-capotiao-admin icon="bi bi-credit-card" title="Suscripciones" description="Gesti&oacute;n de suscripciones de colegios" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-credit-card me-2"></i>Listado de Suscripciones</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddSubscription">
+			<i class="bi bi-plus-circle me-1"></i> Nueva Suscripci&oacute;n
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="subscriptionsTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Colegio</th>
+						<th>Plan</th>
+						<th>Inicio</th>
+						<th>Fin</th>
+						<th>Estado</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="subscriptionModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="subscriptionModalTitle">Suscripci&oacute;n</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="subscriptionForm">
+					<input type="hidden" id="subId" name="id">
+					<div class="row g-3">
+						<div class="col-12">
+							<label class="form-label required">Colegio</label>
+							<select class="form-select choices" id="subTenant" name="tenant_id" required>
+								<option value="">Seleccionar...</option>
+								<option value="1">Colegio San Jos&eacute;</option>
+								<option value="2">Instituto Moderno</option>
+								<option value="3">Liceo Cultural</option>
+							</select>
+						</div>
+						<div class="col-12">
+							<label class="form-label required">Plan</label>
+							<select class="form-select choices" id="subPlan" name="plan_id" required>
+								<option value="">Seleccionar...</option>
+								<option value="1">B&aacute;sico - $49.99</option>
+								<option value="2">Premium - $99.99</option>
+								<option value="3">Ilimitado - $149.99</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de inicio</label>
+							<input type="date" class="form-control" id="subStart" name="starts_at" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Fecha de fin</label>
+							<input type="date" class="form-control" id="subEnd" name="ends_at" required>
+						</div>
+						<div class="col-12">
+							<label class="form-label required">Estado</label>
+							<select class="form-select choices" id="subStatus" name="status" required>
+								<option value="active">Activa</option>
+								<option value="expired">Vencida</option>
+								<option value="cancelled">Cancelada</option>
+								<option value="trial">Prueba</option>
+							</select>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="subscriptionForm" class="btn btn-primary" id="btnSaveSub">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const tenantNames = { 1: 'Colegio San Jos&eacute;', 2: 'Instituto Moderno', 3: 'Liceo Cultural' };
+	const planNames = { 1: 'B&aacute;sico', 2: 'Premium', 3: 'Ilimitado' };
+
+	const mockData = [
+		{ id: 1, tenant_id: 1, tenant_name: 'Colegio San Jos&eacute;', plan_id: 2, plan_name: 'Premium', starts_at: '2026-01-15', ends_at: '2027-01-15', status: 'active' },
+		{ id: 2, tenant_id: 2, tenant_name: 'Instituto Moderno', plan_id: 1, plan_name: 'B&aacute;sico', starts_at: '2026-02-01', ends_at: '2027-02-01', status: 'active' },
+		{ id: 3, tenant_id: 3, tenant_name: 'Liceo Cultural', plan_id: 2, plan_name: 'Premium', starts_at: '2026-02-20', ends_at: '2027-02-20', status: 'trial' },
+	];
+
+	let currentId = 3;
+
+	/* ── Mock API ── */
+	async function createSub(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const t = tenantNames[payload.tenant_id] || 'Desconocido';
+		const p = planNames[payload.plan_id] || 'Desconocido';
+		const item = { ...payload, id: ++currentId, tenant_name: t, plan_name: p };
+		mockData.unshift(item);
+		return App.makeResponse('S', 'Suscripci\u00f3n creada correctamente', { ...item });
+	}
+	async function updateSub(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(s => s.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Suscripci\u00f3n no encontrada');
+		const t = tenantNames[payload.tenant_id] || 'Desconocido';
+		const p = planNames[payload.plan_id] || 'Desconocido';
+		Object.assign(mockData[idx], payload, { tenant_name: t, plan_name: p });
+		return App.makeResponse('S', 'Suscripci\u00f3n actualizada', { ...mockData[idx] });
+	}
+	async function removeSub(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(s => s.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Suscripci\u00f3n no encontrada');
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', 'Suscripci\u00f3n eliminada');
+	}
+
+	/* ── DataTable ── */
+	const table = $('#subscriptionsTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('tenant_name', 'Colegio'),
+			App.tblCol('plan_name', 'Plan'),
+			App.tblCol('starts_at', 'Inicio'),
+			App.tblCol('ends_at', 'Fin'),
+			App.tblBadge('status', 'Estado', {
+				active: { color: 'success', label: 'Activa' },
+				expired: { color: 'secondary', label: 'Vencida' },
+				cancelled: { color: 'danger', label: 'Cancelada' },
+				trial: { color: 'info', label: 'Prueba' },
+			}),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'desc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddSubscription').on('click', () => App.openCrudModal('#subscriptionModal', '#subscriptionForm', 'create', {}, {
+		titleCreate: 'Nueva Suscripci\u00f3n',
+		titleEdit: 'Editar Suscripci\u00f3n',
+	}));
+
+	App.onTableAction('#subscriptionsTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#subscriptionModal', '#subscriptionForm', 'edit', row, { titleEdit: 'Editar Suscripci\u00f3n' });
+		}
+		if (action === 'delete') {
+			removeSub(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#subscriptionsTable', mockData)));
+		}
+	});
+
+	$('#btnSaveSub').on('click', () => App.crudSave({
+		form: '#subscriptionForm',
+		modal: '#subscriptionModal',
+		table: '#subscriptionsTable',
+		dataArray: mockData,
+		onCreate: (p) => createSub(p),
+		onUpdate: (id, p) => updateSub(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-admin}}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> capotiao-head}}
+
+<body class="auth-body">
+	<main class="d-flex w-100">
+		<div class="container d-flex flex-column">
+			<div class="row vh-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto d-flex align-items-center">
+					<div class="w-100">
+						<div class="text-center mb-4">
+							<h1 class="auth-logo mb-3">
+								<img src="img/logotype.png" alt="Capotiao" class="img-fluid" width="260" style="object-fit:contain">
+							</h1>
+							<h2 class="auth-title text-white fw-bold">{{title}}</h2>
+							<p class="auth-description text-white-50 small mb-0">{{description}}</p>
+						</div>
+
+						<div class="card">
+							<div class="card-body">
+								{{> @partial-block}}
+							</div>
+						</div>
+
+						<div class="text-center mt-4 auth-footer">
+							{{#if authFooter}}{{{authFooter}}}{{/if}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+</body>
+
+</html>

@@ -15,21 +15,22 @@
  *  7.  Validation   — sin dependencias
  *  8.  Forms        — depende de Dom, Api, Alert, Validation
  *  9.  Select2      — depende de jQuery
- * 10.  Table        — depende de jQuery, Config
- * 11.  Modal        — depende de Bootstrap, Dom
- * 12.  Sidebar      — depende de SimpleBar, Dom
- * 13.  Iframe       — depende de Dom
- * 14.  Fullscreen   — depende de Dom
- * 15.  Editor       — depende de Quill
- * 16.  Signature    — depende de SignaturePad
- * 17.  Date         — sin dependencias externas
- * 18.  Charts       — depende de Chart.js
- * 19.  Codes        — depende de JsBarcode, QRCode
- * 20.  Humanize     — depende de humanize-duration
- * 21.  Icons        — depende de Feather Icons
- * 22.  Print        — sin dependencias externas
- * 23.  Excel        — depende de XLSX
- * 24.  Calendar     — depende de FullCalendar
+ * 10.  ChoicesJS    — vanilla, sin dependencias externas
+ * 11.  Table        — depende de jQuery, Config
+ * 12.  Modal        — depende de Bootstrap, Dom
+ * 13.  Sidebar      — depende de SimpleBar, Dom
+ * 14.  Iframe       — depende de Dom
+ * 15.  Fullscreen   — depende de Dom
+ * 16.  Editor       — depende de Quill
+ * 17.  Signature    — depende de SignaturePad
+ * 18.  Date         — sin dependencias externas
+ * 19.  Charts       — depende de Chart.js
+ * 20.  Codes        — depende de JsBarcode, QRCode
+ * 21.  Humanize     — depende de humanize-duration
+ * 22.  Icons        — depende de Feather Icons
+ * 23.  Print        — sin dependencias externas
+ * 24.  Excel        — depende de XLSX
+ * 25.  Calendar     — depende de FullCalendar
  *
  * @version 4.0.0
  */
@@ -52,6 +53,7 @@ import Editor from "../helpers/Editor.js";
 import Signature from "../helpers/Signature.js";
 import DateHelper from "../helpers/Date.js";
 import Charts from "../helpers/Charts.js";
+import ChoicesJS from "../helpers/ChoicesJS.js";
 import Codes from "../helpers/Codes.js";
 import Humanize from "../helpers/Humanize.js";
 import Icons from "../helpers/Icons.js";
@@ -77,6 +79,7 @@ const _helpers = [
 	{ name: "Validation", helper: Validation, required: false },
 	{ name: "Forms", helper: Forms, required: false },
 	{ name: "Select2", helper: Select2, required: false },
+	{ name: "ChoicesJS", helper: ChoicesJS, required: false },
 	{ name: "Table", helper: Table, required: false },
 	{ name: "Modal", helper: Modal, required: false },
 	{ name: "Sidebar", helper: Sidebar, required: false },
@@ -153,7 +156,7 @@ export default function init(scope = document) {
 		}
 	} else {
 		// Reinicialización parcial en scope (modal recién abierto, contenido dinámico)
-		const scoped = [Forms, Select2, Table, Editor, Signature, DateHelper, Icons, Codes];
+		const scoped = [Forms, Select2, ChoicesJS, Table, Editor, Signature, DateHelper, Icons, Codes, Calendar];
 		scoped.forEach(({ init: fn }) => {
 			if (typeof fn === "function") {
 				try {

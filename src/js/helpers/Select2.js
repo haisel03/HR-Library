@@ -16,24 +16,7 @@
  */
 
 import $ from "jquery";
-
-/* ── Config base Select2 ── */
-const _S2_BASE = Object.freeze({
-	theme: "bootstrap-5",
-	width: "100%",
-	allowClear: true,
-	language: {
-		errorLoading: () => "No se pudieron cargar los resultados.",
-		inputTooLong: ({ maximum, input }) => `Por favor, elimine ${input.length - maximum} caractere(s).`,
-		inputTooShort: ({ minimum }) => `Por favor, ingrese ${minimum} o más caracteres.`,
-		loadingMore: () => "Cargando más resultados...",
-		maximumSelected: ({ maximum }) => `Solo puede seleccionar ${maximum} opción(es).`,
-		noResults: () => "No se encontraron resultados.",
-		searching: () => "Buscando...",
-		removeAllItems: () => "Eliminar todos los elementos.",
-	},
-	placeholder: "Seleccione una opción",
-});
+import config from "../core/config.js";
 
 /* ── Helpers privados ── */
 const _isInit = ($el) => $el.hasClass("select2-hidden-accessible");
@@ -59,6 +42,8 @@ const Select2 = {
 			return;
 		}
 
+		const base = config.select2 || {};
+
 		$(scope)
 			.find("select.select2")
 			.each(function () {
@@ -68,8 +53,8 @@ const Select2 = {
 				_destroy($select);
 
 				$select.select2({
-					..._S2_BASE,
-					placeholder: $select.data("placeholder") || _S2_BASE.placeholder,
+					...base,
+					placeholder: $select.data("placeholder") || base.placeholder || "Seleccione una opción",
 					dropdownParent: parentModal.length ? parentModal : $(document.body),
 					...options,
 				});

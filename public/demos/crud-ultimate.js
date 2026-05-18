@@ -52,8 +52,6 @@ $(async function () {
 				buttons: App.tblButtons(["excel", "pdf", "print"]),
 			});
 
-			App.select2Init(document, { placeholder: "Seleccionar Rol..." });
-
 			// App.flatpickrOptions() devuelve opciones — se pasan al llamado nativo de flatpickr
 			flatpickr("#empJoinDate", App.flatpickrOptions({ type: "date", defaultDate: "today", altInput: true }));
 
@@ -67,6 +65,8 @@ $(async function () {
 				App.toastInfo("Tienes un borrador guardado");
 				currentDraft = draft;
 			}
+
+			await loadUsers();
 
 			App.close();
 		} catch (error) {
@@ -87,7 +87,7 @@ $(async function () {
 			App.val("#empName",  row.name);
 			App.val("#empEmail", row.email);
 			App.val("#empPhone", row.phone);
-			App.select2Set("#empRole", "IT");
+			App.val("#empRole", "IT");
 			App.val("#empSalary", (row.username?.length || 5) * 5000);
 			updateSalaryPreview();
 			App.modalOpen("#employeeModal");
@@ -174,6 +174,29 @@ $(async function () {
 
 	/* ── HELPERS LOCALES ── */
 
+	async function loadUsers() {
+		const raw = await App.getApi("https://jsonplaceholder.typicode.com/users");
+		const result = {
+			isError: false,
+			message: "",
+			type: "s",
+			data: raw.map(u => ({ codigo: u.id, descripcion: u.name })),
+		};
+		const sl = App.q("select.slUsers");
+		if (!sl) return;
+		sl.innerHTML = `<option value="">Seleccione...</option>` +
+			result.data.map(item => `<option value="${item.codigo}">${item.descripcion}</option>`).join("");
+		if (result.data.length >= 10) {
+			const $sl = $(sl);
+			if ($sl.data("select2")) $sl.select2("destroy");
+			const parentModal = $sl.closest(".modal");
+			$sl.select2({
+				...App.config.select2,
+				dropdownParent: parentModal.length ? parentModal : $(document.body),
+			});
+		}
+	}
+
 	function resetForm() {
 		App.clearForm("#employeeForm");
 		App.clearSignature("#empSignature");
@@ -187,7 +210,7 @@ $(async function () {
 		App.val("#empName",  data.name);
 		App.val("#empEmail", data.email);
 		App.val("#empPhone", data.phone);
-		App.select2Set("#empRole", data.role);
+		App.val("#empRole", data.role);
 		App.val("#empSalary", data.salary);
 		updateSalaryPreview();
 	}

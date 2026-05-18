@@ -1,0 +1,164 @@
+{{#> layout-capotiao-tenant icon="bi bi-layers" title="Grados y Niveles" description="Gesti&oacute;n de grados acad&eacute;micos" userName="Juan P&eacute;rez" userBadge="Director"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-layers me-2"></i>Listado de Grados</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddGrade">
+			<i class="bi bi-plus-circle me-1"></i> Nuevo Grado
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="gradesTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Nivel</th>
+						<th>Secciones</th>
+						<th>Estudiantes</th>
+						<th>Activo</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="gradeModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="gradeModalTitle">Grado</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="gradeForm">
+					<input type="hidden" id="gradeId" name="id">
+					<div class="row g-3">
+						<div class="col-12">
+							<label class="form-label required">Nombre del grado</label>
+							<input type="text" class="form-control" id="gradeName" name="name" required placeholder="Ej: Primer Grado">
+						</div>
+						<div class="col-12">
+							<label class="form-label required">Nivel educativo</label>
+							<select class="form-select select2" id="gradeLevel" name="level" required>
+								<option value="">Seleccionar...</option>
+								<option value="initial">Inicial</option>
+								<option value="primary">Primaria</option>
+								<option value="secondary">Secundaria</option>
+							</select>
+						</div>
+						<div class="col-12">
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="gradeActive" name="is_active" checked>
+								<label class="form-check-label" for="gradeActive">Grado activo</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="gradeForm" class="btn btn-primary" id="btnSaveGrade">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+
+
+	const mockData = [
+		{ id: 1, name: 'Primer Grado', level: 'primary', secciones: 3, estudiantes: 75, is_active: true },
+		{ id: 2, name: 'Segundo Grado', level: 'primary', secciones: 3, estudiantes: 82, is_active: true },
+		{ id: 3, name: 'Tercer Grado', level: 'primary', secciones: 2, estudiantes: 58, is_active: true },
+		{ id: 4, name: 'Cuarto Grado', level: 'primary', secciones: 2, estudiantes: 61, is_active: true },
+		{ id: 5, name: 'Quinto Grado', level: 'primary', secciones: 2, estudiantes: 55, is_active: true },
+		{ id: 6, name: 'Sexto Grado', level: 'primary', secciones: 2, estudiantes: 63, is_active: true },
+		{ id: 7, name: '1er A&ntilde;o', level: 'secondary', secciones: 3, estudiantes: 90, is_active: true },
+		{ id: 8, name: '2do A&ntilde;o', level: 'secondary', secciones: 3, estudiantes: 85, is_active: true },
+		{ id: 9, name: '3er A&ntilde;o', level: 'secondary', secciones: 2, estudiantes: 52, is_active: true },
+		{ id: 10, name: '4to A&ntilde;o', level: 'secondary', secciones: 2, estudiantes: 48, is_active: true },
+		{ id: 11, name: '5to A&ntilde;o', level: 'secondary', secciones: 2, estudiantes: 45, is_active: true },
+		{ id: 12, name: 'Pre-Kinder', level: 'initial', secciones: 2, estudiantes: 40, is_active: true },
+		{ id: 13, name: 'Kinder', level: 'initial', secciones: 2, estudiantes: 38, is_active: true },
+		{ id: 14, name: 'Preparatorio', level: 'initial', secciones: 2, estudiantes: 42, is_active: true },
+	];
+
+	let currentId = 14;
+
+	/* ── Mock API ── */
+	async function createGrade(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const item = { ...payload, id: ++currentId, secciones: 0, estudiantes: 0 };
+		mockData.unshift(item);
+		return App.makeResponse('S', 'Grado creado correctamente', { ...item });
+	}
+	async function updateGrade(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(g => g.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Grado no encontrado');
+		Object.assign(mockData[idx], payload);
+		return App.makeResponse('S', 'Grado actualizado', { ...mockData[idx] });
+	}
+	async function removeGrade(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(g => g.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Grado no encontrado');
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', 'Grado eliminado');
+	}
+
+	/* ── DataTable ── */
+	const table = $('#gradesTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('name', 'Nombre'),
+			App.tblBadge('level', 'Nivel', {
+				initial: { color: 'info', label: 'Inicial' },
+				primary: { color: 'primary', label: 'Primaria' },
+				secondary: { color: 'success', label: 'Secundaria' },
+			}),
+			App.tblCol('secciones', 'Secciones'),
+			App.tblCol('estudiantes', 'Estudiantes'),
+			App.tblBoolean('is_active', 'Activo'),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'asc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 15
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddGrade').on('click', () => App.openCrudModal('#gradeModal', '#gradeForm', 'create', {}, {
+		titleCreate: 'Nuevo Grado',
+		titleEdit: 'Editar Grado',
+	}));
+
+	App.onTableAction('#gradesTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#gradeModal', '#gradeForm', 'edit', row, { titleEdit: 'Editar Grado' });
+		}
+		if (action === 'delete') {
+			removeGrade(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#gradesTable', mockData)));
+		}
+	});
+
+	$('#btnSaveGrade').on('click', () => App.crudSave({
+		form: '#gradeForm',
+		modal: '#gradeModal',
+		table: '#gradesTable',
+		dataArray: mockData,
+		onCreate: (p) => createGrade(p),
+		onUpdate: (id, p) => updateGrade(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-tenant}}

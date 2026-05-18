@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> capotiao-head}}
+
+<body>
+	<div class="wrapper">
+		{{> capotiao-tenant-sidebar}}
+
+		<div class="main">
+			{{> capotiao-header}}
+
+			<main class="content">
+				<div class="container-fluid p-0">
+					{{> header}}
+
+					{{> @partial-block}}
+
+				</div>
+			</main>
+
+			{{> capotiao-footer}}
+		</div>
+	</div>
+
+</body>
+
+</html>

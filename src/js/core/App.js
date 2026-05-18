@@ -38,6 +38,7 @@ import Api from "../helpers/Api.js";
 import Asset from "../helpers/Asset.js";
 import Calendar from "../helpers/Calendar.js";
 import Charts from "../helpers/Charts.js";
+import ChoicesJS from "../helpers/ChoicesJS.js";
 import Codes from "../helpers/Codes.js";
 import Currency from "../helpers/Currency.js";
 import DateHelper from "../helpers/Date.js";
@@ -63,6 +64,7 @@ import Storage from "../helpers/Storage.js";
 import Strings from "../helpers/Strings.js";
 import Table from "../helpers/Table.js";
 import Validation from "../helpers/Validation.js";
+import Custon from "../helpers/Custon.js";
 
 const App = {
 	/* ── Meta ── */
@@ -261,7 +263,13 @@ const App = {
 	loading: Alert.loading,
 
 	/**
-	 * Cierra la alerta actualmente abierta.
+	 * Cierra la alerta / loading actualmente abierto.
+	 * @returns {void}
+	 */
+	close: Alert.close,
+
+	/**
+	 * Alias de {@link App.close}
 	 * @returns {void}
 	 */
 	closeAlert: Alert.close,
@@ -965,14 +973,14 @@ const App = {
 	 * @param {string|HTMLElement} target Selector o elemento contenedor
 	 * @returns {Object|null} Instancia de Quill o null
 	 */
-	getEditor: Editor.get,
+	getEditor: Editor.get.bind(Editor),
 
 	/**
 	 * Obtiene el contenido HTML del editor.
 	 * @param {string|HTMLElement} target Selector o elemento contenedor
 	 * @returns {string} HTML del contenido
 	 */
-	getEditorHtml: Editor.getHtml,
+	getEditorHtml: Editor.getHtml.bind(Editor),
 
 	/**
 	 * Establece el contenido HTML del editor.
@@ -980,14 +988,14 @@ const App = {
 	 * @param {string} html Contenido HTML a insertar
 	 * @returns {void}
 	 */
-	setEditorHtml: Editor.setHtml,
+	setEditorHtml: Editor.setHtml.bind(Editor),
 
 	/**
 	 * Destruye el editor liberando recursos.
 	 * @param {string|HTMLElement} target Selector o elemento contenedor
 	 * @returns {void}
 	 */
-	destroyEditor: Editor.destroy,
+	destroyEditor: Editor.destroy.bind(Editor),
 
 	/* ── Firma digital ── */
 
@@ -1028,7 +1036,7 @@ const App = {
 	 * @param {Object} [options={}] Opciones de FullCalendar
 	 * @returns {Object|null} Instancia del calendario
 	 */
-	initCalendar: Calendar.init,
+	initCalendar: Calendar.create,
 
 	/**
 	 * Obtiene la instancia del calendario.
@@ -1051,6 +1059,44 @@ const App = {
 	 * @returns {void}
 	 */
 	clearCalendarEvents: Calendar.clearEvents,
+
+	/**
+	 * Elimina un evento del calendario por su ID.
+	 * @param {string|HTMLElement} target Selector o elemento contenedor
+	 * @param {string|number} eventId ID del evento
+	 * @returns {void}
+	 */
+	removeCalendarEvent: Calendar.removeEvent,
+
+	/**
+	 * Recarga eventos desde la fuente de datos.
+	 * @param {string|HTMLElement} target Selector o elemento contenedor
+	 * @returns {void}
+	 */
+	refetchCalendarEvents: Calendar.refetchEvents,
+
+	/**
+	 * Destruye el calendario liberando recursos.
+	 * @param {string|HTMLElement} target Selector o elemento contenedor
+	 * @returns {void}
+	 */
+	destroyCalendar: Calendar.destroy,
+
+	/**
+	 * Navega a una fecha específica en el calendario.
+	 * @param {string|HTMLElement} target Selector o elemento contenedor
+	 * @param {Date|string} date Fecha a la que navegar
+	 * @returns {void}
+	 */
+	calendarGoTo: Calendar.goTo,
+
+	/**
+	 * Cambia la vista actual del calendario.
+	 * @param {string|HTMLElement} target Selector o elemento contenedor
+	 * @param {"dayGridMonth"|"timeGridWeek"|"timeGridDay"|"listWeek"} view Nombre de la vista
+	 * @returns {void}
+	 */
+	calendarSetView: Calendar.setView,
 
 	/**
 	 * Hace que elementos externos sean arrastrables al calendario.
@@ -1982,6 +2028,79 @@ const App = {
 	 */
 	select2Init: Select2.init,
 
+	/* ── Choices JS ── */
+
+	/**
+	 * Inicializa Choices en todos los `<select class="choices">` del scope.
+	 * @param {HTMLElement|Document} [scope=document] Scope de búsqueda
+	 * @param {Object} [options={}] Opciones adicionales de Choices
+	 * @returns {void}
+	 */
+	choicesInit: ChoicesJS.init,
+
+	/**
+	 * Obtiene la instancia de Choices de un select.
+	 * @param {string|HTMLElement} el Selector o elemento
+	 * @returns {Object|null} Instancia de Choices o null
+	 */
+	choicesGet: ChoicesJS.getInstance,
+
+	/**
+	 * Obtiene el valor actual de un Choices.
+	 * @param {string|HTMLElement} el Selector o elemento
+	 * @param {boolean} [asString=true] true devuelve string, false devuelve array
+	 * @returns {string|string[]|null}
+	 */
+	choicesGetValue: ChoicesJS.getValue,
+
+	/**
+	 * Establece el valor de un Choices.
+	 * @param {string|HTMLElement} el Selector o elemento
+	 * @param {string|string[]|Object[]} value Valor o array de valores
+	 * @param {boolean} [triggerChange=true] Dispara evento change
+	 * @returns {void}
+	 */
+	choicesSet: ChoicesJS.setValue,
+
+	/**
+	 * Limpia la selección de un Choices.
+	 * @param {string|HTMLElement} el Selector o elemento
+	 * @returns {void}
+	 */
+	choicesClear: ChoicesJS.clear,
+
+	/**
+	 * Habilita un Choices.
+	 * @param {string|HTMLElement} el Selector o elemento
+	 * @returns {void}
+	 */
+	choicesEnable: ChoicesJS.enable,
+
+	/**
+	 * Deshabilita un Choices.
+	 * @param {string|HTMLElement} el Selector o elemento
+	 * @returns {void}
+	 */
+	choicesDisable: ChoicesJS.disable,
+
+	/**
+	 * Destruye la instancia de Choices de un select.
+	 * @param {string|HTMLElement} el Selector o elemento
+	 * @returns {void}
+	 */
+	choicesDestroy: ChoicesJS.destroy,
+
+	/* ── Custon ── */
+
+	/**
+	 * Carga opciones de un select desde una API.
+	 * @param {string} name Nombre semántico (ej: "users" → busca select.slUsers)
+	 * @param {string} url Endpoint de la API
+	 * @param {Object} [param] Parámetros opcionales
+	 * @returns {Promise<void>}
+	 */
+	getSelect: Custon.getSelect,
+
 	/* ── Sidebar ── */
 
 	/**
@@ -2320,6 +2439,165 @@ const App = {
 	 * @returns {string} URL del placeholder
 	 */
 	assetPlaceholder: Asset.placeholder,
+
+	/* ── CRUD (AppResponse) ── */
+
+	/**
+	 * Construye una respuesta estándar AppResponse.
+	 * @param {"S"|"D"|"W"|"I"} type Tipo: S=success, D=danger/error, W=warning, I=info
+	 * @param {string} message Mensaje descriptivo
+	 * @param {*} [data=null] Datos adicionales
+	 * @returns {Object} { isError, type, Message, data }
+	 *
+	 * @example
+	 * App.makeResponse("S", "Guardado exitoso", { id: 1 });
+	 * // { isError: false, type: "S", Message: "Guardado exitoso", data: { id: 1 } }
+	 */
+	makeResponse: (type, message, data = null) => ({
+		isError: type === "D" || type === "W",
+		type,
+		Message: message,
+		data,
+	}),
+
+	/**
+	 * Maneja una respuesta en formato AppResponse mostrando la notificación
+	 * correspondiente según el tipo (S→success, D→error, W→warning, I→info).
+	 * @param {Object} res Respuesta con { isError, type, Message, data }
+	 * @param {Function} [onSuccess] Callback ejecutado con res.data si es exitoso
+	 * @returns {Object} La misma respuesta
+	 *
+	 * @example
+	 * const res = await App.postApi("/api/usuarios", data);
+	 * App.handleApiResponse(res, (data) => App.refreshTbl("#tabla", data));
+	 */
+	handleApiResponse: (res, onSuccess) => {
+		if (!res.isError) {
+			if (res.type === "S") Alert.success(res.Message);
+			else if (res.type === "I") Alert.info(res.Message);
+			if (typeof onSuccess === "function") onSuccess(res.data);
+		} else {
+			if (res.type === "D") Alert.error(res.Message);
+			else if (res.type === "W") Alert.warning(res.Message);
+		}
+		return res;
+	},
+
+	/**
+	 * Abre un modal CRUD reseteando el formulario y llenándolo en modo edición.
+	 * @param {string} modalSelector Selector del modal
+	 * @param {string} formSelector Selector del formulario
+	 * @param {"create"|"edit"} mode Modo: "create" o "edit"
+	 * @param {Object} [data={}] Datos para llenar el formulario (solo en modo edit)
+	 * @param {Object} [options={}] Opciones adicionales
+	 * @param {string} [options.titleCreate="Nuevo Registro"] Título en modo create
+	 * @param {string} [options.titleEdit="Editar Registro"] Título en modo edit
+	 *
+	 * @example
+	 * App.openCrudModal("#userModal", "#userForm", "edit", user);
+	 */
+	openCrudModal: (modalSelector, formSelector, mode, data = {}, options = {}) => {
+		const { titleCreate = "Nuevo Registro", titleEdit = "Editar Registro" } = options;
+
+		Forms.clear(formSelector);
+		const formEl = Forms.resolveForm(formSelector);
+		if (formEl) {
+			const idInput = formEl.querySelector('[name="id"]');
+			if (idInput) idInput.value = "";
+		}
+
+		if (mode === "edit" && Object.keys(data).length) {
+			Modal.setTitle(modalSelector, titleEdit);
+			Forms.fill(formSelector, data);
+		} else {
+			Modal.setTitle(modalSelector, titleCreate);
+		}
+
+		Modal.open(modalSelector, data);
+	},
+
+	/**
+	 * Ejecuta el flujo completo de guardado CRUD:
+	 * valida formulario → serializa → confirma → ejecuta → maneja respuesta.
+	 * @param {Object} options
+	 * @param {string} options.form Selector del formulario
+	 * @param {string} [options.modal] Selector del modal a cerrar tras éxito
+	 * @param {string} [options.table] Selector de la tabla a refrescar
+	 * @param {Object[]} [options.dataArray] Array de datos para refrescar la tabla
+	 * @param {Function} options.onCreate Función asíncrona (payload) => AppResponse
+	 * @param {Function} options.onUpdate Función asíncrona (id, payload) => AppResponse
+	 *
+	 * @example
+	 * App.crudSave({
+	 *   form: "#userForm",
+	 *   modal: "#userModal",
+	 *   table: "#usersTable",
+	 *   dataArray: users,
+	 *   onCreate: (p) => createUser(p),
+	 *   onUpdate: (id, p) => updateUser(id, p),
+	 * });
+	 */
+	crudSave: async (options) => {
+		const { form, modal, table, dataArray, onCreate, onUpdate } = options;
+
+		if (!Forms.isValid(form)) return;
+
+		const payload = Forms.serialize(form);
+		const id = parseInt(payload.id, 10);
+		delete payload.id;
+
+		const isUpdate = !isNaN(id) && id > 0;
+
+		const confirmed = isUpdate ? await Alert.confirmUpdate() : await Alert.confirmInsert();
+		if (!confirmed) return;
+
+		Alert.loading(true);
+		try {
+			const res = isUpdate ? await onUpdate(id, payload) : await onCreate(payload);
+			App.handleApiResponse(res, () => {
+				if (table && dataArray) Table.refresh(table, dataArray);
+				if (modal) Modal.close(modal);
+			});
+		} finally {
+			Alert.loading(false);
+		}
+	},
+
+	/**
+	 * Ejecuta el flujo completo de eliminación CRUD:
+	 * confirma → ejecuta → maneja respuesta.
+	 * @param {Object} options
+	 * @param {number|string} options.id ID del registro a eliminar
+	 * @param {Function} options.onDelete Función asíncrona (id) => AppResponse
+	 * @param {string} [options.name] Nombre del registro (para confirmación personalizada)
+	 * @param {string} [options.table] Selector de la tabla a refrescar
+	 * @param {Object[]} [options.dataArray] Array de datos para refrescar la tabla
+	 *
+	 * @example
+	 * App.crudDelete({
+	 *   id: 5,
+	 *   name: "Juan Pérez",
+	 *   onDelete: (id) => removeUser(id),
+	 *   table: "#usersTable",
+	 *   dataArray: users,
+	 * });
+	 */
+	crudDelete: async (options) => {
+		const { id, onDelete, name, table, dataArray } = options;
+
+		const confirmed = name ? await Alert.confirmDeleteByName(name) : await Alert.confirmDelete();
+		if (!confirmed) return;
+
+		Alert.loading(true);
+		try {
+			const res = await onDelete(id);
+			App.handleApiResponse(res, () => {
+				if (table && dataArray) Table.refresh(table, dataArray);
+			});
+		} finally {
+			Alert.loading(false);
+		}
+	},
 };
 
 /* ── Plugin system ── */

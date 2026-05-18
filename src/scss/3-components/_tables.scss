@@ -120,7 +120,7 @@
 
 /* ── DataTables overrides ─────────────────────────────────────────────────── */
 
-.dataTables_wrapper {
+div.dt-container {
 	.dataTables_filter input {
 		background: $input-bg;
 		border: 1px solid $input-border-color;
@@ -149,6 +149,16 @@
 	.dataTables_filter label {
 		font-size: 0.82rem;
 		color: $secondary;
+	}
+
+	div.dt-paging ul.pagination {
+		justify-content: flex-end;
+	}
+
+	@media (max-width: 767px) {
+		div.dt-paging ul.pagination {
+			justify-content: flex-end !important;
+		}
 	}
 
 	.paginate_button {

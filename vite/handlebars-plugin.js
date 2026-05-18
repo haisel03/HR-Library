@@ -64,7 +64,7 @@ export default function handlebarsPlugin(options = {}) {
       '\n<script type="module" src="./src/js/app.js"></script>\n';
 
     if (demo) {
-      scripts += `<script src="./demos/${pageName}.js"></script>\n`;
+      scripts += `<script type="module" src="./demos/${pageName}.js"></script>\n`;
     }
 
     if (htmlContent.includes("</body>")) {

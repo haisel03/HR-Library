@@ -1,0 +1,168 @@
+{{#> layout-capotiao-tenant icon="bi bi-book" title="Materias" description="Gesti&oacute;n de materias acad&eacute;micas" userName="Juan P&eacute;rez" userBadge="Director"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-book me-2"></i>Listado de Materias</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddSubject">
+			<i class="bi bi-plus-circle me-1"></i> Nueva Materia
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="subjectsTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Grado</th>
+						<th>Profesor</th>
+						<th>Horas/Sem</th>
+						<th>Activa</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="subjectModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="subjectModalTitle">Materia</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="subjectForm">
+					<input type="hidden" id="subjId" name="id">
+					<div class="row g-3">
+						<div class="col-12">
+							<label class="form-label required">Nombre de la materia</label>
+							<input type="text" class="form-control" id="subjName" name="name" required placeholder="Ej: Matem&aacute;ticas">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Grado</label>
+							<select class="form-select choices" id="subjGrade" name="grade_id" required>
+								<option value="">Seleccionar...</option>
+								<option value="1">Primer Grado</option>
+								<option value="2">Segundo Grado</option>
+								<option value="3">Tercer Grado</option>
+								<option value="5">Quinto Grado</option>
+								<option value="7">1er A&ntilde;o</option>
+								<option value="8">2do A&ntilde;o</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Profesor</label>
+							<input type="text" class="form-control" id="subjTeacher" name="teacher" required placeholder="Ej: Prof. Juan">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Horas semanales</label>
+							<input type="number" class="form-control" id="subjHours" name="hours_per_week" min="1" max="10" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">&nbsp;</label>
+							<div class="form-check form-switch pt-2">
+								<input class="form-check-input" type="checkbox" id="subjActive" name="is_active" checked>
+								<label class="form-check-label" for="subjActive">Materia activa</label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="subjectForm" class="btn btn-primary" id="btnSaveSubject">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const gradeNames = { 1: 'Primer Grado', 2: 'Segundo Grado', 3: 'Tercer Grado', 5: 'Quinto Grado', 7: '1er A&ntilde;o', 8: '2do A&ntilde;o' };
+
+	const mockData = [
+		{ id: 1, name: 'Matem&aacute;ticas', grade_id: 1, grade_name: 'Primer Grado', teacher: 'Prof. Carlos Mendoza', hours_per_week: 5, is_active: true },
+		{ id: 2, name: 'Lengua y Literatura', grade_id: 1, grade_name: 'Primer Grado', teacher: 'Prof. Ana Torres', hours_per_week: 5, is_active: true },
+		{ id: 3, name: 'Ciencias Naturales', grade_id: 3, grade_name: 'Tercer Grado', teacher: 'Prof. Laura Gim&eacute;nez', hours_per_week: 3, is_active: true },
+		{ id: 4, name: 'Historia', grade_id: 7, grade_name: '1er A&ntilde;o', teacher: 'Prof. Roberto Sosa', hours_per_week: 4, is_active: true },
+		{ id: 5, name: 'Ingl&eacute;s', grade_id: 5, grade_name: 'Quinto Grado', teacher: 'Prof. Emily Brown', hours_per_week: 3, is_active: true },
+		{ id: 6, name: 'Educaci&oacute;n F&iacute;sica', grade_id: 2, grade_name: 'Segundo Grado', teacher: 'Prof. Diego Ruiz', hours_per_week: 2, is_active: true },
+		{ id: 7, name: 'Qu&iacute;mica', grade_id: 8, grade_name: '2do A&ntilde;o', teacher: 'Prof. Laura Gim&eacute;nez', hours_per_week: 4, is_active: true },
+		{ id: 8, name: 'Arte y M&uacute;sica', grade_id: 1, grade_name: 'Primer Grado', teacher: 'Prof. Sof&iacute;a Vega', hours_per_week: 2, is_active: false },
+	];
+
+	let currentId = 8;
+
+	/* ── Mock API ── */
+	async function createSubject(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const g = gradeNames[payload.grade_id] || 'Desconocido';
+		const item = { ...payload, id: ++currentId, grade_name: g };
+		mockData.unshift(item);
+		return App.makeResponse('S', 'Materia creada correctamente', { ...item });
+	}
+	async function updateSubject(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(s => s.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Materia no encontrada');
+		const g = gradeNames[payload.grade_id] || 'Desconocido';
+		Object.assign(mockData[idx], payload, { grade_name: g });
+		return App.makeResponse('S', 'Materia actualizada', { ...mockData[idx] });
+	}
+	async function removeSubject(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(s => s.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Materia no encontrada');
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', 'Materia eliminada');
+	}
+
+	/* ── DataTable ── */
+	const table = $('#subjectsTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('name', 'Nombre'),
+			App.tblCol('grade_name', 'Grado'),
+			App.tblCol('teacher', 'Profesor'),
+			App.tblCol('hours_per_week', 'Horas/Sem', { render: v => v + ' h' }),
+			App.tblBoolean('is_active', 'Activa'),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'asc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddSubject').on('click', () => App.openCrudModal('#subjectModal', '#subjectForm', 'create', {}, {
+		titleCreate: 'Nueva Materia',
+		titleEdit: 'Editar Materia',
+	}));
+
+	App.onTableAction('#subjectsTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#subjectModal', '#subjectForm', 'edit', row, { titleEdit: 'Editar Materia' });
+		}
+		if (action === 'delete') {
+			removeSubject(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#subjectsTable', mockData)));
+		}
+	});
+
+	$('#btnSaveSubject').on('click', () => App.crudSave({
+		form: '#subjectForm',
+		modal: '#subjectModal',
+		table: '#subjectsTable',
+		dataArray: mockData,
+		onCreate: (p) => createSubject(p),
+		onUpdate: (id, p) => updateSubject(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-tenant}}

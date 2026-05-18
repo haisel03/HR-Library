@@ -1,0 +1,165 @@
+{{#> layout-capotiao-admin icon="bi bi-building" title="Colegios" description="Gesti&oacute;n de centros educativos" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+		<h6 class="fw-bold mb-0"><i class="bi bi-building me-2"></i>Listado de Colegios</h6>
+		<button class="btn btn-primary btn-sm" id="btnAddTenant">
+			<i class="bi bi-plus-circle me-1"></i> Nuevo Colegio
+		</button>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="tenantsTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Nombre</th>
+						<th>Dominio</th>
+						<th>Plan</th>
+						<th>Estado</th>
+						<th>Registro</th>
+						<th style="width:120px">Acciones</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="tenantModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="tenantModalTitle">Colegio</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<form id="tenantForm">
+					<input type="hidden" id="tenantId" name="id">
+					<div class="row g-3">
+						<div class="col-md-6">
+							<label class="form-label required">Nombre del colegio</label>
+							<input type="text" class="form-control" id="tenantName" name="name" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Dominio</label>
+							<input type="text" class="form-control" id="tenantDomain" name="domain" required>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Plan</label>
+							<select class="form-select choices" id="tenantPlan" name="plan_id" required>
+								<option value="">Seleccionar...</option>
+								<option value="1">B&aacute;sico - $49.99</option>
+								<option value="2">Premium - $99.99</option>
+								<option value="3">Ilimitado - $149.99</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label required">Estado</label>
+							<select class="form-select choices" id="tenantStatus" name="status" required>
+								<option value="active">Activo</option>
+								<option value="suspended">Suspendido</option>
+								<option value="trial">Prueba</option>
+							</select>
+						</div>
+						<div class="col-12">
+							<label class="form-label">Direcci&oacute;n</label>
+							<textarea class="form-control" id="tenantAddress" name="address" rows="2"></textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+				<button type="submit" form="tenantForm" class="btn btn-primary" id="btnSaveTenant">Guardar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	/* ── Mock Data ── */
+	const mockData = [
+		{ id: 1, name: 'Colegio San Jos&eacute;', domain: 'sanjose.capotiao.test', plan: 'Premium', plan_id: 2, status: 'active', address: 'Av. Principal 123', created_at: '2026-01-15' },
+		{ id: 2, name: 'Instituto Moderno', domain: 'moderno.capotiao.test', plan: 'B&aacute;sico', plan_id: 1, status: 'active', address: 'Calle 45 #67', created_at: '2026-02-01' },
+		{ id: 3, name: 'Liceo Cultural', domain: 'cultural.capotiao.test', plan: 'Premium', plan_id: 2, status: 'active', address: 'Cra 8 #12-34', created_at: '2026-02-20' },
+		{ id: 4, name: 'Escuela T&eacute;cnica N&ordm;3', domain: 'tecnica3.capotiao.test', plan: 'Ilimitado', plan_id: 3, status: 'active', address: 'Av. Industrial 567', created_at: '2026-03-05' },
+		{ id: 5, name: 'Colegio Biling&uuml;e', domain: 'bilingue.capotiao.test', plan: 'Premium', plan_id: 2, status: 'suspended', address: 'Zona Rosa 890', created_at: '2026-03-10' },
+	];
+
+	let currentId = 5;
+	const planNames = { 1: 'B&aacute;sico', 2: 'Premium', 3: 'Ilimitado' };
+
+	/* ── Mock API ── */
+	async function createTenant(payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const item = { ...payload, id: ++currentId, plan: planNames[payload.plan_id], created_at: new Date().toISOString().split('T')[0] };
+		mockData.unshift(item);
+		return App.makeResponse('S', `Colegio "${item.name}" creado correctamente`, { ...item });
+	}
+	async function updateTenant(id, payload) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(t => t.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Colegio no encontrado');
+		Object.assign(mockData[idx], payload, { plan: planNames[payload.plan_id] || 'Desconocido' });
+		return App.makeResponse('S', `Colegio "${mockData[idx].name}" actualizado`, { ...mockData[idx] });
+	}
+	async function removeTenant(id) {
+		await new Promise(r => setTimeout(r, 300));
+		const idx = mockData.findIndex(t => t.id === id);
+		if (idx === -1) return App.makeResponse('D', 'Colegio no encontrado');
+		const name = mockData[idx].name;
+		mockData.splice(idx, 1);
+		return App.makeResponse('S', `Colegio "${name}" eliminado`);
+	}
+
+	/* ── DataTable ── */
+	const table = $('#tenantsTable').DataTable({
+		data: mockData,
+		columns: [
+			App.tblCol('id', '#'),
+			App.tblCol('name', 'Nombre'),
+			App.tblCol('domain', 'Dominio', { render: v => '<code>' + v + '</code>' }),
+			App.tblCol('plan', 'Plan'),
+			App.tblBadge('status', 'Estado', {
+				active: { color: 'success', label: 'Activo' },
+				suspended: { color: 'secondary', label: 'Suspendido' },
+				trial: { color: 'info', label: 'Prueba' },
+			}),
+			App.tblCol('created_at', 'Registro'),
+			App.tblActionsCol(['edit', 'delete']),
+		],
+		order: [[0, 'desc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	/* ── Event Handlers ── */
+	$('#btnAddTenant').on('click', () => App.openCrudModal('#tenantModal', '#tenantForm', 'create', {}, {
+		titleCreate: 'Nuevo Colegio',
+		titleEdit: 'Editar Colegio',
+	}));
+
+	App.onTableAction('#tenantsTable', ({ action, row }) => {
+		if (action === 'edit') {
+			App.openCrudModal('#tenantModal', '#tenantForm', 'edit', row, { titleEdit: 'Editar Colegio' });
+		}
+		if (action === 'delete') {
+			removeTenant(row.id).then(res => App.handleApiResponse(res, () => App.refreshTbl('#tenantsTable', mockData)));
+		}
+	});
+
+	$('#btnSaveTenant').on('click', () => App.crudSave({
+		form: '#tenantForm',
+		modal: '#tenantModal',
+		table: '#tenantsTable',
+		dataArray: mockData,
+		onCreate: (p) => createTenant(p),
+		onUpdate: (id, p) => updateTenant(id, p),
+	}));
+});
+</script>
+
+{{/layout-capotiao-admin}}

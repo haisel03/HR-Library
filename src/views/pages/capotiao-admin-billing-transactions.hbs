@@ -1,0 +1,98 @@
+{{#> layout-capotiao-admin icon="bi bi-arrow-left-right" title="Transacciones" description="Historial de transacciones" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="card shadow-sm">
+	<div class="card-header bg-white py-3">
+		<h6 class="fw-bold mb-0"><i class="bi bi-arrow-left-right me-2"></i>Historial de Transacciones</h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-hover align-middle w-100" id="transactionsTable">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Colegio</th>
+						<th>Monto</th>
+						<th>M&eacute;todo</th>
+						<th>Concepto</th>
+						<th>Fecha</th>
+						<th>Estado</th>
+						<th style="width:80px">Acci&oacute;n</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const mockData = [
+		{ id: 1, tenant_name: 'Colegio San Jos&eacute;', amount: 99.99, method: '**** 4242', concept: 'Suscripci&oacute;n Premium - Mayo', date: '2026-05-01', status: 'completed' },
+		{ id: 2, tenant_name: 'Instituto Moderno', amount: 49.99, method: 'Transferencia', concept: 'Suscripci&oacute;n B&aacute;sico - Mayo', date: '2026-05-01', status: 'completed' },
+		{ id: 3, tenant_name: 'Liceo Cultural', amount: 99.99, method: '**** 9876', concept: 'Suscripci&oacute;n Premium - Abril', date: '2026-04-20', status: 'completed' },
+		{ id: 4, tenant_name: 'Colegio San Jos&eacute;', amount: 99.99, method: '**** 4242', concept: 'Suscripci&oacute;n Premium - Abril', date: '2026-04-01', status: 'completed' },
+		{ id: 5, tenant_name: 'Liceo Cultural', amount: 99.99, method: '**** 9876', concept: 'Suscripci&oacute;n Premium - Mayo', date: '2026-05-15', status: 'pending' },
+	];
+
+	$('#transactionsTable').DataTable({
+		data: mockData,
+		columns: [
+			{ data: 'id' },
+			{ data: 'tenant_name' },
+			{ data: 'amount', render: v => '$' + v.toFixed(2) },
+			{ data: 'method' },
+			{ data: 'concept' },
+			{ data: 'date' },
+			{ data: 'status', render: v => ({ completed: '<span class="badge bg-success">Completada</span>', pending: '<span class="badge bg-warning text-dark">Pendiente</span>', failed: '<span class="badge bg-danger">Fallida</span>' })[v] || v },
+			{
+				data: null,
+				render: d => `<button class="btn btn-sm btn-outline-info viewTransaction" data-id="${d.id}" title="Ver detalle"><i class="bi bi-eye"></i></button>`
+			}
+		],
+		order: [[5, 'desc']],
+		language: { url: 'https://cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json' },
+		pageLength: 10
+	});
+
+	$(document).on('click', '.viewTransaction', function() {
+		const id = $(this).data('id');
+		const t = mockData.find(tx => tx.id === id);
+		if (!t) return;
+		App.modalSetContent('#transactionDetailModal', `
+			<div class="modal-header">
+				<h5 class="modal-title">Transacci&oacute;n #${t.id}</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			</div>
+			<div class="modal-body">
+				<dl class="row mb-0">
+					<dt class="col-sm-4">Colegio</dt>
+					<dd class="col-sm-8">${t.tenant_name}</dd>
+					<dt class="col-sm-4">Monto</dt>
+					<dd class="col-sm-8">$${t.amount.toFixed(2)}</dd>
+					<dt class="col-sm-4">M&eacute;todo</dt>
+					<dd class="col-sm-8">${t.method}</dd>
+					<dt class="col-sm-4">Concepto</dt>
+					<dd class="col-sm-8">${t.concept}</dd>
+					<dt class="col-sm-4">Fecha</dt>
+					<dd class="col-sm-8">${t.date}</dd>
+					<dt class="col-sm-4">Estado</dt>
+					<dd class="col-sm-8">${t.status}</dd>
+				</dl>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+			</div>
+		`);
+		App.modalOpen('#transactionDetailModal');
+	});
+});
+</script>
+
+<div class="modal fade" id="transactionDetailModal" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+	</div>
+</div>
+
+{{/layout-capotiao-admin}}

@@ -1,0 +1,47 @@
+{{#> layout-capotiao-auth title="Registrar Colegio" description="Crea tu cuenta y empieza a gestionar tu colegio." authFooter='<small class="text-white-50">¿Ya tienes cuenta? <a href="capotiao-login.html" class="text-white-50">Iniciar sesión</a></small>'}}
+
+<form id="registerForm">
+	<div class="form-floating mb-4">
+		<input type="text" class="form-control" id="schoolName" name="school_name" placeholder="Nombre del colegio" required>
+		<label for="schoolName"><i class="bi bi-building me-1"></i> Nombre del Colegio</label>
+	</div>
+	<div class="form-floating mb-4">
+		<input type="text" class="form-control" id="name" name="name" placeholder="Tu nombre" required>
+		<label for="name"><i class="bi bi-person me-1"></i> Tu Nombre</label>
+	</div>
+	<div class="form-floating mb-4">
+		<input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com" required>
+		<label for="email"><i class="bi bi-envelope me-1"></i> Correo Electr&oacute;nico</label>
+	</div>
+	<div class="form-floating mb-4 password-wrapper">
+		<input type="password" class="form-control" id="password" name="password" placeholder="Contrase&ntilde;a" minlength="8" required>
+		<label for="password"><i class="bi bi-lock me-1"></i> Contrase&ntilde;a</label>
+		<i class="bi bi-eye toggle-password" id="togglePassword"></i>
+	</div>
+	<div class="form-floating mb-4 password-wrapper">
+		<input type="password" class="form-control" id="passwordConfirm" name="password_confirmation" placeholder="Confirmar contrase&ntilde;a" required>
+		<label for="passwordConfirm"><i class="bi bi-lock me-1"></i> Confirmar Contrase&ntilde;a</label>
+		<i class="bi bi-eye toggle-password" id="togglePassword2"></i>
+	</div>
+	<div class="d-grid">
+		<button type="submit" class="btn btn-primary btn-lg">
+			<i class="bi bi-check-circle me-2"></i> Crear Cuenta y Colegio
+		</button>
+	</div>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	$('#registerForm').on('submit', function(e) {
+		e.preventDefault();
+		if ($('#password').val() !== $('#passwordConfirm').val()) {
+			App.error('Las contrase&ntilde;as no coinciden');
+			return;
+		}
+		App.success('Colegio registrado correctamente. Revisa tu correo para continuar.');
+		setTimeout(() => window.location.href = 'capotiao-login.html', 2000);
+	});
+});
+</script>
+
+{{/layout-capotiao-auth}}

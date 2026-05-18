@@ -1,0 +1,172 @@
+{{#> layout-capotiao-admin icon="bi bi-speedometer2" title="Dashboard" description="Panel de control central" userName="Super Admin" userBadge="Super Admin"}}
+
+<div class="row g-3 mb-4">
+	<div class="col-xl-3 col-md-6">
+		<div class="card border-start border-primary border-3 shadow-sm">
+			<div class="card-body d-flex align-items-center justify-content-between">
+				<div>
+					<h6 class="text-muted mb-1">Colegios Activos</h6>
+					<h3 class="fw-bold mb-0" id="statTenants">--</h3>
+				</div>
+				<i class="bi bi-building fs-1 text-primary opacity-25"></i>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card border-start border-success border-3 shadow-sm">
+			<div class="card-body d-flex align-items-center justify-content-between">
+				<div>
+					<h6 class="text-muted mb-1">Planes</h6>
+					<h3 class="fw-bold mb-0" id="statPlans">--</h3>
+				</div>
+				<i class="bi bi-boxes fs-1 text-success opacity-25"></i>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card border-start border-warning border-3 shadow-sm">
+			<div class="card-body d-flex align-items-center justify-content-between">
+				<div>
+					<h6 class="text-muted mb-1">Suscripciones Activas</h6>
+					<h3 class="fw-bold mb-0" id="statSubscriptions">--</h3>
+				</div>
+				<i class="bi bi-credit-card fs-1 text-warning opacity-25"></i>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-3 col-md-6">
+		<div class="card border-start border-info border-3 shadow-sm">
+			<div class="card-body d-flex align-items-center justify-content-between">
+				<div>
+					<h6 class="text-muted mb-1">Ingresos del Mes</h6>
+					<h3 class="fw-bold mb-0" id="statRevenue">--</h3>
+				</div>
+				<i class="bi bi-graph-up fs-1 text-info opacity-25"></i>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row g-3">
+	<div class="col-xl-8">
+		<div class="card shadow-sm">
+			<div class="card-header bg-white py-3">
+				<h6 class="fw-bold mb-0"><i class="bi bi-activity me-2"></i>Ingresos Mensuales</h6>
+			</div>
+			<div class="card-body">
+				<canvas id="revenueChart" height="250"></canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-4">
+		<div class="card shadow-sm">
+			<div class="card-header bg-white py-3">
+				<h6 class="fw-bold mb-0"><i class="bi bi-pie-chart me-2"></i>Distribuci&oacute;n de Planes</h6>
+			</div>
+			<div class="card-body">
+				<canvas id="plansChart" height="250"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row g-3 mt-2">
+	<div class="col-12">
+		<div class="card shadow-sm">
+			<div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+				<h6 class="fw-bold mb-0"><i class="bi bi-clock-history me-2"></i>&Uacute;ltimos Colegios Registrados</h6>
+				<a href="capotiao-admin-tenants.html" class="btn btn-sm btn-outline-primary">Ver todos</a>
+			</div>
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table table-hover align-middle mb-0" id="latestTenantsTable">
+						<thead class="table-light">
+							<tr>
+								<th>Colegio</th>
+								<th>Dominio</th>
+								<th>Plan</th>
+								<th>Estado</th>
+								<th>Registro</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const tenants = [
+		{ id: 1, name: 'Colegio San Jos&eacute;', domain: 'sanjose.capotiao.test', plan: 'Premium', status: 'active', revenue: 99.99, created_at: '2026-01-15' },
+		{ id: 2, name: 'Instituto Moderno', domain: 'moderno.capotiao.test', plan: 'B&aacute;sico', status: 'active', revenue: 49.99, created_at: '2026-02-01' },
+		{ id: 3, name: 'Liceo Cultural', domain: 'cultural.capotiao.test', plan: 'Premium', status: 'active', revenue: 99.99, created_at: '2026-02-20' },
+		{ id: 4, name: 'Escuela T&eacute;cnica N&ordm;3', domain: 'tecnica3.capotiao.test', plan: 'Ilimitado', status: 'active', revenue: 149.99, created_at: '2026-03-05' },
+		{ id: 5, name: 'Colegio Biling&uuml;e', domain: 'bilingue.capotiao.test', plan: 'Premium', status: 'suspended', revenue: 99.99, created_at: '2026-03-10' },
+	];
+
+	const plans = [
+		{ id: 1, name: 'B&aacute;sico', price: 49.99 },
+		{ id: 2, name: 'Premium', price: 99.99 },
+		{ id: 3, name: 'Ilimitado', price: 149.99 },
+	];
+
+	document.getElementById('statTenants').textContent = tenants.filter(t => t.status === 'active').length;
+	document.getElementById('statPlans').textContent = plans.length;
+	document.getElementById('statSubscriptions').textContent = tenants.filter(t => t.status === 'active').length;
+
+	const total = tenants.reduce((s, t) => s + (t.status === 'active' ? t.revenue : 0), 0);
+	document.getElementById('statRevenue').textContent = '$' + total.toFixed(2) + '/mes';
+
+	const tbody = document.querySelector('#latestTenantsTable tbody');
+	tenants.slice(0, 5).forEach(t => {
+		const badge = t.status === 'active'
+			? '<span class="badge bg-success">Activo</span>'
+			: '<span class="badge bg-secondary">Suspendido</span>';
+		tbody.innerHTML += `<tr>
+			<td><strong>${t.name}</strong></td>
+			<td><code>${t.domain}</code></td>
+			<td>${t.plan}</td>
+			<td>${badge}</td>
+			<td>${t.created_at}</td>
+		</tr>`;
+	});
+
+	const chartColors = ['#4e73df', '#1cc88a', '#36b9cc', '#f6c23e', '#e74a3b'];
+
+	if (typeof Chart !== 'undefined') {
+		new Chart(document.getElementById('revenueChart'), {
+			type: 'line',
+			data: {
+				labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+				datasets: [{
+					label: 'Ingresos ($)',
+					data: [1200, 1900, 2800, 3500, 4200, 5100],
+					borderColor: '#4e73df',
+					backgroundColor: 'rgba(78, 115, 223, 0.1)',
+					fill: true,
+					tension: 0.3
+				}]
+			},
+			options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+		});
+
+		new Chart(document.getElementById('plansChart'), {
+			type: 'doughnut',
+			data: {
+				labels: ['B&aacute;sico', 'Premium', 'Ilimitado'],
+				datasets: [{
+					data: [2, 2, 1],
+					backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+					borderWidth: 0
+				}]
+			},
+			options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+		});
+	}
+});
+</script>
+
+{{/layout-capotiao-admin}}

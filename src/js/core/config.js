@@ -144,12 +144,12 @@ const config = {
 			dom:
 				'<"row align-items-center mb-2"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
 				'<"row"<"col-sm-12"tr>>' +
-				'<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+				'<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7 text-end"p>>',
 		},
 		domButtons:
 			'<"row align-items-center mb-2"<"col-sm-12 col-md-4"l><"col-sm-12 col-md-4"B><"col-sm-12 col-md-4"f>>' +
 			'<"row"<"col-sm-12"tr>>' +
-			'<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+			'<"row mt-2"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7 text-end"p>>',
 	},
 
 	/* ── Acciones de DataTable ── */
@@ -188,6 +188,48 @@ const config = {
 			range: { mode: "range" },
 		},
 		modifiers: { min: { minDate: "today" }, max: { maxDate: "today" } },
+	},
+
+	/* ── FullCalendar ── */
+	fullcalendar: {
+		locale: "es",
+		firstDay: 1,
+		initialView: "dayGridMonth",
+		editable: true,
+		selectable: true,
+		buttonText: {
+			today: "Hoy",
+			month: "Mes",
+			week: "Semana",
+			day: "Día",
+			list: "Agenda",
+		},
+		headerToolbar: {
+			left: "prev,next today",
+			center: "title",
+			right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+		},
+	},
+
+	/* ── Select2 ── */
+	select2: {
+		theme: "bootstrap-5",
+		width: "100%",
+		allowClear: true,
+		language: "es",
+		placeholder: "Seleccione una opción",
+	},
+
+	/* ── Choices JS ── */
+	choices: {
+		base: {
+			searchEnabled: true,
+			shouldSort: true,
+			removeItemButton: false,
+			placeholder: true,
+			placeholderValue: "Seleccione...",
+			itemSelectText: "",
+		},
 	},
 
 	/* ── Charts (Chart.js) ── */
