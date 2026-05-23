@@ -44,7 +44,7 @@ $(async function () {
 
 		if (action === "edit") {
 			App.text("#userModalTitle", "Editar Usuario");
-			App.modalOpen("userModal", row);
+			App.modalOpen("#userModal", row);
 		}
 
 		// "delete" ya tiene confirmación automática desde config.dt_actions.delete.confirm
@@ -62,7 +62,7 @@ $(async function () {
 		}
 
 		if (action === "view") {
-			console.log("Ver usuario:", row);
+			App.info("Usuario: " + row.name);
 		}
 	});
 
@@ -72,7 +72,7 @@ $(async function () {
 		App.clearForm("#userForm");
 		App.val("#userId", "");
 		App.text("#userModalTitle", "Nuevo Usuario");
-		App.modalOpen("userModal");
+		App.modalOpen("#userModal");
 	});
 
 	/* ── SAVE (CREATE / UPDATE) ── */

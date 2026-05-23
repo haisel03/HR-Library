@@ -2,10 +2,10 @@
 .hamburger:before,
 .hamburger:after {
 	cursor: pointer;
-	border-radius: 1px;
+	border-radius: 2px;
 	height: 3px;
 	width: $hamburger-width-middle;
-	background: $gray-700;
+	background: $gray-500;
 	display: block;
 	content: "";
 	transition: $transition-appearance-fast;
@@ -31,7 +31,7 @@
 	.hamburger,
 	.hamburger:before,
 	.hamburger:after {
-		background: $primary;
+		background: $bronze-500;
 	}
 }
 

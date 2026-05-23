@@ -1,23 +1,27 @@
 .navbar-nav .dropdown-menu {
-	box-shadow: $box-shadow;
+	box-shadow: $dropdown-box-shadow;
+	border: 1px solid $gray-200;
+	border-radius: 0.6rem;
+	padding: 0.4rem;
+	overflow: hidden;
 }
 
 .dropdown .dropdown-menu.show {
 	animation-name: dropdownAnimation;
-	animation-duration: 0.25s;
+	animation-duration: 0.2s;
 	animation-iteration-count: 1;
-	animation-timing-function: ease;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	animation-fill-mode: forwards;
 }
 
 @keyframes dropdownAnimation {
 	from {
 		opacity: 0;
-		transform: translateY(-8px);
+		transform: translateY(-6px) scale(0.97);
 	}
 	to {
 		opacity: 1;
-		transform: translate(0);
+		transform: translateY(0) scale(1);
 	}
 }
 
@@ -31,6 +35,29 @@
 
 .dropdown-item {
 	transition: $transition-appearance-fast;
+	border-radius: 0.4rem;
+	padding: 0.5rem 0.85rem;
+	font-size: $font-size-sm;
+
+	i {
+		margin-right: 0.5rem;
+		width: 1.2rem;
+		text-align: center;
+	}
+
+	&:hover {
+		background: rgba($primary, 0.05);
+		color: $navy-800;
+	}
+
+	&.text-danger:hover {
+		background: rgba($danger, 0.08);
+	}
+}
+
+.dropdown-divider {
+	margin: 0.3rem 0;
+	border-color: $gray-200;
 }
 
 .dropdown-menu {
@@ -68,4 +95,9 @@
 	text-align: center;
 	display: block;
 	font-size: $font-size-sm;
+	color: $gray-500;
+
+	&:hover {
+		color: $primary;
+	}
 }

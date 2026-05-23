@@ -1,3 +1,10 @@
-a.list-group-item {
-	text-decoration: none;
+.list-group-item {
+	border-color: $card-border-color;
+	padding: 0.8rem 1.1rem;
+	color: $body-color;
+	transition: background 0.15s;
+
+	&:hover {
+		background: $gray-50;
+	}
 }

@@ -1,18 +1,12 @@
 @use "sass:color";
 
-// ============================================================================
-// 4-utilities/_sweetalert.scss
-// Fusión: CoffeeSchools (estética rica) + HR Library (loading popup, spinner)
-// ============================================================================
-
-/* ── Popup base ──────────────────────────────────────────────────────────── */
-
 .swal2-popup {
 	font-family: $font-family-sans-serif !important;
 	border: 1px solid $card-border-color !important;
-	border-radius: none !important;
-	box-shadow: none !important;
+	border-radius: 0.75rem !important;
+	box-shadow: 0 20px 60px rgba($navy-900, 0.2) !important;
 	background: $swal-bg !important;
+	padding: 1.5rem !important;
 }
 
 .swal2-title {
@@ -26,81 +20,76 @@
 	font-size: 1rem !important;
 }
 
-/* ── Iconos ──────────────────────────────────────────────────────────────── */
-
 .swal2-icon {
 	&.swal2-success {
-		border-color: color.change($success, $alpha: 0.3) !important;
+		border-color: rgba($success, 0.3) !important;
 		.swal2-success-ring {
-			border-color: color.change($success, $alpha: 0.25) !important;
+			border-color: rgba($success, 0.25) !important;
 		}
 		[class^="swal2-success-line"] {
 			background: $success !important;
 		}
 	}
 	&.swal2-warning {
-		border-color: color.change($warning, $alpha: 0.4) !important;
+		border-color: rgba($warning, 0.4) !important;
 		color: $warning !important;
 	}
 	&.swal2-error {
-		border-color: color.change($danger, $alpha: 0.35) !important;
+		border-color: rgba($danger, 0.35) !important;
 		.swal2-x-mark-line-left,
 		.swal2-x-mark-line-right {
 			background: $danger !important;
 		}
 	}
 	&.swal2-question {
-		border-color: color.change($info, $alpha: 0.3) !important;
+		border-color: rgba($info, 0.3) !important;
 		color: $info !important;
 	}
 	&.swal2-info {
-		border-color: color.change($info, $alpha: 0.3) !important;
+		border-color: rgba($info, 0.3) !important;
 		color: $info !important;
 	}
 }
-
-/* ── Botones ─────────────────────────────────────────────────────────────── */
 
 .swal2-confirm {
 	font-weight: 700 !important;
 	letter-spacing: 0.03em !important;
+	border-radius: 0.5rem !important;
+	padding: 0.5rem 1.5rem !important;
 }
 
 .swal2-cancel {
-	background: color.change($primary, $alpha: 0.08) !important;
+	background: rgba($primary, 0.08) !important;
 	color: $secondary !important;
 	border: 1px solid $input-border-color !important;
 	font-weight: 700 !important;
+	border-radius: 0.5rem !important;
 	&:hover {
-		background: color.change($primary, $alpha: 0.15) !important;
+		background: rgba($primary, 0.15) !important;
 	}
 }
 
 .swal2-deny {
-	background: color.change($danger, $alpha: 0.1) !important;
+	background: rgba($danger, 0.1) !important;
 	color: $danger !important;
-	border: 1px solid color.change($danger, $alpha: 0.25) !important;
+	border: 1px solid rgba($danger, 0.25) !important;
 	font-weight: 700 !important;
+	border-radius: 0.5rem !important;
 }
-
-/* ── Timer bar ───────────────────────────────────────────────────────────── */
 
 .swal2-timer-progress-bar {
 	background: linear-gradient(90deg, $primary, $secondary) !important;
 }
 
-/* ── Backdrop ────────────────────────────────────────────────────────────── */
-
 .swal2-backdrop-show {
-	background: color.change($dark, $alpha: 0.55) !important;
+	background: rgba($navy-900, 0.55) !important;
+	backdrop-filter: blur(4px);
 }
 
-/* ── Loading popup (HR Library style) ───────────────────────────────────── */
-
 .swal-loading-popup {
-	border-radius: $swal-radius;
+	border-radius: 0.75rem;
 	padding: 2.5rem 2rem;
-	box-shadow: $swal-shadow;
+	box-shadow: 0 20px 60px rgba(#000, 0.3);
 	background: $swal-bg-dark;
 }
 
@@ -124,14 +113,12 @@
 	margin: 0;
 }
 
-/* ── Spinner ─────────────────────────────────────────────────────────────── */
-
 .swal-spinner {
 	width: 42px;
 	height: 42px;
 	border-radius: 50%;
-	border: 3px solid color.change($white, $alpha: 0.15);
-	border-top-color: $primary;
+	border: 3px solid rgba($white, 0.15);
+	border-top-color: $bronze-500;
 	animation: swal-spin 0.9s linear infinite;
 }
 

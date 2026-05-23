@@ -36,6 +36,12 @@ const _instances = new Map();
  */
 const _data = new Map();
 
+/**
+ * Listeners registrados por elemento (para limpieza en destroy).
+ * @private
+ */
+const _listeners = new Map();
+
 // ─────────────────────────────────────────────
 // Función privada de resolución
 // ─────────────────────────────────────────────
@@ -130,6 +136,11 @@ const Modal = {
 		_instances.get(el)?.dispose();
 		_instances.delete(el);
 		_data.delete(el);
+		const ls = _listeners.get(el);
+		if (ls) {
+			ls.forEach(({ event, handler }) => el.removeEventListener(event, handler));
+			_listeners.delete(el);
+		}
 	},
 
 	// ── Datos ─────────────────────────────────────────────────────────────
@@ -207,10 +218,16 @@ const Modal = {
 	 * @example
 	 * Modal.onClose("#modalEditar", () => Form.clear("#formEditar"));
 	 */
+	_addListener(el, event, handler) {
+		el.addEventListener(event, handler, { once: false });
+		if (!_listeners.has(el)) _listeners.set(el, []);
+		_listeners.get(el).push({ event, handler });
+	},
+
 	onClose(target, callback) {
 		const el = _el(target);
 		if (!el || typeof callback !== "function") return;
-		el.addEventListener("hidden.bs.modal", callback, { once: false });
+		this._addListener(el, "hidden.bs.modal", callback);
 	},
 
 	/**
@@ -225,7 +242,7 @@ const Modal = {
 	onOpen(target, callback) {
 		const el = _el(target);
 		if (!el || typeof callback !== "function") return;
-		el.addEventListener("shown.bs.modal", callback, { once: false });
+		this._addListener(el, "shown.bs.modal", callback);
 	},
 
 	// ── Init ──────────────────────────────────────────────────────────────

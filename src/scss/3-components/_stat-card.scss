@@ -1,61 +1,51 @@
-// ============================================================================
-// 3-components/_stat-card.scss
-//
-// Stat cards de CoffeeSchools integradas en HR Library.
-// Complementan al componente .stat (círculo) ya existente.
-// ============================================================================
-
-// ── Stat card (versión tarjeta completa) ─────────────────────────────────────
-
 .stat-card {
 	background: $card-bg;
 	border: 1px solid $card-border-color;
-	border-radius: $card-border-radius;
+	border-radius: 0.75rem;
 	padding: 1.35rem;
 	display: flex;
 	align-items: center;
 	gap: 1.1rem;
 	box-shadow: $card-shadow;
 	transition:
-		transform 0.2s,
-		box-shadow 0.2s;
+		transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
 	overflow: hidden;
 
-	// Ornamento decorativo esquina
 	&::after {
 		content: "";
 		position: absolute;
-		right: -12px;
-		bottom: -12px;
-		width: 70px;
-		height: 70px;
+		right: -15px;
+		bottom: -15px;
+		width: 80px;
+		height: 80px;
 		border-radius: 50%;
-		background: rgba($primary, 0.06);
+		background: rgba($bronze-500, 0.06);
 		pointer-events: none;
 	}
 
 	&:hover {
 		transform: translateY(-3px);
-		box-shadow: 0 8px 24px rgba($dark, 0.09);
+		box-shadow: 0 8px 28px rgba($navy-900, 0.1);
 	}
 
 	&__icon {
 		width: 54px;
 		height: 54px;
-		border-radius: $border-radius-lg;
+		border-radius: 0.6rem;
 		flex-shrink: 0;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		font-size: 1.5rem;
-		border: 1px solid rgba($primary, 0.15);
+		border: 1px solid rgba($bronze-500, 0.15);
 	}
 
 	&__label {
 		display: block;
 		font-size: 0.75rem;
-		color: $secondary;
+		color: $gray-500;
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
@@ -66,8 +56,10 @@
 		display: block;
 		font-size: 1.7rem;
 		font-weight: 700;
-		color: $dark;
+		color: $navy-800;
 		line-height: 1.1;
+		font-family: $ff-display;
+		font-variation-settings: "wght" 700, "SOFT" 30;
 	}
 
 	&__change {
@@ -77,30 +69,27 @@
 		font-weight: 700;
 	}
 
-	// Variantes de color
 	&--primary .stat-card__icon {
-		background: rgba($primary, 0.1);
+		background: rgba($primary, 0.08);
 		color: $primary;
 	}
 	&--success .stat-card__icon {
-		background: rgba($success, 0.1);
+		background: rgba($success, 0.08);
 		color: $success;
 	}
 	&--warning .stat-card__icon {
-		background: rgba($warning, 0.1);
+		background: rgba($warning, 0.08);
 		color: $warning;
 	}
 	&--danger .stat-card__icon {
-		background: rgba($danger, 0.1);
+		background: rgba($danger, 0.08);
 		color: $danger;
 	}
 	&--info .stat-card__icon {
-		background: rgba($info, 0.1);
+		background: rgba($info, 0.08);
 		color: $info;
 	}
 }
-
-// ── Stat simple (círculo — versión original HR) ───────────────────────────────
 
 .stat {
 	background: $stat-bg;
@@ -116,5 +105,67 @@
 		height: 18px;
 		color: $stat-icon-color !important;
 		stroke-width: 1.5;
+	}
+}
+
+.stat-label {
+	display: block;
+	font-size: 0.75rem;
+	color: $gray-500;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	margin-bottom: 0.15rem;
+}
+
+.stat-value {
+	display: block;
+	font-size: 1.7rem;
+	font-weight: 700;
+	color: $navy-800;
+	line-height: 1.1;
+	font-family: $ff-display;
+	font-variation-settings: "wght" 700, "SOFT" 30;
+}
+
+.stat-footnote {
+	font-size: 0.78rem;
+	color: $gray-500;
+	margin-left: 0.35rem;
+}
+
+.stat-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1.2rem;
+	flex-shrink: 0;
+
+	&--primary {
+		background: rgba($primary, 0.08);
+		color: $primary;
+	}
+	&--success {
+		background: rgba($success, 0.08);
+		color: $success;
+	}
+	&--bronze {
+		background: rgba($bronze-500, 0.08);
+		color: $bronze-500;
+	}
+	&--info {
+		background: rgba($info, 0.08);
+		color: $info;
+	}
+	&--warning {
+		background: rgba($warning, 0.08);
+		color: $warning;
+	}
+	&--danger {
+		background: rgba($danger, 0.08);
+		color: $danger;
 	}
 }

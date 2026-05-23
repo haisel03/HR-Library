@@ -49,8 +49,8 @@ Chart.register(
 );
 
 // Defaults globales desde config
-Chart.defaults.color = window.theme?.["gray-600"] || "#6c757d";
-Chart.defaults.font.family = "'Roboto', 'Helvetica Neue', sans-serif";
+Chart.defaults.color = window.theme?.["gray-600"] || "#7D7268";
+Chart.defaults.font.family = "'DM Sans', 'Helvetica Neue', Arial, system-ui, sans-serif";
 
 const instances = new Map();
 

@@ -1,15 +1,21 @@
-// ============================================================================
-// 3-components/_navbar.scss
-// Fusión: HR Library (estructura nav) + CoffeeSchools (topbar, search, profile)
-// ============================================================================
-
-/* ── Navbar principal ────────────────────────────────────────────────────── */
+@use "sass:color";
 
 .navbar {
 	background: $navbar-bg;
 	border-bottom: $navbar-border-bottom;
 	box-shadow: $navbar-box-shadow;
 	padding: $navbar-padding-y $navbar-padding-x;
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 1.5rem;
+		right: 1.5rem;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, $gray-200, transparent);
+	}
 
 	@include media-breakpoint-down(md) {
 		width: 100vw;
@@ -20,12 +26,15 @@
 	margin-top: -15px;
 	margin-bottom: -15px;
 }
+
 .navbar-nav {
 	direction: ltr;
 }
+
 .navbar-align {
 	margin-left: auto;
 }
+
 .navbar-bg {
 	background: $navbar-bg;
 }
@@ -48,14 +57,12 @@
 	}
 }
 
-/* ── Nav icons ───────────────────────────────────────────────────────────── */
-
 .nav-icon,
 .nav-flag {
 	padding: 0.1rem 0.8rem;
 	display: block;
 	font-size: 1.5rem;
-	color: $gray-600;
+	color: $gray-500;
 	transition: $transition-appearance-fast;
 	line-height: 1.4;
 
@@ -64,7 +71,7 @@
 	}
 	&:hover,
 	&.active {
-		color: $primary;
+		color: $bronze-500;
 	}
 
 	svg,
@@ -76,8 +83,8 @@
 
 .nav-item {
 	.indicator {
-		background: $primary;
-		box-shadow: $box-shadow;
+		background: $danger;
+		box-shadow: 0 2px 6px rgba($danger, 0.3);
 		border-radius: 50%;
 		display: block;
 		height: 18px;
@@ -87,9 +94,11 @@
 		top: 0;
 		right: -8px;
 		text-align: center;
-		transition: top 0.1s ease-out;
-		font-size: 0.675rem;
+		transition: top 0.15s ease-out;
+		font-size: 0.625rem;
 		color: $white;
+		font-weight: 700;
+		line-height: 1.2;
 	}
 	&:hover .indicator {
 		top: -4px;
@@ -106,8 +115,6 @@
 	object-fit: cover;
 }
 
-/* ── Topbar buttons / toggle ─────────────────────────────────────────────── */
-
 .topbar-toggle,
 .topbar-btn {
 	background: none;
@@ -118,7 +125,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: $secondary;
+	color: $gray-500;
 	font-size: 1.15rem;
 	position: relative;
 	transition:
@@ -126,8 +133,8 @@
 		color 0.15s;
 	flex-shrink: 0;
 	&:hover {
-		background: rgba($primary, 0.08);
-		color: $dark;
+		background: rgba($primary, 0.06);
+		color: $navy-800;
 	}
 }
 
@@ -137,7 +144,7 @@
 	right: 5px;
 	background: $danger;
 	color: $white;
-	font-size: 0.58rem;
+	font-size: 0.55rem;
 	font-weight: 700;
 	line-height: 1;
 	width: 15px;
@@ -149,28 +156,27 @@
 	border: 2px solid $navbar-bg;
 }
 
-/* ── Topbar search ───────────────────────────────────────────────────────── */
-
 .topbar-search {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 	background: $navbar-input-bg;
-	border: 1px solid rgba($primary, 0.15);
-	border-radius: $border-radius;
+	border: 1px solid $gray-200;
+	border-radius: 0.6rem;
 	padding: 0.38rem 0.85rem;
-	color: $secondary;
+	color: $gray-500;
 	transition:
-		border-color 0.15s,
-		box-shadow 0.15s;
+		border-color 0.2s,
+		box-shadow 0.2s;
 
 	&:focus-within {
-		border-color: $primary;
-		box-shadow: 0 0 0 3px rgba($primary, 0.1);
+		border-color: $bronze-500;
+		box-shadow: 0 0 0 3px rgba($bronze-500, 0.1);
 	}
 
 	i {
 		font-size: 0.9rem;
+		color: $gray-400;
 	}
 
 	input {
@@ -178,15 +184,13 @@
 		border: none;
 		outline: none;
 		font-size: 0.85rem;
-		color: $dark;
-		width: 185px;
+		color: $navy-800;
+		width: 200px;
 		&::placeholder {
-			color: rgba($secondary, 0.45);
+			color: rgba($gray-500, 0.5);
 		}
 	}
 }
-
-/* ── Topbar profile ──────────────────────────────────────────────────────── */
 
 .topbar-profile {
 	background: none;
@@ -195,23 +199,23 @@
 	align-items: center;
 	gap: 0.5rem;
 	padding: 0.25rem 0.6rem;
-	border-radius: $border-radius-sm;
-	color: $dark;
+	border-radius: 0.6rem;
+	color: $navy-800;
 	font-size: 0.875rem;
-	font-weight: 700;
+	font-weight: 600;
 	transition: background 0.15s;
 	cursor: pointer;
 	&:hover {
-		background: rgba($primary, 0.08);
+		background: rgba($primary, 0.06);
 	}
 
 	.profile-avatar {
-		width: 33px;
-		height: 33px;
+		width: 34px;
+		height: 34px;
 		border-radius: 50%;
-		background: rgba($primary, 0.12);
-		border: 2px solid rgba($primary, 0.3);
-		color: $secondary;
+		background: rgba($primary, 0.1);
+		border: 2px solid rgba($bronze-500, 0.3);
+		color: $gray-500;
 		font-size: 0.7rem;
 		font-weight: 700;
 		display: flex;
@@ -220,22 +224,24 @@
 	}
 }
 
-/* ── Notifications dropdown ──────────────────────────────────────────────── */
-
 .notification-dropdown {
-	width: 330px;
+	width: 340px;
 	border: 1px solid $card-border-color !important;
+	border-radius: 0.75rem !important;
+	padding: 0;
+	overflow: hidden;
 }
 
 .dropdown-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0.9rem 1.1rem;
+	padding: 1rem 1.25rem;
 	border-bottom: 1px solid $card-border-color;
 	font-size: 0.9rem;
 	font-weight: 700;
-	color: $dark;
+	color: $navy-800;
+	background: $gray-50;
 }
 
 .notification-list {
@@ -247,13 +253,13 @@
 	display: flex;
 	align-items: flex-start;
 	gap: 0.75rem;
-	padding: 0.8rem 1.1rem;
+	padding: 0.9rem 1.25rem;
 	text-decoration: none;
 	color: inherit;
-	border-bottom: 1px solid rgba($card-border-color, 0.4);
+	border-bottom: 1px solid rgba($card-border-color, 0.5);
 	transition: background 0.15s;
 	&:hover {
-		background: rgba($primary, 0.04);
+		background: rgba($primary, 0.03);
 	}
 	&:last-child {
 		border-bottom: none;
@@ -263,7 +269,7 @@
 .notification-icon {
 	width: 38px;
 	height: 38px;
-	border-radius: $border-radius-sm;
+	border-radius: 0.5rem;
 	flex-shrink: 0;
 	display: flex;
 	align-items: center;
@@ -276,8 +282,6 @@
 	color: $body-color;
 	margin: 0;
 }
-
-/* ── Responsive ──────────────────────────────────────────────────────────── */
 
 @include media-breakpoint-down(sm) {
 	.navbar {
@@ -309,5 +313,79 @@
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 	.navbar .avatar {
 		max-height: 47px;
+	}
+}
+
+.navbar-landing {
+	background: transparent;
+	padding: 1rem 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1030;
+	transition: background 0.3s ease, box-shadow 0.3s ease;
+
+	&.scrolled {
+		background: rgba($navy-800, 0.95);
+		backdrop-filter: blur(12px);
+		box-shadow: 0 4px 20px rgba($navy-900, 0.3);
+	}
+
+	.navbar-brand {
+		font-family: $ff-display;
+		color: $gray-100 !important;
+		font-weight: 700;
+		font-size: 1.5rem;
+
+		span { color: $bronze-500; }
+	}
+
+	.navbar-toggler {
+		color: $gray-100;
+		border: 0;
+	}
+
+	.nav-link {
+		color: rgba($gray-100, 0.6) !important;
+		transition: color 0.2s;
+
+		&:hover,
+		&.active {
+			color: $gray-100 !important;
+		}
+	}
+
+	&-outline {
+		border: 2px solid rgba($gray-100, 0.3);
+		color: $gray-100;
+		background: transparent;
+		border-radius: 50rem;
+		padding: 0.375rem 0.75rem;
+		font-size: $font-size-sm;
+		transition: all 0.2s;
+		text-decoration: none;
+
+		&:hover {
+			background: rgba($gray-100, 0.1);
+			color: $gray-100;
+		}
+	}
+
+	&-cta {
+		background: $bronze-500;
+		color: $navy-800;
+		border: none;
+		font-weight: 700;
+		border-radius: 50rem;
+		padding: 0.375rem 0.75rem;
+		font-size: $font-size-sm;
+		transition: all 0.2s;
+		text-decoration: none;
+
+		&:hover {
+			background: color.adjust($bronze-500, $lightness: -8%);
+			color: $navy-800;
+		}
 	}
 }

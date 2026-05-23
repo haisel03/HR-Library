@@ -1,5 +1,32 @@
 # Changelog
 
+## [4.1.0] - 2026-05-23
+
+### Añadido
+- **SCSS**: Nuevos componentes `_badge.scss`, `_close.scss`, `_progress.scss` con variantes de color y dark mode.
+- **Dark mode**: Cobertura completa para modal, toast, tooltip, popover, spinner, offcanvas, accordion, placeholder, close button, badge y progress.
+
+### Corregido
+- **JS**: `ChoicesJS.setValue()` — lógica de `triggerChange` invertida (disparaba change al pasar `false`).
+- **JS**: `Iframe.open()` — XSS por inyección de HTML sin escapar en `title`/`icon`.
+- **JS**: `Modal.destroy()` — fuga de memoria: listeners de `hidden.bs.modal`/`shown.bs.modal` no se removían.
+- **JS**: `Alert.toast.show()` — SweetAlert2 lanzaba warning por `backdrop` incompatible con toasts.
+- **JS**: `tasks.js demo` — `App.getApi()` agregaba prefijo `/api` causando 404 al buscar `tasks.json`.
+- **JS**: `Charts.js` y `chartjs.js` — fuentes `Roboto`/`Inter`→`DM Sans`, fallback de color corregido.
+- **JS**: Demo `index.js`, `ecommerce-products.js` — `App.msgSuccess()`/`App.msgLoading()` deprecados reemplazados por `App.success()`/`App.loading()`.
+- **SCSS**: `_sidebar.scss` — `$red` (variable Bootstrap fuera de scope) reemplazado por `$danger`.
+- **SCSS**: `_utils.scss` y `_components.scss` — duplicado de `$stat-bg` eliminado (conflicto con `_bootstrap-overrides.scss`).
+- **SCSS**: `_info-box.scss` — typo `prgress-bar`→`progress-bar`.
+- **SCSS**: `_flatpickr.scss` — colores fijos `#e6e6e6` reemplazados por variable `$gray-200`.
+- **Mock API**: `middleware.cjs` — crash al acceder a `db.dashboard[0]` sin que exista la clave `dashboard`.
+- **Mock API**: `package-api.json` — extensión `middleware.js`→`middleware.cjs` (el archivo real es `.cjs`).
+- **Inline HTML**: `ui-kit.hbs`, `finance-payments.hbs`, `invoice.hbs` — `HR.*` cambiado a `App.*` (objeto global correcto).
+- **Sidebar layout**: `_sidebar.scss` — añadido `height: 100vh` y scroll nativo para evitar espacio vacío scrolleable.
+
+### Cambiado
+- **SCSS**: `_dark-mode.scss` — 11 componentes Bootstrap añadidos a la cobertura dark mode.
+- **SCSS**: `_sidebar.scss` — scroll nativo (`overflow-y: auto`) reemplaza dependencia de SimpleBar JS.
+
 ## [4.0.0] - 2026-05-16
 
 ### Cambios

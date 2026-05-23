@@ -1,13 +1,6 @@
 @use "sass:color";
 
-// ============================================================================
-// 4-utilities/_dark-mode.scss
-// Fusión: CoffeeSchools (dark café) + HR Library (estructura data-bs-theme)
-// Activa con: <html data-bs-theme="dark">
-// ============================================================================
-
 [data-bs-theme="dark"] {
-	// ── Cuerpo ──────────────────────────────────────────────────────────────
 	--bs-body-bg: #{$body-bg-dark};
 	--bs-body-color: #{$body-color-dark};
 
@@ -16,34 +9,27 @@
 		color: $body-color-dark;
 	}
 
-	// ── Sidebar ─────────────────────────────────────────────────────────────
 	.sidebar {
-		background: color.adjust($sidebar-bg, $lightness: -5%);
-		background-image: linear-gradient(
-			180deg,
-			color.change($primary, $alpha: 0.05) 0%,
-			transparent 50%,
-			color.change(#000, $alpha: 0.2) 100%
-		);
+		background: color.adjust($sidebar-bg, $lightness: -3%);
+		background-image: linear-gradient(180deg, rgba($bronze-500, 0.04) 0%, transparent 50%, rgba(#000, 0.2) 100%);
 	}
 	.sidebar-content {
-		background: color.adjust($sidebar-bg, $lightness: -5%);
+		background: color.adjust($sidebar-bg, $lightness: -3%);
 	}
 	.sidebar-user {
-		background: color.change(#000, $alpha: 0.25);
+		background: rgba(#000, 0.25);
 	}
 
-	// ── Navbar / Topbar ──────────────────────────────────────────────────────
 	.navbar,
 	.topbar {
-		background: color.adjust($body-bg-dark, $lightness: -3%);
-		border-color: color.change($primary, $alpha: 0.2);
-		box-shadow: 0 2px 12px color.change(#000, $alpha: 0.2);
+		background: color.adjust($body-bg-dark, $lightness: -2%);
+		border-color: rgba($primary, 0.2);
+		box-shadow: 0 2px 12px rgba(#000, 0.2);
 	}
 
 	.topbar-search {
-		background: color.change($primary, $alpha: 0.06);
-		border-color: color.change($primary, $alpha: 0.15);
+		background: rgba($primary, 0.06);
+		border-color: rgba($primary, 0.15);
 		input {
 			color: $body-color-dark;
 		}
@@ -51,24 +37,24 @@
 
 	.topbar-toggle,
 	.topbar-btn {
-		color: color.change($body-color-dark, $alpha: 0.6);
+		color: rgba($body-color-dark, 0.6);
 		&:hover {
-			background: color.change($primary, $alpha: 0.1);
+			background: rgba($primary, 0.1);
 			color: $body-color-dark;
 		}
 	}
 
 	.topbar-btn__badge {
-		border-color: color.adjust($body-bg-dark, $lightness: -3%);
+		border-color: color.adjust($body-bg-dark, $lightness: -2%);
 	}
 
 	.topbar-profile {
 		color: $body-color-dark;
 		.profile-avatar {
-			background: color.change($primary, $alpha: 0.15);
+			background: rgba($primary, 0.15);
 		}
 		&:hover {
-			background: color.change($primary, $alpha: 0.08);
+			background: rgba($primary, 0.08);
 		}
 	}
 
@@ -78,30 +64,24 @@
 
 	.nav-icon,
 	.nav-flag {
-		color: color.change($body-color-dark, $alpha: 0.55);
+		color: rgba($body-color-dark, 0.55);
 		&:hover {
-			color: $primary;
+			color: $bronze-500;
 		}
 	}
 
-	// ── Cards ────────────────────────────────────────────────────────────────
 	.card,
 	.stat-card {
 		background: color.adjust($body-bg-dark, $lightness: 4%);
-		border-color: color.change($primary, $alpha: 0.15);
+		border-color: rgba($primary, 0.15);
 	}
 	.card-header,
 	.card-footer {
-		background: color.change($primary, $alpha: 0.04);
-		border-color: color.change($primary, $alpha: 0.12);
+		background: rgba($primary, 0.04);
+		border-color: rgba($primary, 0.12);
 	}
 	.card-title,
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
+	h1, h2, h3, h4, h5, h6 {
 		color: $body-color-dark;
 	}
 	.stat-card__value {
@@ -111,102 +91,97 @@
 		color: $body-color-dark;
 	}
 
-	// ── Layout ───────────────────────────────────────────────────────────────
 	.main {
-		background: color.adjust($body-bg-dark, $lightness: -2%);
+		background: color.adjust($body-bg-dark, $lightness: -1%);
 	}
 	.wrapper {
-		background: color.adjust($sidebar-bg, $lightness: -5%);
+		background: color.adjust($sidebar-bg, $lightness: -3%);
 	}
 
 	.content-footer {
-		background: color.adjust($body-bg-dark, $lightness: -3%);
-		border-color: color.change($primary, $alpha: 0.15);
-		color: color.change($body-color-dark, $alpha: 0.55);
+		background: color.adjust($body-bg-dark, $lightness: -2%);
+		border-color: rgba($primary, 0.15);
+		color: rgba($body-color-dark, 0.55);
 	}
 
-	// ── Formularios ──────────────────────────────────────────────────────────
 	.form-control,
 	.form-select {
-		background: color.adjust($body-bg-dark, $lightness: 4%);
-		border-color: color.change($primary, $alpha: 0.25);
+		background: color.adjust($body-bg-dark, $lightness: 6%);
+		border-color: rgba($primary, 0.25);
 		color: $body-color-dark;
 
 		&:focus {
-			background: color.adjust($body-bg-dark, $lightness: 4%);
-			border-color: $primary;
+			background: color.adjust($body-bg-dark, $lightness: 6%);
+			border-color: $bronze-500;
 			color: $body-color-dark;
 		}
 
 		&::placeholder {
-			color: color.change($body-color-dark, $alpha: 0.35);
+			color: rgba($body-color-dark, 0.35);
 		}
 	}
 
 	.form-label {
-		color: color.change($body-color-dark, $alpha: 0.8);
+		color: rgba($body-color-dark, 0.8);
 	}
 	.input-group-text {
-		background: color.change($primary, $alpha: 0.12);
-		border-color: color.change($primary, $alpha: 0.25);
-		color: color.change($body-color-dark, $alpha: 0.7);
+		background: rgba($primary, 0.12);
+		border-color: rgba($primary, 0.25);
+		color: rgba($body-color-dark, 0.7);
 	}
 	.form-check-input {
-		border-color: color.change($primary, $alpha: 0.35);
+		border-color: rgba($primary, 0.35);
 	}
 
-	// Select2
 	.select2-container--bootstrap-5 {
 		.select2-selection {
-			background: color.adjust($body-bg-dark, $lightness: 4%);
-			border-color: color.change($primary, $alpha: 0.25);
+			background: color.adjust($body-bg-dark, $lightness: 6%);
+			border-color: rgba($primary, 0.25);
 			color: $body-color-dark;
 		}
 		.select2-dropdown {
-			background: color.adjust($body-bg-dark, $lightness: 4%);
-			border-color: color.change($primary, $alpha: 0.2);
+			background: color.adjust($body-bg-dark, $lightness: 6%);
+			border-color: rgba($primary, 0.2);
 		}
 		.select2-results__option {
 			color: $body-color-dark;
 		}
 	}
 
-	// ── Tablas ───────────────────────────────────────────────────────────────
 	.table {
 		color: $body-color-dark;
 		th {
-			color: color.change($body-color-dark, $alpha: 0.55);
-			border-color: color.change($primary, $alpha: 0.2) !important;
+			color: rgba($body-color-dark, 0.55);
+			border-color: rgba($primary, 0.2) !important;
 		}
 		td {
-			border-color: color.change($primary, $alpha: 0.1);
+			border-color: rgba($primary, 0.1);
 		}
 		&.table-hover > tbody > tr:hover > * {
-			background: color.change($primary, $alpha: 0.06);
+			background: rgba($primary, 0.06);
 		}
 	}
 	.table-light {
-		--bs-table-bg: #{color.change($primary, $alpha: 0.06)};
-		color: color.change($body-color-dark, $alpha: 0.6);
+		--bs-table-bg: #{rgba($primary, 0.06)};
+		color: rgba($body-color-dark, 0.6);
 	}
 
-	// DataTables dark
 	.dataTables_wrapper {
 		.dataTables_filter input,
 		.dataTables_length select {
-			background: color.adjust($body-bg-dark, $lightness: 4%);
-			border-color: color.change($primary, $alpha: 0.25);
+			background: color.adjust($body-bg-dark, $lightness: 6%);
+			border-color: rgba($primary, 0.25);
 			color: $body-color-dark;
 		}
 		.dataTables_info,
 		.dataTables_length label,
 		.dataTables_filter label {
-			color: color.change($body-color-dark, $alpha: 0.55);
+			color: rgba($body-color-dark, 0.55);
 		}
 		.paginate_button {
-			color: color.change($body-color-dark, $alpha: 0.55) !important;
+			color: rgba($body-color-dark, 0.55) !important;
 			&:hover {
-				background: color.change($primary, $alpha: 0.1) !important;
+				background: rgba($primary, 0.1) !important;
 				color: $body-color-dark !important;
 			}
 			&.current {
@@ -216,48 +191,48 @@
 		}
 	}
 
-	// ── Dropdowns ────────────────────────────────────────────────────────────
 	.dropdown-menu {
-		background: color.adjust($body-bg-dark, $lightness: 4%);
-		border-color: color.change($primary, $alpha: 0.2);
+		background: color.adjust($body-bg-dark, $lightness: 6%);
+		border-color: rgba($primary, 0.2);
 	}
 	.dropdown-item {
 		color: $body-color-dark;
 		&:hover {
-			background: color.change($primary, $alpha: 0.08);
-			color: color.adjust($body-color-dark, $lightness: 15%);
+			background: rgba($primary, 0.08);
+			color: $body-color-dark;
+			span, small {
+				color: $body-color-dark;
+			}
 		}
 	}
 	.dropdown-divider {
-		border-color: color.change($primary, $alpha: 0.15);
+		border-color: rgba($primary, 0.15);
 	}
 	.dropdown-header {
-		border-color: color.change($primary, $alpha: 0.15);
+		border-color: rgba($primary, 0.15);
 		color: $body-color-dark;
 	}
 
-	// ── Notificaciones ────────────────────────────────────────────────────────
 	.notification-item {
-		border-color: color.change($primary, $alpha: 0.08);
+		border-color: rgba($primary, 0.08);
 		&:hover {
-			background: color.change($primary, $alpha: 0.06);
+			background: rgba($primary, 0.06);
 		}
 	}
 	.notification-body p {
 		color: $body-color-dark;
 	}
 	.notification-dropdown {
-		border-color: color.change($primary, $alpha: 0.2) !important;
+		border-color: rgba($primary, 0.2) !important;
 	}
 
-	// ── Misc ─────────────────────────────────────────────────────────────────
 	.activity-item {
-		border-color: color.change($primary, $alpha: 0.1);
+		border-color: rgba($primary, 0.1);
 	}
 	.breadcrumb-item a {
-		color: color.change($body-color-dark, $alpha: 0.55);
+		color: rgba($body-color-dark, 0.55);
 		&:hover {
-			color: $primary;
+			color: $bronze-500;
 		}
 	}
 	.breadcrumb-item.active {
@@ -265,11 +240,11 @@
 	}
 
 	.page-link {
-		color: color.change($body-color-dark, $alpha: 0.6);
-		background: color.adjust($body-bg-dark, $lightness: 4%);
-		border-color: color.change($primary, $alpha: 0.2);
+		color: rgba($body-color-dark, 0.6);
+		background: color.adjust($body-bg-dark, $lightness: 6%);
+		border-color: rgba($primary, 0.2);
 		&:hover {
-			background: color.change($primary, $alpha: 0.1);
+			background: rgba($primary, 0.1);
 			color: $body-color-dark;
 		}
 	}
@@ -279,32 +254,137 @@
 		color: $white;
 	}
 
-	// ── SweetAlert2 ──────────────────────────────────────────────────────────
 	.swal2-popup {
-		background: color.adjust($body-bg-dark, $lightness: 4%) !important;
-		border-color: color.change($primary, $alpha: 0.2) !important;
+		background: color.adjust($body-bg-dark, $lightness: 6%) !important;
+		border-color: rgba($primary, 0.2) !important;
 	}
 	.swal2-title {
 		color: $body-color-dark !important;
 	}
 	.swal2-html-container {
-		color: color.change($body-color-dark, $alpha: 0.8) !important;
+		color: rgba($body-color-dark, 0.8) !important;
 	}
 
-	// ── IFrame tabs ──────────────────────────────────────────────────────────
 	.nav-tabs-iframe .nav-link {
-		background: color.adjust($body-bg-dark, $lightness: -2%);
-		color: color.change($body-color-dark, $alpha: 0.7);
-		border-color: color.change($primary, $alpha: 0.15);
+		background: color.adjust($body-bg-dark, $lightness: -1%);
+		color: rgba($body-color-dark, 0.7);
+		border-color: rgba($primary, 0.15);
 		&.active {
-			background: color.adjust($body-bg-dark, $lightness: 4%);
-			color: $primary;
+			background: color.adjust($body-bg-dark, $lightness: 6%);
+			color: $bronze-500;
 		}
 	}
 
-	// ── Info-box ─────────────────────────────────────────────────────────────
 	.info-box {
-		background-color: color.adjust($body-bg-dark, $lightness: 4%);
+		background-color: color.adjust($body-bg-dark, $lightness: 6%);
 		color: $body-color-dark;
+	}
+
+	::selection {
+		background: rgba($bronze-500, 0.3);
+		color: $body-color-dark;
+	}
+
+	.text-muted {
+		color: rgba($body-color-dark, 0.5) !important;
+	}
+
+	.modal-content {
+		background: color.adjust($body-bg-dark, $lightness: 6%);
+		border-color: rgba($primary, 0.2);
+	}
+	.modal-header,
+	.modal-footer {
+		border-color: rgba($primary, 0.15);
+	}
+	.modal-title {
+		color: $body-color-dark;
+	}
+
+	.badge {
+		color: $white;
+	}
+
+	.btn-close {
+		filter: invert(1) grayscale(100%) brightness(200%);
+	}
+
+	.progress {
+		background-color: rgba($primary, 0.15);
+	}
+	.progress-bar {
+		background-color: $bronze-500;
+	}
+
+	.toast {
+		background: color.adjust($body-bg-dark, $lightness: 8%);
+		border-color: rgba($primary, 0.2);
+	}
+	.toast-header {
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		border-color: rgba($primary, 0.15);
+		color: $body-color-dark;
+	}
+
+	.tooltip-inner {
+		background: color.adjust($body-bg-dark, $lightness: 12%);
+		color: $body-color-dark;
+	}
+	.bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before,
+	.bs-tooltip-top .tooltip-arrow::before {
+		border-top-color: color.adjust($body-bg-dark, $lightness: 12%);
+	}
+	.bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before,
+	.bs-tooltip-bottom .tooltip-arrow::before {
+		border-bottom-color: color.adjust($body-bg-dark, $lightness: 12%);
+	}
+
+	.popover {
+		background: color.adjust($body-bg-dark, $lightness: 8%);
+		border-color: rgba($primary, 0.2);
+	}
+	.popover-header {
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		border-color: rgba($primary, 0.15);
+		color: $body-color-dark;
+	}
+	.popover-body {
+		color: rgba($body-color-dark, 0.8);
+	}
+
+	.spinner-border,
+	.spinner-grow {
+		color: $bronze-500;
+	}
+
+	.offcanvas {
+		background: color.adjust($body-bg-dark, $lightness: 6%);
+		border-color: rgba($primary, 0.2);
+		color: $body-color-dark;
+	}
+	.offcanvas-header {
+		border-color: rgba($primary, 0.15);
+	}
+
+	.accordion-item {
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		border-color: rgba($primary, 0.15);
+	}
+	.accordion-button {
+		background: color.adjust($body-bg-dark, $lightness: 4%);
+		color: $body-color-dark;
+
+		&:not(.collapsed) {
+			background: color.adjust($body-bg-dark, $lightness: 8%);
+			color: $bronze-500;
+		}
+
+		&::after {
+			filter: invert(0.8);
+		}
+	}
+
+	.placeholder {
+		background: rgba($primary, 0.15);
 	}
 }

@@ -1,10 +1,5 @@
 @use "sass:color";
 
-// ============================================================================
-// 3-components/_card.scss
-// Fusión: HR Library (base, variantes BT) + CoffeeSchools (hover, accent, header)
-// ============================================================================
-
 .card {
 	margin-bottom: $grid-gutter-width;
 	background: $card-bg;
@@ -13,29 +8,30 @@
 	box-shadow: $card-shadow;
 	overflow: hidden;
 	transition:
-		box-shadow 0.2s,
-		transform 0.2s;
+		box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	position: relative;
 
 	&:hover {
-		box-shadow: 0 8px 24px color.change($dark, $alpha: 0.08);
+		box-shadow: 0 8px 28px rgba($navy-900, 0.1);
 		transform: translateY(-2px);
 	}
 }
 
 .card-header {
 	border-bottom: 1px solid $card-border-color;
-	background-color: color.change($primary, $alpha: 0.03);
+	background-color: $gray-50;
 	padding: $card-cap-padding-y $card-cap-padding-x;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 1rem;
+	font-family: $ff-display;
 }
 
 .card-footer {
-	background-color: color.change($primary, $alpha: 0.02);
+	background-color: $gray-50;
 	border-top: 1px solid $card-border-color;
 	padding-top: $card-cap-padding-y;
 	padding-bottom: $card-cap-padding-y;
@@ -48,12 +44,14 @@
 	font-weight: $card-title-font-weight;
 	color: $card-title-color;
 	margin: 0;
-	font-family: $ff-condensed;
+	font-family: $ff-display;
+	font-variation-settings: "wght" 700, "SOFT" 30;
 
 	i {
-		font-size: 1.5rem;
-		color: $dark;
+		font-size: 1.4rem;
+		color: $bronze-500;
 		margin-right: 0.5rem;
+		vertical-align: middle;
 	}
 }
 
@@ -61,26 +59,22 @@
 	font-weight: $font-weight-normal;
 }
 
-// Variante card destacada
 .card--accent {
-	border-color: color.change($primary, $alpha: 0.4);
+	border-color: rgba($bronze-500, 0.4);
 }
 
-// Card header actions helper
 .card-header-actions {
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
 }
 
-// Variantes BT (border-top coloreado)
 @each $name, $color in $theme-colors {
 	.card-bt-#{$name} {
 		@include card-bt($color);
 	}
 }
 
-// Imágenes
 .card-img,
 .card-img-top,
 .card-img-bottom {

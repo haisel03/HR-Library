@@ -45,7 +45,7 @@ module.exports = (req, res, next) => {
   // ── Dashboard: devolver objeto único en lugar de array ───────────────────
   if (req.method === "GET" && req.url === "/api/dashboard/stats") {
     const db = require("./db.json");
-    return res.json(db.dashboard[0]);
+    return res.json(db.dashboard?.[0] ?? {});
   }
 
   next();

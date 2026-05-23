@@ -92,7 +92,6 @@ const toast = {
 			position: config.swal.toast.position,
 			timer: config.swal.toast.timer,
 			showConfirmButton: false,
-			backdrop: false,
 			html: `
         <div class="d-flex p-0" style="overflow:hidden;border-radius:none;min-height:60px">
           <div class="d-flex align-items-center justify-content-center bg-${color}" style="width:20%">

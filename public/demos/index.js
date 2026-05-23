@@ -6,7 +6,7 @@
  */
 
 App.ready(() => {
-	App.msgSuccess("¡Bienvenido a HR Library!");
+	App.success("¡Bienvenido a HR Library!");
 	// Meses cortos para labels de gráficas — desde spanish.js
 	const shortMonths = App.lang.months_short;
 

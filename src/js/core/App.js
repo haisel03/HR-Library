@@ -64,7 +64,7 @@ import Storage from "../helpers/Storage.js";
 import Strings from "../helpers/Strings.js";
 import Table from "../helpers/Table.js";
 import Validation from "../helpers/Validation.js";
-import Custon from "../helpers/Custon.js";
+
 
 const App = {
 	/* ── Meta ── */
@@ -183,14 +183,16 @@ const App = {
 	uploadApi: Api.upload,
 
 	/**
-	 * Llena un elemento &lt;select&gt; con opciones obtenidas de la API.
-	 * @param {string|HTMLElement} el Selector o elemento select
-	 * @param {string} url URL que devuelve un array de opciones
-	 * @param {Object} [options={}] Opciones de configuración (valueField, textField, etc.)
+	 * Carga opciones de un select desde una API usando su nombre semántico.
+	 * El select debe tener la clase "sl{Name}" (ej: select.slDepartment).
+	 * Si hay más de 5 opciones activa Select2 automáticamente.
+	 * @param {string} name Nombre semántico (ej: "department")
+	 * @param {string} url  Endpoint de la API
+	 * @param {Object} [param] Parámetros opcionales (ej: { active: true })
 	 * @returns {Promise<void>}
 	 *
 	 * @example
-	 * await App.getSelect("#pais", "/api/paises");
+	 * await App.getSelect("department", "/api/departments", { active: true });
 	 */
 	getSelect: Api.getSelect,
 
@@ -1869,6 +1871,27 @@ const App = {
 	 */
 	dragDestroy: Drag.destroy,
 
+	/**
+	 * Escucha el evento "drop" (fin de arrastre) en un grupo.
+	 * @param {string} key Identificador del grupo
+	 * @param {Function} callback(el, target, source, sibling)
+	 */
+	dragDrop: Drag.onDrop,
+
+	/**
+	 * Escucha el evento "drag" (inicio de arrastre) en un grupo.
+	 * @param {string} key Identificador del grupo
+	 * @param {Function} callback(el, target, source, sibling)
+	 */
+	dragDrag: Drag.onDrag,
+
+	/**
+	 * Escucha el evento "cancel" en un grupo.
+	 * @param {string} key Identificador del grupo
+	 * @param {Function} callback(el, target, source, sibling)
+	 */
+	dragCancel: Drag.onCancel,
+
 	/* ── Archivos ── */
 
 	/**
@@ -2090,17 +2113,6 @@ const App = {
 	 */
 	choicesDestroy: ChoicesJS.destroy,
 
-	/* ── Custon ── */
-
-	/**
-	 * Carga opciones de un select desde una API.
-	 * @param {string} name Nombre semántico (ej: "users" → busca select.slUsers)
-	 * @param {string} url Endpoint de la API
-	 * @param {Object} [param] Parámetros opcionales
-	 * @returns {Promise<void>}
-	 */
-	getSelect: Custon.getSelect,
-
 	/* ── Sidebar ── */
 
 	/**
@@ -2174,6 +2186,12 @@ const App = {
 	 * @returns {void}
 	 */
 	iframeCloseAll: Iframe.closeAll,
+
+	// Alias cortos para conveniencia
+	open: Iframe.open,
+	refresh: Iframe.refresh,
+	closeOthers: Iframe.closeOthers,
+	closeAll: Iframe.closeAll,
 
 	/* ── Excel (SheetJS) ── */
 

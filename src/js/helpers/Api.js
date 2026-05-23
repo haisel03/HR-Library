@@ -19,10 +19,14 @@
  * @version 3.0.0
  */
 
+import $ from "jquery";
 import axios from "axios";
 import config from "../core/config.js";
 import Alert from "./Alert.js";
 import Storage from "./Storage.js";
+import Dom from "./Dom.js";
+import Strings from "./Strings.js";
+import Validation from "./Validation.js";
 
 /* ── Estado interno ── */
 const _state = {
@@ -172,25 +176,43 @@ const Api = {
 		}),
 
 	/**
-	 * Carga un select con datos del servidor.
-	 * @param {string|HTMLSelectElement} el  - Selector o elemento select.
-	 * @param {string} url                   - Endpoint que retorna [{id, nombre}].
-	 * @param {Object} [params={}]
+	 * Carga opciones de un select desde una API.
+	 * El select debe tener la clase "sl{Name}" (ej: slDepartment para "department").
+	 * El endpoint debe devolver un array de objetos con {id, name} o {codigo, descripcion}.
+	 * Si hay más de 5 opciones se activa Select2 automáticamente.
+	 * @param {string} name  Nombre semántico (ej: "department")
+	 * @param {string} url   Endpoint de la API
+	 * @param {Object} [param] Parámetros opcionales (ej: { active: true })
 	 * @returns {Promise<void>}
 	 * @example
-	 * await Api.getSelect("#selectPais", "/paises");
+	 * await Api.getSelect("department", "/api/departments", { active: true });
 	 */
-	async getSelect(el, url, params = {}) {
-		const select = typeof el === "string" ? document.querySelector(el) : el;
-		if (!select) return;
+	async getSelect(name, url, param) {
+		if (Validation.isNullOrEmpty(name) || Validation.isNullOrEmpty(url)) return null;
+		const sl = Dom.q(`select.sl${Strings.capitalize(name)}`);
+		if (!sl) return null;
 		try {
-			const data = await Api.get(url, params);
-			const items = Array.isArray(data) ? data : (data?.data ?? []);
-			select.innerHTML =
-				`<option value="">Seleccione...</option>` +
-				items
-					.map((item) => `<option value="${item.id}">${item.nombre ?? item.name ?? item.label ?? ""}</option>`)
-					.join("");
+			const res = await Api.get(url, param);
+			const data = Array.isArray(res.data) ? res.data : res.data?.data;
+			const isWarning = res.data?.type === "w" && res.data?.data === null;
+
+			if (isWarning || !data || data.length === 0) {
+				sl.innerHTML = `<option value="">Seleccione...</option>`;
+				return;
+			}
+
+			sl.innerHTML = `<option value="">Seleccione...</option>` +
+				data.map(item => `<option value="${item.codigo ?? item.id}">${item.descripcion ?? item.name}</option>`).join("");
+
+			if (data.length > 5) {
+				if ($(sl).data("select2")) $(sl).select2("destroy");
+				const $sl = $(sl);
+				const parentModal = $sl.closest(".modal");
+				$sl.select2({
+					...config.select2,
+					dropdownParent: parentModal.length ? parentModal : $(document.body),
+				});
+			}
 		} catch {
 			// Error ya manejado por el interceptor
 		}

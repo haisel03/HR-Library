@@ -42,7 +42,7 @@ $flatpickr-tile-height: 45px;
 			}
 
 			&:hover {
-				background: #e6e6e6;
+				background: $gray-200;
 				color: $black;
 			}
 		}
@@ -99,7 +99,7 @@ $flatpickr-tile-height: 45px;
 		border-radius: $border-radius;
 
 		&:hover {
-			background: #e6e6e6;
+			background: $gray-200;
 			color: $black;
 		}
 	}

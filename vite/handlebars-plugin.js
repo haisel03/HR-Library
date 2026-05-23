@@ -57,14 +57,17 @@ export default function handlebarsPlugin(options = {}) {
     return fs.existsSync(path.join(demosDir, `${pageName}.js`));
   }
 
-  function buildHtmlDocument(pageName, htmlContent) {
+  function buildHtmlDocument(pageName, htmlContent, isBuild) {
     const demo = hasDemo(pageName);
 
     let scripts =
       '\n<script type="module" src="./src/js/app.js"></script>\n';
 
     if (demo) {
-      scripts += `<script type="module" src="./demos/${pageName}.js"></script>\n`;
+      // Dev: inject as ES module (Vite resolves via public/ → / mapping)
+      // Build: inject as plain script (Vite would fail to resolve public/ modules)
+      const scriptType = isBuild ? 'src' : 'type="module" src';
+      scripts += `<script ${scriptType}="./demos/${pageName}.js"></script>\n`;
     }
 
     if (htmlContent.includes("</body>")) {
@@ -86,7 +89,7 @@ export default function handlebarsPlugin(options = {}) {
         pages.forEach((name) => {
           const content = compilePage(name);
           if (content) {
-            const html = buildHtmlDocument(name, content);
+            const html = buildHtmlDocument(name, content, true);
             const htmlPath = path.join(root, `${name}.html`);
             fs.writeFileSync(htmlPath, html, "utf8");
             input[name] = htmlPath;
@@ -132,7 +135,7 @@ export default function handlebarsPlugin(options = {}) {
             next();
             return;
           }
-          const html = buildHtmlDocument(pageName, content);
+          const html = buildHtmlDocument(pageName, content, false);
           res.setHeader("Content-Type", "text/html; charset=utf-8");
           res.end(html);
         } catch (err) {

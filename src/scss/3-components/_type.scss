@@ -19,4 +19,10 @@ pre.snippet {
 
 a {
 	cursor: pointer;
+	color: $primary;
+	transition: color 0.15s;
+
+	&:hover {
+		color: $bronze-500;
+	}
 }

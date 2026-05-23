@@ -4,6 +4,7 @@
 	width: 100vw;
 	max-width: 100vw;
 	direction: ltr;
+	background: $body-bg;
 
 	@include media-breakpoint-up(md) {
 		width: auto;

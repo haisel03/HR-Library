@@ -42,7 +42,7 @@ $sidebar-link-gap: 0.65rem !default; // espacio ícono - texto
 // ── Link hover ─────────────────────────────────────────────────────────────
 $sidebar-link-hover-color: $white !default;
 $sidebar-link-hover-bg: rgba($white, 0.04) !default;
-$sidebar-link-hover-border-left-color: $red !default;
+$sidebar-link-hover-border-left-color: $danger !default;
 $sidebar-link-icon-hover-color: $white !default;
 
 // ── Link active ────────────────────────────────────────────────────────────
@@ -53,7 +53,7 @@ $sidebar-link-active-bg: linear-gradient(
 	rgba($primary, 0.06) 60%,
 	rgba($primary, 0) 100%
 ) !default;
-$sidebar-link-active-border-left-color: $red !default;
+$sidebar-link-active-border-left-color: $danger !default;
 $sidebar-link-icon-color: rgba($white, 0.55) !default;
 $sidebar-link-icon-active-color: $white !default;
 

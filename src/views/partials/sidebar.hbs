@@ -2,9 +2,26 @@
 	<div class="sidebar-content js-simplebar" data-simplebar-auto-hide="true">
 
 		<a class="sidebar-brand" href="index.html">
-			<img src="img/logos/logo-sidebar.svg" alt="HR Library" class="sidebar-brand-full" width="160" height="44">
+			<div class="brand-link">
+				<div class="brand-icon">
+					<i class="bi bi-book"></i>
+				</div>
+				<span class="sidebar-brand-full" style="font-family: 'Fraunces', serif; font-size: 1.25rem; color: #F5F0EB;">
+					<span style="color: #C4956A;">HR</span> Library
+				</span>
+			</div>
 			<img src="img/logos/logo-sidebar-collapsed.svg" alt="HR" class="sidebar-brand-icon" width="36" height="36">
 		</a>
+
+		{{!-- User Info --}}
+		<div class="sidebar-user">
+			<div class="user-avatar">HR</div>
+			<div class="sidebar-brand-full" style="overflow: hidden;">
+				<span class="user-name">Haisel Ramírez</span>
+				<span class="user-role">Administrador</span>
+			</div>
+		</div>
+
 		<ul class="sidebar-nav">
 
 			{{!-- DASHBOARDS --}}
@@ -118,7 +135,7 @@
 				<a class="sidebar-link" href="panel-login.html">
 					<i class="bi bi-window-stack"></i>
 					<span>Panel de Control</span>
-					<span class="sidebar-badge badge bg-danger">NEW</span>
+					<span class="sidebar-badge badge bg-danger" style="background: rgba(196,149,106,0.18) !important; color: #D4B08C !important;">NEW</span>
 				</a>
 			</li>
 
@@ -163,7 +180,7 @@
 				</ul>
 			</li>
 
-			<li class="sidebar-item">
+			<li class="sidebar-item" style="margin-top: auto;">
 				<a class="sidebar-link" href="landing.html" target="_blank" rel="noopener">
 					<i class="bi bi-display"></i>
 					<span>Landing Page</span>

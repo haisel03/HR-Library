@@ -10,12 +10,12 @@ $(function () {
 		const productName = $btn.closest(".card-body").find(".card-title").text();
 
 		// loading() sin arg = abrir
-		App.msgLoading();
+		App.loading();
 
 		setTimeout(() => {
 			// loading(false) = cerrar
-			App.msgLoading(false);
-			App.msgSuccess(`¡"${productName}" reservado en tu carrito institucional!`);
+			App.loading(false);
+			App.success(`¡"${productName}" reservado en tu carrito institucional!`);
 			$btn.removeClass("btn-primary").addClass("btn-success")
 			    .html('<i class="bi bi-check2-all me-1"></i> En el Carrito');
 		}, 800);

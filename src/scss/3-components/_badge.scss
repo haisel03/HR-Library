@@ -1,0 +1,13 @@
+.badge {
+	font-weight: 600;
+	letter-spacing: 0.03em;
+	padding: 0.35em 0.7em;
+	border-radius: 0.35rem;
+	font-size: 0.7rem;
+}
+
+@each $color, $value in $theme-colors {
+	.badge.bg-#{$color} {
+		color: $white;
+	}
+}

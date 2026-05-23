@@ -6,20 +6,17 @@
  */
 
 $(async function () {
-	// 1. Inicializar Dragula
+	// 1. Inicializar SortableJS
 	const containers = [
 		document.getElementById("tasks-pending"),
 		document.getElementById("tasks-progress"),
 		document.getElementById("tasks-completed"),
 	];
 
-	const drake = App.dragCreate("kanban", containers, {
-		moves:   () => true,
-		accepts: () => true,
-	});
+	App.dragCreate("kanban", containers);
 
-	// 2. Eventos de Dragula
-	drake.on("drop", function (el, target, source, sibling) {
+	// 2. Eventos de arrastre
+	App.dragDrop("kanban", function (el, target, source, sibling) {
 		const status = target.dataset.status;
 		updateCardColor(el, status);
 		updateCounts();
@@ -34,7 +31,9 @@ $(async function () {
 	// 3. Cargar Tareas desde JSON
 	App.loading();
 	try {
-		const tasks = await App.getApi("json/tasks.json");
+		const res = await fetch("/json/tasks.json");
+		if (!res.ok) throw new Error(res.statusText);
+		const tasks = await res.json();
 		tasks.forEach((t) => $(`#tasks-${t.status}`).append(createTaskCard(t)));
 		updateCounts();
 		App.loading(false);

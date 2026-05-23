@@ -1,13 +1,114 @@
+@use "sass:color";
+
 footer.footer {
 	padding: $spacer $spacer * 0.875;
 	direction: ltr;
 	background: $footer-bg;
+	border-top: 1px solid $gray-200;
+	font-size: $font-size-sm;
 
 	ul {
 		margin-bottom: 0;
 	}
 
+	a {
+		color: $gray-500;
+		text-decoration: none;
+		transition: color 0.15s;
+
+		&:hover {
+			color: $bronze-500;
+		}
+	}
+
 	@include media-breakpoint-down(md) {
 		width: 100vw;
+	}
+}
+
+.footer-landing {
+	background: $navy-800;
+	padding: 4rem 0 1.5rem;
+
+	&-brand {
+		font-family: $ff-display;
+		font-weight: 700;
+		font-size: 1.5rem;
+		color: $gray-100;
+		text-decoration: none;
+
+		span {
+			color: $bronze-500;
+		}
+	}
+
+	&-text {
+		color: rgba($gray-100, 0.5);
+		font-size: $font-size-sm;
+	}
+
+	&-heading {
+		color: $bronze-500;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		font-size: 0.65rem;
+		font-weight: 700;
+		margin-bottom: 0.75rem;
+	}
+
+	&-link {
+		color: rgba($gray-100, 0.5) !important;
+		text-decoration: none;
+		font-size: $font-size-sm;
+		transition: color 0.2s;
+
+		&:hover {
+			color: $bronze-500 !important;
+		}
+	}
+
+	&-social {
+		color: rgba($gray-100, 0.4);
+		text-decoration: none;
+		transition: color 0.2s;
+		font-size: 1.2rem;
+
+		&:hover {
+			color: $bronze-500;
+		}
+	}
+
+	&-input {
+		background: rgba($white, 0.06);
+		border: 1px solid rgba($white, 0.1);
+		color: $gray-100;
+		border-radius: $border-radius 0 0 $border-radius;
+
+		&::placeholder {
+			color: rgba($gray-100, 0.3);
+		}
+	}
+
+	&-btn {
+		background: $bronze-500;
+		color: $navy-800;
+		border: none;
+		font-weight: 700;
+		border-radius: 0 $border-radius $border-radius 0;
+
+		&:hover {
+			background: color.adjust($bronze-500, $lightness: -8%);
+			color: $navy-800;
+		}
+	}
+
+	&-divider {
+		border-color: rgba($white, 0.06) !important;
+		margin: 2rem 0;
+	}
+
+	&-copyright {
+		color: rgba($gray-100, 0.3);
+		font-size: $font-size-sm;
 	}
 }

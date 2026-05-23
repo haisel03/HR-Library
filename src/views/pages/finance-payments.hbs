@@ -3,7 +3,7 @@
 <div class="row">
 	<!-- Payment Form -->
 	<div class="col-lg-5 mb-4">
-		<div class="card shadow">
+		<div class="card">
 			<div class="card-header py-3">
 				<h6 class="m-0 font-weight-bold text-primary"><i class="bi bi-plus-circle"></i> Nuevo Pago</h6>
 			</div>
@@ -68,10 +68,10 @@
 
 	<!-- Payment History -->
 	<div class="col-lg-7">
-		<div class="card shadow">
+		<div class="card">
 			<div class="card-header py-3 d-flex justify-content-between align-items-center">
 				<h6 class="m-0 font-weight-bold text-primary">Historial de Transacciones</h6>
-				<button class="btn btn-sm btn-outline-secondary" onclick='HR.exportPdf("payments-table", {}) '>
+				<button class="btn btn-sm btn-outline-secondary" onclick='App.exportPdf("payments-table", {}) '>
 					<i class="bi bi-printer"></i> Reporte Diario
 				</button>
 			</div>
@@ -95,7 +95,7 @@
 							<td>Hoy 10:30</td>
 							<td class="text-success fw-bold">RD$ 3,000</td>
 							<td class="text-end">
-								<a href="invoice.html" class="btn btn-sm btn-light" title="Imprimir"><i class="bi bi-printer"></i></a>
+								<a href="invoice.html" class="btn btn-sm btn-outline-secondary" title="Imprimir"><i class="bi bi-printer"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -105,7 +105,7 @@
 							<td>Hoy 09:15</td>
 							<td class="text-success fw-bold">RD$ 5,000</td>
 							<td class="text-end">
-								<a href="invoice.html" class="btn btn-sm btn-light" title="Imprimir"><i class="bi bi-printer"></i></a>
+								<a href="invoice.html" class="btn btn-sm btn-outline-secondary" title="Imprimir"><i class="bi bi-printer"></i></a>
 							</td>
 						</tr>
 						<tr>
@@ -115,7 +115,7 @@
 							<td>Ayer</td>
 							<td class="text-success fw-bold">RD$ 1,200</td>
 							<td class="text-end">
-								<a href="invoice.html" class="btn btn-sm btn-light" title="Imprimir"><i class="bi bi-printer"></i></a>
+								<a href="invoice.html" class="btn btn-sm btn-outline-secondary" title="Imprimir"><i class="bi bi-printer"></i></a>
 							</td>
 						</tr>
 					</tbody>

@@ -43,7 +43,7 @@ Chart.register(
 // Si en el futuro necesitas radar, bubble, scatter o polarArea:
 // importarlos e incluirlos en Chart.register() arriba.
 
-Chart.defaults.color = window.theme?.["gray-600"] || "#6c757d";
-Chart.defaults.font.family = "'Inter', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif";
+Chart.defaults.color = window.theme?.["gray-600"] || "#7D7268";
+Chart.defaults.font.family = "'DM Sans', 'Helvetica Neue', Arial, system-ui, sans-serif";
 
 window.Chart = Chart;

@@ -1,152 +1,74 @@
 @use "sass:color";
 @use "sass:map";
-// Theme colors - Soft professional palette (A–Z)
-$aqua: #00ffff !default;
-$beige: #f5f5dc !default;
-$bisque: #ffe4c4 !default;
-$black: #1a1a1a !default;
-$blue: #003876 !default; // DR National Blue
-$blueviolet: #8a2be2 !default;
-$brown: #a52a2a !default;
-$burly: #deb887 !default;
-$cadet: #5f9ea0 !default;
-$charcoal: #2b2f36 !default;
-$chocolate: #d2691e !default;
-$coral: #c65a4a !default;
-$crimson: #dc143c !default;
-$cyan: #00ffff !default;
-$deep: #ff1493 !default;
-$dodger: #1e90ff !default;
-$fire: #b22222 !default;
-$gold: #c9a227 !default;
-$goldenrod: #daa520 !default;
-$gray: #708090 !default;
-$green: #087208 !default;
-$indian: #cd5c5c !default;
-$indigo: #0a0a0a !default;
-$lemon: #fffacd !default;
-$light: #f5f7fb !default;
-$lime: #00ff00 !default;
-$magenta: #ff00ff !default;
-$maroon: #800000 !default;
-$midnight: #191970 !default;
-$mint: #5fb3a2 !default;
-$moccasin: #ffe4b5 !default;
-$navy: #183a5d !default;
-$navajo: #ffdead !default;
-$olive: #7a8f3a !default;
-$orange: #fe5000 !default;
-$orangered: #ff4500 !default;
-$papaya: #ffefd5 !default;
-$peru: #cd853f !default;
-$pink: #ff69b4 !default;
-$purple: #800080 !default;
-$red: #ce1126 !default; // DR National Red
-$rose: #b85c7a !default;
-$royal: #4169e1 !default;
-$salmon: #fa8072 !default;
-$sand: #e6d8c3 !default;
-$sienna: #a0522d !default;
-$silver: #c0c0c0 !default;
-$sky: #6fa3d8 !default;
-$slate: #4a5d73 !default;
-$tan: #d2b48c !default;
-$teal: #008080 !default;
-$tomato: #ff6347 !default;
-$turquoise: #40e0d0 !default;
-$violet: #ee82ee !default;
-$violetred: #c71585 !default;
-$yellow: #efdf00 !default;
-$white: #ffffff !default;
 
-// Escala de grises
-$gray-100: #f8f9fa !default;
-$gray-200: #e9ecef !default;
-$gray-300: #dee2e6 !default;
-$gray-400: #ced4da !default;
-$gray-500: #adb5bd !default;
-$gray-600: #6c757d !default;
-$gray-700: #495057 !default;
-$gray-800: #343a40 !default;
-$gray-900: #212529 !default;
-$black-100: #000000 !default;
+// ============================================================================
+// _colors.scss — Warm Institutional Palette
+// Deep navy, warm cream, bronze accents — editorial & refined
+// ============================================================================
 
-//Semantic colors
-$primary: $blue !default;
+$black: #1A1513 !default;
+$white: #FFFFFF !default;
+
+// Escala de neutros cálidos
+$gray-50: #FAF8F5 !default;
+$gray-100: #F5F0EB !default;
+$gray-200: #EAE3DB !default;
+$gray-300: #D5CCC2 !default;
+$gray-400: #B8ADA1 !default;
+$gray-500: #9A8E82 !default;
+$gray-600: #7D7268 !default;
+$gray-700: #5C534B !default;
+$gray-800: #3D3732 !default;
+$gray-900: #221F1C !default;
+
+// Brand — Deep Navy
+$navy-900: #0A1628 !default;
+$navy-800: #0F1F33 !default;
+$navy-700: #152A45 !default;
+$navy-600: #1B3A5C !default;
+$navy-500: #2D5A8E !default;
+$navy-400: #4A7AB5 !default;
+$navy-300: #7BA3D4 !default;
+$navy-200: #B0CAE8 !default;
+$navy-100: #D9E5F5 !default;
+
+// Brand — Warm Bronze/Gold
+$bronze-900: #3D2A1A !default;
+$bronze-800: #5C3F28 !default;
+$bronze-700: #7A5438 !default;
+$bronze-600: #9B6B47 !default;
+$bronze-500: #C4956A !default;
+$bronze-400: #D4B08C !default;
+$bronze-300: #E4C9AE !default;
+$bronze-200: #F0E0D0 !default;
+$bronze-100: #F7EFE5 !default;
+
+// Semantic
+$primary: $navy-600 !default;
+$primary-dark: $navy-800 !default;
 $secondary: $gray-600 !default;
-$success: #198754 !default;
-$info: $cyan !default;
-$warning: #ffc107 !default;
-$danger: $red !default;
-$dark: $charcoal !default;
+$success: #3A7D5C !default;
+$info: #5A7D9A !default;
+$warning: #C49A5A !default;
+$danger: #B53B3B !default;
+$light: $gray-100 !default;
+$dark: $navy-800 !default;
 
 $theme-colors: (
-	"aqua": $aqua,
-	"beige": $beige,
-	"bisque": $bisque,
-	"black": $black,
-	"blue": $blue,
-	"blueviolet": $blueviolet,
-	"brown": $brown,
-	"burly": $burly,
-	"cadet": $cadet,
-	"charcoal": $charcoal,
-	"chocolate": $chocolate,
-	"coral": $coral,
-	"crimson": $crimson,
-	"cyan": $cyan,
-	"danger": $danger,
-	"dark": $dark,
-	"deep": $deep,
-	"dodger": $dodger,
-	"fire": $fire,
-	"gold": $gold,
-	"goldenrod": $goldenrod,
-	"gray": $gray,
-	"green": $green,
-	"indian": $indian,
-	"indigo": $indigo,
-	"info": $info,
-	"lemon": $lemon,
-	"light": $light,
-	"lime": $lime,
-	"magenta": $magenta,
-	"maroon": $maroon,
-	"midnight": $midnight,
-	"mint": $mint,
-	"moccasin": $moccasin,
-	"navy": $navy,
-	"navajo": $navajo,
-	"olive": $olive,
-	"orange": $orange,
-	"orangered": $orangered,
-	"papaya": $papaya,
-	"peru": $peru,
-	"pink": $pink,
 	"primary": $primary,
-	"purple": $purple,
-	"red": $red,
-	"rose": $rose,
-	"royal": $royal,
-	"salmon": $salmon,
-	"sand": $sand,
 	"secondary": $secondary,
-	"sienna": $sienna,
-	"silver": $silver,
-	"sky": $sky,
-	"slate": $slate,
 	"success": $success,
-	"tan": $tan,
-	"teal": $teal,
-	"tomato": $tomato,
-	"turquoise": $turquoise,
-	"violet": $violet,
-	"violetred": $violetred,
+	"info": $info,
 	"warning": $warning,
-	"yellow": $yellow,
+	"danger": $danger,
+	"light": $light,
+	"dark": $dark,
+	"white": $white,
+	"navy": $navy-600,
+	"bronze": $bronze-500,
 ) !default;
 
-// Social colors (brand-safe)
+// Social colors
 $social-colors: (
 	"bitbucket": #0052cc,
 	"dribbble": #ea4c89,
@@ -164,11 +86,12 @@ $social-colors: (
 $theme-colors: map.merge($theme-colors, $social-colors);
 
 // Body
-$body-bg: #f8f9fa !default;
-$main-bg: $gray-400 !default;
+$body-bg: $gray-100 !default;
+$main-bg: $gray-200 !default;
 $body-color: $gray-800 !default;
-$body-bg-dark: #0b0e14 !default;
-$body-color-dark: $gray-100 !default;
+$body-bg-dark: #0A1118 !default;
+$body-color-dark: #E8E2DA !default;
 
-$sidebar-bg: #002144 !default; // Darker DR blue for sidebar
+// Sidebar
+$sidebar-bg: $navy-800 !default;
 $sidebar-cta-bg: color.adjust($sidebar-bg, $lightness: 5%) !default;

@@ -1,12 +1,5 @@
 @use "sass:color";
 
-// ============================================================================
-// 3-components/_tables.scss
-// Fusión: HR Library (estructura, variantes) + CoffeeSchools (DT overrides)
-// ============================================================================
-
-/* ── Base ─────────────────────────────────────────────────────────────────── */
-
 .table {
 	width: 100%;
 	margin-bottom: 0;
@@ -15,16 +8,18 @@
 	--bs-table-hover-bg: #{$table-hover-bg};
 
 	thead {
-		background-color: color.change($primary, $alpha: 0.04);
+		background-color: $gray-50;
 
 		th {
 			text-transform: uppercase;
-			font-size: 0.75rem;
-			letter-spacing: 0.5px;
-			font-weight: $font-weight-bold;
-			color: $secondary;
+			font-size: 0.72rem;
+			letter-spacing: 0.06em;
+			font-weight: 700;
+			color: $gray-600;
 			border-bottom: 2px solid $table-border-color !important;
 			white-space: nowrap;
+			padding-top: 0.9rem;
+			padding-bottom: 0.7rem;
 		}
 	}
 
@@ -46,11 +41,9 @@
 }
 
 .table-light {
-	--bs-table-bg: #{color.change($primary, $alpha: 0.04)};
-	color: $secondary;
+	--bs-table-bg: #{rgba($primary, 0.04)};
+	color: $gray-600;
 }
-
-/* ── Variante compacta ────────────────────────────────────────────────────── */
 
 .table-xs {
 	font-size: $font-size-sm;
@@ -83,15 +76,13 @@
 	}
 
 	&.table-striped tbody tr:nth-of-type(odd) {
-		background-color: color.change($primary, $alpha: 0.02);
+		background-color: rgba($primary, 0.02);
 	}
 	&.table-hover tbody tr:hover {
-		background-color: color.change($primary, $alpha: 0.05);
+		background-color: rgba($primary, 0.05);
 		cursor: pointer;
 	}
 }
-
-/* ── .table-h-* (header coloreado por tema) ──────────────────────────────── */
 
 @each $name, $color in $theme-colors {
 	.table-h-#{$name} {
@@ -118,28 +109,27 @@
 	}
 }
 
-/* ── DataTables overrides ─────────────────────────────────────────────────── */
-
 div.dt-container {
 	.dataTables_filter input {
 		background: $input-bg;
-		border: 1px solid $input-border-color;
-		border-radius: $border-radius;
-		padding: 0.35rem 0.75rem;
-		font-size: 0.875rem;
+		border: 1.5px solid $input-border-color;
+		border-radius: 0.5rem;
+		padding: 0.35rem 0.85rem;
+		font-size: 0.85rem;
 		color: $body-color;
+		transition: border-color 0.2s, box-shadow 0.2s;
 		&:focus {
 			outline: none;
 			border-color: $primary;
-			box-shadow: 0 0 0 3px color.change($primary, $alpha: 0.12);
+			box-shadow: 0 0 0 3px rgba($primary, 0.1);
 		}
 	}
 
 	.dataTables_length select {
 		background: $input-bg;
-		border: 1px solid $input-border-color;
-		border-radius: $border-radius;
-		padding: 0.3rem 0.6rem;
+		border: 1.5px solid $input-border-color;
+		border-radius: 0.4rem;
+		padding: 0.3rem 0.75rem;
 		color: $body-color;
 		cursor: pointer;
 	}
@@ -148,11 +138,12 @@ div.dt-container {
 	.dataTables_length label,
 	.dataTables_filter label {
 		font-size: 0.82rem;
-		color: $secondary;
+		color: $gray-500;
 	}
 
 	div.dt-paging ul.pagination {
 		justify-content: flex-end;
+		gap: 0.2rem;
 	}
 
 	@media (max-width: 767px) {
@@ -162,32 +153,33 @@ div.dt-container {
 	}
 
 	.paginate_button {
-		border-radius: $border-radius-sm !important;
-		color: $secondary !important;
+		border-radius: 0.4rem !important;
+		color: $gray-600 !important;
+		border: 1px solid transparent !important;
 
 		&:hover {
-			background: color.change($primary, $alpha: 0.1) !important;
-			border-color: color.change($primary, $alpha: 0.2) !important;
-			color: $dark !important;
+			background: rgba($primary, 0.06) !important;
+			border-color: rgba($primary, 0.15) !important;
+			color: $navy-800 !important;
 		}
 
 		&.current {
 			background: $primary !important;
-			border-color: color.adjust($primary, $lightness: -8%) !important;
+			border-color: $primary !important;
 			color: $white !important;
+			box-shadow: 0 2px 8px rgba($primary, 0.2) !important;
 			&:hover {
-				background: color.adjust($primary, $lightness: -8%) !important;
+				background: color.adjust($primary, $lightness: -5%) !important;
 				color: $white !important;
 			}
 		}
 
 		&.disabled {
-			color: color.change($secondary, $alpha: 0.35) !important;
+			color: rgba($gray-500, 0.35) !important;
+			opacity: 0.5;
 		}
 	}
 }
-
-/* ── Table Actions ────────────────────────────────────────────────────────── */
 
 .table-actions {
 	display: flex;

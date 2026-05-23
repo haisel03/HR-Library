@@ -161,7 +161,7 @@ const ChoicesJS = {
 			: [{ value, label: value }];
 
 		instance.setValue(items);
-		if (!triggerChange) {
+		if (triggerChange) {
 			const native = _el(el);
 			if (native) native.dispatchEvent(new Event("change"));
 		}

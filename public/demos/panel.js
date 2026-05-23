@@ -16,18 +16,17 @@ $(function () {
 		const title = $(this).find("span").text() || $(this).text();
 		const icon  = $(this).find("i").attr("class") || "bi bi-file-earmark";
 
-		App.open(title, href, icon);
-		$(".tab-empty").addClass("d-none");
+		App.iframeOpen(title, href, icon);
 	});
 
 	// 2. Botones de Control
-	$("#btnIframeFullscreen").on("click", () => App.toggleFullscreen());
-	$("#btnIframeRefresh").on("click",    () => App.refresh());
+	$("#btnIframeFullscreen").on("click", () => App.iframeFullscreen());
+	$("#btnIframeRefresh").on("click",    () => App.iframeRefresh());
 
 	$("#btnCloseOthers").on("click", function (e) {
 		e.preventDefault();
 		App.confirm("¿Cerrar las demás pestañas?", "Se cerrarán todas las pestañas excepto la actual.", () => {
-			App.closeOthers();
+			App.iframeCloseOthers();
 			App.toastInfo("Pestañas cerradas");
 		});
 	});
@@ -35,9 +34,8 @@ $(function () {
 	$("#btnCloseAll").on("click", function (e) {
 		e.preventDefault();
 		App.confirm("¿Cerrar todas las pestañas?", "Se cerrarán todas las ventanas abiertas.", () => {
-			App.closeAll();
+			App.iframeCloseAll();
 			App.toastInfo("Todas las pestañas cerradas");
 		});
 	});
 });
-

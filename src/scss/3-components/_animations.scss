@@ -1,0 +1,180 @@
+@use "sass:color";
+
+@keyframes fadeIn {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeInDown {
+	from {
+		opacity: 0;
+		transform: translateY(-12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.92);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes orbitFloat {
+	0% { transform: translate(0, 0) scale(1); }
+	20% { transform: translate(30px, -20px) scale(1.05); }
+	40% { transform: translate(-20px, -40px) scale(0.97); }
+	60% { transform: translate(-40px, 0) scale(1.02); }
+	80% { transform: translate(10px, 30px) scale(0.95); }
+	100% { transform: translate(0, 0) scale(1); }
+}
+
+@keyframes orbitFloatSlow {
+	0% { transform: translate(0, 0) rotate(0deg); }
+	25% { transform: translate(40px, -30px) rotate(4deg); }
+	50% { transform: translate(-20px, -50px) rotate(-2deg); }
+	75% { transform: translate(-50px, 10px) rotate(3deg); }
+	100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+@keyframes noisePulse {
+	0% { opacity: 0.4; }
+	50% { opacity: 0.55; }
+	100% { opacity: 0.4; }
+}
+
+@keyframes countGlow {
+	0% { opacity: 0.6; }
+	50% { opacity: 1; }
+	100% { opacity: 0.6; }
+}
+
+@keyframes shimmer {
+	0% { background-position: -200% 0; }
+	100% { background-position: 200% 0; }
+}
+
+@keyframes badgePulse {
+	0% { box-shadow: 0 0 0 0 rgba($bronze-500, 0.4); }
+	70% { box-shadow: 0 0 0 6px rgba($bronze-500, 0); }
+	100% { box-shadow: 0 0 0 0 rgba($bronze-500, 0); }
+}
+
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes spin {
+	to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.5s ease both;
+}
+
+.animate-fade-in-up {
+	animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-fade-in-down {
+	animation: fadeInDown 0.4s ease both;
+}
+
+.animate-scale-in {
+	animation: scaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-slide-in-right {
+	animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-stagger > * {
+	animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+	animation-delay: calc(var(--stagger-index, 0) * 80ms);
+}
+
+.animate-stagger-2 > * {
+	animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+	animation-delay: calc(var(--stagger-index, 0) * 120ms);
+}
+
+.animate-stagger-3 > * {
+	animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+	animation-delay: calc(var(--stagger-index, 0) * 180ms);
+}
+
+.auth-orb {
+	position: absolute;
+	border-radius: 50%;
+	filter: blur(80px);
+	pointer-events: none;
+	z-index: 0;
+	animation: orbitFloat 18s ease-in-out infinite;
+}
+
+.auth-orb--1 {
+	width: 400px;
+	height: 400px;
+	top: -100px;
+	right: -100px;
+	background: radial-gradient(circle, rgba(#C4956A, 0.15) 0%, transparent 70%);
+}
+
+.auth-orb--2 {
+	width: 350px;
+	height: 350px;
+	bottom: -80px;
+	left: -80px;
+	background: radial-gradient(circle, rgba(#1B3A5C, 0.2) 0%, transparent 70%);
+	animation: orbitFloatSlow 25s ease-in-out infinite;
+}
+
+.auth-noise {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+	opacity: 0.4;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+	animation: noisePulse 6s ease-in-out infinite;
+}
+
+.badge-pulse {
+	animation: badgePulse 2s ease-in-out infinite;
+}
+
+.count-glow {
+	animation: countGlow 2s ease-in-out infinite;
+}
+
+.skeleton-loading {
+	background: linear-gradient(90deg, $gray-200 25%, $gray-100 50%, $gray-200 75%);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s ease-in-out infinite;
+	border-radius: $border-radius;
+}

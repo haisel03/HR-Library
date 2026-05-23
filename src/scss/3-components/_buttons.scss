@@ -1,21 +1,27 @@
-// ============================================================================
-// 3-components/_buttons.scss
-// Fusión: HR Library (mixin loop) + CoffeeSchools (transiciones, sombras)
-// ============================================================================
-
 .btn {
-	font-weight: $btn-font-weight;
+	font-weight: 600;
 	border-radius: $btn-border-radius;
-	letter-spacing: 0.02em;
-	transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+	letter-spacing: 0.01em;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	padding: 0.5rem 1.1rem;
+	font-size: $font-size-base;
 
 	.feather {
 		width: 14px;
 		height: 14px;
 	}
+
+	&.btn-lg {
+		padding: 0.65rem 1.5rem;
+		font-size: 1rem;
+	}
+
+	&.btn-sm {
+		padding: 0.3rem 0.75rem;
+		font-size: $font-size-sm;
+	}
 }
 
-// Botones de todos los colores del tema
 @each $color, $value in $theme-colors {
 	.btn-#{$color} {
 		@include button-color($white);
@@ -23,7 +29,6 @@
 	}
 }
 
-// Redes sociales
 @each $color, $value in $social-colors {
 	.btn-#{$color} {
 		@include button-variant($value, $value);
@@ -32,22 +37,53 @@
 	}
 }
 
-// Light y white con texto oscuro
 .btn-light,
 .btn-white {
 	@include button-color($gray-800);
 	@include button-color-hover($gray-800);
 }
 
-// Elevación en hover para botones primarios
 .btn-primary {
-	box-shadow: 0 2px 8px rgba($primary, 0.3);
+	box-shadow: 0 4px 12px rgba($primary, 0.25);
+	position: relative;
+	overflow: hidden;
+
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(135deg, transparent 40%, rgba($white, 0.08) 100%);
+		pointer-events: none;
+	}
+
 	&:hover {
-		box-shadow: 0 4px 14px rgba($primary, 0.4);
-		transform: translateY(-1px);
+		box-shadow: 0 8px 24px rgba($primary, 0.35);
+		transform: translateY(-2px);
 	}
 	&:active {
 		transform: translateY(0);
+	}
+}
+
+.btn-outline-primary {
+	border-width: 2px;
+	border-color: $primary;
+	color: $primary;
+
+	&:hover {
+		background: $primary;
+		border-color: $primary;
+		color: $white;
+		box-shadow: 0 4px 12px rgba($primary, 0.2);
+	}
+}
+
+.btn-outline-light {
+	border-width: 2px;
+
+	&:hover {
+		box-shadow: 0 4px 12px rgba($white, 0.15);
+		transform: translateY(-1px);
 	}
 }
 
