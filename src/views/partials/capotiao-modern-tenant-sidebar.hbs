@@ -1,0 +1,168 @@
+<nav id="sidebar" class="sidebar cm-sidebar js-sidebar">
+	<div class="sidebar-content js-simplebar" data-simplebar-auto-hide="true">
+		<a class="sidebar-brand" href="school-dashboard.html">
+			<img src="img/logotype.png" alt="Capotiao" class="sidebar-brand-full" width="150" height="40" style="object-fit:contain">
+			<img src="img/capotiao_logo.png" alt="C" class="sidebar-brand-icon" width="32" height="32">
+		</a>
+		<ul class="sidebar-nav">
+			<li class="sidebar-header">Dashboard</li>
+			<li class="sidebar-item{{#if (eq page 'school-dashboard')}} active{{/if}}">
+				<a class="sidebar-link" href="school-dashboard.html">
+					<i class="bi bi-speedometer2"></i>
+					<span>Panel Principal</span>
+				</a>
+			</li>
+			<li class="sidebar-header">Gestión Académica</li>
+			<li class="sidebar-item{{#if (eq page 'school-academic-years')}} active{{/if}}">
+				<a class="sidebar-link" href="school-academic-years.html">
+					<i class="bi bi-calendar-range"></i>
+					<span>Años Escolares</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'school-academic-grades')}} active{{/if}}">
+				<a class="sidebar-link" href="school-academic-grades.html">
+					<i class="bi bi-layers"></i>
+					<span>Grados y Niveles</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'school-academic-subjects')}} active{{/if}}">
+				<a class="sidebar-link" href="school-academic-subjects.html">
+					<i class="bi bi-book"></i>
+					<span>Materias</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'school-courses')}} active{{/if}}">
+				<a class="sidebar-link" href="school-courses.html">
+					<i class="bi bi-journal-text"></i>
+					<span>Cursos</span>
+				</a>
+			</li>
+			<li class="sidebar-header">Escuela</li>
+			<li class="sidebar-item{{#if (eq page 'school-students')}} active{{/if}}">
+				<a class="sidebar-link" href="school-students.html">
+					<i class="bi bi-people"></i>
+					<span>Estudiantes</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'school-teachers')}} active{{/if}}">
+				<a class="sidebar-link" href="school-teachers.html">
+					<i class="bi bi-person-workspace"></i>
+					<span>Docentes</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'school-tutors')}} active{{/if}}">
+				<a class="sidebar-link" href="school-tutors.html">
+					<i class="bi bi-people-fill"></i>
+					<span>Tutores</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'school-carga-academica')}} active{{/if}}">
+				<a class="sidebar-link" href="school-carga-academica.html">
+					<i class="bi bi-card-checklist"></i>
+					<span>Carga Académica</span>
+				</a>
+			</li>
+			<li class="sidebar-header">Evaluación</li>
+			<li class="sidebar-item{{#if (eq page 'evaluation-periods')}} active{{/if}}">
+				<a class="sidebar-link" href="evaluation-periods.html">
+					<i class="bi bi-calendar-week"></i>
+					<span>Períodos</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'evaluation-grades')}} active{{/if}}">
+				<a class="sidebar-link" href="evaluation-grades.html">
+					<i class="bi bi-clipboard-data"></i>
+					<span>Calificaciones</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'evaluation-attendance')}} active{{/if}}">
+				<a class="sidebar-link" href="evaluation-attendance.html">
+					<i class="bi bi-person-check"></i>
+					<span>Asistencias</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link collapsed" data-bs-target="#eval-more" data-bs-toggle="collapse">
+					<i class="bi bi-journal-check"></i>
+					<span>Más</span>
+					<i class="bi bi-chevron-right icon-right"></i>
+				</a>
+				<ul id="eval-more" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a class="sidebar-link" href="evaluation-competences.html">Competencias</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="evaluation-rubrics.html">Rúbricas</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="evaluation-planning.html">Planificaciones</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="evaluation-schedules.html">Horarios</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="evaluation-criteria.html">Criterios de Rúbrica</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="evaluation-indicators.html">Indicadores de Logro</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="evaluation-types.html">Tipos de Evaluación</a></li>
+				</ul>
+			</li>
+			<li class="sidebar-header">Finanzas</li>
+			<li class="sidebar-item{{#if (eq page 'finance-dashboard')}} active{{/if}}">
+				<a class="sidebar-link" href="finance-dashboard.html">
+					<i class="bi bi-graph-up"></i>
+					<span>Panel Financiero</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link collapsed" data-bs-target="#finance-more" data-bs-toggle="collapse">
+					<i class="bi bi-credit-card"></i>
+					<span>Gestión</span>
+					<i class="bi bi-chevron-right icon-right"></i>
+				</a>
+				<ul id="finance-more" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a class="sidebar-link" href="finance-payments.html">Cobros</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="finance-expenses.html">Gastos</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="finance-categories.html">Categorías</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="finance-concepts.html">Conceptos de Cobro</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="finance-discounts.html">Descuentos</a></li>
+				</ul>
+			</li>
+			<li class="sidebar-header">Configuración</li>
+			<li class="sidebar-item{{#if (eq page 'config-settings')}} active{{/if}}">
+				<a class="sidebar-link" href="config-settings.html">
+					<i class="bi bi-gear"></i>
+					<span>Configuración</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'config-incidents')}} active{{/if}}">
+				<a class="sidebar-link" href="config-incidents.html">
+					<i class="bi bi-shield-exclamation"></i>
+					<span>Incidentes</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'config-communications')}} active{{/if}}">
+				<a class="sidebar-link" href="config-communications.html">
+					<i class="bi bi-megaphone"></i>
+					<span>Comunicados</span>
+				</a>
+			</li>
+			<li class="sidebar-item">
+				<a class="sidebar-link collapsed" data-bs-target="#config-more" data-bs-toggle="collapse">
+					<i class="bi bi-three-dots"></i>
+					<span>Más</span>
+					<i class="bi bi-chevron-right icon-right"></i>
+				</a>
+				<ul id="config-more" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+					<li class="sidebar-item"><a class="sidebar-link" href="config-notifications.html">Notificaciones</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="config-holidays.html">Días Festivos</a></li>
+					<li class="sidebar-item"><a class="sidebar-link" href="config-observations.html">Observaciones</a></li>
+				</ul>
+			</li>
+			<li class="sidebar-header">Reportes</li>
+			<li class="sidebar-item{{#if (eq page 'reports-index')}} active{{/if}}">
+				<a class="sidebar-link" href="reports-index.html">
+					<i class="bi bi-file-earmark-bar-graph"></i>
+					<span>Reportes</span>
+				</a>
+			</li>
+			<li class="sidebar-header">Mensajería</li>
+			<li class="sidebar-item{{#if (eq page 'messaging-inbox')}} active{{/if}}">
+				<a class="sidebar-link" href="messaging-inbox.html">
+					<i class="bi bi-chat-dots"></i>
+					<span>Bandeja</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>

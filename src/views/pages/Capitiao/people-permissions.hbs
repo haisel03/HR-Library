@@ -1,0 +1,226 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-shield-check" title="Permisos" description="Gestión de permisos del sistema" userName="Juan Pérez" userBadge="Director" page="people-permissions"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-shield-check"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Permisos</h1>
+			<div class="cm-breadcrumbs">
+				<a href="school-dashboard.html">Inicio</a>
+				<span class="sep">/</span>
+				<span class="current">Permisos</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-circle"></i> Nuevo Permiso</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros</h6>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-2">
+				<select class="cm-input cm-input-sm w-100">
+					<option value="">Todos los módulos</option>
+					<option>Escuela</option>
+					<option>Evaluación</option>
+					<option>Finanzas</option>
+					<option>Reportes</option>
+					<option>Configuración</option>
+					<option>Seguridad</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<select class="cm-input cm-input-sm w-100">
+					<option value="">Todas las acciones</option>
+					<option>Crear</option>
+					<option>Leer</option>
+					<option>Actualizar</option>
+					<option>Eliminar</option>
+				</select>
+			</div>
+			<div class="col-lg-3">
+				<select class="cm-input cm-input-sm w-100">
+					<option value="">Todos los roles</option>
+					<option>Administrador</option>
+					<option>Director</option>
+					<option>Docente</option>
+					<option>Secretaría</option>
+					<option>Tutor</option>
+					<option>Finanzas</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<button class="cm-btn cm-btn-primary cm-btn-sm w-100"><i class="bi bi-search"></i> Buscar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-shield-check"></i> Listado de Permisos</h6>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Módulo</th>
+						<th>Recurso</th>
+						<th>Acción</th>
+						<th>Descripción</th>
+						<th>Rol Asignado</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Escuela</span></td>
+						<td>Estudiantes</td>
+						<td><code class="cm-data">Crear</code></td>
+						<td>Registrar nuevos estudiantes en el sistema</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-warning cm-badge-sm">Secretaría</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Escuela</span></td>
+						<td>Estudiantes</td>
+						<td><code class="cm-data">Leer</code></td>
+						<td>Consultar información de estudiantes</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-warning cm-badge-sm">Secretaría</span>
+							<span class="cm-badge cm-badge-success cm-badge-sm">Docente</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Escuela</span></td>
+						<td>Estudiantes</td>
+						<td><code class="cm-data">Actualizar</code></td>
+						<td>Modificar datos de estudiantes existentes</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-warning cm-badge-sm">Secretaría</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Escuela</span></td>
+						<td>Estudiantes</td>
+						<td><code class="cm-data">Eliminar</code></td>
+						<td>Eliminar estudiantes del sistema</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-info cm-badge-sm">Evaluación</span></td>
+						<td>Calificaciones</td>
+						<td><code class="cm-data">Crear</code></td>
+						<td>Registrar notas y calificaciones de estudiantes</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-success cm-badge-sm">Docente</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-info cm-badge-sm">Evaluación</span></td>
+						<td>Calificaciones</td>
+						<td><code class="cm-data">Leer</code></td>
+						<td>Consultar calificaciones y reportes de notas</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-success cm-badge-sm">Docente</span>
+							<span class="cm-badge cm-badge-secondary cm-badge-sm">Tutor</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Finanzas</span></td>
+						<td>Cobros</td>
+						<td><code class="cm-data">Crear</code></td>
+						<td>Registrar pagos y cobros de estudiantes</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-danger cm-badge-sm">Finanzas</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Finanzas</span></td>
+						<td>Gastos</td>
+						<td><code class="cm-data">Leer</code></td>
+						<td>Consultar reporte de gastos y egresos</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-danger cm-badge-sm">Finanzas</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-secondary cm-badge-sm">Configuración</span></td>
+						<td>Usuarios</td>
+						<td><code class="cm-data">Gestionar</code></td>
+						<td>Administrar usuarios, roles y permisos del sistema</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm">Reportes</span></td>
+						<td>Reportes</td>
+						<td><code class="cm-data">Exportar</code></td>
+						<td>Exportar reportes en formatos PDF, Excel y CSV</td>
+						<td>
+							<span class="cm-badge cm-badge-primary cm-badge-sm">Admin</span>
+							<span class="cm-badge cm-badge-info cm-badge-sm">Director</span>
+							<span class="cm-badge cm-badge-warning cm-badge-sm">Secretaría</span>
+						</td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

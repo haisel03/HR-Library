@@ -1,0 +1,209 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-calendar-check" title="Reporte de Asistencias" description="Reporte de asistencia académica" userName="Juan Pérez" userBadge="Director" page="reports-index"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-calendar-check"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Reporte de Asistencias</h1>
+			<div class="cm-breadcrumbs">
+				<a href="reports-index.html">Reportes</a>
+				<span class="sep">/</span>
+				<span class="current">Asistencias</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-printer"></i> Imprimir</button>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-people"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Asistencia Promedio</div>
+			<div class="cm-stat-value">94.8%</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> +2.1% vs período ant.</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-warning">
+		<div class="cm-stat-icon cm-stat-icon-warning"><i class="bi bi-clock"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Total Tardanzas</div>
+			<div class="cm-stat-value">47</div>
+			<span class="cm-stat-trend">En el período</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-danger">
+		<div class="cm-stat-icon cm-stat-icon-danger"><i class="bi bi-x-circle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Total Ausencias</div>
+			<div class="cm-stat-value">32</div>
+			<span class="cm-stat-trend">En el período</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-info">
+		<div class="cm-stat-icon cm-stat-icon-info"><i class="bi bi-check-circle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Ausencias Justificadas</div>
+			<div class="cm-stat-value">12</div>
+			<span class="cm-stat-trend cm-stat-trend-up">62.5% justificadas</span>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros de Reporte</h6>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-3">
+				<label class="cm-label">Curso</label>
+				<select class="cm-input w-100">
+					<option value="">Todos los cursos</option>
+					<option>1er Grado A</option>
+					<option>1er Grado B</option>
+					<option>2do Grado A</option>
+					<option>3er Grado A</option>
+					<option>4to Grado A</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Desde</label>
+				<input type="date" class="cm-input w-100" value="2026-05-01">
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Hasta</label>
+				<input type="date" class="cm-input w-100" value="2026-05-24">
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Tipo</label>
+				<select class="cm-input w-100">
+					<option value="">Todos</option>
+					<option>Presente</option>
+					<option>Ausente</option>
+					<option>Tardanza</option>
+					<option>Justificado</option>
+				</select>
+			</div>
+			<div class="col-lg-3 d-flex align-items-end gap-1">
+				<button class="cm-btn cm-btn-primary cm-btn-sm flex-fill"><i class="bi bi-search"></i> Generar Reporte</button>
+				<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-x-lg"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-table"></i> Resultados - Asistencias</h6>
+		<div class="cm-card-header-actions">
+			<span class="cm-label">Período: 01/05/2026 - 24/05/2026</span>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar Excel</button>
+		</div>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Estudiante</th>
+						<th>Curso</th>
+						<th>Presentes</th>
+						<th>Ausencias</th>
+						<th>Tardanzas</th>
+						<th>Justificados</th>
+						<th>% Asistencia</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Ana María Rodríguez</strong></td>
+						<td>1ro A</td>
+						<td class="cm-data">18</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data"><strong>100%</strong></td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Excelente</span></td>
+					</tr>
+					<tr>
+						<td><strong>Carlos Jiménez</strong></td>
+						<td>1ro A</td>
+						<td class="cm-data">15</td>
+						<td class="cm-data">2</td>
+						<td class="cm-data">1</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data"><strong>83%</strong></td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Bueno</span></td>
+					</tr>
+					<tr>
+						<td><strong>María García</strong></td>
+						<td>2do B</td>
+						<td class="cm-data">16</td>
+						<td class="cm-data">1</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data">1</td>
+						<td class="cm-data"><strong>89%</strong></td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Bueno</span></td>
+					</tr>
+					<tr>
+						<td><strong>Pedro Martínez</strong></td>
+						<td>2do B</td>
+						<td class="cm-data">10</td>
+						<td class="cm-data">6</td>
+						<td class="cm-data">2</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data"><strong>56%</strong></td>
+						<td><span class="cm-badge cm-badge-danger cm-badge-sm">Crítico</span></td>
+					</tr>
+					<tr>
+						<td><strong>Lucía Fernández</strong></td>
+						<td>3ro A</td>
+						<td class="cm-data">17</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data">1</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data"><strong>94%</strong></td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Excelente</span></td>
+					</tr>
+					<tr>
+						<td><strong>Sofía Ramírez</strong></td>
+						<td>3ro A</td>
+						<td class="cm-data">14</td>
+						<td class="cm-data">2</td>
+						<td class="cm-data">2</td>
+						<td class="cm-data">1</td>
+						<td class="cm-data"><strong>78%</strong></td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm">Regular</span></td>
+					</tr>
+					<tr>
+						<td><strong>Diego Torres</strong></td>
+						<td>4to A</td>
+						<td class="cm-data">18</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data">0</td>
+						<td class="cm-data"><strong>100%</strong></td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Excelente</span></td>
+					</tr>
+					<tr>
+						<td><strong>Valentina Flores</strong></td>
+						<td>5to A</td>
+						<td class="cm-data">12</td>
+						<td class="cm-data">3</td>
+						<td class="cm-data">3</td>
+						<td class="cm-data">1</td>
+						<td class="cm-data"><strong>67%</strong></td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm">Regular</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

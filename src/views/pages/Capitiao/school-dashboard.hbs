@@ -1,0 +1,187 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-speedometer2" title="Panel Principal" description="Bienvenido al sistema de gestión escolar" userName="Juan Pérez" userBadge="Director" page="school-dashboard"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-speedometer2"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Panel Principal</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Escuela</a>
+				<span class="sep">/</span>
+				<span class="current">Panel Principal</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-ghost cm-btn-sm" onclick="location.reload()">
+				<i class="bi bi-arrow-clockwise"></i> Actualizar
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-primary">
+		<div class="cm-stat-icon cm-stat-icon-primary"><i class="bi bi-people"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Estudiantes</div>
+			<div class="cm-stat-value">1,284</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> 8% vs año ant.</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-person-workspace"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Docentes</div>
+			<div class="cm-stat-value">64</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> 2 nuevos este mes</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-warning">
+		<div class="cm-stat-icon cm-stat-icon-warning"><i class="bi bi-door-open"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Aulas</div>
+			<div class="cm-stat-value">32</div>
+			<span class="cm-stat-trend cm-stat-trend-down"><i class="bi bi-arrow-down"></i> 85% ocupación</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-info">
+		<div class="cm-stat-icon cm-stat-icon-info"><i class="bi bi-book"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Materias</div>
+			<div class="cm-stat-value">18</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> 2 nuevas este año</span>
+		</div>
+	</div>
+</div>
+
+<div class="row g-3 mb-4">
+	<div class="col-xl-7">
+		<div class="cm-card cm-card-accent">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-graph-up"></i>Rendimiento Académico por Grado</h6>
+			</div>
+			<div class="cm-card-body">
+				<canvas id="academicChart" height="260"></canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-5">
+		<div class="cm-card cm-card-accent">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-calendar-event"></i>Calendario Escolar</h6>
+			</div>
+			<div class="cm-card-body p-2">
+				<div data-calendar='{
+					"initialView": "dayGridMonth",
+					"height": 320,
+					"headerToolbar": {
+						"left": "prev,next",
+						"center": "title",
+						"right": "dayGridMonth,listWeek"
+					},
+					"events": [
+						{"title": "Reunión de Padres", "start": "2026-05-20", "color": "#003876"},
+						{"title": "Entrega de Notas", "start": "2026-05-22", "color": "#c9a227"},
+						{"title": "Día del Estudiante", "start": "2026-05-30", "color": "#5b8fa8"},
+						{"title": "Inicio de Vacaciones", "start": "2026-06-15", "color": "#af5f5f"}
+					]
+				}'></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-clock-history"></i>Últimas Actividades</h6>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Fecha</th>
+						<th>Usuario</th>
+						<th>Actividad</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><span class="cm-data">2026-05-16</span> <span class="cm-data-subtle">10:30</span></td>
+						<td><strong>Juan Pérez</strong></td>
+						<td>Actualización de calificaciones - 5to Grado</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Completado</span></td>
+					</tr>
+					<tr>
+						<td><span class="cm-data">2026-05-16</span> <span class="cm-data-subtle">09:15</span></td>
+						<td><strong>María López</strong></td>
+						<td>Registro de asistencia - 3er Grado</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Completado</span></td>
+					</tr>
+					<tr>
+						<td><span class="cm-data">2026-05-15</span> <span class="cm-data-subtle">14:30</span></td>
+						<td><strong>Carlos Mendoza</strong></td>
+						<td>Creación de nuevo curso: Matemáticas Avanzadas</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Completado</span></td>
+					</tr>
+					<tr>
+						<td><span class="cm-data">2026-05-15</span> <span class="cm-data-subtle">11:00</span></td>
+						<td><strong>Sistema</strong></td>
+						<td>Respaldo automático de base de datos</td>
+						<td><span class="cm-badge cm-badge-info"><span class="cm-dot cm-dot-info"></span>Programado</span></td>
+					</tr>
+					<tr>
+						<td><span class="cm-data">2026-05-14</span> <span class="cm-data-subtle">16:45</span></td>
+						<td><strong>Ana Torres</strong></td>
+						<td>Registro de nuevo estudiante: Pedro Rodríguez</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Completado</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	if (typeof Chart !== 'undefined') {
+		new Chart(document.getElementById('academicChart'), {
+			type: 'bar',
+			data: {
+				labels: ['1ro', '2do', '3ro', '4to', '5to', '6to'],
+				datasets: [
+					{
+						label: 'Promedio General',
+						data: [85, 82, 88, 79, 91, 84],
+						backgroundColor: '#003876',
+						borderRadius: 4
+					},
+					{
+						label: 'Asistencia (%)',
+						data: [95, 92, 94, 89, 96, 91],
+						backgroundColor: '#5b8fa8',
+						borderRadius: 4
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						position: 'bottom',
+						labels: { usePointStyle: true, padding: 16 }
+					}
+				},
+				scales: {
+					y: { beginAtZero: true, max: 100, grid: { color: 'rgba(0,0,0,0.04)' } },
+					x: { grid: { display: false } }
+				}
+			}
+		});
+	}
+});
+</script>
+
+{{/layout-capotiao-modern-tenant}}

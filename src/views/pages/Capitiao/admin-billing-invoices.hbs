@@ -1,0 +1,133 @@
+{{#> layout-capotiao-modern-admin icon="bi bi-receipt" title="Facturas" description="Historial de facturación" userName="Super Admin" userBadge="Super Admin" page="admin-billing-invoices"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-receipt"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Facturas</h1>
+			<div class="cm-breadcrumbs">
+				<a href="admin-dashboard.html">Admin Central</a>
+				<span class="sep">/</span>
+				<a href="#">Facturación</a>
+				<span class="sep">/</span>
+				<span class="current">Facturas</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Nueva Factura</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar factura..." style="min-width:240px;">
+		</div>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-funnel"></i> Filtros</button>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 facturas</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Factura #</th><th>Colegio</th><th>Monto</th><th>Emisión</th><th>Estado</th><th>Pagada</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>FAC-2026-001</strong></td>
+						<td>Colegio San José</td>
+						<td class="cm-data">RD$ 2,999.00</td>
+						<td class="cm-data">2026-03-01</td>
+						<td><span class="cm-badge cm-badge-success">Pagada</span></td>
+						<td class="cm-data">2026-03-01</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Descargar"><i class="bi bi-download"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>FAC-2026-002</strong></td>
+						<td>Instituto Moderno</td>
+						<td class="cm-data">RD$ 1,499.00</td>
+						<td class="cm-data">2026-03-01</td>
+						<td><span class="cm-badge cm-badge-success">Pagada</span></td>
+						<td class="cm-data">2026-03-01</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Descargar"><i class="bi bi-download"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>FAC-2026-003</strong></td>
+						<td>Liceo Cultural</td>
+						<td class="cm-data">RD$ 2,999.00</td>
+						<td class="cm-data">2026-03-01</td>
+						<td><span class="cm-badge cm-badge-success">Pagada</span></td>
+						<td class="cm-data">2026-03-01</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Descargar"><i class="bi bi-download"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>FAC-2026-004</strong></td>
+						<td>Escuela Técnica Nº3</td>
+						<td class="cm-data">RD$ 5,999.00</td>
+						<td class="cm-data">2026-03-05</td>
+						<td><span class="cm-badge cm-badge-success">Pagada</span></td>
+						<td class="cm-data">2026-03-05</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Descargar"><i class="bi bi-download"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>FAC-2026-005</strong></td>
+						<td>Colegio Bilingüe</td>
+						<td class="cm-data">RD$ 2,999.00</td>
+						<td class="cm-data">2026-04-01</td>
+						<td><span class="cm-badge cm-badge-warning">Pendiente</span></td>
+						<td class="cm-data">—</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Descargar"><i class="bi bi-download"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>FAC-2026-006</strong></td>
+						<td>Centro de Estudios Norte</td>
+						<td class="cm-data">RD$ 1,499.00</td>
+						<td class="cm-data">2026-03-01</td>
+						<td><span class="cm-badge cm-badge-secondary">Vencida</span></td>
+						<td class="cm-data">—</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Descargar"><i class="bi bi-download"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-admin}}

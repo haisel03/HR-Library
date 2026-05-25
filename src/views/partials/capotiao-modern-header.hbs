@@ -1,0 +1,61 @@
+<header class="cm-header">
+	<div class="cm-header-left">
+		<a class="sidebar-toggle js-sidebar-toggle" data-toggle="sidebar" href="#">
+			<i class="hamburger align-self-center"></i>
+		</a>
+		<div class="cm-header-search">
+			<i class="bi bi-search"></i>
+			<input type="text" placeholder="Buscar en el sistema..." aria-label="Buscar">
+		</div>
+	</div>
+	<div class="cm-header-right">
+		<a href="#" class="cm-header-btn" title="Notificaciones">
+			<i class="bi bi-bell"></i>
+			<span class="badge-dot"></span>
+		</a>
+		<a href="#" class="cm-header-btn" title="Calendario">
+			<i class="bi bi-calendar3"></i>
+		</a>
+		<a href="#" class="cm-header-avatar" data-bs-toggle="dropdown" aria-expanded="false">
+			<img src="img/avatars/avatar.png" alt="{{userName}}">
+			<div class="avatar-info">
+				<span class="avatar-name">{{userName}}</span>
+				<span class="avatar-role">{{userBadge}}</span>
+			</div>
+		</a>
+		<div class="dropdown-menu dropdown-menu-end">
+			<div class="dropdown-header d-flex flex-column px-3 py-2">
+				<strong>{{userName}}</strong>
+				<small class="text-muted">{{userBadge}}</small>
+			</div>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="#">
+				<i class="bi bi-person me-2"></i> Mi Perfil
+			</a>
+			<a class="dropdown-item" href="#">
+				<i class="bi bi-gear me-2"></i> Configuración
+			</a>
+			<div class="dropdown-divider"></div>
+			<div class="px-3 py-2">
+				<div class="d-flex align-items-center justify-content-between small mb-1">
+					<span class="text-muted">Tema</span>
+				</div>
+				<div class="d-flex gap-1">
+					<button class="cm-btn cm-btn-sm cm-btn-ghost" data-theme="light" title="Claro">
+						<i class="bi bi-sun"></i>
+					</button>
+					<button class="cm-btn cm-btn-sm cm-btn-ghost" data-theme="dark" title="Oscuro">
+						<i class="bi bi-moon"></i>
+					</button>
+					<button class="cm-btn cm-btn-sm cm-btn-ghost" data-theme="auto" title="Auto">
+						<i class="bi bi-circle-half"></i>
+					</button>
+				</div>
+			</div>
+			<div class="dropdown-divider"></div>
+			<a class="dropdown-item" href="login.html">
+				<i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+			</a>
+		</div>
+	</div>
+</header>

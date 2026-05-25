@@ -1,0 +1,127 @@
+{{#> layout-capotiao-modern-admin icon="bi bi-shield-check" title="Inicios de Sesión" description="Registro de accesos al sistema" userName="Super Admin" userBadge="Super Admin" page="admin-monitoring-login-logs"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-shield-check"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Inicios de Sesión</h1>
+			<div class="cm-breadcrumbs">
+				<a href="admin-dashboard.html">Admin Central</a>
+				<span class="sep">/</span>
+				<a href="#">Monitoreo</a>
+				<span class="sep">/</span>
+				<span class="current">Inicios de Sesión</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-ghost cm-btn-sm"><i class="bi bi-download"></i> Exportar</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar en logs..." style="min-width:240px;">
+		</div>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-funnel"></i> Filtros</button>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 registros</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Fecha/Hora</th><th>Usuario</th><th>Email</th><th>IP</th><th>Navegador</th><th>Estado</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="cm-data">2026-05-24 09:00:01</td>
+						<td><strong>Super Admin</strong></td>
+						<td>admin@capotiao.com</td>
+						<td><code class="cm-data">192.168.1.100</code></td>
+						<td><small>Chrome 125 / Windows 11</small></td>
+						<td><span class="cm-badge cm-badge-success">Exitoso</span></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-24 08:30:45</td>
+						<td><strong>carlos</strong></td>
+						<td>carlos@sanjose.edu</td>
+						<td><code class="cm-data">192.168.1.50</code></td>
+						<td><small>Firefox 136 / Windows 10</small></td>
+						<td><span class="cm-badge cm-badge-success">Exitoso</span></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-24 07:15:22</td>
+						<td><strong>mariaperez</strong></td>
+						<td>maria@moderno.edu</td>
+						<td><code class="cm-data">10.0.0.45</code></td>
+						<td><small>Safari 18 / macOS 15</small></td>
+						<td><span class="cm-badge cm-badge-success">Exitoso</span></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-23 23:55:10</td>
+						<td><strong>admin</strong></td>
+						<td>admin@tecnica3.edu</td>
+						<td><code class="cm-data">45.67.89.123</code></td>
+						<td><small>Edge 125 / Windows 11</small></td>
+						<td><span class="cm-badge cm-badge-danger">Fallido</span></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-23 22:12:33</td>
+						<td><strong>lramota</strong></td>
+						<td>lramota@liceocultural.edu</td>
+						<td><code class="cm-data">190.95.22.78</code></td>
+						<td><small>Chrome 124 / Android 14</small></td>
+						<td><span class="cm-badge cm-badge-success">Exitoso</span></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-23 20:05:18</td>
+						<td><strong>desconocido</strong></td>
+						<td>spam@malicioso.com</td>
+						<td><code class="cm-data">185.220.101.44</code></td>
+						<td><small>Chrome 120 / Linux</small></td>
+						<td><span class="cm-badge cm-badge-danger">Bloqueado</span></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-admin}}

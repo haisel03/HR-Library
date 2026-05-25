@@ -1,0 +1,150 @@
+{{#> layout-capotiao-modern-admin icon="bi bi-speedometer2" title="Dashboard" description="Panel de control central" userName="Super Admin" userBadge="Super Admin" page="admin-dashboard"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-speedometer2"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Dashboard</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Admin Central</a>
+				<span class="sep">/</span>
+				<span class="current">Dashboard</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-ghost cm-btn-sm" onclick="location.reload()">
+				<i class="bi bi-arrow-clockwise"></i> Actualizar
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-primary">
+		<div class="cm-stat-icon cm-stat-icon-primary"><i class="bi bi-building"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Colegios Activos</div>
+			<div class="cm-stat-value" id="statTenants">--</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> 12% este mes</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-boxes"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Planes</div>
+			<div class="cm-stat-value" id="statPlans">--</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> 3 activos</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-warning">
+		<div class="cm-stat-icon cm-stat-icon-warning"><i class="bi bi-credit-card"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Suscripciones Activas</div>
+			<div class="cm-stat-value" id="statSubscriptions">--</div>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-info">
+		<div class="cm-stat-icon cm-stat-icon-info"><i class="bi bi-graph-up"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Ingresos del Mes</div>
+			<div class="cm-stat-value cm-stat-value-mono" id="statRevenue">--</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> +18% vs mes ant.</span>
+		</div>
+	</div>
+</div>
+
+<div class="row g-3 mb-4">
+	<div class="col-xl-8">
+		<div class="cm-card cm-card-accent">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-activity"></i>Ingresos Mensuales</h6>
+			</div>
+			<div class="cm-card-body">
+				<canvas id="revenueChart" height="260"></canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-4">
+		<div class="cm-card cm-card-accent">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-pie-chart"></i>Distribución de Planes</h6>
+			</div>
+			<div class="cm-card-body">
+				<canvas id="plansChart" height="260"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-clock-history"></i>Últimos Colegios Registrados</h6>
+		<div class="cm-card-header-actions">
+			<a href="admin-tenants.html" class="cm-btn cm-btn-sm cm-btn-ghost">Ver todos</a>
+		</div>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table" id="latestTenantsTable">
+				<thead>
+					<tr><th>Colegio</th><th>Dominio</th><th>Plan</th><th>Estado</th><th>Registro</th></tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const tenants = [
+		{ name: 'Colegio San Jos&eacute;', domain: 'sanjose.capotiao.test', plan: 'Premium', status: 'active', revenue: 99.99, created: '2026-01-15' },
+		{ name: 'Instituto Moderno', domain: 'moderno.capotiao.test', plan: 'B&aacute;sico', status: 'active', revenue: 49.99, created: '2026-02-01' },
+		{ name: 'Liceo Cultural', domain: 'cultural.capotiao.test', plan: 'Premium', status: 'active', revenue: 99.99, created: '2026-02-20' },
+		{ name: 'Escuela T&eacute;cnica N&ordm;3', domain: 'tecnica3.capotiao.test', plan: 'Ilimitado', status: 'active', revenue: 149.99, created: '2026-03-05' },
+		{ name: 'Colegio Biling&uuml;e', domain: 'bilingue.capotiao.test', plan: 'Premium', status: 'suspended', revenue: 99.99, created: '2026-03-10' },
+	];
+
+	document.getElementById('statTenants').textContent = tenants.filter(t => t.status === 'active').length;
+	document.getElementById('statPlans').textContent = '3';
+	document.getElementById('statSubscriptions').textContent = tenants.filter(t => t.status === 'active').length;
+	document.getElementById('statRevenue').textContent = 'RD$ ' + tenants.reduce((s, t) => s + (t.status === 'active' ? t.revenue : 0), 0).toFixed(2);
+
+	const tbody = document.querySelector('#latestTenantsTable tbody');
+	tenants.forEach(t => {
+		const badge = t.status === 'active' ? '<span class="cm-badge cm-badge-success">Activo</span>' : '<span class="cm-badge cm-badge-secondary">Suspendido</span>';
+		tbody.innerHTML += `<tr><td><strong>${t.name}</strong></td><td><code class="cm-data">${t.domain}</code></td><td>${t.plan}</td><td>${badge}</td><td class="cm-data">${t.created}</td></tr>`;
+	});
+
+	if (typeof Chart !== 'undefined') {
+		new Chart(document.getElementById('revenueChart'), {
+			type: 'line',
+			data: {
+				labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+				datasets: [{
+					label: 'Ingresos (RD$)',
+					data: [1200, 1900, 2800, 3500, 4200, 5100],
+					borderColor: '#003876',
+					backgroundColor: 'rgba(0, 56, 118, 0.06)',
+					fill: true, tension: 0.3,
+					pointBackgroundColor: '#003876'
+				}]
+			},
+			options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+				scales: { y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
+						 x: { grid: { display: false } } } }
+		});
+		new Chart(document.getElementById('plansChart'), {
+			type: 'doughnut',
+			data: {
+				labels: ['B&aacute;sico', 'Premium', 'Ilimitado'],
+				datasets: [{ data: [2, 2, 1], backgroundColor: ['#5b8fa8', '#003876', '#c9a227'], borderWidth: 0 }]
+			},
+			options: { responsive: true, maintainAspectRatio: false, cutout: '70%',
+				plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12 } } } }
+		});
+	}
+});
+</script>
+
+{{/layout-capotiao-modern-admin}}

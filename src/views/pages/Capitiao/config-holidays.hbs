@@ -1,0 +1,124 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-calendar-heart" title="Días Festivos" description="Calendario de días festivos y no laborables" userName="Juan Pérez" userBadge="Director" page="config-holidays"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-calendar-heart"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Días Festivos</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Configuración</a>
+				<span class="sep">/</span>
+				<span class="current">Días Festivos</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Nuevo Festivo</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar festivo..." style="min-width:240px;">
+		</div>
+		<select class="cm-input cm-input-sm" style="width:auto;">
+			<option value="">Todos los tipos</option>
+			<option>Nacional</option>
+			<option>Religioso</option>
+			<option>Institucional</option>
+		</select>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 festivos</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Nombre</th><th>Fecha</th><th>Tipo</th><th>Aplica a</th><th>Recurrente</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Año Nuevo</strong></td>
+						<td class="cm-data">2026-01-01</td>
+						<td><span class="cm-badge cm-badge-info">Nacional</span></td>
+						<td>Toda la institución</td>
+						<td><span class="cm-dot cm-dot-success"></span> Sí</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Día de la Independencia</strong></td>
+						<td class="cm-data">2026-02-27</td>
+						<td><span class="cm-badge cm-badge-info">Nacional</span></td>
+						<td>Toda la institución</td>
+						<td><span class="cm-dot cm-dot-success"></span> Sí</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Viernes Santo</strong></td>
+						<td class="cm-data">2026-04-03</td>
+						<td><span class="cm-badge cm-badge-warning">Religioso</span></td>
+						<td>Toda la institución</td>
+						<td><span class="cm-dot cm-dot-success"></span> Sí</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Día del Maestro</strong></td>
+						<td class="cm-data">2026-05-04</td>
+						<td><span class="cm-badge cm-badge-success">Institucional</span></td>
+						<td>Suspensión de clases</td>
+						<td><span class="cm-dot cm-dot-success"></span> Sí</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Día del Estudiante</strong></td>
+						<td class="cm-data">2026-05-30</td>
+						<td><span class="cm-badge cm-badge-success">Institucional</span></td>
+						<td>Actividades sin clases</td>
+						<td><span class="cm-dot cm-dot-success"></span> Sí</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Aniversario del Colegio</strong></td>
+						<td class="cm-data">2026-10-15</td>
+						<td><span class="cm-badge cm-badge-primary">Especial</span></td>
+						<td>Toda la institución</td>
+						<td><span class="cm-dot cm-dot-success"></span> Sí</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

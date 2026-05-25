@@ -1,0 +1,125 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-exclamation-triangle" title="Incidentes" description="Registro de incidentes y eventos disciplinarios" userName="Juan Pérez" userBadge="Director" page="config-incidents"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-exclamation-triangle"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Incidentes</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Configuración</a>
+				<span class="sep">/</span>
+				<span class="current">Incidentes</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Reportar Incidente</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar incidente..." style="min-width:240px;">
+		</div>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-funnel"></i> Filtros</button>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 incidentes</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Fecha</th><th>Estudiante</th><th>Tipo</th><th>Descripción</th><th>Reportado por</th><th>Estado</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="cm-data">2026-05-20</td>
+						<td><strong>Pedro Ramírez</strong></td>
+						<td><span class="cm-badge cm-badge-warning">Disciplinario</span></td>
+						<td>Uso inapropiado del celular en clase</td>
+						<td>María López</td>
+						<td><span class="cm-dot cm-dot-info"></span> En proceso</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-18</td>
+						<td><strong>Ana Torres</strong></td>
+						<td><span class="cm-badge cm-badge-danger">Académico</span></td>
+						<td>No entrega de tareas por tercera semana consecutiva</td>
+						<td>Roberto Sánchez</td>
+						<td><span class="cm-dot cm-dot-warning"></span> Pendiente</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-15</td>
+						<td><strong>Carlos Méndez</strong></td>
+						<td><span class="cm-badge cm-badge-primary">Convivencia</span></td>
+						<td>Conflicto con compañero durante el recreo</td>
+						<td>Laura Fernández</td>
+						<td><span class="cm-dot cm-dot-success"></span> Resuelto</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-12</td>
+						<td><strong>Sofía Castillo</strong></td>
+						<td><span class="cm-badge cm-badge-secondary">Asistencia</span></td>
+						<td>Inasistencias injustificadas recurrentes</td>
+						<td>Dirección</td>
+						<td><span class="cm-dot cm-dot-info"></span> En proceso</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-10</td>
+						<td><strong>Miguel Ángel</strong></td>
+						<td><span class="cm-badge cm-badge-warning">Disciplinario</span></td>
+						<td>Daño a mobiliario escolar</td>
+						<td>Mantenimiento</td>
+						<td><span class="cm-dot cm-dot-success"></span> Resuelto</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-08</td>
+						<td><strong>Laura Fernández</strong></td>
+						<td><span class="cm-badge cm-badge-info">Salud</span></td>
+						<td>Reacción alérgica en horario de clases</td>
+						<td>Enfermería</td>
+						<td><span class="cm-dot cm-dot-success"></span> Resuelto</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

@@ -1,0 +1,186 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-cart" title="Reporte de Gastos" description="Reporte de egresos y presupuesto" userName="Juan Pérez" userBadge="Director" page="reports-index"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-cart"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Reporte de Gastos</h1>
+			<div class="cm-breadcrumbs">
+				<a href="reports-index.html">Reportes</a>
+				<span class="sep">/</span>
+				<span class="current">Gastos</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-printer"></i> Imprimir</button>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-danger">
+		<div class="cm-stat-icon cm-stat-icon-danger"><i class="bi bi-cart"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Total Egresos</div>
+			<div class="cm-stat-value">$18,230.00</div>
+			<span class="cm-stat-trend cm-stat-trend-down">Mayo 2026</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-primary">
+		<div class="cm-stat-icon cm-stat-icon-primary"><i class="bi bi-pie-chart"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Presupuesto Mensual</div>
+			<div class="cm-stat-value">$22,000.00</div>
+			<span class="cm-stat-trend cm-stat-trend-up">82.9% utilizado</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-cash"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Saldo Disponible</div>
+			<div class="cm-stat-value">$3,770.00</div>
+			<span class="cm-stat-trend">17.1% restante</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-info">
+		<div class="cm-stat-icon cm-stat-icon-info"><i class="bi bi-receipt"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Transacciones</div>
+			<div class="cm-stat-value">42</div>
+			<span class="cm-stat-trend">En el período</span>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros de Reporte</h6>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-3">
+				<label class="cm-label">Categoría</label>
+				<select class="cm-input w-100">
+					<option value="">Todas las categorías</option>
+					<option>Servicios</option>
+					<option>Suministros</option>
+					<option>Mantenimiento</option>
+					<option>Nómina</option>
+					<option>Equipamiento</option>
+					<option>Eventos</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Desde</label>
+				<input type="date" class="cm-input w-100" value="2026-05-01">
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Hasta</label>
+				<input type="date" class="cm-input w-100" value="2026-05-24">
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Proveedor</label>
+				<input type="text" class="cm-input w-100" placeholder="Buscar proveedor...">
+			</div>
+			<div class="col-lg-3 d-flex align-items-end gap-1">
+				<button class="cm-btn cm-btn-primary cm-btn-sm flex-fill"><i class="bi bi-search"></i> Generar Reporte</button>
+				<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-x-lg"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-table"></i> Resultados - Gastos</h6>
+		<div class="cm-card-header-actions">
+			<span class="cm-label">Total: $18,230.00</span>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar Excel</button>
+		</div>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Fecha</th>
+						<th>Concepto</th>
+						<th>Categoría</th>
+						<th>Proveedor</th>
+						<th>Monto</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code class="cm-data">001</code></td>
+						<td>2026-05-03</td>
+						<td><strong>Pago de electricidad</strong></td>
+						<td>Servicios</td>
+						<td>EDE Este</td>
+						<td class="cm-data">$3,200.00</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">002</code></td>
+						<td>2026-05-05</td>
+						<td><strong>Material de oficina</strong></td>
+						<td>Suministros</td>
+						<td>Papelería Moderna</td>
+						<td class="cm-data">$890.00</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">003</code></td>
+						<td>2026-05-08</td>
+						<td><strong>Reparación de aire acondicionado</strong></td>
+						<td>Mantenimiento</td>
+						<td>Clima Total</td>
+						<td class="cm-data">$2,450.00</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">004</code></td>
+						<td>2026-05-10</td>
+						<td><strong>Nómina docente - Abril</strong></td>
+						<td>Nómina</td>
+						<td>—</td>
+						<td class="cm-data">$8,500.00</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">005</code></td>
+						<td>2026-05-12</td>
+						<td><strong>Compra de libros</strong></td>
+						<td>Suministros</td>
+						<td>Librería Central</td>
+						<td class="cm-data">$1,340.00</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">006</code></td>
+						<td>2026-05-15</td>
+						<td><strong>Servicio de internet</strong></td>
+						<td>Servicios</td>
+						<td>Claro RD</td>
+						<td class="cm-data">$650.00</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">007</code></td>
+						<td>2026-05-18</td>
+						<td><strong>Equipos de computación</strong></td>
+						<td>Equipamiento</td>
+						<td>Tech Solutions</td>
+						<td class="cm-data">$1,200.00</td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm">Pendiente</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

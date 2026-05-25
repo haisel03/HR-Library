@@ -1,0 +1,133 @@
+{{#> layout-capotiao-modern-admin icon="bi bi-credit-card-2-front" title="Suscripciones" description="Gestión de suscripciones activas" userName="Super Admin" userBadge="Super Admin" page="admin-subscriptions"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-credit-card-2-front"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Suscripciones</h1>
+			<div class="cm-breadcrumbs">
+				<a href="admin-dashboard.html">Admin Central</a>
+				<span class="sep">/</span>
+				<a href="#">Facturación</a>
+				<span class="sep">/</span>
+				<span class="current">Suscripciones</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Nueva Suscripción</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar suscripción..." style="min-width:240px;">
+		</div>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-funnel"></i> Filtros</button>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 suscripciones</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Colegio</th><th>Plan</th><th>Inicio</th><th>Vencimiento</th><th>Estado</th><th>Monto</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Colegio San José</strong><br><small class="text-muted">sanjose.edu.do</small></td>
+						<td><span class="cm-badge cm-badge-primary">Premium</span></td>
+						<td class="cm-data">2026-01-15</td>
+						<td class="cm-data">2026-12-31</td>
+						<td><span class="cm-dot cm-dot-success"></span> Activa</td>
+						<td class="cm-data">RD$ 2,999/mes</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Instituto Moderno</strong><br><small class="text-muted">moderno.edu.do</small></td>
+						<td><span class="cm-badge cm-badge-neutral">Básico</span></td>
+						<td class="cm-data">2026-02-01</td>
+						<td class="cm-data">2027-01-31</td>
+						<td><span class="cm-dot cm-dot-success"></span> Activa</td>
+						<td class="cm-data">RD$ 1,499/mes</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Liceo Cultural</strong><br><small class="text-muted">liceocultural.edu.do</small></td>
+						<td><span class="cm-badge cm-badge-primary">Premium</span></td>
+						<td class="cm-data">2026-02-20</td>
+						<td class="cm-data">2026-12-31</td>
+						<td><span class="cm-dot cm-dot-success"></span> Activa</td>
+						<td class="cm-data">RD$ 2,999/mes</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Escuela Técnica Nº3</strong><br><small class="text-muted">tecnican3.edu.do</small></td>
+						<td><span class="cm-badge cm-badge-warning">Ilimitado</span></td>
+						<td class="cm-data">2026-03-05</td>
+						<td class="cm-data">2027-03-04</td>
+						<td><span class="cm-dot cm-dot-success"></span> Activa</td>
+						<td class="cm-data">RD$ 5,999/mes</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Colegio Bilingüe</strong><br><small class="text-muted">bilingue.edu.do</small></td>
+						<td><span class="cm-badge cm-badge-primary">Premium</span></td>
+						<td class="cm-data">2026-03-10</td>
+						<td class="cm-data">2026-06-10</td>
+						<td><span class="cm-dot cm-dot-warning"></span> Por vencer</td>
+						<td class="cm-data">RD$ 2,999/mes</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Centro de Estudios Norte</strong><br><small class="text-muted">cenorte.edu.do</small></td>
+						<td><span class="cm-badge cm-badge-neutral">Básico</span></td>
+						<td class="cm-data">2025-11-01</td>
+						<td class="cm-data">2026-04-30</td>
+						<td><span class="cm-dot cm-dot-secondary"></span> Cancelada</td>
+						<td class="cm-data">RD$ 1,499/mes</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-admin}}

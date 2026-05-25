@@ -1,0 +1,127 @@
+{{#> layout-capotiao-modern-admin icon="bi bi-journal-text" title="Auditoría" description="Registro de auditoría del sistema" userName="Super Admin" userBadge="Super Admin" page="admin-monitoring-audit-logs"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-journal-text"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Auditoría</h1>
+			<div class="cm-breadcrumbs">
+				<a href="admin-dashboard.html">Admin Central</a>
+				<span class="sep">/</span>
+				<a href="#">Monitoreo</a>
+				<span class="sep">/</span>
+				<span class="current">Auditoría</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-ghost cm-btn-sm"><i class="bi bi-download"></i> Exportar</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar en auditoría..." style="min-width:240px;">
+		</div>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-funnel"></i> Filtros</button>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 registros</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Fecha/Hora</th><th>Usuario</th><th>Acción</th><th>Recurso</th><th>IP</th><th>Estado</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="cm-data">2026-05-24 09:15:32</td>
+						<td><strong>Super Admin</strong></td>
+						<td><span class="cm-badge cm-badge-info">CREATE</span> Crear colegio</td>
+						<td>Colegio San José</td>
+						<td><code class="cm-data">192.168.1.100</code></td>
+						<td><span class="cm-dot cm-dot-success"></span> Éxito</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-24 10:23:07</td>
+						<td><strong>maria@moderno.edu</strong></td>
+						<td><span class="cm-badge cm-badge-warning">UPDATE</span> Actualizar plan</td>
+						<td>Plan Premium → Básico</td>
+						<td><code class="cm-data">10.0.0.45</code></td>
+						<td><span class="cm-dot cm-dot-success"></span> Éxito</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-23 14:45:12</td>
+						<td><strong>carlos@sanjose.edu</strong></td>
+						<td><span class="cm-badge cm-badge-secondary">DELETE</span> Eliminar usuario</td>
+						<td>Usuario #342 - Juan Pérez</td>
+						<td><code class="cm-data">172.16.0.88</code></td>
+						<td><span class="cm-dot cm-dot-success"></span> Éxito</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-23 11:30:00</td>
+						<td><strong>Super Admin</strong></td>
+						<td><span class="cm-badge cm-badge-info">CREATE</span> Generar factura</td>
+						<td>FAC-2026-005</td>
+						<td><code class="cm-data">192.168.1.100</code></td>
+						<td><span class="cm-dot cm-dot-success"></span> Éxito</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-22 16:18:44</td>
+						<td><strong>soporte@capotiao.com</strong></td>
+						<td><span class="cm-badge cm-badge-warning">UPDATE</span> Modificar cupón</td>
+						<td>Cupón ESCOLAR25</td>
+						<td><code class="cm-data">201.220.15.33</code></td>
+						<td><span class="cm-dot cm-dot-success"></span> Éxito</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-22 08:05:19</td>
+						<td><strong>admin@tecnica3.edu</strong></td>
+						<td><span class="cm-badge cm-badge-danger">LOGIN</span> Intento fallido</td>
+						<td>Inicio de sesión</td>
+						<td><code class="cm-data">45.67.89.123</code></td>
+						<td><span class="cm-dot cm-dot-error"></span> Fallo</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-admin}}

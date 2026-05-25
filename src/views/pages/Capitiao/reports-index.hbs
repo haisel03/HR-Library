@@ -1,0 +1,134 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-file-earmark-bar-graph" title="Reportes" description="Centro de reportes y análisis" userName="Juan Pérez" userBadge="Director" page="reports-index"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-file-earmark-bar-graph"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Reportes</h1>
+			<div class="cm-breadcrumbs">
+				<a href="school-dashboard.html">Inicio</a>
+				<span class="sep">/</span>
+				<span class="current">Reportes</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-ghost cm-btn-sm"><i class="bi bi-calendar-range"></i> Período: Mayo 2026</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-actions-grid">
+	<div class="cm-action-card" onclick="window.location='reports-students.html'">
+		<div class="cm-action-card-icon"><i class="bi bi-people"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Estudiantes</h6>
+			<p class="cm-action-card-desc">Reporte detallado de estudiantes matriculados por grado, sección y estado académico.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+
+	<div class="cm-action-card" onclick="window.location='reports-grades.html'">
+		<div class="cm-action-card-icon"><i class="bi bi-trophy"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Calificaciones</h6>
+			<p class="cm-action-card-desc">Análisis de rendimiento académico con notas por asignatura, período y estudiante.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+
+	<div class="cm-action-card" onclick="window.location='reports-attendance.html'">
+		<div class="cm-action-card-icon"><i class="bi bi-calendar-check"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Asistencias</h6>
+			<p class="cm-action-card-desc">Reporte de asistencia por curso, período y estudiante con indicadores de puntualidad.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+
+	<div class="cm-action-card" onclick="window.location='reports-payments.html'">
+		<div class="cm-action-card-icon"><i class="bi bi-cash-stack"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Cobros</h6>
+			<p class="cm-action-card-desc">Reporte financiero de cobros realizados, pendientes y morosidad por estudiante.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+
+	<div class="cm-action-card" onclick="window.location='reports-expenses.html'">
+		<div class="cm-action-card-icon"><i class="bi bi-cart"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Gastos</h6>
+			<p class="cm-action-card-desc">Control de egresos, categorías de gasto y presupuesto por período escolar.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+
+	<div class="cm-action-card">
+		<div class="cm-action-card-icon"><i class="bi bi-graph-up-arrow"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Rendimiento</h6>
+			<p class="cm-action-card-desc">Análisis de rendimiento general por grado, asignatura y comparativa entre períodos.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+
+	<div class="cm-action-card">
+		<div class="cm-action-card-icon"><i class="bi bi-piggy-bank"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Financiero</h6>
+			<p class="cm-action-card-desc">Resumen financiero consolidado con ingresos, egresos, saldos y proyecciones.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+
+	<div class="cm-action-card">
+		<div class="cm-action-card-icon"><i class="bi bi-shield-check"></i></div>
+		<div class="cm-action-card-body">
+			<h6 class="cm-action-card-title">Auditoría</h6>
+			<p class="cm-action-card-desc">Registro de actividades del sistema para seguimiento y control de cambios.</p>
+		</div>
+		<div class="cm-action-card-arrow"><i class="bi bi-chevron-right"></i></div>
+	</div>
+</div>
+
+<style>
+.cm-actions-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 1rem;
+}
+.cm-action-card {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1.25rem;
+	background: var(--cm-surface-card, #fff);
+	border: 1px solid var(--cm-border, #e2e5ea);
+	border-radius: 0.75rem;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+.cm-action-card:hover {
+	border-color: var(--cm-primary, #003876);
+	box-shadow: 0 2px 12px rgba(0,56,118,0.1);
+	transform: translateY(-2px);
+}
+.cm-action-card-icon {
+	width: 48px;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: var(--cm-primary-bg, #e8f0fe);
+	border-radius: 0.75rem;
+	flex-shrink: 0;
+}
+.cm-action-card-icon i { font-size: 1.35rem; color: var(--cm-primary, #003876); }
+.cm-action-card-body { flex: 1; min-width: 0; }
+.cm-action-card-title { margin: 0 0 0.25rem; font-size: 0.9rem; font-weight: 600; color: var(--cm-text, #1a1d23); }
+.cm-action-card-desc { margin: 0; font-size: 0.78rem; color: var(--cm-text-muted, #6b7280); line-height: 1.4; }
+.cm-action-card-arrow { color: var(--cm-text-muted, #bbb); font-size: 1.1rem; flex-shrink: 0; transition: all 0.2s; }
+.cm-action-card:hover .cm-action-card-arrow { color: var(--cm-primary, #003876); transform: translateX(3px); }
+</style>
+
+{{/layout-capotiao-modern-tenant}}

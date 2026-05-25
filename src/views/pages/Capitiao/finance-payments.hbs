@@ -1,0 +1,125 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-credit-card" title="Cobros" description="Registro de cobros a estudiantes" userName="Juan Pérez" userBadge="Director" page="finance-payments"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-credit-card"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Cobros</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Finanzas</a>
+				<span class="sep">/</span>
+				<span class="current">Cobros</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Nuevo Cobro</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar cobro..." style="min-width:240px;">
+		</div>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-funnel"></i> Filtros</button>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 cobros</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Estudiante</th><th>Concepto</th><th>Monto</th><th>Fecha</th><th>Estado</th><th>Método de Pago</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Juan Rodríguez</strong></td>
+						<td>Colegiatura Mayo</td>
+						<td class="cm-data">RD$ 4,500</td>
+						<td class="cm-data">2026-05-20</td>
+						<td><span class="cm-badge cm-badge-success">Pagado</span></td>
+						<td>Efectivo</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>María Díaz</strong></td>
+						<td>Inscripción</td>
+						<td class="cm-data">RD$ 6,500</td>
+						<td class="cm-data">2026-05-18</td>
+						<td><span class="cm-badge cm-badge-success">Pagado</span></td>
+						<td>Transferencia BHD</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Pedro Ramírez</strong></td>
+						<td>Curso de Verano</td>
+						<td class="cm-data">RD$ 3,500</td>
+						<td class="cm-data">2026-05-16</td>
+						<td><span class="cm-badge cm-badge-success">Pagado</span></td>
+						<td>Visa •••• 4582</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Ana Torres</strong></td>
+						<td>Colegiatura Mayo</td>
+						<td class="cm-data">RD$ 4,500</td>
+						<td class="cm-data">2026-05-15</td>
+						<td><span class="cm-badge cm-badge-warning">Pendiente</span></td>
+						<td>—</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Carlos Méndez</strong></td>
+						<td>Materiales</td>
+						<td class="cm-data">RD$ 2,800</td>
+						<td class="cm-data">2026-05-14</td>
+						<td><span class="cm-badge cm-badge-success">Pagado</span></td>
+						<td>PayPal</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Laura Fernández</strong></td>
+						<td>Colegiatura Abril</td>
+						<td class="cm-data">RD$ 4,500</td>
+						<td class="cm-data">2026-04-28</td>
+						<td><span class="cm-badge cm-badge-success">Pagado</span></td>
+						<td>Efectivo</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

@@ -1,0 +1,200 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-cash-stack" title="Reporte de Cobros" description="Reporte financiero de cobros" userName="Juan Pérez" userBadge="Director" page="reports-index"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-cash-stack"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Reporte de Cobros</h1>
+			<div class="cm-breadcrumbs">
+				<a href="reports-index.html">Reportes</a>
+				<span class="sep">/</span>
+				<span class="current">Cobros</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-printer"></i> Imprimir</button>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-cash"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Total Cobrado</div>
+			<div class="cm-stat-value">$45,680.00</div>
+			<span class="cm-stat-trend cm-stat-trend-up">Mayo 2026</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-warning">
+		<div class="cm-stat-icon cm-stat-icon-warning"><i class="bi bi-clock-history"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Pendiente</div>
+			<div class="cm-stat-value">$8,320.00</div>
+			<span class="cm-stat-trend">15.4% morosidad</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-info">
+		<div class="cm-stat-icon cm-stat-icon-info"><i class="bi bi-receipt"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Transacciones</div>
+			<div class="cm-stat-value">184</div>
+			<span class="cm-stat-trend">En el período</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-primary">
+		<div class="cm-stat-icon cm-stat-icon-primary"><i class="bi bi-people"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Estudiantes al Día</div>
+			<div class="cm-stat-value">132</div>
+			<span class="cm-stat-trend cm-stat-trend-up">84.6% al día</span>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros de Reporte</h6>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-3">
+				<label class="cm-label">Concepto</label>
+				<select class="cm-input w-100">
+					<option value="">Todos los conceptos</option>
+					<option>Mensualidad</option>
+					<option>Inscripción</option>
+					<option>Materiales</option>
+					<option>Uniforme</option>
+					<option>Actividades Extracurriculares</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Desde</label>
+				<input type="date" class="cm-input w-100" value="2026-05-01">
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Hasta</label>
+				<input type="date" class="cm-input w-100" value="2026-05-24">
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Estado</label>
+				<select class="cm-input w-100">
+					<option value="">Todos</option>
+					<option>Pagado</option>
+					<option>Pendiente</option>
+					<option>Vencido</option>
+					<option>Parcial</option>
+				</select>
+			</div>
+			<div class="col-lg-3 d-flex align-items-end gap-1">
+				<button class="cm-btn cm-btn-primary cm-btn-sm flex-fill"><i class="bi bi-search"></i> Generar Reporte</button>
+				<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-x-lg"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-table"></i> Resultados - Cobros</h6>
+		<div class="cm-card-header-actions">
+			<span class="cm-label">Total: $45,680.00 cobrados</span>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar Excel</button>
+		</div>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Recibo</th>
+						<th>Estudiante</th>
+						<th>Concepto</th>
+						<th>Monto</th>
+						<th>Fecha</th>
+						<th>Método</th>
+						<th>Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code class="cm-data">REC-2026-001</code></td>
+						<td><strong>Pedro Rodríguez</strong></td>
+						<td>Mensualidad Mayo</td>
+						<td class="cm-data">$1,200.00</td>
+						<td>2026-05-02</td>
+						<td>Efectivo</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">REC-2026-002</code></td>
+						<td><strong>Sofía Martínez</strong></td>
+						<td>Inscripción</td>
+						<td class="cm-data">$2,500.00</td>
+						<td>2026-05-03</td>
+						<td>Transferencia</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">REC-2026-003</code></td>
+						<td><strong>Luis Hernández</strong></td>
+						<td>Materiales</td>
+						<td class="cm-data">$850.00</td>
+						<td>2026-05-05</td>
+						<td>Tarjeta</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">REC-2026-004</code></td>
+						<td><strong>Camila Reyes</strong></td>
+						<td>Mensualidad Mayo</td>
+						<td class="cm-data">$1,200.00</td>
+						<td>2026-05-08</td>
+						<td>Efectivo</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">REC-2026-005</code></td>
+						<td><strong>Diego Castillo</strong></td>
+						<td>Mensualidad Mayo</td>
+						<td class="cm-data">$1,200.00</td>
+						<td>—</td>
+						<td>—</td>
+						<td><span class="cm-badge cm-badge-danger cm-badge-sm">Vencido</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">REC-2026-006</code></td>
+						<td><strong>Valentina Gómez</strong></td>
+						<td>Uniforme</td>
+						<td class="cm-data">$1,500.00</td>
+						<td>2026-05-10</td>
+						<td>Transferencia</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Pagado</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">REC-2026-007</code></td>
+						<td><strong>Mateo Torres</strong></td>
+						<td>Actividad Extra</td>
+						<td class="cm-data">$600.00</td>
+						<td>2026-05-12</td>
+						<td>Efectivo</td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm">Pendiente</span></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">REC-2026-008</code></td>
+						<td><strong>Isabella Vargas</strong></td>
+						<td>Mensualidad Mayo</td>
+						<td class="cm-data">$1,200.00</td>
+						<td>—</td>
+						<td>—</td>
+						<td><span class="cm-badge cm-badge-danger cm-badge-sm">Vencido</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

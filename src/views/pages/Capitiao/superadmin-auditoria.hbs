@@ -1,0 +1,276 @@
+{{#> layout-capotiao-modern-admin icon="bi bi-journal-code" title="Auditoría" description="Panel completo de auditoría del sistema" userName="Super Admin" userBadge="Super Admin" page="superadmin-auditoria"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-journal-code"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Auditoría del Sistema</h1>
+			<div class="cm-breadcrumbs">
+				<a href="admin-dashboard.html">Admin</a>
+				<span class="sep">/</span>
+				<span class="current">Auditoría</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-download"></i> Exportar</button>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-arrow-clockwise"></i> Actualizar</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-primary">
+		<div class="cm-stat-icon cm-stat-icon-primary"><i class="bi bi-activity"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Total Eventos</div>
+			<div class="cm-stat-value">12,847</div>
+			<span class="cm-stat-trend">Desde el inicio</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-check-circle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Eventos Hoy</div>
+			<div class="cm-stat-value">243</div>
+			<span class="cm-stat-trend cm-stat-trend-up">+12% vs ayer</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-warning">
+		<div class="cm-stat-icon cm-stat-icon-warning"><i class="bi bi-exclamation-triangle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Alertas</div>
+			<div class="cm-stat-value">8</div>
+			<span class="cm-stat-trend cm-stat-trend-down">3 sin revisar</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-info">
+		<div class="cm-stat-icon cm-stat-icon-info"><i class="bi bi-people"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Usuarios Activos</div>
+			<div class="cm-stat-value">24</div>
+			<span class="cm-stat-trend">Ahora mismo</span>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros Avanzados</h6>
+		<div class="cm-card-header-actions">
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-bookmark-plus"></i> Guardar filtro</button>
+		</div>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-2">
+				<label class="cm-label">Colegio</label>
+				<select class="cm-input w-100">
+					<option value="">Todos los colegios</option>
+					<option>Colegio San José</option>
+					<option>Instituto Moderno</option>
+					<option>Liceo Cultural</option>
+					<option>Escuela Técnica Nº3</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Acción</label>
+				<select class="cm-input w-100">
+					<option value="">Todas</option>
+					<option>created</option>
+					<option>updated</option>
+					<option>deleted</option>
+					<option>login</option>
+					<option>logout</option>
+					<option>export</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Entidad</label>
+				<select class="cm-input w-100">
+					<option value="">Todas</option>
+					<option>user</option>
+					<option>tenant</option>
+					<option>plan</option>
+					<option>subscription</option>
+					<option>student</option>
+					<option>grade</option>
+					<option>payment</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Usuario</label>
+				<input type="text" class="cm-input w-100" placeholder="Email de usuario...">
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Desde - Hasta</label>
+				<div class="d-flex gap-1">
+					<input type="date" class="cm-input w-100" value="2026-05-01">
+					<input type="date" class="cm-input w-100" value="2026-05-24">
+				</div>
+			</div>
+			<div class="col-lg-2 d-flex align-items-end gap-1">
+				<button class="cm-btn cm-btn-primary cm-btn-sm flex-fill"><i class="bi bi-search"></i> Buscar</button>
+				<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-x-lg"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-journal-code"></i> Registro de Auditoría</h6>
+		<div class="cm-card-header-actions">
+			<span class="cm-label">Mostrando 25 de 12,847 registros</span>
+		</div>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Colegio</th>
+						<th>Usuario</th>
+						<th>Acción</th>
+						<th>Entidad</th>
+						<th>ID Entidad</th>
+						<th>IP</th>
+						<th>Fecha/Hora</th>
+						<th>Detalle</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code class="cm-data">1</code></td>
+						<td>Colegio San José</td>
+						<td>admin@capotiao.test</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">created</span></td>
+						<td>tenant</td>
+						<td><code>5</code></td>
+						<td>192.168.1.100</td>
+						<td>2026-05-24 11:30:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2</code></td>
+						<td>Instituto Moderno</td>
+						<td>jperez@moderno.edu</td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">updated</span></td>
+						<td>student</td>
+						<td><code>1024</code></td>
+						<td>10.0.0.45</td>
+						<td>2026-05-24 11:15:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">3</code></td>
+						<td>Liceo Cultural</td>
+						<td>mlopez@liceo.edu</td>
+						<td><span class="cm-badge cm-badge-danger cm-badge-sm">deleted</span></td>
+						<td>payment</td>
+						<td><code>89</code></td>
+						<td>10.0.0.78</td>
+						<td>2026-05-24 10:45:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">4</code></td>
+						<td>Colegio San José</td>
+						<td>juan.perez@sanjose.edu</td>
+						<td><span class="cm-badge cm-badge-info cm-badge-sm">login</span></td>
+						<td>user</td>
+						<td><code>42</code></td>
+						<td>192.168.1.45</td>
+						<td>2026-05-24 10:30:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">5</code></td>
+						<td>Escuela Técnica Nº3</td>
+						<td>admin@tecnica3.edu</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">created</span></td>
+						<td>subscription</td>
+						<td><code>12</code></td>
+						<td>10.0.1.23</td>
+						<td>2026-05-24 10:00:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">6</code></td>
+						<td>Colegio San José</td>
+						<td>admin@capotiao.test</td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm">export</span></td>
+						<td>report</td>
+						<td><code>—</code></td>
+						<td>192.168.1.100</td>
+						<td>2026-05-24 09:45:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">7</code></td>
+						<td>Instituto Moderno</td>
+						<td>jperez@moderno.edu</td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">updated</span></td>
+						<td>grade</td>
+						<td><code>456</code></td>
+						<td>10.0.0.45</td>
+						<td>2026-05-24 09:30:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">8</code></td>
+						<td>Liceo Cultural</td>
+						<td>mlopez@liceo.edu</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">created</span></td>
+						<td>student</td>
+						<td><code>1088</code></td>
+						<td>10.0.0.78</td>
+						<td>2026-05-24 09:15:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">9</code></td>
+						<td>Colegio San José</td>
+						<td>sistema@capotiao.test</td>
+						<td><span class="cm-badge cm-badge-secondary cm-badge-sm">logout</span></td>
+						<td>user</td>
+						<td><code>42</code></td>
+						<td>192.168.1.45</td>
+						<td>2026-05-23 18:00:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">10</code></td>
+						<td>Escuela Técnica Nº3</td>
+						<td>admin@tecnica3.edu</td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">updated</span></td>
+						<td>tenant</td>
+						<td><code>3</code></td>
+						<td>10.0.1.23</td>
+						<td>2026-05-23 17:30:00</td>
+						<td><button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver detalle"><i class="bi bi-eye"></i></button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="d-flex justify-content-between align-items-center mt-3">
+	<span class="cm-label">Página 1 de 514</span>
+	<div class="d-flex gap-1">
+		<button class="cm-btn cm-btn-sm cm-btn-ghost" disabled><i class="bi bi-chevron-left"></i></button>
+		<button class="cm-btn cm-btn-sm cm-btn-primary">1</button>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost">2</button>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost">3</button>
+		<span class="cm-label px-1">...</span>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost">514</button>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-chevron-right"></i></button>
+	</div>
+</div>
+
+<style scoped>
+.pagination .cm-btn { min-width: 36px; }
+</style>
+
+{{/layout-capotiao-modern-admin}}

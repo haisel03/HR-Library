@@ -1,0 +1,196 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-gear-wide-connected" title="Configuración General" description="Configuración institucional del colegio" userName="Juan Pérez" userBadge="Director" page="config-settings"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-gear-wide-connected"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Configuración General</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Configuración</a>
+				<span class="sep">/</span>
+				<span class="current">Configuración General</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-floppy"></i> Guardar Cambios</button>
+		</div>
+	</div>
+</div>
+
+<div class="row g-3">
+	<div class="col-lg-8">
+		<div class="cm-card">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-building"></i> Información de la Institución</h6>
+			</div>
+			<div class="cm-card-body">
+				<form>
+					<div class="row g-3">
+						<div class="col-md-6">
+							<label class="form-label">Nombre del Colegio</label>
+							<input type="text" class="cm-input" value="Colegio San José" placeholder="Nombre de la institución">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">RNC / Identificación Fiscal</label>
+							<input type="text" class="cm-input" value="1-01-23456-7" placeholder="RNC">
+						</div>
+						<div class="col-md-12">
+							<label class="form-label">Dirección</label>
+							<input type="text" class="cm-input" value="Calle Principal #123, Zona Universitaria" placeholder="Dirección completa">
+						</div>
+						<div class="col-md-4">
+							<label class="form-label">Teléfono</label>
+							<input type="text" class="cm-input" value="(809) 555-0100" placeholder="Teléfono">
+						</div>
+						<div class="col-md-4">
+							<label class="form-label">Teléfono Secundario</label>
+							<input type="text" class="cm-input" value="(809) 555-0101" placeholder="Teléfono alterno">
+						</div>
+						<div class="col-md-4">
+							<label class="form-label">Email</label>
+							<input type="email" class="cm-input" value="info@colegiosanjose.edu.do" placeholder="Correo electrónico">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Director</label>
+							<input type="text" class="cm-input" value="Juan Pérez" placeholder="Nombre del director">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Subdirector</label>
+							<input type="text" class="cm-input" value="María López" placeholder="Nombre del subdirector">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="cm-card">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-currency-dollar"></i> Configuración Financiera</h6>
+			</div>
+			<div class="cm-card-body">
+				<form>
+					<div class="row g-3">
+						<div class="col-md-4">
+							<label class="form-label">Moneda</label>
+							<select class="cm-input">
+								<option value="DOP" selected>Peso Dominicano (RD$)</option>
+								<option value="USD">Dólar Americano (US$)</option>
+								<option value="EUR">Euro (€)</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label class="form-label">Formato de Fecha</label>
+							<select class="cm-input">
+								<option value="DD/MM/YYYY" selected>DD/MM/AAAA</option>
+								<option value="MM/DD/YYYY">MM/DD/AAAA</option>
+								<option value="YYYY-MM-DD">AAAA-MM-DD</option>
+							</select>
+						</div>
+						<div class="col-md-4">
+							<label class="form-label">Formato de Número</label>
+							<select class="cm-input">
+								<option value="1,234.56" selected>1,234.56</option>
+								<option value="1.234,56">1.234,56</option>
+								<option value="1 234,56">1 234,56</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">Día de Corte Mensual</label>
+							<input type="number" class="cm-input" value="5" min="1" max="28">
+						</div>
+						<div class="col-md-6">
+							<label class="form-label">% de Mora por Retraso</label>
+							<input type="number" class="cm-input" value="2" min="0" max="100" step="0.5">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-4">
+		<div class="cm-card">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-person-badge"></i> Personal Directivo</h6>
+			</div>
+			<div class="cm-card-body">
+				<form>
+					<div class="mb-3">
+						<label class="form-label">Director</label>
+						<select class="cm-input">
+							<option value="1" selected>Juan Pérez</option>
+							<option value="2">María López</option>
+							<option value="3">Carlos Mendoza</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Coordinador Académico</label>
+						<select class="cm-input">
+							<option value="1">Ana Torres</option>
+							<option value="2" selected>Roberto Sánchez</option>
+							<option value="3">Laura Fernández</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Encargado Financiero</label>
+						<select class="cm-input">
+							<option value="1" selected>Pedro Ramírez</option>
+							<option value="2">Sofía Castillo</option>
+							<option value="3">Miguel Ángel</option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Encargado de TI</label>
+						<select class="cm-input">
+							<option value="1">Diego Martínez</option>
+							<option value="2" selected>Carolina Peña</option>
+							<option value="3">Andrés Jiménez</option>
+						</select>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="cm-card">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-palette"></i> Personalización</h6>
+			</div>
+			<div class="cm-card-body">
+				<form>
+					<div class="mb-3">
+						<label class="form-label">Color Principal</label>
+						<div class="d-flex align-items-center gap-2">
+							<input type="color" class="cm-input" style="width:60px;height:38px;padding:3px;" value="#003876">
+							<input type="text" class="cm-input" value="#003876" style="flex:1;">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Color Secundario</label>
+						<div class="d-flex align-items-center gap-2">
+							<input type="color" class="cm-input" style="width:60px;height:38px;padding:3px;" value="#c9a227">
+							<input type="text" class="cm-input" value="#c9a227" style="flex:1;">
+						</div>
+					</div>
+					<div class="mb-3">
+						<label class="form-label">Idioma del Sistema</label>
+						<select class="cm-input">
+							<option value="es" selected>Español</option>
+							<option value="en">English</option>
+							<option value="fr">Français</option>
+						</select>
+					</div>
+					<div class="form-check form-switch mb-2">
+						<input class="form-check-input" type="checkbox" id="swTheme" checked>
+						<label class="form-check-label" for="swTheme">Modo Oscuro</label>
+					</div>
+					<div class="form-check form-switch mb-2">
+						<input class="form-check-input" type="checkbox" id="swAnimations">
+						<label class="form-check-label" for="swAnimations">Desactivar Animaciones</label>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

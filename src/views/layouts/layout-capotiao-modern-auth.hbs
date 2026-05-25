@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+{{> capotiao-modern-head}}
+
+<body class="cm-auth-body">
+	<div class="cm-auth-container">
+		<div class="cm-auth-header">
+			<img src="img/logotype.png" alt="Capotiao" class="cm-auth-logo">
+			<h1 class="cm-auth-title">{{title}}</h1>
+			<p class="cm-auth-subtitle">{{description}}</p>
+		</div>
+
+		<div class="cm-auth-card">
+			<div class="cm-auth-card-accent"></div>
+			<div class="cm-auth-card-body">
+				{{> @partial-block}}
+			</div>
+		</div>
+
+		{{#if authFooter}}
+		<div class="cm-auth-footer">{{{authFooter}}}</div>
+		{{/if}}
+	</div>
+
+</body>
+
+</html>

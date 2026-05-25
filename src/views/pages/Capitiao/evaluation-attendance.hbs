@@ -1,0 +1,190 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-calendar-check" title="Asistencias" description="Registro de asistencia diaria de estudiantes" userName="Juan Pérez" userBadge="Director" page="evaluation-attendance"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-calendar-check"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Asistencias</h1>
+			<div class="cm-breadcrumbs">
+				<a href="evaluation-periods.html">Evaluación</a>
+				<span class="sep">/</span>
+				<span class="current">Asistencias</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Tomar Asistencia</button>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Reporte</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-people"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Asistencia Total</div>
+			<div class="cm-stat-value">94.8%</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> +2.1% vs período ant.</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-warning">
+		<div class="cm-stat-icon cm-stat-icon-warning"><i class="bi bi-clock"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Tardanzas</div>
+			<div class="cm-stat-value">12</div>
+			<span class="cm-stat-trend">Últimos 5 días</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-danger">
+		<div class="cm-stat-icon cm-stat-icon-danger"><i class="bi bi-x-circle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Ausencias</div>
+			<div class="cm-stat-value">8</div>
+			<span class="cm-stat-trend">Últimos 5 días</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-info">
+		<div class="cm-stat-icon cm-stat-icon-info"><i class="bi bi-check-circle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Justificados</div>
+			<div class="cm-stat-value">3</div>
+			<span class="cm-stat-trend">Últimos 5 días</span>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar estudiante..." style="min-width:180px;">
+		</div>
+		<select class="cm-input cm-input-sm" style="width:160px;">
+			<option>Curso: Todos</option>
+			<option>1ro A</option>
+			<option>2do B</option>
+			<option>3ro A</option>
+			<option>4to C</option>
+		</select>
+		<input type="date" class="cm-input cm-input-sm" value="2026-05-24" style="width:150px;">
+		<select class="cm-input cm-input-sm" style="width:150px;">
+			<option>Período: Actual</option>
+			<option>Período 1</option>
+			<option>Período 2</option>
+			<option>Período 3</option>
+		</select>
+		<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-funnel"></i> Filtros</button>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 estudiantes</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Estudiante</th>
+						<th class="text-center">Lun 19</th>
+						<th class="text-center">Mar 20</th>
+						<th class="text-center">Mié 21</th>
+						<th class="text-center">Jue 22</th>
+						<th class="text-center">Vie 23</th>
+						<th>% Asistencia</th>
+						<th style="width:80px;"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Ana María Rodríguez</strong><br><small class="text-muted">1ro A</small></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="cm-data"><strong>100%</strong></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Carlos Jiménez</strong><br><small class="text-muted">1ro A</small></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-warning cm-badge-sm">Tardanza</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-danger cm-badge-sm">Ausente</span></td>
+						<td class="cm-data"><strong>80%</strong></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>María García</strong><br><small class="text-muted">2do B</small></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-info cm-badge-sm">Justificado</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="cm-data"><strong>80%</strong></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Pedro Martínez</strong><br><small class="text-muted">2do B</small></td>
+						<td class="text-center"><span class="cm-badge cm-badge-danger cm-badge-sm">Ausente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-danger cm-badge-sm">Ausente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-warning cm-badge-sm">Tardanza</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-danger cm-badge-sm">Ausente</span></td>
+						<td class="cm-data"><strong>20%</strong></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Lucía Fernández</strong><br><small class="text-muted">3ro A</small></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="cm-data"><strong>100%</strong></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Sofía Ramírez</strong><br><small class="text-muted">3ro A</small></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-warning cm-badge-sm">Tardanza</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-success cm-badge-sm">Presente</span></td>
+						<td class="text-center"><span class="cm-badge cm-badge-info cm-badge-sm">Justificado</span></td>
+						<td class="cm-data"><strong>60%</strong></td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

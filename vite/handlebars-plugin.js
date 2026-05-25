@@ -12,11 +12,25 @@ export default function handlebarsPlugin(options = {}) {
 
   function getPages() {
     if (!fs.existsSync(pagesDir)) return [];
-    return fs
-      .readdirSync(pagesDir)
-      .filter((f) => f.endsWith(".hbs"))
-      .map((f) => path.parse(f).name);
+    const pages = [];
+    function scan(dir, prefix) {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          scan(full, prefix + entry.name + "/");
+        } else if (entry.name.endsWith(".hbs")) {
+          pages.push(prefix + path.parse(entry.name).name);
+        }
+      }
+    }
+    scan(pagesDir, "");
+    return pages;
   }
+
+  // Register custom helpers
+  Handlebars.registerHelper("eq", function (a, b) {
+    return a === b;
+  });
 
   function registerPartials() {
     if (fs.existsSync(layoutsDir)) {
@@ -60,14 +74,17 @@ export default function handlebarsPlugin(options = {}) {
   function buildHtmlDocument(pageName, htmlContent, isBuild) {
     const demo = hasDemo(pageName);
 
+    // Compute relative path prefix based on page depth
+    const depth = (pageName.match(/\//g) || []).length;
+    const prefix = depth > 0 ? "../".repeat(depth) : "./";
+
     let scripts =
-      '\n<script type="module" src="./src/js/app.js"></script>\n';
+      `\n<script type="module" src="${prefix}src/js/app.js"></script>\n`;
 
     if (demo) {
-      // Dev: inject as ES module (Vite resolves via public/ → / mapping)
-      // Build: inject as plain script (Vite would fail to resolve public/ modules)
+      const demoName = path.basename(pageName);
       const scriptType = isBuild ? 'src' : 'type="module" src';
-      scripts += `<script ${scriptType}="./demos/${pageName}.js"></script>\n`;
+      scripts += `<script ${scriptType}="${prefix}demos/${demoName}.js"></script>\n`;
     }
 
     if (htmlContent.includes("</body>")) {
@@ -91,6 +108,10 @@ export default function handlebarsPlugin(options = {}) {
           if (content) {
             const html = buildHtmlDocument(name, content, true);
             const htmlPath = path.join(root, `${name}.html`);
+            const htmlDir = path.dirname(htmlPath);
+            if (!fs.existsSync(htmlDir)) {
+              fs.mkdirSync(htmlDir, { recursive: true });
+            }
             fs.writeFileSync(htmlPath, html, "utf8");
             input[name] = htmlPath;
           }
@@ -113,6 +134,19 @@ export default function handlebarsPlugin(options = {}) {
           fs.unlinkSync(htmlPath);
         }
       });
+      // Clean up empty subdirectories left by page removal
+      function cleanEmpty(dir) {
+        if (!fs.existsSync(dir)) return;
+        for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+          if (entry.isDirectory()) {
+            cleanEmpty(path.join(dir, entry.name));
+          }
+        }
+        if (fs.readdirSync(dir).length === 0) {
+          fs.rmdirSync(dir);
+        }
+      }
+      cleanEmpty(root);
     },
 
     configureServer(server) {

@@ -1,0 +1,102 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-calendar-range" title="Años Escolares" description="Gestión de periodos académicos" userName="Juan Pérez" userBadge="Director" page="school-academic-years"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-calendar-range"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Años Escolares</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Escuela</a>
+				<span class="sep">/</span>
+				<a href="#">Académico</a>
+				<span class="sep">/</span>
+				<span class="current">Años Escolares</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm" id="btnAddYear">
+				<i class="bi bi-plus-circle"></i> Nuevo Año Escolar
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-calendar-range"></i>Listado de Años Escolares</h6>
+		<div class="cm-card-header-actions">
+			<div class="cm-toolbar">
+				<input type="text" class="cm-input cm-input-sm" placeholder="Buscar año..." id="filterYear">
+			</div>
+		</div>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Año</th>
+						<th>Fecha Inicio</th>
+						<th>Fecha Fin</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>2026-2027</strong></td>
+						<td><span class="cm-data">01-09-2026</span></td>
+						<td><span class="cm-data">30-06-2027</span></td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>2025-2026</strong></td>
+						<td><span class="cm-data">01-09-2025</span></td>
+						<td><span class="cm-data">30-06-2026</span></td>
+						<td><span class="cm-badge cm-badge-secondary"><span class="cm-dot cm-dot-secondary"></span>Finalizado</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>2024-2025</strong></td>
+						<td><span class="cm-data">01-09-2024</span></td>
+						<td><span class="cm-data">30-06-2025</span></td>
+						<td><span class="cm-badge cm-badge-secondary"><span class="cm-dot cm-dot-secondary"></span>Finalizado</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>2023-2024</strong></td>
+						<td><span class="cm-data">01-09-2023</span></td>
+						<td><span class="cm-data">30-06-2024</span></td>
+						<td><span class="cm-badge cm-badge-secondary"><span class="cm-dot cm-dot-secondary"></span>Finalizado</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>2027-2028</strong></td>
+						<td><span class="cm-data">01-09-2027</span></td>
+						<td><span class="cm-data">30-06-2028</span></td>
+						<td><span class="cm-badge cm-badge-info"><span class="cm-dot cm-dot-info"></span>Programado</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

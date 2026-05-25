@@ -1,0 +1,239 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-graph-up" title="Panel Financiero" description="Resumen financiero de la institución" userName="Juan Pérez" userBadge="Director" page="finance-dashboard"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-graph-up"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Panel Financiero</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Finanzas</a>
+				<span class="sep">/</span>
+				<span class="current">Panel Financiero</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-ghost cm-btn-sm"><i class="bi bi-printer"></i> Reporte</button>
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Nuevo Movimiento</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-stat-row">
+	<div class="cm-stat-card cm-stat-card-success">
+		<div class="cm-stat-icon cm-stat-icon-success"><i class="bi bi-arrow-down-circle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Ingresos del Mes</div>
+			<div class="cm-stat-value">RD$ 486,200</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> 12% vs mes ant.</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-danger">
+		<div class="cm-stat-icon cm-stat-icon-danger"><i class="bi bi-arrow-up-circle"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Gastos del Mes</div>
+			<div class="cm-stat-value">RD$ 312,850</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> 5% vs mes ant.</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-primary">
+		<div class="cm-stat-icon cm-stat-icon-primary"><i class="bi bi-wallet2"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Saldo Disponible</div>
+			<div class="cm-stat-value">RD$ 173,350</div>
+			<span class="cm-stat-trend cm-stat-trend-up"><i class="bi bi-arrow-up"></i> +RD$ 23,450 vs mes ant.</span>
+		</div>
+	</div>
+	<div class="cm-stat-card cm-stat-card-warning">
+		<div class="cm-stat-icon cm-stat-icon-warning"><i class="bi bi-clock-history"></i></div>
+		<div class="cm-stat-body">
+			<div class="cm-stat-label">Cobros Pendientes</div>
+			<div class="cm-stat-value">RD$ 98,500</div>
+			<span class="cm-stat-trend cm-stat-trend-down"><i class="bi bi-arrow-down"></i> 18 estudiantes</span>
+		</div>
+	</div>
+</div>
+
+<div class="row g-3 mb-4">
+	<div class="col-xl-8">
+		<div class="cm-card cm-card-accent">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-bar-chart-line"></i> Ingresos vs Gastos</h6>
+				<div class="cm-card-header-actions">
+					<select class="cm-input cm-input-sm" style="width:auto;">
+						<option>Este Mes</option>
+						<option>Últimos 3 Meses</option>
+						<option>Este Año</option>
+					</select>
+				</div>
+			</div>
+			<div class="cm-card-body">
+				<canvas id="financeChart" height="280"></canvas>
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-4">
+		<div class="cm-card cm-card-accent">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-pie-chart"></i> Distribución de Gastos</h6>
+			</div>
+			<div class="cm-card-body">
+				<canvas id="expensePieChart" height="280"></canvas>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-clock-history"></i> Transacciones Recientes</h6>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Fecha</th><th>Concepto</th><th>Tipo</th><th>Monto</th><th>Estado</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="cm-data">2026-05-20</td>
+						<td>Colegiatura Mayo - Juan Rodríguez</td>
+						<td><span class="cm-badge cm-badge-success">Ingreso</span></td>
+						<td class="cm-data">RD$ 4,500</td>
+						<td><span class="cm-dot cm-dot-success"></span> Completado</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-20</td>
+						<td>Pago de Nómina - Mayo</td>
+						<td><span class="cm-badge cm-badge-danger">Gasto</span></td>
+						<td class="cm-data">RD$ 185,000</td>
+						<td><span class="cm-dot cm-dot-success"></span> Completado</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-19</td>
+						<td>Materiales Didácticos</td>
+						<td><span class="cm-badge cm-badge-danger">Gasto</span></td>
+						<td class="cm-data">RD$ 12,500</td>
+						<td><span class="cm-dot cm-dot-success"></span> Completado</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-18</td>
+						<td>Inscripción Nuevo Ingreso - María Díaz</td>
+						<td><span class="cm-badge cm-badge-success">Ingreso</span></td>
+						<td class="cm-data">RD$ 6,500</td>
+						<td><span class="cm-dot cm-dot-success"></span> Completado</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-17</td>
+						<td>Mantenimiento de Aulas</td>
+						<td><span class="cm-badge cm-badge-danger">Gasto</span></td>
+						<td class="cm-data">RD$ 23,800</td>
+						<td><span class="cm-dot cm-dot-warning"></span> Pendiente</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td class="cm-data">2026-05-16</td>
+						<td>Curso de Verano - Pedro Ramírez</td>
+						<td><span class="cm-badge cm-badge-success">Ingreso</span></td>
+						<td class="cm-data">RD$ 3,500</td>
+						<td><span class="cm-dot cm-dot-success"></span> Completado</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-view" title="Ver"><i class="bi bi-eye"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	if (typeof Chart !== 'undefined') {
+		new Chart(document.getElementById('financeChart'), {
+			type: 'line',
+			data: {
+				labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May'],
+				datasets: [
+					{
+						label: 'Ingresos',
+						data: [320000, 385000, 410000, 452000, 486200],
+						borderColor: '#2e7d32',
+						backgroundColor: 'rgba(46,125,50,0.08)',
+						fill: true,
+						tension: 0.3,
+						pointRadius: 4
+					},
+					{
+						label: 'Gastos',
+						data: [265000, 278000, 289000, 298000, 312850],
+						borderColor: '#c62828',
+						backgroundColor: 'rgba(198,40,40,0.08)',
+						fill: true,
+						tension: 0.3,
+						pointRadius: 4
+					}
+				]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: { position: 'bottom', labels: { usePointStyle: true, padding: 16 } }
+				},
+				scales: {
+					y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.04)' } },
+					x: { grid: { display: false } }
+				}
+			}
+		});
+
+		new Chart(document.getElementById('expensePieChart'), {
+			type: 'doughnut',
+			data: {
+				labels: ['Nómina', 'Servicios', 'Materiales', 'Mantenimiento', 'Otros'],
+				datasets: [{
+					data: [58, 18, 12, 8, 4],
+					backgroundColor: ['#003876', '#2e7d32', '#c9a227', '#5b8fa8', '#af5f5f'],
+					borderWidth: 0
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: { position: 'bottom', labels: { usePointStyle: true, padding: 12 } }
+				},
+				cutout: '65%'
+			}
+		});
+	}
+});
+</script>
+
+{{/layout-capotiao-modern-tenant}}

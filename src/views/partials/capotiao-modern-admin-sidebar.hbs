@@ -1,0 +1,80 @@
+<nav id="sidebar" class="sidebar cm-sidebar js-sidebar">
+	<div class="sidebar-content js-simplebar" data-simplebar-auto-hide="true">
+		<a class="sidebar-brand" href="admin-dashboard.html">
+			<img src="img/logotype.png" alt="Capotiao" class="sidebar-brand-full" width="150" height="40" style="object-fit:contain">
+			<img src="img/capotiao_logo.png" alt="C" class="sidebar-brand-icon" width="32" height="32">
+		</a>
+		<ul class="sidebar-nav">
+			<li class="sidebar-header">Admin Central</li>
+			<li class="sidebar-item{{#if (eq page 'admin-dashboard')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-dashboard.html">
+					<i class="bi bi-speedometer2"></i>
+					<span>Dashboard</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'admin-tenants')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-tenants.html">
+					<i class="bi bi-building"></i>
+					<span>Colegios</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'admin-plans')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-plans.html">
+					<i class="bi bi-boxes"></i>
+					<span>Planes</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'admin-subscriptions')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-subscriptions.html">
+					<i class="bi bi-credit-card"></i>
+					<span>Suscripciones</span>
+				</a>
+			</li>
+			<li class="sidebar-header">Facturación</li>
+			<li class="sidebar-item{{#if (eq page 'admin-billing-invoices')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-billing-invoices.html">
+					<i class="bi bi-file-text"></i>
+					<span>Facturas</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'admin-billing-payment-methods')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-billing-payment-methods.html">
+					<i class="bi bi-credit-card-2-front"></i>
+					<span>Métodos de Pago</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'admin-billing-coupons')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-billing-coupons.html">
+					<i class="bi bi-ticket-perforated"></i>
+					<span>Cupones</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'admin-billing-transactions')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-billing-transactions.html">
+					<i class="bi bi-arrow-left-right"></i>
+					<span>Transacciones</span>
+				</a>
+			</li>
+			<li class="sidebar-header">Seguridad</li>
+			<li class="sidebar-item{{#if (eq page 'admin-monitoring-audit-logs')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-monitoring-audit-logs.html">
+					<i class="bi bi-journal-code"></i>
+					<span>Auditoría</span>
+				</a>
+			</li>
+			<li class="sidebar-item{{#if (eq page 'admin-monitoring-login-logs')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-monitoring-login-logs.html">
+					<i class="bi bi-shield-lock"></i>
+					<span>Inicios de Sesión</span>
+				</a>
+			</li>
+			<li class="sidebar-header">Catálogos</li>
+			<li class="sidebar-item{{#if (eq page 'admin-catalogos')}} active{{/if}}">
+				<a class="sidebar-link" href="admin-catalogos.html">
+					<i class="bi bi-bookmarks"></i>
+					<span>Ver Catálogos</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>

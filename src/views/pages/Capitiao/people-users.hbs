@@ -1,0 +1,144 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-people" title="Usuarios" description="Gestión de usuarios del sistema" userName="Juan Pérez" userBadge="Director" page="people-users"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-people"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Usuarios</h1>
+			<div class="cm-breadcrumbs">
+				<a href="school-dashboard.html">Inicio</a>
+				<span class="sep">/</span>
+				<span class="current">Usuarios</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-circle"></i> Nuevo Usuario</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros</h6>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-3">
+				<input type="text" class="cm-input cm-input-sm w-100" placeholder="Buscar por nombre o email...">
+			</div>
+			<div class="col-lg-2">
+				<select class="cm-input cm-input-sm w-100">
+					<option value="">Todos los roles</option>
+					<option>Administrador</option>
+					<option>Director</option>
+					<option>Docente</option>
+					<option>Secretaría</option>
+					<option>Tutor</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<select class="cm-input cm-input-sm w-100">
+					<option value="">Todos los estados</option>
+					<option>Activo</option>
+					<option>Inactivo</option>
+					<option>Bloqueado</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<button class="cm-btn cm-btn-primary cm-btn-sm w-100"><i class="bi bi-search"></i> Buscar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-people"></i> Listado de Usuarios</h6>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Email</th>
+						<th>Rol</th>
+						<th>Último Acceso</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Juan Pérez</strong><br><small class="cm-data-subtle">Director</small></td>
+						<td>juan.perez@colegio.edu</td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Director</span></td>
+						<td>2026-05-24 08:30 AM</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Permisos"><i class="bi bi-shield"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>María López</strong><br><small class="cm-data-subtle">Secretaria</small></td>
+						<td>maria.lopez@colegio.edu</td>
+						<td><span class="cm-badge cm-badge-info cm-badge-sm">Secretaría</span></td>
+						<td>2026-05-24 09:15 AM</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Permisos"><i class="bi bi-shield"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Carlos Mendoza</strong><br><small class="cm-data-subtle">Docente</small></td>
+						<td>carlos.mendoza@colegio.edu</td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm">Docente</span></td>
+						<td>2026-05-23 14:45 PM</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Permisos"><i class="bi bi-shield"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Ana Torres</strong><br><small class="cm-data-subtle">Tutor</small></td>
+						<td>ana.torres@email.com</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Tutor</span></td>
+						<td>2026-05-22 10:30 AM</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Permisos"><i class="bi bi-shield"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Ricardo Vargas</strong><br><small class="cm-data-subtle">Tutor</small></td>
+						<td>ricardo.vargas@email.com</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Tutor</span></td>
+						<td>2026-05-15 07:00 AM</td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm"><span class="cm-dot cm-dot-warning"></span>Inactivo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Permisos"><i class="bi bi-shield"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Pedro Reyes</strong><br><small class="cm-data-subtle">Administrador</small></td>
+						<td>pedro.reyes@colegio.edu</td>
+						<td><span class="cm-badge cm-badge-danger cm-badge-sm">Administrador</span></td>
+						<td>2026-05-24 11:00 AM</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Permisos"><i class="bi bi-shield"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

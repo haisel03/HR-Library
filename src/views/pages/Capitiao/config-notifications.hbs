@@ -1,0 +1,207 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-bell" title="Notificaciones" description="Configuración de notificaciones del sistema" userName="Juan Pérez" userBadge="Director" page="config-notifications"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-bell"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Notificaciones</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Configuración</a>
+				<span class="sep">/</span>
+				<span class="current">Notificaciones</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row g-3">
+	<div class="col-lg-7">
+		<div class="cm-card">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-toggle-on"></i> Canales de Notificación</h6>
+			</div>
+			<div class="cm-card-body">
+				<form>
+					<div class="mb-3">
+						<div class="d-flex align-items-center justify-content-between py-2">
+							<div>
+								<strong>Notificaciones por Correo Electrónico</strong>
+								<p class="mb-0 text-muted small">Recibir alertas importantes en tu correo</p>
+							</div>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="swEmail" checked>
+								<label class="form-check-label" for="swEmail"></label>
+							</div>
+						</div>
+						<div class="d-flex align-items-center justify-content-between py-2">
+							<div>
+								<strong>Notificaciones por SMS</strong>
+								<p class="mb-0 text-muted small">Mensajes de texto a tu teléfono móvil</p>
+							</div>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="swSms">
+								<label class="form-check-label" for="swSms"></label>
+							</div>
+						</div>
+						<div class="d-flex align-items-center justify-content-between py-2">
+							<div>
+								<strong>Notificaciones en la Plataforma</strong>
+								<p class="mb-0 text-muted small">Alertas visibles dentro del sistema</p>
+							</div>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="swPlatform" checked>
+								<label class="form-check-label" for="swPlatform"></label>
+							</div>
+						</div>
+						<div class="d-flex align-items-center justify-content-between py-2">
+							<div>
+								<strong>Notificaciones Push</strong>
+								<p class="mb-0 text-muted small">Notificaciones en tu dispositivo móvil</p>
+							</div>
+							<div class="form-check form-switch">
+								<input class="form-check-input" type="checkbox" id="swPush">
+								<label class="form-check-label" for="swPush"></label>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<div class="cm-card">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-bell-fill"></i> Tipos de Notificaciones</h6>
+			</div>
+			<div class="cm-card-body p-0">
+				<div class="cm-table-wrap">
+					<table class="cm-table">
+						<thead>
+							<tr><th>Tipo</th><th>Descripción</th><th class="text-center">Email</th><th class="text-center">SMS</th><th class="text-center">Plataforma</th></tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><strong>Alertas Académicas</strong></td>
+								<td>Bajas calificaciones, ausencias, tareas atrasadas</td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox"></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+							</tr>
+							<tr>
+								<td><strong>Pagos y Facturación</strong></td>
+								<td>Recordatorios de pago, recibos, moras</td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+							</tr>
+							<tr>
+								<td><strong>Eventos y Calendario</strong></td>
+								<td>Reuniones, actividades, fechas importantes</td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox"></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+							</tr>
+							<tr>
+								<td><strong>Incidentes Disciplinarios</strong></td>
+								<td>Reportes de incidentes y medidas tomadas</td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+							</tr>
+							<tr>
+								<td><strong>Comunicados Generales</strong></td>
+								<td>Avisos y comunicaciones institucionales</td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox"></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+							</tr>
+							<tr>
+								<td><strong>Seguridad del Sistema</strong></td>
+								<td>Inicios de sesión, cambios de contraseña, accesos</td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+								<td class="text-center"><div class="form-check form-switch d-inline-block"><input class="form-check-input" type="checkbox" checked></div></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-lg-5">
+		<div class="cm-card">
+			<div class="cm-card-header">
+				<h6 class="cm-card-header-title"><i class="bi bi-clock-history"></i> Notificaciones Recientes</h6>
+			</div>
+			<div class="cm-card-body p-0">
+				<div class="list-group list-group-flush">
+					<div class="list-group-item d-flex align-items-start gap-3 py-3">
+						<div class="cm-stat-icon cm-stat-icon-info" style="width:36px;height:36px;min-width:36px;">
+							<i class="bi bi-info-circle" style="font-size:0.9rem;"></i>
+						</div>
+						<div class="flex-grow-1 min-w-0">
+							<div class="d-flex justify-content-between">
+								<strong class="text-truncate">Recordatorio de Reunión</strong>
+								<small class="text-muted ms-2" style="white-space:nowrap;">10 min</small>
+							</div>
+							<p class="mb-0 text-muted small text-truncate">Reunión de padres - 3er grado a las 4:00 PM</p>
+						</div>
+					</div>
+					<div class="list-group-item d-flex align-items-start gap-3 py-3">
+						<div class="cm-stat-icon cm-stat-icon-warning" style="width:36px;height:36px;min-width:36px;">
+							<i class="bi bi-exclamation-circle" style="font-size:0.9rem;"></i>
+						</div>
+						<div class="flex-grow-1 min-w-0">
+							<div class="d-flex justify-content-between">
+								<strong class="text-truncate">Pago Pendiente</strong>
+								<small class="text-muted ms-2" style="white-space:nowrap;">1 hora</small>
+							</div>
+							<p class="mb-0 text-muted small text-truncate">5 estudiantes con colegiatura de mayo pendiente</p>
+						</div>
+					</div>
+					<div class="list-group-item d-flex align-items-start gap-3 py-3">
+						<div class="cm-stat-icon cm-stat-icon-success" style="width:36px;height:36px;min-width:36px;">
+							<i class="bi bi-check-circle" style="font-size:0.9rem;"></i>
+						</div>
+						<div class="flex-grow-1 min-w-0">
+							<div class="d-flex justify-content-between">
+								<strong class="text-truncate">Carga Académica Aprobada</strong>
+								<small class="text-muted ms-2" style="white-space:nowrap;">3 horas</small>
+							</div>
+							<p class="mb-0 text-muted small text-truncate">La carga académica del semestre ha sido aprobada</p>
+						</div>
+					</div>
+					<div class="list-group-item d-flex align-items-start gap-3 py-3">
+						<div class="cm-stat-icon cm-stat-icon-danger" style="width:36px;height:36px;min-width:36px;">
+							<i class="bi bi-x-circle" style="font-size:0.9rem;"></i>
+						</div>
+						<div class="flex-grow-1 min-w-0">
+							<div class="d-flex justify-content-between">
+								<strong class="text-truncate">Incidente Reportado</strong>
+								<small class="text-muted ms-2" style="white-space:nowrap;">5 horas</small>
+							</div>
+							<p class="mb-0 text-muted small text-truncate">Incidente disciplinario reportado para Pedro Ramírez</p>
+						</div>
+					</div>
+					<div class="list-group-item d-flex align-items-start gap-3 py-3">
+						<div class="cm-stat-icon cm-stat-icon-secondary" style="width:36px;height:36px;min-width:36px;">
+							<i class="bi bi-calendar" style="font-size:0.9rem;"></i>
+						</div>
+						<div class="flex-grow-1 min-w-0">
+							<div class="d-flex justify-content-between">
+								<strong class="text-truncate">Evento Próximo</strong>
+								<small class="text-muted ms-2" style="white-space:nowrap;">1 día</small>
+							</div>
+							<p class="mb-0 text-muted small text-truncate">Día del Estudiante - actividades programadas</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cm-card-footer text-center">
+				<button class="cm-btn cm-btn-ghost cm-btn-sm">Ver todas las notificaciones</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

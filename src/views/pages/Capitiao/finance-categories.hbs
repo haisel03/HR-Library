@@ -1,0 +1,118 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-tags" title="Categorías de Gasto" description="Gestión de categorías para clasificar gastos" userName="Juan Pérez" userBadge="Director" page="finance-categories"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-tags"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Categorías de Gasto</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Finanzas</a>
+				<span class="sep">/</span>
+				<span class="current">Categorías de Gasto</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-lg"></i> Nueva Categoría</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-toolbar">
+	<div class="cm-toolbar-left">
+		<div class="cm-input-wrap">
+			<i class="bi bi-search"></i>
+			<input type="text" class="cm-input cm-input-sm" placeholder="Buscar categoría..." style="min-width:240px;">
+		</div>
+	</div>
+	<div class="cm-toolbar-right">
+		<span class="cm-label">6 categorías</span>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr><th>Nombre</th><th>Descripción</th><th>Presupuesto</th><th>Gastado</th><th>Restante</th><th style="width:80px;"></th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Nómina</strong></td>
+						<td>Salarios y compensaciones del personal</td>
+						<td class="cm-data">RD$ 200,000</td>
+						<td class="cm-data">RD$ 185,000</td>
+						<td class="cm-data cm-text-success">RD$ 15,000</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Servicios</strong></td>
+						<td>Agua, electricidad, internet, telefonía</td>
+						<td class="cm-data">RD$ 45,000</td>
+						<td class="cm-data">RD$ 38,200</td>
+						<td class="cm-data cm-text-success">RD$ 6,800</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Educativo</strong></td>
+						<td>Materiales didácticos, recursos educativos</td>
+						<td class="cm-data">RD$ 30,000</td>
+						<td class="cm-data">RD$ 28,500</td>
+						<td class="cm-data cm-text-warning">RD$ 1,500</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Infraestructura</strong></td>
+						<td>Mantenimiento y reparaciones</td>
+						<td class="cm-data">RD$ 50,000</td>
+						<td class="cm-data">RD$ 23,800</td>
+						<td class="cm-data cm-text-success">RD$ 26,200</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Tecnología</strong></td>
+						<td>Equipos, software, licencias</td>
+						<td class="cm-data">RD$ 100,000</td>
+						<td class="cm-data">RD$ 77,850</td>
+						<td class="cm-data cm-text-success">RD$ 22,150</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Administrativo</strong></td>
+						<td>Suministros, papelería, varios</td>
+						<td class="cm-data">RD$ 15,000</td>
+						<td class="cm-data">RD$ 12,800</td>
+						<td class="cm-data cm-text-success">RD$ 2,200</td>
+						<td>
+							<div class="cm-actions">
+								<button class="cm-btn-icon cm-btn-icon-sm cm-btn-icon-edit" title="Editar"><i class="bi bi-pencil"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

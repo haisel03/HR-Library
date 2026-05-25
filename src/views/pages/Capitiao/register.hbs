@@ -1,0 +1,53 @@
+{{#> layout-capotiao-modern-auth title="Crear Cuenta" description="Regístrate para gestionar tu institución"}}
+
+<form class="cm-form" onsubmit="return false;">
+	<div class="row g-3">
+		<div class="col-md-6">
+			<div class="cm-form-group">
+				<label class="cm-form-label" for="nombre">Nombre</label>
+				<input type="text" id="nombre" class="cm-input" placeholder="Tu nombre">
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="cm-form-group">
+				<label class="cm-form-label" for="apellido">Apellido</label>
+				<input type="text" id="apellido" class="cm-input" placeholder="Tu apellido">
+			</div>
+		</div>
+	</div>
+	<div class="cm-form-group">
+		<label class="cm-form-label" for="reg-email">Correo electrónico</label>
+		<div class="cm-input-wrap">
+			<i class="bi bi-envelope"></i>
+			<input type="email" id="reg-email" class="cm-input" placeholder="tucorreo@colegio.com">
+		</div>
+	</div>
+	<div class="cm-form-group">
+		<label class="cm-form-label" for="reg-password">Contraseña</label>
+		<div class="cm-input-wrap">
+			<i class="bi bi-lock"></i>
+			<input type="password" id="reg-password" class="cm-input" placeholder="Mín. 8 caracteres">
+		</div>
+	</div>
+	<div class="cm-form-group">
+		<label class="cm-form-label" for="reg-confirm">Confirmar contraseña</label>
+		<div class="cm-input-wrap">
+			<i class="bi bi-lock-fill"></i>
+			<input type="password" id="reg-confirm" class="cm-input" placeholder="Repite la contraseña">
+		</div>
+	</div>
+	<label class="cm-check mb-3">
+		<input type="checkbox">
+		<span>Acepto los <a href="#" style="color:var(--cm-brand);text-decoration:none;">términos y condiciones</a></span>
+	</label>
+	<button type="submit" class="cm-btn cm-btn-primary w-100 cm-btn-lg">
+		<i class="bi bi-person-plus"></i> Crear Cuenta
+	</button>
+</form>
+
+<div class="text-center mt-3">
+	<small class="text-muted">¿Ya tienes cuenta?</small>
+	<a href="login.html" class="small" style="color:var(--cm-brand);text-decoration:none;font-weight:500;">Inicia sesión</a>
+</div>
+
+{{/layout-capotiao-modern-auth}}

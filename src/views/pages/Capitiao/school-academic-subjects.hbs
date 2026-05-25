@@ -1,0 +1,121 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-book" title="Materias" description="Gestión de materias académicas" userName="Juan Pérez" userBadge="Director" page="school-academic-subjects"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-book"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Materias</h1>
+			<div class="cm-breadcrumbs">
+				<a href="#">Escuela</a>
+				<span class="sep">/</span>
+				<a href="#">Académico</a>
+				<span class="sep">/</span>
+				<span class="current">Materias</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm" id="btnAddSubject">
+				<i class="bi bi-plus-circle"></i> Nueva Materia
+			</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-book"></i>Listado de Materias</h6>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Código</th>
+						<th>Área</th>
+						<th>Nivel</th>
+						<th>Horas/Sem</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Matemáticas</strong></td>
+						<td><code class="cm-data">MAT-01</code></td>
+						<td>Ciencias Exactas</td>
+						<td><span class="cm-badge cm-badge-primary">Primaria</span></td>
+						<td>5 h</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Activa</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Lengua y Literatura</strong></td>
+						<td><code class="cm-data">LEN-01</code></td>
+						<td>Comunicación</td>
+						<td><span class="cm-badge cm-badge-primary">Primaria</span></td>
+						<td>5 h</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Activa</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Ciencias Naturales</strong></td>
+						<td><code class="cm-data">CN-01</code></td>
+						<td>Ciencias Exactas</td>
+						<td><span class="cm-badge cm-badge-primary">Primaria</span></td>
+						<td>3 h</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Activa</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Historia</strong></td>
+						<td><code class="cm-data">HIS-01</code></td>
+						<td>Ciencias Sociales</td>
+						<td><span class="cm-badge cm-badge-success">Secundaria</span></td>
+						<td>4 h</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Activa</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Inglés</strong></td>
+						<td><code class="cm-data">ING-01</code></td>
+						<td>Idiomas</td>
+						<td><span class="cm-badge cm-badge-primary">Primaria</span></td>
+						<td>3 h</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Activa</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Química</strong></td>
+						<td><code class="cm-data">QUI-01</code></td>
+						<td>Ciencias Exactas</td>
+						<td><span class="cm-badge cm-badge-success">Secundaria</span></td>
+						<td>4 h</td>
+						<td><span class="cm-badge cm-badge-success"><span class="cm-dot cm-dot-success"></span>Activa</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Eliminar"><i class="bi bi-trash"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

@@ -1,0 +1,156 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-person-badge" title="Personas" description="Gestión de personas" userName="Juan Pérez" userBadge="Director" page="people-persons"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-person-badge"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Personas</h1>
+			<div class="cm-breadcrumbs">
+				<a href="school-dashboard.html">Inicio</a>
+				<span class="sep">/</span>
+				<span class="current">Personas</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm"><i class="bi bi-plus-circle"></i> Nueva Persona</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros</h6>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-3">
+				<input type="text" class="cm-input cm-input-sm w-100" placeholder="Buscar por nombre o documento...">
+			</div>
+			<div class="col-lg-2">
+				<select class="cm-input cm-input-sm w-100">
+					<option value="">Todos los tipos</option>
+					<option>Estudiante</option>
+					<option>Docente</option>
+					<option>Tutor</option>
+					<option>Personal Administrativo</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<select class="cm-input cm-input-sm w-100">
+					<option value="">Todos los estados</option>
+					<option>Activo</option>
+					<option>Inactivo</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<button class="cm-btn cm-btn-primary cm-btn-sm w-100"><i class="bi bi-search"></i> Buscar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-people"></i> Listado de Personas</h6>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Nombre Completo</th>
+						<th>Documento</th>
+						<th>Tipo</th>
+						<th>Teléfono</th>
+						<th>Email</th>
+						<th>Dirección</th>
+						<th>Estado</th>
+						<th>Acciones</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><strong>Juan Pérez</strong></td>
+						<td><code class="cm-data">001-1234567-8</code></td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Docente</span></td>
+						<td>809-555-1001</td>
+						<td>juan.perez@email.com</td>
+						<td>Calle Principal #45, Santo Domingo</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver"><i class="bi bi-eye"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>María López</strong></td>
+						<td><code class="cm-data">001-2345678-9</code></td>
+						<td><span class="cm-badge cm-badge-info cm-badge-sm">Estudiante</span></td>
+						<td>809-555-1002</td>
+						<td>maria.lopez@email.com</td>
+						<td>Av. Independencia #120, Santo Domingo</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver"><i class="bi bi-eye"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Carlos Mendoza</strong></td>
+						<td><code class="cm-data">001-3456789-0</code></td>
+						<td><span class="cm-badge cm-badge-primary cm-badge-sm">Docente</span></td>
+						<td>829-555-1003</td>
+						<td>carlos.mendoza@email.com</td>
+						<td>Calle 5ta #78, Santiago</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver"><i class="bi bi-eye"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Ana Torres</strong></td>
+						<td><code class="cm-data">001-4567890-1</code></td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Tutor</span></td>
+						<td>849-555-1004</td>
+						<td>ana.torres@email.com</td>
+						<td>Av. Abraham Lincoln #200, Santo Domingo</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver"><i class="bi bi-eye"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Ricardo Vargas</strong></td>
+						<td><code class="cm-data">001-5678901-2</code></td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm">Tutor</span></td>
+						<td>809-555-1005</td>
+						<td>ricardo.v@email.com</td>
+						<td>Calle Duarte #55, La Vega</td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm"><span class="cm-dot cm-dot-warning"></span>Inactivo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver"><i class="bi bi-eye"></i></button>
+						</td>
+					</tr>
+					<tr>
+						<td><strong>Sofía Martínez</strong></td>
+						<td><code class="cm-data">001-6789012-3</code></td>
+						<td><span class="cm-badge cm-badge-info cm-badge-sm">Estudiante</span></td>
+						<td>829-555-1006</td>
+						<td>sofia.martinez@email.com</td>
+						<td>Calle Las Flores #33, Santiago</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Editar"><i class="bi bi-pencil"></i></button>
+							<button class="cm-btn-icon cm-btn-icon-sm cm-btn-ghost" title="Ver"><i class="bi bi-eye"></i></button>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}

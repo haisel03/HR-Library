@@ -1,0 +1,184 @@
+{{#> layout-capotiao-modern-tenant icon="bi bi-people" title="Reporte de Estudiantes" description="Reporte detallado de estudiantes matriculados" userName="Juan Pérez" userBadge="Director" page="reports-index"}}
+
+<div class="cm-page-header">
+	<div class="cm-page-header-inner">
+		<div class="cm-page-header-left">
+			<div class="cm-page-header-icon"><i class="bi bi-people"></i></div>
+			<h1 class="cm-headline cm-headline-lg">Reporte de Estudiantes</h1>
+			<div class="cm-breadcrumbs">
+				<a href="reports-index.html">Reportes</a>
+				<span class="sep">/</span>
+				<span class="current">Estudiantes</span>
+			</div>
+		</div>
+		<div class="cm-page-header-actions">
+			<button class="cm-btn cm-btn-primary cm-btn-sm" onclick="window.print()"><i class="bi bi-printer"></i> Imprimir</button>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar</button>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-funnel"></i> Filtros de Reporte</h6>
+	</div>
+	<div class="cm-card-body">
+		<div class="row g-2">
+			<div class="col-lg-3">
+				<label class="cm-label">Grado</label>
+				<select class="cm-input w-100">
+					<option value="">Todos los grados</option>
+					<option>Primer Grado</option>
+					<option>Segundo Grado</option>
+					<option>Tercer Grado</option>
+					<option>Cuarto Grado</option>
+					<option>Quinto Grado</option>
+					<option>Sexto Grado</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Sección</label>
+				<select class="cm-input w-100">
+					<option value="">Todas</option>
+					<option>A</option>
+					<option>B</option>
+					<option>C</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Estado</label>
+				<select class="cm-input w-100">
+					<option value="">Todos</option>
+					<option>Activo</option>
+					<option>Inactivo</option>
+					<option>Retirado</option>
+					<option>Graduado</option>
+				</select>
+			</div>
+			<div class="col-lg-2">
+				<label class="cm-label">Año Escolar</label>
+				<select class="cm-input w-100">
+					<option>2025-2026</option>
+					<option>2024-2025</option>
+					<option>2023-2024</option>
+				</select>
+			</div>
+			<div class="col-lg-3 d-flex align-items-end gap-1">
+				<button class="cm-btn cm-btn-primary cm-btn-sm flex-fill"><i class="bi bi-search"></i> Generar Reporte</button>
+				<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-x-lg"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="cm-card">
+	<div class="cm-card-header">
+		<h6 class="cm-card-header-title"><i class="bi bi-table"></i> Resultados</h6>
+		<div class="cm-card-header-actions">
+			<span class="cm-label">Total: 156 estudiantes</span>
+			<button class="cm-btn cm-btn-sm cm-btn-ghost"><i class="bi bi-download"></i> Exportar Excel</button>
+		</div>
+	</div>
+	<div class="cm-card-body p-0">
+		<div class="cm-table-wrap">
+			<table class="cm-table">
+				<thead>
+					<tr>
+						<th>Matrícula</th>
+						<th>Nombre Completo</th>
+						<th>Grado</th>
+						<th>Sección</th>
+						<th>Estado</th>
+						<th>Tutor</th>
+						<th>Teléfono</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><code class="cm-data">2026-001</code></td>
+						<td><strong>Pedro Rodríguez</strong></td>
+						<td>Primer Grado</td>
+						<td>A</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>María Rodríguez</td>
+						<td>809-555-0101</td>
+						<td>maria.r@email.com</td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2026-002</code></td>
+						<td><strong>Sofía Martínez</strong></td>
+						<td>Segundo Grado</td>
+						<td>B</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>Carlos Martínez</td>
+						<td>809-555-0102</td>
+						<td>carlos.m@email.com</td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2026-003</code></td>
+						<td><strong>Luis Hernández</strong></td>
+						<td>Tercer Grado</td>
+						<td>A</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>Ana Hernández</td>
+						<td>829-555-0103</td>
+						<td>ana.hernandez@email.com</td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2026-004</code></td>
+						<td><strong>Camila Reyes</strong></td>
+						<td>Cuarto Grado</td>
+						<td>C</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>Pedro Reyes</td>
+						<td>849-555-0104</td>
+						<td>pedro.reyes@email.com</td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2026-005</code></td>
+						<td><strong>Diego Castillo</strong></td>
+						<td>Quinto Grado</td>
+						<td>B</td>
+						<td><span class="cm-badge cm-badge-warning cm-badge-sm"><span class="cm-dot cm-dot-warning"></span>Inactivo</span></td>
+						<td>Rosa Castillo</td>
+						<td>809-555-0105</td>
+						<td>rosa.castillo@email.com</td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2026-006</code></td>
+						<td><strong>Valentina Gómez</strong></td>
+						<td>Primer Grado</td>
+						<td>A</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>José Gómez</td>
+						<td>829-555-0106</td>
+						<td>jose.gomez@email.com</td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2026-007</code></td>
+						<td><strong>Mateo Torres</strong></td>
+						<td>Sexto Grado</td>
+						<td>A</td>
+						<td><span class="cm-badge cm-badge-success cm-badge-sm"><span class="cm-dot cm-dot-success"></span>Activo</span></td>
+						<td>Lucía Torres</td>
+						<td>809-555-0107</td>
+						<td>lucia.torres@email.com</td>
+					</tr>
+					<tr>
+						<td><code class="cm-data">2026-008</code></td>
+						<td><strong>Isabella Vargas</strong></td>
+						<td>Segundo Grado</td>
+						<td>C</td>
+						<td><span class="cm-badge cm-badge-danger cm-badge-sm"><span class="cm-dot cm-dot-danger"></span>Retirado</span></td>
+						<td>Ricardo Vargas</td>
+						<td>849-555-0108</td>
+						<td>ricardo.vargas@email.com</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+{{/layout-capotiao-modern-tenant}}
